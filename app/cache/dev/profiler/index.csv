@@ -1,6 +1,11 @@
-1b6fd7,10.240.1.20,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/,1468941489,ad7233,200
-ad7233,10.240.1.20,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/,1468941489,,404
-292076,10.240.0.75,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/SistemadeVotacion/inicio,1468941542,,200
-c76d54,10.240.0.75,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/SistemadeVotacion/inicio,1468941561,,200
-cad7a4,10.240.0.110,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/,1468941623,c0601b,200
-c0601b,10.240.0.110,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/,1468941623,,404
+7cd542,10.240.1.17,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/SistemadeVotacion/inicio,1468969050,,200
+687a7a,10.240.0.208,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/SistemadeVotacion/inicio,1468969289,,200
+f21e9a,10.240.0.119,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/SistemadeVotacion/inicio,1468969411,,200
+b5c1ac,10.240.0.182,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/SistemadeVotacion/inicio,1468969453,,200
+59065d,10.240.1.20,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/SistemadeVotacion/inicio,1468969487,,200
+6e5a17,10.240.0.75,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/SistemadeVotacion/inicio,1468969540,,200
+040816,10.240.1.15,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/SistemadeVotacion/inicio,1468969580,,200
+6bcaf4,10.240.0.200,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/SistemadeVotacion/inicio,1468969638,,200
+ea1a5c,10.240.0.186,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/SistemadeVotacion/inicio,1468969885,,200
+df6a5a,10.240.0.206,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/SistemadeVotacion/inicio,1468970015,,200
+352ee4,10.240.0.207,GET,http://asignaciones-sirdio24.c9users.io/web/app_dev.php/SistemadeVotacion/seleccionatipousuario,1468970023,,200

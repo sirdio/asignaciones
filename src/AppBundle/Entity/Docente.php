@@ -48,9 +48,9 @@ class Docente  extends Usuariovotante
     private $emaildoc;
 	
     /**
-    * @ORM\Column(name="emaildoc", type="string", length=30)
+    * @ORM\Column(name="maildoc", type="string", length=30)
     */    
-    private $emaildoc;
+    private $maildoc;
     
    /**
      * Get id
@@ -86,16 +86,16 @@ class Docente  extends Usuariovotante
         return $this->especialidadd;
     }
 	
-    public function setEmaildoc($emaidoc)
+    public function setMaildoc($maildoc)
     {
-        $this->emaildoc = $emaildoc;
+        $this->maildoc = $maildoc;
     
         return $this;
     }
 
-    public function getEmaildoc()
+    public function getMaildoc()
     {
-        return $this->emaildoc;
+        return $this->maildoc;
     }
 
     public function setTeldoc($teldoc)
