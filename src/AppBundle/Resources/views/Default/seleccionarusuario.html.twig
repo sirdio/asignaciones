@@ -1,0 +1,39 @@
+{% extends '::base.html.twig' %}
+{% block title %}Agregar Usuario{% endblock %}
+{% block body %}
+
+    {{parent()}}
+<div class="container">
+     <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+               <form action="{{ path('Inicio') }}" method="post" class="form-horizontal">
+                     <fieldset>
+                         <legend>Iniciar Carga de Datos</legend>
+                         <div class="control-group">
+                            <div class="controls">
+                               <select id="selectbasic" name="selectbasic" class="input-xlarge">
+                                  <option>Seleccionar Opci&oacuten</option>
+                                  <option>Directivo</option>
+                                  <option>Encargado</option>
+                                  <option>Docente</option>
+                                  <option>Estudiante</option>
+                                  <option>COPETyP</option>
+                                </select>
+                             </div>
+                         </div>
+                         <div class="control-group">
+                           <div class="controls">
+                              <button id="singlebutton" name="singlebutton" class="btn btn-primary">Iniciar</button>
+                           </div>
+                         </div>
+                     </fieldset>
+               </form>
+          </div> 
+          <div class="col-md-4">
+          </div>
+    </div>
+</div> 
+
+{% endblock %}

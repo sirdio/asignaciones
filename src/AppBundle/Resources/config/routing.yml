@@ -1,0 +1,3 @@
+inicio:
+    pattern: /inicio
+    defaults: { _controller: AppBundle:Default:Inicio }
