@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Entity\Drectivo;
+use AppBundle\Entity\Directivo;
 use AppBundle\Entity\Encargado;
 use AppBundle\Entity\Docente;
 use AppBundle\Entity\Estudiante;
@@ -45,7 +45,7 @@ class DefaultController extends Controller
     {
         if ($request->isMethod('POST')) {
             if ($_POST['selectbasic'] == "Directivo"){
-                $directivo = new Directivo(); 
+                return $this->render('AppBundle:Default:nuevodirectivo.html.twig');
             }elseif ($_POST['selectbasic'] == "Encargado"){
                 echo "nuevo encargado";
             }elseif ($_POST['selectbasic'] == "Docente"){
@@ -53,6 +53,44 @@ class DefaultController extends Controller
             }elseif ($_POST['selectbasic'] == "Estudiante"){
                 echo "nuevo estudiante";
             }elseif ($_POST['selectbasic'] == "COPETyP"){
+                echo "nuevo copetyp";
+            }else{
+                echo "error debe seleccinar un tipo de usuario valido";
+            }
+            
+            
+            die();
+            //return $this->render('AppBundle:Default:nuevousuario.html.twig');
+        }
+        echo "no es post";
+        die();
+    }
+
+    /**
+     * @Route("/guardarusuario", name="GuardarUsuario")
+     */
+    public function GuardarUAction(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            if ($_POST['tipovotante'] == "Directivo"){
+                $directivo = new Directivo();
+                $directivo->setDni($_POST['dni']);
+                $directivo->setNombre($_POST['nombre']);
+                $directivo->setApellido($_POST['apellido']);
+                $directivo->setTipovot($_POST['tipovotante']);
+                $directivo->setCargo($_POST['cargo']);
+                $directivo->setTeld($_POST['tel']);
+                $directivo->setEmaild($_POST['email']);
+                print_r($directivo);
+                
+                //return $this->render('AppBundle:Default:nuevodirectivo.html.twig');
+            }elseif ($_POST['tipovotante'] == "Encargado"){
+                echo "nuevo encargado";
+            }elseif ($_POST['tipovotante'] == "Docente"){
+                echo "nuevo docente";
+            }elseif ($_POST['tipovotante'] == "Estudiante"){
+                echo "nuevo estudiante";
+            }elseif ($_POST['tipovotante'] == "COPETyP"){
                 echo "nuevo copetyp";
             }else{
                 echo "error debe seleccinar un tipo de usuario valido";

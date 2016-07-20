@@ -87,16 +87,16 @@ class Usuariovotante
         return $this->isActive;
     }
 
-    public function setTipouser( $tipouser)
+    public function setTipovot( $tipovot)
     {
-        $this->tipouser = $tipouser;
+        $this->tipovot = $tipovot;
     
         return $this;
     }
 
-    public function getTipouser()
+    public function getTipovot()
     {
-        return $this->tipouser;
+        return $this->$tipovot;
     }
 
     public function setNombre($nombre)
