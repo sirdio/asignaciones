@@ -148,8 +148,8 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
 
             // NuevoUsuario
-            if (0 === strpos($pathinfo, '/SistemadeVotacion/nuevousuario') && preg_match('#^/SistemadeVotacion/nuevousuario/(?P<tipu>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'NuevoUsuario')), array (  '_controller' => 'AppBundle\\Controller\\DefaultController::NuevoUAction',));
+            if ($pathinfo === '/SistemadeVotacion/nuevousuario') {
+                return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::NuevoUAction',  '_route' => 'NuevoUsuario',);
             }
 
         }

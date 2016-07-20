@@ -2,13 +2,19 @@
 {% block title %}Bienvenido a TECNICAMENTE 2016!!!{% endblock %}
 {% block body %}
 
-    {{parent()}}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div><!-- /.container-fluid -->
+</nav>
 <div class="container">
   <div class="row">
     <div class="col-md-4">
     </div>
     <div class="col-md-4">
-      <form action="{#{ path('NuevoUsuario') }#}" method="post" class="form-horizontal">
+      <form action="{{ path('NuevoUsuario') }}" method="post" class="form-horizontal">
         <fieldset>
 	  <legend>Iniciar Carga de Datos</legend>
 	    <div class="control-group">
@@ -46,10 +52,10 @@
 
 <script>
 
-$(document).ready(function(){
-    $('#singlebutton').on('click', function(e){
-      e.preventDefault();        
-      alert("hola");
+//$(document).ready(function(){
+//    $('#singlebutton').on('click', function(e){
+//      e.preventDefault();        
+//      alert("hola");
     //    link  = $(this).attr('value');      
     //    if (tipouser == "Empleado") {
     //        var url = "{#{path('pedido_buscararcdesemp',{'fId':'fId'})}#}";  
@@ -58,8 +64,8 @@ $(document).ready(function(){
     //    }                
     //    url = url.replace("fId",link);         
     //    location.href = url;
-   });
-});
+//   });
+//});
 </script>
   
 {% endblock %}
