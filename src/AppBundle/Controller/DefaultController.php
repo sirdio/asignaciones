@@ -72,6 +72,10 @@ class DefaultController extends Controller
     public function GuardarUAction(Request $request)
     {
         if ($request->isMethod('POST')) {
+            foreach($_POST as $nombre => $valor){
+                echo $nombre. " = ".$valor."<br>";
+            }
+            die();
             if ($_POST['tipovotante'] == "Directivo"){
                 $directivo = new Directivo();
                 $directivo->setDni($_POST['dni']);
