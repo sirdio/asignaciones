@@ -45,7 +45,8 @@ class DefaultController extends Controller
     {
         if ($request->isMethod('POST')) {
             if ($_POST['selectbasic'] == "Directivo"){
-                return $this->render('AppBundle:Default:nuevodirectivo.html.twig');
+                $tipovotante = $_POST['selectbasic'];
+                return $this->render('AppBundle:Default:nuevodirectivo.html.twig', array('tipovotante'=>$tipovotante));
             }elseif ($_POST['selectbasic'] == "Encargado"){
                 echo "nuevo encargado";
             }elseif ($_POST['selectbasic'] == "Docente"){

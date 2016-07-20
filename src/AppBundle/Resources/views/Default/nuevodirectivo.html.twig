@@ -48,7 +48,7 @@
 </div>
 
 <!-- Select Basic -->
-<div class="form-group">
+{#<div class="form-group">
   <label class="col-md-4 control-label" for="tipovotante">Tipo de Votante:</label>
   <div class="col-md-8">
     <select id="tipovotante" name="tipovotante" class="form-control">
@@ -59,6 +59,13 @@
       <option value="4">Estudiante</option>
       <option value="5">COPETyP</option>
     </select>
+  </div>
+</div>#}
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="tipovotante">Tipo de Votante::</label>  
+  <div class="col-md-8">
+  <input id="tipovotante" name="tipovotante" class="form-control input-md" required="" type="text" value="{{tipovotante}}" disabled>
   </div>
 </div>
 
