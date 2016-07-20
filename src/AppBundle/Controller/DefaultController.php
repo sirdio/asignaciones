@@ -73,10 +73,10 @@ class DefaultController extends Controller
     public function GuardarUAction(Request $request)
     {
         if ($request->isMethod('POST')) {
-            foreach($_POST as $nombre => $valor){
-                echo $nombre. " = ".$valor."<br>";
-            }
-            die();
+//            foreach($_POST as $nombre => $valor){
+//                echo $nombre. " = ".$valor."<br>";
+//            }
+            //die();
             if ($_POST['tipovotante'] == "Directivo"){
                 $directivo = new Directivo();
                 $directivo->setDni($_POST['dni']);
@@ -86,9 +86,11 @@ class DefaultController extends Controller
                 $directivo->setCargo($_POST['cargo']);
                 $directivo->setTeld($_POST['tel']);
                 $directivo->setEmaild($_POST['email']);
-                print_r($directivo);
-                
-                //return $this->render('AppBundle:Default:nuevodirectivo.html.twig');
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($directivo);
+                $em->flush();
+                $msj = "Usuario cargado con exito.";              
+                return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));
             }elseif ($_POST['tipovotante'] == "Encargado"){
                 echo "nuevo encargado";
             }elseif ($_POST['tipovotante'] == "Docente"){
@@ -102,7 +104,7 @@ class DefaultController extends Controller
             }
             
             
-            die();
+            //die();
             //return $this->render('AppBundle:Default:nuevousuario.html.twig');
         }
         echo "no es post";
