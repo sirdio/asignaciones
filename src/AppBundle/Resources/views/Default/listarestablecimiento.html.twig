@@ -22,9 +22,9 @@
       </tr>
       {% for esc in escuela %}
       <tr>
-        <td>esc.id</td>
-        <td>esc.cue</td>
-        <td>esc.nombesc</td>
+        <td>{{esc.id}}</td>
+        <td>{{esc.cue}}</td>
+        <td>{{esc.nombesc}}</td>
         <td><a href="{{path('MostrarEstablecimiento',{ 'id': esc.id})}}" class="btn btn-primary btn-lg disabled" role="button">Modificar</a></td>
       </tr>
       {% endfor %}
