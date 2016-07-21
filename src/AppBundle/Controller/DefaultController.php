@@ -80,12 +80,13 @@ class DefaultController extends Controller
      */
     public function GuardarUAction(Request $request)
     {
-        if ($request->isMethod('POST')) {
+//        if ($request->isMethod('POST')) {
 //            foreach($_POST as $nombre => $valor){
 //                echo $nombre. " = ".$valor."<br>";
 //            }
-            //die();
+//            die();
             if ($_POST['tipovotante'] == "Directivo"){
+                
                 $directivo = new Directivo();
                 $directivo->setDni($_POST['dni']);
                 $directivo->setNombre($_POST['nombre']);
@@ -108,7 +109,8 @@ class DefaultController extends Controller
             }elseif ($_POST['tipovotante'] == "COPETyP"){
                 echo "nuevo copetyp";
             }else{
-                echo "error debe seleccinar un tipo de usuario valido";
+                $msj = "Ocurrio un problema debe seleccinar un tipo de usuario valido.";        
+                return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));                
             }
             
             
