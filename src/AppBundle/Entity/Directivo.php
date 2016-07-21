@@ -95,7 +95,7 @@ class Directivo  extends Usuariovotante
         return $this->Teld;
     }
 
-    public function setIdeesc($idesc)
+    public function setIdesc($idesc)
     {
         $this->idesc = $idesc;
     

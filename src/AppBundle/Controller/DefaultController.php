@@ -81,10 +81,10 @@ class DefaultController extends Controller
     public function GuardarUAction(Request $request)
     {
         if ($request->isMethod('POST')) {
-//            foreach($_POST as $nombre => $valor){
-//                echo $nombre. " = ".$valor."<br>";
-//            }
-//            die();
+            foreach($_POST as $nombre => $valor){
+                echo $nombre. " = ".$valor."<br>";
+            }
+            die();
             if ($_POST['tipovotante'] == "Directivo"){
                 
                 $directivo = new Directivo();
@@ -95,6 +95,7 @@ class DefaultController extends Controller
                 $directivo->setCargo($_POST['cargo']);
                 $directivo->setTeld($_POST['tel']);
                 $directivo->setEmaild($_POST['email']);
+                $directivo->setIdesc($_POST['establecimiento']);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($directivo);
                 $em->flush();
