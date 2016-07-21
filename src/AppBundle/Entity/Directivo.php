@@ -43,6 +43,11 @@ class Directivo  extends Usuariovotante
     * @ORM\Column(name="teld", type="string", length=30)
     */    
     private $teld;	
+
+    /**
+    * @ORM\Column(name="idesc", type="integer")
+    */    
+    private $idesc;
     
    /**
      * Get id
@@ -89,5 +94,16 @@ class Directivo  extends Usuariovotante
     {
         return $this->Teld;
     }
-  
+
+    public function setIdeesc($idesc)
+    {
+        $this->idesc = $idesc;
+    
+        return $this;
+    }
+
+    public function getIdesc()
+    {
+        return $this->idesc;
+    }  
 }

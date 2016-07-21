@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraint\NotNull;
 *
 * @ORM\Entity
 * @ORM\Table(name="Usuariovotante")
-* @ORM\Entity(repositoryClass="Sistema\UsuariosBundle\Entity\UsuariovotanteRepository") 
+* @ORM\Entity(repositoryClass="AppBundle\Entity\UsuariovotanteRepository") 
 * @ORM\DiscriminatorMap({"usuariovotante" = "Usuariovotante","directivo" = "Directivo", "encargado" = "Encargado", "estudiante" = "Estudiante", "docente" = "Docente", "copetyp" = "Copetyp"})
 * @ORM\InheritanceType("JOINED")
 * @ORM\DiscriminatorColumn(name="tipo", type="string")

@@ -10,6 +10,7 @@ use AppBundle\Entity\Encargado;
 use AppBundle\Entity\Docente;
 use AppBundle\Entity\Estudiante;
 use AppBundle\Entity\COPETyP;
+use AppBundle\Entity\Escuela;
 class DefaultController extends Controller
 {
     /**
@@ -46,7 +47,14 @@ class DefaultController extends Controller
         if ($request->isMethod('POST')) {
             if ($_POST['selectbasic'] == "Directivo"){
                 $tipovotante = $_POST['selectbasic'];
-                return $this->render('AppBundle:Default:nuevodirectivo.html.twig', array('tipovotante'=>$tipovotante));
+                $em = $this->getDoctrine()->getManager();
+                $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
+                if (!$escuela){
+                    $msj = "Para cargar un usuario Directivo es necesario cargar antes datos del establecimiento.";              
+                    return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));                    
+                }    
+                return $this->render('AppBundle:Default:nuevodirectivo.html.twig', 
+                array('tipovotante'=>$tipovotante, 'escuela'=>$escuela));
             }elseif ($_POST['selectbasic'] == "Encargado"){
                 echo "nuevo encargado";
             }elseif ($_POST['selectbasic'] == "Docente"){
