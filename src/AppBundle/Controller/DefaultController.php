@@ -51,7 +51,7 @@ class DefaultController extends Controller
                 $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
                 if (!$escuela){
                     $msj = "Para cargar un usuario Directivo es necesario cargar antes datos del establecimiento.";              
-                    return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));                    
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
                 }    
                 return $this->render('AppBundle:Default:nuevodirectivo.html.twig', 
                 array('tipovotante'=>$tipovotante, 'escuela'=>$escuela));
@@ -115,8 +115,98 @@ class DefaultController extends Controller
             //die();
             //return $this->render('AppBundle:Default:nuevousuario.html.twig');
         }
-        echo "no es post";
-        die();
+        $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
+        return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+    }
+    
+    /**
+     * @Route("/nuevoestablecimiento", name="NuevoEstablecimiento")
+     */
+    public function MostrarFormularioAction()
+    {
+        return $this->render('AppBundle:Default:nuevaescuela.html.twig');
     }
 
+    /**
+     * @Route("/agregarestablecimiento", name="AgregarEstablecimiento")
+     */
+    public function AgregarEstAction(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            $escuela = new Escuela();
+            $escuela->setCue($_POST['cue']);
+            $escuela->setNombesc($_POST['nombesc']);
+            $escuela->setAmbitogestion($_POST['ambitogestion']);
+            $escuela->setJurisdiccion($_POST['jurisdiccion']);
+            $escuela->setDepartamento($_POST['departamento']);
+            $escuela->setLocalidad($_POST['localidad']);
+            $escuela->setDomicilio($_POST['domicilio']);
+            $escuela->setTelefono($_POST['telefono']);
+            $escuela->setEmailesc($_POST['emailesc']);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($escuela);
+            $em->flush();
+            $msj = "Establecimiento cargado con exito.";              
+            return $this->render('AppBundle:Default:mensajealtaest.html.twig', array('msj'=>$msj));            
+        }
+        $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
+        return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+    }
+    
+    /**
+     * @Route("/listarestablecimiento", name="ListarEstablecimiento")
+     */
+    public function ListarEstAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
+        if (!$escuela){
+            $msj = "No existe Establecimientos cargados.";              
+            return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+        }        
+        return $this->render('AppBundle:Default:listarestablecimiento.html.twig',array('escuela'=>$escuela));
+    }    
+
+    /**
+     * @Route("/mostrarestablecimiento/{id}", name="MostrarEstablecimiento")
+     */
+    public function MostrarEstAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $escuela = $em->getRepository('AppBundle:Escuela')->find($id);
+        if (!$escuela){
+            $msj = "No existe Establecimiento.";              
+            return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+        }        
+        return $this->render('AppBundle:Default:editarestablecimiento.html.twig',array('escuela'=>$escuela));
+    }
+
+    /**
+     * @Route("/guardarcambiosest/{id}", name="GuardarCambiosEst")
+     */
+    public function GuardarCambiosEstAction(Request $request, $id)
+    {
+        if ($request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
+            $escuela = $em->getRepository('AppBundle:Escuela')->find($id);
+            $escuela->setCue($_POST['cue']);
+            $escuela->setNombesc($_POST['nombesc']);
+            $escuela->setAmbitogestion($_POST['ambitogestion']);
+            $escuela->setJurisdiccion($_POST['jurisdiccion']);
+            $escuela->setDepartamento($_POST['departamento']);
+            $escuela->setLocalidad($_POST['localidad']);
+            $escuela->setDomicilio($_POST['domicilio']);
+            $escuela->setTelefono($_POST['telefono']);
+            $escuela->setEmailesc($_POST['emailesc']);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($escuela);
+            $em->flush();
+            $msj = "Los datos del Establecimiento se modificaron con exito.";              
+            return $this->render('AppBundle:Default:mensajemodificacion.html.twig', array('msj'=>$msj));            
+        }
+        $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
+        return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+    }    
+    
+    
 }

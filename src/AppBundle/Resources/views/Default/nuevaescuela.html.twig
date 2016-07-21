@@ -1,0 +1,119 @@
+{% extends '::base.html.twig' %}
+{% block title %}Agregar Establecimiento{% endblock %}
+{% block body %}
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div>
+</nav>
+<div class="container">
+     <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+<form action="{{ path('AgregarEstablecimiento') }}" method="post" class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Ingresar datos Establecimiento</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cue">C.U.E.:</label>  
+  <div class="col-md-8">
+  <input id="cue" name="cue" placeholder="ingrese C.U.E." class="form-control input-md" required="" type="text">
+  <span class="help-block">ej.: 169139800</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="nombesc">Nombre Establecimiento:</label>  
+  <div class="col-md-8">
+  <input id="nombesc" name="nombesc" placeholder="ingrese nombre del establecimiento" class="form-control input-md" required="" type="text">
+  <span class="help-block">ej.: Escuela Técnica "Pedro Ferré"</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="ambitogestion">Ambito de Gestión:</label>  
+  <div class="col-md-8">
+  <input id="ambitogestion" name="ambitogestion" placeholder="ingrese Ambito Gestión" class="form-control input-md" required="" type="text">
+  <span class="help-block">ej.: PUBLICA"</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="jurisdiccion">Jurisdicción:</label>  
+  <div class="col-md-8">
+  <input id="jurisdiccion" name="jurisdiccion" placeholder="ingrese jurisdiccion" class="form-control input-md" required="" type="text">
+  <span class="help-block">ej.: Corrientes</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="detartamento">Departamento:</label>  
+  <div class="col-md-8">
+  <input id="detartamento" name="detartamento" placeholder="ingrese departamento" class="form-control input-md" required="" type="text" >
+  <span class="help-block">ej.: Capital</span> 
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="localidad">Localidad:</label>  
+  <div class="col-md-8">
+  <input id="localidad" name="localidad" placeholder="ingresar localidad" class="form-control input-md" required="" type="text">
+  <span class="help-block">ej.: Capital</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="domicilio">Domicilio:</label>  
+  <div class="col-md-8">
+  <input id="domicilio" name="domicilio" placeholder="ingrese domicilio" class="form-control input-md" required="" type="text">
+  <span class="help-block">ej.: Juan Pujol 1284</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="telefono">Teléfono:</label>  
+  <div class="col-md-8">
+  <input id="telefono" name="telefono" placeholder="ingrese teléfono" class="form-control input-md" required="" type="text">
+  <span class="help-block">ej.: 379-4457189</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="emailesc">Email:</label>  
+  <div class="col-md-8">
+  <input id="emailesc" name="emailesc" placeholder="ingrese email" class="form-control input-md" required="" type="text">
+  <span class="help-block">ej.: escuelatecnica@hotmail.com</span>  
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Aceptar</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+          </div> 
+          <div class="col-md-4">
+          </div>
+    </div>
+</div> 
+
+{% endblock %}

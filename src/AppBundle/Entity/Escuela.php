@@ -61,6 +61,10 @@ class Escuela
     * @ORM\Column(name="emailesc", type="string", length=200)
     */
     private $emailesc;    
+    /**
+    * @ORM\Column(name="ambitogestion", type="string", length=150)
+    */
+    private $ambitogestion;        
 
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
@@ -165,4 +169,16 @@ class Escuela
     {
         return $this->emailesc;
     }    
+    
+    public function setAmbitogestion($ambitogestion)
+    {
+        $this->ambitogestion = $ambitogestion;
+    
+        return $this;
+    }
+
+    public function getAmbitogestion()
+    {
+        return $this->ambitogestion;
+    }      
 }
