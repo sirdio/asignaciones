@@ -80,7 +80,7 @@ class DefaultController extends Controller
      */
     public function GuardarUAction(Request $request)
     {
-//        if ($request->isMethod('POST')) {
+        if ($request->isMethod('POST')) {
 //            foreach($_POST as $nombre => $valor){
 //                echo $nombre. " = ".$valor."<br>";
 //            }
@@ -113,8 +113,6 @@ class DefaultController extends Controller
                 return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));                
             }
             
-            
-            //die();
             //return $this->render('AppBundle:Default:nuevousuario.html.twig');
         }
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
