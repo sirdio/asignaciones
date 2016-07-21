@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraint\NotNull;
 *
 * @ORM\Entity
 * @ORM\Table(name="Escuela")
-* @ORM\Entity(repositoryClass="AppBundle\Entity\UsuariovotanteRepository") 
+* @ORM\Entity(repositoryClass="AppBundle\Entity\EscuelaRepository") 
 * 
 */
 
