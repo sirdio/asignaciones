@@ -47,8 +47,9 @@ class DefaultController extends Controller
     {
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
+            $tipovotante = $_POST['selectbasic'];
             if ($_POST['selectbasic'] == "Directivo"){
-                $tipovotante = $_POST['selectbasic'];
+                
                 $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
                 if (!$escuela){
                     $msj = "Para cargar un usuario Directivo es necesario cargar antes datos del establecimiento.";              
@@ -84,10 +85,7 @@ class DefaultController extends Controller
     public function GuardarUAction(Request $request)
     {
         if ($request->isMethod('POST')) {
-            foreach($_POST as $nombre => $valor){
-                echo $nombre. " = ".$valor."<br>";
-            }
-            die();
+
             if ($_POST['tipovotante'] == "Directivo"){
                 $em = $this->getDoctrine()->getManager();
                 $configuracion = new Configuration();
@@ -115,7 +113,28 @@ class DefaultController extends Controller
                 $msj = "Usuario cargado con exito.";              
                 return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));
             }elseif ($_POST['tipovotante'] == "Encargado"){
-                echo "nuevo encargado";
+                
+                //foreach($_POST as $nombre => $valor){
+                //    echo $nombre. " = ".$valor."<br>";
+                //}
+                //die();                
+                $directivo = $em->getRepository('AppBundle:Directivo')->findByIdesc($_POST['establecimiento']);
+                $idconf = $directivo->getIdconf();
+                $encargado = new Encargado();
+                $encargado->setDni();
+                $encargado->setNombre();
+                $encargado->setApellido();
+                $encargado->setTipovot();
+                $encargado->setMateriadic();
+                $encargado->setTele();
+                $encargado->setEmaile();
+                $encargado->setIdconf();
+                $em->persist($encargado);
+                $em->flush();
+                $msj = "Usuario cargado con exito.";              
+                return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));                
+                
+
             }elseif ($_POST['tipovotante'] == "Docente"){
                 echo "nuevo docente";
             }elseif ($_POST['tipovotante'] == "Estudiante"){
