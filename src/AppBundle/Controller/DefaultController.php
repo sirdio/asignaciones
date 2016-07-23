@@ -276,7 +276,7 @@ class DefaultController extends Controller
             $trabajo->setEncargado($encargado);
             $trabajo->setEscuela($escuela);
             $msj = "Trabajo cargado con exito.";              
-            return $this->render('AppBundle:Default:mensajealtatrab.html.twig', array('msj'=>$msj));            
+            return $this->render('AppBundle:Trabajo:mensajealtatrab.html.twig', array('msj'=>$msj));            
 
         }
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
