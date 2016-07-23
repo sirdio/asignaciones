@@ -258,6 +258,18 @@ class DefaultController extends Controller
     {
         if ($request->isMethod('POST')) {
             echo "leo encargado <br>";
+            foreach($_POST as $nombre => $valor){
+                echo $nombre. " = ".$valor."<br>";
+            }
+            die();                
+            $em = $this->getDoctrine()->getManager();
+            $encargado = $em->getRepository('AppBundle:Encargado')->findAll();
+            $escuela = $em->getRepository('AppBundle:Escuela')->findAll();            
+            
+            
+            
+            
+            
             echo "leo esceula <br>";
             echo "guardo trabajo";
             die();
