@@ -275,6 +275,8 @@ class DefaultController extends Controller
             $trabajo->setCantvoto(0);
             $trabajo->setEncargado($encargado);
             $trabajo->setEscuela($escuela);
+            $em->persist($trabajo);
+            $em->flush();            
             $msj = "Trabajo cargado con exito.";              
             return $this->render('AppBundle:Trabajo:mensajealtatrab.html.twig', array('msj'=>$msj));            
 
