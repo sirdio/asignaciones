@@ -257,16 +257,16 @@ class DefaultController extends Controller
     public function AgregarTrabajoAction(Request $request)
     {
         if ($request->isMethod('POST')) {
-            echo "leo encargado <br>";
-            foreach($_POST as $nombre => $valor){
-                echo $nombre. " = ".$valor."<br>";
-            }
-            die();                
+//            echo "leo encargado <br>";
+//            foreach($_POST as $nombre => $valor){
+//                echo $nombre. " = ".$valor."<br>";
+//            }
+//            die();                
             $em = $this->getDoctrine()->getManager();
-            $encargado = $em->getRepository('AppBundle:Encargado')->findAll();
-            $escuela = $em->getRepository('AppBundle:Escuela')->findAll();            
-            
-            
+            $encargado = $em->getRepository('AppBundle:Usuariovotante')->findOneByDni($_POST['encargado']);
+            $escuela = $em->getRepository('AppBundle:Escuela')->findId($_POST['establecimiento']);            
+            echo count($encargado)."<br>";
+            echo count($escuela)."<br>";
             
             
             

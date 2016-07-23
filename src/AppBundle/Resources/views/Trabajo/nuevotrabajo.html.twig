@@ -32,7 +32,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="descproyecto">Descripci&oacuten:</label>  
   <div class="col-md-8">
-  <input id="descproyecto" name="descproyecto" placeholder="Ingrese Descripci&oacuten" class="form-control input-md" required="" type="text">
+  <input id="descproyecto" name="descproyecto" placeholder="Ingrese Descripción" class="form-control input-md" required="" type="text">
   </div>
 </div>
 
@@ -48,7 +48,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="dpwproyecto">Direcci&oacuten P&aacutegina Web:</label>  
   <div class="col-md-8">
-  <input id="dpwproyecto" name="dpwproyecto" placeholder="Ingrese Direcci&oacuten P&aacutegina Web" class="form-control input-md" required="" type="text">
+  <input id="dpwproyecto" name="dpwproyecto" placeholder="Ingrese Dirección Pátegina Web" class="form-control input-md" required="" type="text">
   </div>
 </div>
 
@@ -67,7 +67,7 @@
     <select id="encargado" name="encargado" class="form-control">
       <option value="0">Seleccionar Opción</option>
       {% for enc in encargado %}
-      <option value="{{enc.id}}">{{enc.apellido}}, {{enc.nombre}}</option>
+      <option value="{{enc.dni}}">{{enc.apellido}}, {{enc.nombre}}</option>
       {% endfor %}
     </select>
   </div>
