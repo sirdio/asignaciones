@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraint\NotNull;
 * 
 */
 
-class Escuela
+class Trabajo
 {
     /**
      * @var integer
