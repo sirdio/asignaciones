@@ -50,7 +50,7 @@ class Directivo  extends Usuariovotante
     private $idesc;
     
     /**
-    * @ORM\Column(name="diconf", type="integer")
+    * @ORM\Column(name="idconf", type="integer")
     */    
     private $idconf;
     

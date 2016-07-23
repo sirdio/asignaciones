@@ -45,7 +45,7 @@ class Encargado  extends Usuariovotante
     private $tele;
     
     /**
-    * @ORM\Column(name="diconf", type="integer")
+    * @ORM\Column(name="idconf", type="integer")
     */    
     private $idconf;
     

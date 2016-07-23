@@ -85,9 +85,8 @@ class DefaultController extends Controller
     public function GuardarUAction(Request $request)
     {
         if ($request->isMethod('POST')) {
-
+            $em = $this->getDoctrine()->getManager();
             if ($_POST['tipovotante'] == "Directivo"){
-                $em = $this->getDoctrine()->getManager();
                 $configuracion = new Configuration();
                 $configuracion->setCantcbsec(3);
                 $configuracion->setCantcssec(3);
@@ -98,7 +97,6 @@ class DefaultController extends Controller
                 $em->flush();
                 $id = $configuracion->getId();
                 $directivo = new Directivo();
-                $configuracion = new Configuration();
                 $directivo->setDni($_POST['dni']);
                 $directivo->setNombre($_POST['nombre']);
                 $directivo->setApellido($_POST['apellido']);
@@ -118,18 +116,17 @@ class DefaultController extends Controller
                 //    echo $nombre. " = ".$valor."<br>";
                 //}
                 //die();                
-                $directivo = $em->getRepository('AppBundle:Directivo')->findByIdesc($_POST['establecimiento']);
+                $directivo = $em->getRepository('AppBundle:Directivo')->findOneByIdesc($_POST['establecimiento']);
                 $idconf = $directivo->getIdconf();
                 $encargado = new Encargado();
-                $encargado->setDni();
-                $encargado->setNombre();
-                $encargado->setApellido();
-                $encargado->setTipovot();
-                $encargado->setMateriadic();
-                $encargado->setTele();
-                $encargado->setEmaile();
-                $encargado->setIdconf();
-                $em->persist($encargado);
+                $encargado->setDni($_POST['dni']);
+                $encargado->setNombre($_POST['nombre']);
+                $encargado->setApellido($_POST['apellido']);
+                $encargado->setTipovot($_POST['tipovotante']);
+                $encargado->setMateriadic($_POST['materiadic']);
+                $encargado->setTele($_POST['tele']);
+                $encargado->setEmaile($_POST['emaile']);
+                $encargado->setIdconf($idconf);
                 $em->flush();
                 $msj = "Usuario cargado con exito.";              
                 return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));                
@@ -151,7 +148,7 @@ class DefaultController extends Controller
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
     }
-    
+////////////////////////////////////////////////////////////////////////////////////////////////////////    
     /**
      * @Route("/nuevoestablecimiento", name="NuevoEstablecimiento")
      */
@@ -241,5 +238,32 @@ class DefaultController extends Controller
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
     }    
     
+////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    /**
+     * @Route("/nuevotrabajo", name="NuevoTrabajo")
+     */
+    public function MostrarFormularioTrabAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $encargado = $em->getRepository('AppBundle:Encargado')->findAll();
+        $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
+        return $this->render('AppBundle:Trabajo:nuevotrabajo.html.twig',
+        array('encargado'=>$encargado, 'escuela'=>$escuela));
+    }
+
+    /**
+     * @Route("/agregartrabajo", name="AgregarTrabajo")
+     */
+    public function AgregarTrabajoAction(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            echo "leo encargado <br>";
+            echo "leo esceula <br>";
+            echo "guardo trabajo";
+            die();
+        }
+        $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
+        return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+    }
     
 }
