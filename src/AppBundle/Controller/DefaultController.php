@@ -266,15 +266,18 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $encargado = $em->getRepository('AppBundle:Encargado')->findOneByDni($_POST['encargado']);
             $escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);   
-            $trabajo
-            echo count($encargado)."<br>";
-            echo count($escuela)."<br>";
-            
-            
-            
-            echo "leo esceula <br>";
-            echo "guardo trabajo";
-            die();
+            $trabajo = new Trabajo();
+            $trabajo->setNombproyecto($_POST['nombproyecto']);
+            $trabajo->setDescproyecto($_POST['descproyecto']);
+            $trabajo->setPavproyecto($_POST['pavproyecto']);
+            $trabajo->setDpwproyecto($_POST['dpwproyecto']);
+            $trabajo->setAemproyecto($_POST['aemproyecto']);
+            $trabajo->setCantvoto(0);
+            $trabajo->setEncargado($encargado);
+            $trabajo->setEscuela($escuela);
+            $msj = "Trabajo cargado con exito.";              
+            return $this->render('AppBundle:Default:mensajealtatrab.html.twig', array('msj'=>$msj));            
+
         }
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
