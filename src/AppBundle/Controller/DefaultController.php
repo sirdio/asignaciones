@@ -12,6 +12,7 @@ use AppBundle\Entity\Estudiante;
 use AppBundle\Entity\COPETyP;
 use AppBundle\Entity\Escuela;
 use AppBundle\Entity\Configuracion;
+use AppBundle\Entity\Trabajo;
 class DefaultController extends Controller
 {
     /**
@@ -263,8 +264,9 @@ class DefaultController extends Controller
 //            }
 //            die();                
             $em = $this->getDoctrine()->getManager();
-            $encargado = $em->getRepository('AppBundle:Usuariovotante')->findOneByDni($_POST['encargado']);
-            $escuela = $em->getRepository('AppBundle:Escuela')->findId($_POST['establecimiento']);            
+            $encargado = $em->getRepository('AppBundle:Encargado')->findOneByDni($_POST['encargado']);
+            $escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);   
+            $trabajo
             echo count($encargado)."<br>";
             echo count($escuela)."<br>";
             
