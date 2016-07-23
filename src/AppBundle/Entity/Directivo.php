@@ -49,6 +49,11 @@ class Directivo  extends Usuariovotante
     */    
     private $idesc;
     
+    /**
+    * @ORM\Column(name="diconf", type="integer")
+    */    
+    private $idconf;
+    
    /**
      * Get id
      *
@@ -106,4 +111,17 @@ class Directivo  extends Usuariovotante
     {
         return $this->idesc;
     }  
+    
+    public function setIdconf($idconf)
+    {
+        $this->idconf = $idconf;
+    
+        return $this;
+    }
+
+    public function getIdconf()
+    {
+        return $this->idconf;
+    }
+    
 }

@@ -11,6 +11,7 @@ use AppBundle\Entity\Docente;
 use AppBundle\Entity\Estudiante;
 use AppBundle\Entity\COPETyP;
 use AppBundle\Entity\Escuela;
+use AppBundle\Entity\Configuracion;
 class DefaultController extends Controller
 {
     /**
@@ -45,9 +46,9 @@ class DefaultController extends Controller
     public function NuevoUAction(Request $request)
     {
         if ($request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
             if ($_POST['selectbasic'] == "Directivo"){
                 $tipovotante = $_POST['selectbasic'];
-                $em = $this->getDoctrine()->getManager();
                 $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
                 if (!$escuela){
                     $msj = "Para cargar un usuario Directivo es necesario cargar antes datos del establecimiento.";              
@@ -56,7 +57,9 @@ class DefaultController extends Controller
                 return $this->render('AppBundle:Default:nuevodirectivo.html.twig', 
                 array('tipovotante'=>$tipovotante, 'escuela'=>$escuela));
             }elseif ($_POST['selectbasic'] == "Encargado"){
-                echo "nuevo encargado";
+                $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
+                return $this->render('AppBundle:Default:nuevoencargado.html.twig', 
+                array('tipovotante'=>$tipovotante, 'escuela'=>$escuela));
             }elseif ($_POST['selectbasic'] == "Docente"){
                 echo "nuevo docente";
             }elseif ($_POST['selectbasic'] == "Estudiante"){
@@ -81,12 +84,23 @@ class DefaultController extends Controller
     public function GuardarUAction(Request $request)
     {
         if ($request->isMethod('POST')) {
-//            foreach($_POST as $nombre => $valor){
-//                echo $nombre. " = ".$valor."<br>";
-//            }
-//            die();
+            foreach($_POST as $nombre => $valor){
+                echo $nombre. " = ".$valor."<br>";
+            }
+            die();
             if ($_POST['tipovotante'] == "Directivo"){
+                $em = $this->getDoctrine()->getManager();
+                $configuracion = new Configuration();
+                $configuracion->setCantcbsec(3);
+                $configuracion->setCantcssec(3);
+                $configuracion->setCantfp(0);
+                $configuracion->setCantts(0);
+                $configuracion->setCantexpped(0);
+                $em->persist($configuracion);
+                $em->flush();
+                $id = $configuracion->getId();
                 $directivo = new Directivo();
+                $configuracion = new Configuration();
                 $directivo->setDni($_POST['dni']);
                 $directivo->setNombre($_POST['nombre']);
                 $directivo->setApellido($_POST['apellido']);
@@ -95,7 +109,7 @@ class DefaultController extends Controller
                 $directivo->setTeld($_POST['tel']);
                 $directivo->setEmaild($_POST['email']);
                 $directivo->setIdesc($_POST['establecimiento']);
-                $em = $this->getDoctrine()->getManager();
+                $directivo->setIdconf($id);
                 $em->persist($directivo);
                 $em->flush();
                 $msj = "Usuario cargado con exito.";              

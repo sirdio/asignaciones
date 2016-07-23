@@ -26,10 +26,10 @@ class Encargado  extends Usuariovotante
     /**
      * @var string
      *
-     * @ORM\Column(name="cargo", type="string", length=150)
+     * @ORM\Column(name="materiadic", type="string", length=150)
      * 
      */    
-    private $cargo;    
+    private $materiadic;    
 
     /**
      * @var string
@@ -44,6 +44,11 @@ class Encargado  extends Usuariovotante
     */    
     private $tele;
     
+    /**
+    * @ORM\Column(name="diconf", type="integer")
+    */    
+    private $idconf;
+    
    /**
      * Get id
      *
@@ -54,16 +59,16 @@ class Encargado  extends Usuariovotante
         return $this->id;
     }
 
-   public function setMatdic($matdic)
+   public function setMateriadic($materiadic)
     {
-        $this->matdic = $matdic;
+        $this->materiadic = $materiadic;
     
         return $this;
     }
 
-    public function getMatdic()
+    public function getMateriadic()
     {
-        return $this->atdic;
+        return $this->materiadic;
     }
 
     public function setEmaile($emaile)
@@ -89,5 +94,16 @@ class Encargado  extends Usuariovotante
     {
         return $this->Tele;
     }
-	
+
+    public function setIdconf($idconf)
+    {
+        $this->idconf = $idconf;
+    
+        return $this;
+    }
+
+    public function getIdconf()
+    {
+        return $this->idconf;
+    }	
 }
