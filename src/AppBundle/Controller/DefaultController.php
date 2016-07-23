@@ -283,4 +283,36 @@ class DefaultController extends Controller
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
     }
     
+    /**
+     * @Route("/listartrabajo", name="ListarTrabajo")
+     */
+    public function ListarTrabajoAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+        if (!$trabajo){
+            $msj = "No existen trabajos cargados.";              
+            return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+        }        
+        return $this->render('AppBundle:Trabajo:listartrabajo.html.twig',array('trabajo'=>$trabajo));
+    }    
+
+    /**
+     * @Route("/mostrartrabajo/{id}", name="MostrarTrabajo")
+     */
+    public function MostrarTrabajoAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);
+        if (!$trabajo){
+            $msj = "No existe trabajo.";              
+            return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+        }        
+        echo $trabajo->getEncargado()->getDni();
+        echo $trabajo->getEncargado()->getApellido();
+        echo $trabajo->getEncargado()->getNombre();
+        die();
+        return $this->render('AppBundle:Default:editartrabajo.html.twig',array('trabajo'=>$trabajo));
+    }
+    
 }

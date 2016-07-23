@@ -1,0 +1,104 @@
+{% extends '::base.html.twig' %}
+{% block title %}Modificar Trabajo{% endblock %}
+{% block body %}
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div>
+</nav>
+<div class="container">
+     <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+<form action="{{ path('GuardarCambiosTrabajo',{'id':trabajo.id}) }}" method="post" class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Ingresar datos Trabajo</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="nombproyecto">Nombre Proyecto:</label>  
+  <div class="col-md-8">
+  <input id="nombproyecto" name="nombproyecto" class="form-control input-md" required="" type="text" value="{{trabajo.nombproyecto}}">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="descproyecto">Descripci&oacuten:</label>  
+  <div class="col-md-8">
+  <input id="descproyecto" name="descproyecto" class="form-control input-md" required="" type="text" value="{{trabajo.descproyecto}}">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="pavproyecto">Presentaci&oacuten Audio Visual:</label>  
+  <div class="col-md-8">
+  <input id="pavproyecto" name="pavproyecto" class="form-control input-md" required="" type="text" value="{{trabajo.pavproyecto}}">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="dpwproyecto">Direcci&oacuten P&aacutegina Web:</label>  
+  <div class="col-md-8">
+  <input id="dpwproyecto" name="dpwproyecto" class="form-control input-md" required="" type="text" value="{{trabajo.dpwproyecto}}">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="aemproyecto">Archivo enviado por mail:</label>  
+  <div class="col-md-8">
+  <input id="aemproyecto" name="aemproyecto" class="form-control input-md" required="" type="text" value="{{trabajo.aemproyecto}}">
+  </div>
+</div>
+
+<!-- Select Basic -->
+{#<div class="form-group">
+  <label class="col-md-4 control-label" for="encargado">Encargado:</label>
+  <div class="col-md-8">
+    <select id="encargado" name="encargado" class="form-control">
+      <option value="0">Seleccionar Opción</option>
+      {% for enc in encargado %}
+      <option value="{{enc.dni}}">{{enc.apellido}}, {{enc.nombre}}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="establecimiento">Establecimiento:</label>
+  <div class="col-md-8">
+    <select id="establecimiento" name="establecimiento" class="form-control">
+      <option value="0">Seleccionar Opción</option>
+      {% for esc in escuela %}
+      <option value="{{esc.id}}">{{esc.nombesc}}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>#}
+
+<!-- Button -->
+<div class="form-group">
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Aceptar</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+          </div> 
+          <div class="col-md-4">
+          </div>
+    </div>
+</div> 
+
+{% endblock %}
