@@ -72,7 +72,7 @@ class DefaultController extends Controller
                     return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
                 }    
                 return $this->render('AppBundle:Default:nuevoestudiante.html.twig', 
-                array('tipovotante'=>$tipovotante, 'escuela'=>$escuela));           
+                array('tipovotante'=>$tipovotante, 'trabajo'=>$trabajo));           
                 
                 
             }elseif ($_POST['selectbasic'] == "COPETyP"){
@@ -121,11 +121,7 @@ class DefaultController extends Controller
                 $msj = "Usuario cargado con exito.";              
                 return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));
             }elseif ($_POST['tipovotante'] == "Encargado"){
-                
-                //foreach($_POST as $nombre => $valor){
-                //    echo $nombre. " = ".$valor."<br>";
-                //}
-                //die();                
+               
                 $directivo = $em->getRepository('AppBundle:Directivo')->findOneByIdesc($_POST['establecimiento']);
                 $idconf = $directivo->getIdconf();
                 $encargado = new Encargado();
@@ -145,6 +141,11 @@ class DefaultController extends Controller
             }elseif ($_POST['tipovotante'] == "Docente"){
                 echo "nuevo docente";
             }elseif ($_POST['tipovotante'] == "Estudiante"){
+                
+                foreach($_POST as $nombre => $valor){
+                    echo $nombre. " = ".$valor."<br>";
+                }
+                die();                 
                 echo "nuevo estudiante";
             }elseif ($_POST['tipovotante'] == "COPETyP"){
                 echo "nuevo copetyp";
