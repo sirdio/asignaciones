@@ -68,7 +68,7 @@ class Trabajo
     */
     private $escuela;    
     /**
-    * @ORM\Column(name="niveltrav", type="string", length=30)
+    * @ORM\Column(name="niveltrab", type="string", length=30)
     */    
     private $niveltrab;        
 
