@@ -133,6 +133,7 @@ class DefaultController extends Controller
                 $encargado->setTele($_POST['tele']);
                 $encargado->setEmaile($_POST['emaile']);
                 $encargado->setIdconf($idconf);
+                $em->persist($encargado);
                 $em->flush();
                 $msj = "Usuario cargado con exito.";              
                 return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));                
@@ -142,11 +143,26 @@ class DefaultController extends Controller
                 echo "nuevo docente";
             }elseif ($_POST['tipovotante'] == "Estudiante"){
                 
-                foreach($_POST as $nombre => $valor){
-                    echo $nombre. " = ".$valor."<br>";
-                }
-                die();                 
-                echo "nuevo estudiante";
+                //foreach($_POST as $nombre => $valor){
+                //    echo $nombre. " = ".$valor."<br>";
+                //}
+                //die();                 
+                
+                
+                $trabajo = $em->getRepository('AppBundle:Trabajo')->find($_POST['trabajo']);
+                $estudiante = new Estudiante();
+                $estudiante->setDni($_POST['dni']);
+                $estudiante->setNombre($_POST['nombre']);
+                $estudiante->setApellido($_POST['apellido']);
+                $estudiante->setTipovot($_POST['tipovotante']);
+                $estudiante->setAniocursada($_POST['aniocursa']);
+                $estudiante->setEspecialidada($_POST['especialidada']);
+                $estudiante->setNivel($_POST['nivel']);
+                $estudiante->setTrabajo($trabajo);
+                $em->persist($estudiante);
+                $em->flush();
+                $msj = "Usuario cargado con exito.";              
+                return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));                 
             }elseif ($_POST['tipovotante'] == "COPETyP"){
                 echo "nuevo copetyp";
             }else{
