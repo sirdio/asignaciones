@@ -320,7 +320,34 @@ class DefaultController extends Controller
         array('trabajo'=>$trabajo,
         'encargado'=>$encargado, 'escuela'=>$escuela,
         'aynenc'=>$aynenc, 'nombreescuela'=>$nombreescuela,
-        'dnienc'=>$dnienc, 'idesc'=>$idesc));
+        'dnienc'=>$dnienc, 'idescuela'=>$idesc));
     }
+    
+    /**
+     * @Route("/guardarcambiostrabajo/{id}", name="GuardarCambiosTrabajo")
+     */
+    public function GuardarCambiosTrabajoAction(Request $request, $id)
+    {
+        if ($request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
+            $encargado = $em->getRepository('AppBundle:Encargado')->findOneByDni($_POST['encargado']);
+            $escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);   
+            $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);   
+            $trabajo->setNombproyecto($_POST['nombproyecto']);
+            $trabajo->setDescproyecto($_POST['descproyecto']);
+            $trabajo->setPavproyecto($_POST['pavproyecto']);
+            $trabajo->setDpwproyecto($_POST['dpwproyecto']);
+            $trabajo->setAemproyecto($_POST['aemproyecto']);
+            $trabajo->setCantvoto(0);
+            $trabajo->setEncargado($encargado);
+            $trabajo->setEscuela($escuela);
+            $em->persist($trabajo);
+            $em->flush();
+            $msj = "Los datos se modificaron con exito.";              
+            return $this->render('AppBundle:Default:mensajemodificacion.html.twig', array('msj'=>$msj));            
+        }
+        $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
+        return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+    }       
     
 }
