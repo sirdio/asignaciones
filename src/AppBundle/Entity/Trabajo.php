@@ -27,8 +27,11 @@ class Trabajo
      */
     private $id;
     /**
-    * @ORM\Column(name="nombproyecto", type="string", length=250)
-    */    
+     * @var string
+     *
+     * @ORM\Column(name="nombproyecto", type="string", length=250)
+     * 
+     */    
     private $nombproyecto;    
     /**
      * @var string
@@ -81,7 +84,7 @@ class Trabajo
         return $this;
     }
 
-    public function getNomproyecto()
+    public function getNombproyecto()
     {
         return $this->nombproyecto;
     }
@@ -146,18 +149,35 @@ class Trabajo
         return $this->cantvoto;
     }    
 //////////////////////////////////////
+    /**
+     * Set encargado
+     *
+     * @param \appBundle\Entity\Encargado $encargado
+     * @return Trabajo
+     */
     public function setEncargado(\AppBundle\Entity\Encargado $encargado = null)
     {
         $this->encargado = $encargado;
     
         return $this;
     }
-
+    
+    /**
+     * Get encargado
+     *
+     * @return \appBundle\Entity\Encargado
+     */
     public function getEncargado()
     {
         return $this->encargado;
     }
 //////////////////////////////////////
+    /**
+     * Set escuela
+     *
+     * @param \appBundle\Entity\Escuela $escuela
+     * @return Trabajo
+     */
     public function setEscuela(\AppBundle\Entity\Escuela $escuela = null)
     {
         $this->escuela = $escuela;
@@ -165,6 +185,11 @@ class Trabajo
         return $this;
     }
 
+    /**
+     * Get escuela
+     *
+     * @return \appBundle\Entity\Escuela
+     */
     public function getEscuela()
     {
         return $this->escuela;

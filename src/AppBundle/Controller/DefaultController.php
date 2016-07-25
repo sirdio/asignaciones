@@ -313,6 +313,9 @@ class DefaultController extends Controller
         echo $trabajo->getEncargado()->getDni();
         echo $trabajo->getEncargado()->getApellido();
         echo $trabajo->getEncargado()->getNombre();
+        echo"<br>";
+        echo $trabajo->getEscuela()->getId)();
+        echo $trabajo->getEscuela()->getNombesc();
         die();
         return $this->render('AppBundle:Default:editartrabajo.html.twig',array('trabajo'=>$trabajo));
     }
