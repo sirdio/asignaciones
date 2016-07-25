@@ -44,6 +44,12 @@ class Estudiante  extends Usuariovotante
     */    
     private $nivel;
     
+    /**
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Trabajo")
+    * @ORM\JoinColumn(name="idtrab", referencedColumnName="id")
+    */
+    private $trabajo;      
+    
    /**
      * Get id
      *
@@ -89,5 +95,29 @@ class Estudiante  extends Usuariovotante
     {
         return $this->nivel;
     }
+    
+//////////////////////////////////////
+    /**
+     * Set trabajo
+     *
+     * @param \appBundle\Entity\Trabajo $trabajo
+     * @return Estudiante
+     */
+    public function setTrabajo(\AppBundle\Entity\Trabajo $trabajo = null)
+    {
+        $this->trabajo = $trabajo;
+    
+        return $this;
+    }
+
+    /**
+     * Get trabajo
+     *
+     * @return \appBundle\Entity\Trabajo
+     */
+    public function getTrabajo()
+    {
+        return $this->trabajo;
+    }    
 	
 }

@@ -65,7 +65,16 @@ class DefaultController extends Controller
             }elseif ($_POST['selectbasic'] == "Docente"){
                 echo "nuevo docente";
             }elseif ($_POST['selectbasic'] == "Estudiante"){
-                echo "nuevo estudiante";
+                
+                $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                if (!$trabajo){
+                    $msj = "Para cargar un usuario Estudiante es necesario cargar antes los trabajos.";              
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+                }    
+                return $this->render('AppBundle:Default:nuevoestudiante.html.twig', 
+                array('tipovotante'=>$tipovotante, 'escuela'=>$escuela));           
+                
+                
             }elseif ($_POST['selectbasic'] == "COPETyP"){
                 echo "nuevo copetyp";
             }else{
