@@ -67,7 +67,10 @@ class Trabajo
     * @ORM\JoinColumn(name="idesc", referencedColumnName="id")
     */
     private $escuela;    
-        
+    /**
+    * @ORM\Column(name="niveltrav", type="string", length=30)
+    */    
+    private $niveltrab;        
 
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
@@ -194,6 +197,17 @@ class Trabajo
     {
         return $this->escuela;
     }
+//////////////////////////////////////
+    public function setNiveltrab($niveltrab)
+    {
+        $this->niveltrab = $niveltrab;
+    
+        return $this;
+    }
 
+    public function getNiveltrab()
+    {
+        return $this->niveltrab;
+    } 
       
 }

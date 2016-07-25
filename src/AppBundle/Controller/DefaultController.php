@@ -301,6 +301,7 @@ class DefaultController extends Controller
             $trabajo->setCantvoto(0);
             $trabajo->setEncargado($encargado);
             $trabajo->setEscuela($escuela);
+            $trabajo->setNiveltrab($_POST['nivel']);
             $em->persist($trabajo);
             $em->flush();            
             $msj = "Trabajo cargado con exito.";              
