@@ -155,7 +155,7 @@ class DefaultController extends Controller
                 $estudiante->setNombre($_POST['nombre']);
                 $estudiante->setApellido($_POST['apellido']);
                 $estudiante->setTipovot($_POST['tipovotante']);
-                $estudiante->setAniocursada($_POST['aniocursa']);
+                $estudiante->setAniocursa($_POST['aniocursa']);
                 $estudiante->setEspecialidada($_POST['especialidada']);
                 $estudiante->setNivel($_POST['nivel']);
                 $estudiante->setTrabajo($trabajo);

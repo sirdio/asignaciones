@@ -60,21 +60,21 @@ class Estudiante  extends Usuariovotante
         return $this->id;
     }
 
-   public function setAniocursada($aniocursada)
+   public function setAniocursa($aniocursa)
     {
-        $this->aniocursada = $aniocursada;
+        $this->aniocursa = $aniocursa;
     
         return $this;
     }
 
-    public function getAniocursada()
+    public function getAniocursa()
     {
-        return $this->aniocursada;
+        return $this->aniocursa;
     }
 
     public function setEspecialidada($especialidada)
     {
-        $this->email = $especialidada;
+        $this->especialidada = $especialidada;
     
         return $this;
     }
