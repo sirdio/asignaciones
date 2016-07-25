@@ -316,9 +316,10 @@ class DefaultController extends Controller
         $aynenc = $trabajo->getEncargado()->getApellido().", ".$trabajo->getEncargado()->getNombre();
         $idesc = $trabajo->getEscuela()->getId();
         $nombreescuela = $trabajo->getEscuela()->getNombesc();
-        return $this->render('AppBundle:Default:editartrabajo.html.twig',
+        return $this->render('AppBundle:Trabajo:editartrabajo.html.twig',
         array('trabajo'=>$trabajo,
         'encargado'=>$encargado, 'escuela'=>$escuela,
+        'aynenc'=>$aynenc, 'nombreescuela'=>$nombreescuela,
         'dnienc'=>$dnienc, 'idesc'=>$idesc));
     }
     

@@ -14,7 +14,7 @@
           <div class="col-md-4">
           </div>
           <div class="col-md-4">
-<form action="{{ path('GuardarCambiosTrabajo',{'id':trabajo.id}) }}" method="post" class="form-horizontal">
+<form action="{#{ path('GuardarCambiosTrabajo',{'id':trabajo.id}) }#}" method="post" class="form-horizontal">
 <fieldset>
 
 <!-- Form Name -->
@@ -67,7 +67,7 @@
     <select id="encargado" name="encargado" class="form-control">
       <option value="{{dnienc}}">{{aynenc}}</option>
       {% for enc in encargado %}
-        {% enc.dni != dnienc %}
+        {% if enc.dni != dnienc %}
           <option value="{{enc.dni}}">{{enc.apellido}}, {{enc.nombre}}</option>
         {% endif%}
       {% endfor %}
@@ -80,7 +80,7 @@
   <label class="col-md-4 control-label" for="establecimiento">Establecimiento:</label>
   <div class="col-md-8">
     <select id="establecimiento" name="establecimiento" class="form-control">
-      <option value="{{idescuela}}">{{}nombreescuela}}</option>
+      <option value="{{idescuela}}">{{nombreescuela}}</option>
       {% for esc in escuela %}
         {% if esc.id != idescuela %}
           <option value="{{esc.id}}">{{esc.nombesc}}</option>
