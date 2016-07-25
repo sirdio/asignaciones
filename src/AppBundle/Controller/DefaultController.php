@@ -305,19 +305,21 @@ class DefaultController extends Controller
     public function MostrarTrabajoAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+        $encargado = $em->getRepository('AppBundle:Encargado')->findAll();
+        $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
         $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);
         if (!$trabajo){
             $msj = "No existe trabajo.";              
             return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
         }        
-        echo $trabajo->getEncargado()->getDni();
-        echo $trabajo->getEncargado()->getApellido();
-        echo $trabajo->getEncargado()->getNombre();
-        echo"<br>";
-        echo $trabajo->getEscuela()->getId)();
-        echo $trabajo->getEscuela()->getNombesc();
-        die();
-        return $this->render('AppBundle:Default:editartrabajo.html.twig',array('trabajo'=>$trabajo));
+        $dnienc = $trabajo->getEncargado()->getDni();
+        $aynenc = $trabajo->getEncargado()->getApellido().", ".$trabajo->getEncargado()->getNombre();
+        $idesc = $trabajo->getEscuela()->getId();
+        $nombreescuela = $trabajo->getEscuela()->getNombesc();
+        return $this->render('AppBundle:Default:editartrabajo.html.twig',
+        array('trabajo'=>$trabajo,
+        'encargado'=>$encargado, 'escuela'=>$escuela,
+        'dnienc'=>$dnienc, 'idesc'=>$idesc));
     }
     
 }
