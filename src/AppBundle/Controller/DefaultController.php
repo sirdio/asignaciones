@@ -64,6 +64,9 @@ class DefaultController extends Controller
                 array('tipovotante'=>$tipovotante, 'escuela'=>$escuela));
             }elseif ($_POST['selectbasic'] == "Docente"){
                 echo "nuevo docente";
+            
+                
+                
             }elseif ($_POST['selectbasic'] == "Estudiante"){
                 
                 $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
@@ -147,7 +150,15 @@ class DefaultController extends Controller
                 //    echo $nombre. " = ".$valor."<br>";
                 //}
                 //die();                 
-                
+                $configuracion = new Configuration();
+                $configuracion->setCantcbsec(3);
+                $configuracion->setCantcssec(3);
+                $configuracion->setCantfp(0);
+                $configuracion->setCantts(0);
+                $configuracion->setCantexpped(0);
+                $em->persist($configuracion);
+                $em->flush();
+                //$id = $configuracion->getId();                
                 
                 $trabajo = $em->getRepository('AppBundle:Trabajo')->find($_POST['trabajo']);
                 $estudiante = new Estudiante();
@@ -159,10 +170,12 @@ class DefaultController extends Controller
                 $estudiante->setEspecialidada($_POST['especialidada']);
                 $estudiante->setNivel($_POST['nivel']);
                 $estudiante->setTrabajo($trabajo);
+                $estudiante->setTrabajo($configuracion);
                 $em->persist($estudiante);
                 $em->flush();
                 $msj = "Usuario cargado con exito.";              
-                return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));                 
+                return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));     
+                
             }elseif ($_POST['tipovotante'] == "COPETyP"){
                 echo "nuevo copetyp";
             }else{
