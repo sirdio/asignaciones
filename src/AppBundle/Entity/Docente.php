@@ -26,10 +26,10 @@ class Docente  extends Usuariovotante
     /**
      * @var string
      *
-     * @ORM\Column(name="especioc", type="string", length=150)
+     * @ORM\Column(name="espacioc", type="string", length=150)
      * 
      */    
-    private $especioc;    
+    private $espacioc;    
 
 	/**
      * @var string
@@ -48,9 +48,26 @@ class Docente  extends Usuariovotante
     private $emaildoc;
 	
     /**
-    * @ORM\Column(name="maildoc", type="string", length=30)
+    * @ORM\Column(name="teldoc", type="string", length=30)
     */    
-    private $maildoc;
+    private $teldoc;
+
+    /**
+    * @ORM\Column(name="niveldoc", type="string", length=30)
+    */    
+    private $niveldoc;
+    
+    /**
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Presentacion")
+    * @ORM\JoinColumn(name="idpres", referencedColumnName="id")
+    */
+    private $presentacion;      
+
+    /**
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Configuracion")
+    * @ORM\JoinColumn(name="idconfig", referencedColumnName="id")
+    */
+    private $configuracion; 
     
    /**
      * Get id
@@ -61,19 +78,19 @@ class Docente  extends Usuariovotante
     {
         return $this->id;
     }
-
-   public function setEspecioc($especioc)
+//////////////////////////////////////////////
+   public function setEspacioc($espacioc)
     {
-        $this->especioc = $especioc;
+        $this->espacioc = $espacioc;
     
         return $this;
     }
 
-    public function getEspecioc()
+    public function getEspacioc()
     {
-        return $this->especioc;
+        return $this->espacioc;
     }
-
+//////////////////////////////////////////////
    public function setEspecialidadd($especialidadd)
     {
         $this->especialidadd = $especialidadd;
@@ -85,19 +102,19 @@ class Docente  extends Usuariovotante
     {
         return $this->especialidadd;
     }
-	
-    public function setMaildoc($maildoc)
+//////////////////////////////////////////////	
+    public function setEmaildoc($emaildoc)
     {
-        $this->maildoc = $maildoc;
+        $this->emaildoc = $emaildoc;
     
         return $this;
     }
 
-    public function getMaildoc()
+    public function getEmaildoc()
     {
-        return $this->maildoc;
+        return $this->emaildoc;
     }
-
+//////////////////////////////////////////////
     public function setTeldoc($teldoc)
     {
         $this->teldoc = $teldoc;
@@ -109,5 +126,65 @@ class Docente  extends Usuariovotante
     {
         return $this->Teldoc;
     }
-	
+
+/////////////////////////////////////////////
+    public function setNiveldoc($niveldoc)
+    {
+        $this->niveldoc = $niveldoc;
+    
+        return $this;
+    }
+
+    public function getNiveldoc()
+    {
+        return $this->niveldoc;
+    }
+    
+//////////////////////////////////////
+    /**
+     * Set presentacion
+     *
+     * @param \appBundle\Entity\Presentacion $presentacion
+     * @return Docente
+     */
+    public function setPresentacion(\AppBundle\Entity\Presentacion $presentacion = null)
+    {
+        $this->presentacion = $presentacion;
+    
+        return $this;
+    }
+
+    /**
+     * Get presentacion
+     *
+     * @return \appBundle\Entity\Presentacion
+     */
+    public function getPresentacion()
+    {
+        return $this->presentacion;
+    }    
+//////////////////////////////////////
+    /**
+     * Set configuracion
+     *
+     * @param \appBundle\Entity\Configuracion $configuracion
+     * @return Docente
+     */
+    public function setConfiguracion(\AppBundle\Entity\Configuracion $configuracion = null)
+    {
+        $this->configuracion = $configuracion;
+    
+        return $this;
+    }
+
+    /**
+     * Get configuracion
+     *
+     * @return \appBundle\Entity\Configuracion
+     */
+    public function getConfiguracion()
+    {
+        return $this->configuracion;
+    }
+    
 }

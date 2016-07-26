@@ -59,17 +59,22 @@ class DefaultController extends Controller
                 }    
                 return $this->render('AppBundle:Default:nuevodirectivo.html.twig', 
                 array('tipovotante'=>$tipovotante, 'escuela'=>$escuela));
+                
             }elseif ($_POST['selectbasic'] == "Encargado"){
                 $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
                 return $this->render('AppBundle:Default:nuevoencargado.html.twig', 
                 array('tipovotante'=>$tipovotante, 'escuela'=>$escuela));
-            }elseif ($_POST['selectbasic'] == "Docente"){
-                echo "nuevo docente";
-            
                 
+            }elseif ($_POST['selectbasic'] == "Docente"){
+                $presentacion = $em->getRepository('AppBundle:presentacion')->findAll();
+                if (!$presentacion){
+                    $msj = "Para cargar un usuario Docente es necesario cargar antes las presentaciones.";              
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+                }    
+                return $this->render('AppBundle:Default:nuevodocente.html.twig', 
+                array('tipovotante'=>$tipovotante, 'presentacion'=>$presentacion));                
                 
             }elseif ($_POST['selectbasic'] == "Estudiante"){
-                
                 $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
                 if (!$trabajo){
                     $msj = "Para cargar un usuario Estudiante es necesario cargar antes los trabajos.";              
@@ -82,15 +87,13 @@ class DefaultController extends Controller
             }elseif ($_POST['selectbasic'] == "COPETyP"){
                 echo "nuevo copetyp";
             }else{
-                echo "error debe seleccinar un tipo de usuario valido";
+                $msj = "error debe seleccinar un tipo de usuario valido";
+                return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj)); 
             }
-            
-            
-            die();
-            //return $this->render('AppBundle:Default:nuevousuario.html.twig');
         }
-        echo "no es post";
-        die();
+        $msj = "Ocurrio un problema intente nuevamente.";
+        return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));         
+        
     }
 
     /**

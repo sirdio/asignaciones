@@ -1,0 +1,120 @@
+{% extends '::base.html.twig' %}
+{% block title %}Agregar Usuario{% endblock %}
+{% block body %}
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div>
+</nav>
+<div class="container">
+     <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+<form action="{{ path('GuardarUsuario') }}" method="post" class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Ingresar datos del Docente</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="dni">D.N.I.:</label>  
+  <div class="col-md-8">
+  <input id="dni" name="dni" placeholder="ingrese DNI" class="form-control input-md" required="" type="text">
+  <span class="help-block">ej.: 26587458</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="nombre">Nombre:</label>  
+  <div class="col-md-8">
+  <input id="nombre" name="nombre" placeholder="ingrese nombre" class="form-control input-md" required="" type="text">
+  <span class="help-block">ej.: Pedro A.</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="apellido">Apellido:</label>  
+  <div class="col-md-8">
+  <input id="apellido" name="apellido" placeholder="ingrese apellido" class="form-control input-md" required="" type="text">
+  <span class="help-block">ej.: López</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="tipovotante">Tipo de Votante::</label>  
+  <div class="col-md-8">
+  <input id="tipovotante" name="tipovotante" class="form-control input-md" required="" type="text" value="{{tipovotante}}" readonly="readonly">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="espacioc">Espacio Curricular:</label>  
+  <div class="col-md-8">
+  <input id="espacioc" name="espacioc" class="form-control input-md" required="" type="text">
+  <span class="help-block">ej.: Practica Integradora II</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="especialidadd">Especialidad:</label>  
+  <div class="col-md-8">
+  <input id="especialidadd" name="especialidadd" class="form-control input-md" required="" type="text">
+  <span class="help-block">ej.: T&eacutecnico Superior en Enfermer&iacutea</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="emaildoc">Email:</label>  
+  <div class="col-md-8">
+  <input id="emaildoc" name="emaildoc" class="form-control input-md" required="" type="text">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="teldoc">Tel&eacutefono:</label>  
+  <div class="col-md-8">
+  <input id="teldoc" name="teldoc" class="form-control input-md" required="" type="text">
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="presentacion">Presentacion:</label>
+  <div class="col-md-8">
+    <select id="presentacion" name="presentacion" class="form-control">
+      <option value="0">Seleccionar Opción</option>
+      {% for pres in presentacion %}
+      <option value="{{pres.id}}">{{pres.esppresentacion}}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Aceptar</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+          </div> 
+          <div class="col-md-4">
+          </div>
+    </div>
+</div> 
+
+{% endblock %}
