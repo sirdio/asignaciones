@@ -420,7 +420,7 @@ class DefaultController extends Controller
             $presentacion->setPavpresentacion($_POST['pavpresentacion']);
             $presentacion->setNapresentacion($_POST['napresentacion']);
             $presentacion->setEscuela($escuela);
-            $presentacion->setNivelpres($_POST['nivelpres']);
+            $presentacion->setNivelpres('expped');
             $presentacion->setCantvoto(0);
             $em->persist($presentacion);
             $em->flush();            
