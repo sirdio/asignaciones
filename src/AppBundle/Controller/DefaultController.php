@@ -66,7 +66,7 @@ class DefaultController extends Controller
                 array('tipovotante'=>$tipovotante, 'escuela'=>$escuela));
                 
             }elseif ($_POST['selectbasic'] == "Docente"){
-                $presentacion = $em->getRepository('AppBundle:presentacion')->findAll();
+                $presentacion = $em->getRepository('AppBundle:Presentacion')->findAll();
                 if (!$presentacion){
                     $msj = "Para cargar un usuario Docente es necesario cargar antes las presentaciones.";              
                     return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
