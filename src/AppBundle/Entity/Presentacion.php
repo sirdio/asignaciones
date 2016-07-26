@@ -29,49 +29,49 @@ class Presentacion
     /**
      * @var string
      *
-     * @ORM\Column(name="nombproyecto", type="string", length=250)
+     * @ORM\Column(name="adpresentacion", type="string", length=10)
      * 
      */    
-    private $nombproyecto;    
+    private $adpresentacion;    
     /**
      * @var string
      *
-     * @ORM\Column(name="descproyecto", type="string", length=300)
+     * @ORM\Column(name="catpresentacion", type="string", length=150)
      * 
      */    
-    private $descproyecto;
+    private $catpresentacion;
     /**
-    * @ORM\Column(name="pavproyecto", type="string", length=250)
+    * @var string
+    * 
+    * @ORM\Column(name="esppresentacion", type="string", length=500)
     */    
-    private $pavproyecto;
+    private $esppresentacion;
     /**
-    * @ORM\Column(name="dpwproyecto", type="string", length=150)
+    * @var string
+    * 
+    * @ORM\Column(name="pavpresentacion", type="string", length=150)
     */
-    private $dpwproyecto;  
+    private $pavpresentacion;  
 
     /**
-    * @ORM\Column(name="aemproyecto", type="string", length=150)
+    * @var string
+    * 
+    * @ORM\Column(name="napresentacion", type="string", length=250)
     */
-    private $aemproyecto;
-    /**
-    * @ORM\Column(name="cantvoto", type="integer")
-    */
-    private $cantvoto;
-    /**
-    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Encargado")
-    * @ORM\JoinColumn(name="idenc", referencedColumnName="id")
-    */
-    private $encargado;
+    private $napresentacion;
     /**
     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Escuela")
     * @ORM\JoinColumn(name="idesc", referencedColumnName="id")
     */
     private $escuela;    
     /**
-    * @ORM\Column(name="niveltrab", type="string", length=30)
+    * @ORM\Column(name="nivelpres", type="string", length=30)
     */    
-    private $niveltrab;        
-
+    private $nivelpres;        
+    /**
+    * @ORM\Column(name="cantvoto", type="integer")
+    */
+    private $cantvoto;
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
 
@@ -80,100 +80,65 @@ class Presentacion
         return $this->id;
     }
 //////////////////////////////////////
-    public function setNombproyecto($nombproyecto)
+    public function setAdpresentacion($adpresentacion)
     {
-        $this->nombproyecto = $nombproyecto;
+        $this->adpresentacion = $adpresentacion;
     
         return $this;
     }
 
-    public function getNombproyecto()
+    public function getAdpresentacion()
     {
-        return $this->nombproyecto;
+        return $this->adpresentacion;
     }
 //////////////////////////////////////
-    public function setDescproyecto($descproyecto)
+    public function setCatpresentacion($catpresentacion)
     {
-        $this->descproyecto = $descproyecto;
+        $this->catpresentacion = $catpresentacion;
     
         return $this;
     }
 
-    public function getDescproyecto()
+    public function getCatpresentacion()
     {
-        return $this->descproyecto;
+        return $this->catpresentacion;
     }
 //////////////////////////////////////
-    public function setPavproyecto($pavproyecto)
+    public function setEsppresentacion($esppresentacion)
     {
-        $this->pavproyecto = $pavproyecto;
+        $this->esppresentacion = $esppresentacion;
     
         return $this;
     }
 
-    public function getPavproyecto()
+    public function getEsppresentacion()
     {
-        return $this->pavproyecto;
+        return $this->esppresentacion;
+    }    
+//////////////////////////////////////
+    public function setPavpresentacion($pavpresentacion)
+    {
+        $this->pavpresentacion = $pavpresentacion;
+    
+        return $this;
+    }
+
+    public function getPavpresentacion()
+    {
+        return $this->pavpresentacion;
     }   
 //////////////////////////////////////
-    public function setDpwproyecto($dpwproyecto)
+    public function setNapresentacion($napresentacion)
     {
-        $this->dpwproyecto = $dpwproyecto;
+        $this->napresentacion = $napresentacion;
     
         return $this;
     }
 
-    public function getDpwproyecto()
+    public function getNapresentacion()
     {
-        return $this->dpwproyecto;
+        return $this->napresentacion;
     }    
-//////////////////////////////////////
-    public function setAemproyecto($aemproyecto)
-    {
-        $this->aemproyecto = $aemproyecto;
-    
-        return $this;
-    }
-
-    public function getAemproyecto()
-    {
-        return $this->aemproyecto;
-    }    
-//////////////////////////////////////
-    public function setCantvoto($cantvoto)
-    {
-        $this->cantvoto = $cantvoto;
-    
-        return $this;
-    }
-
-    public function getCantvoto()
-    {
-        return $this->cantvoto;
-    }    
-//////////////////////////////////////
-    /**
-     * Set encargado
-     *
-     * @param \appBundle\Entity\Encargado $encargado
-     * @return Trabajo
-     */
-    public function setEncargado(\AppBundle\Entity\Encargado $encargado = null)
-    {
-        $this->encargado = $encargado;
-    
-        return $this;
-    }
-    
-    /**
-     * Get encargado
-     *
-     * @return \appBundle\Entity\Encargado
-     */
-    public function getEncargado()
-    {
-        return $this->encargado;
-    }
 //////////////////////////////////////
     /**
      * Set escuela
@@ -198,16 +163,29 @@ class Presentacion
         return $this->escuela;
     }
 //////////////////////////////////////
-    public function setNiveltrab($niveltrab)
+    public function setNivelpres($nivelpres)
     {
-        $this->niveltrab = $niveltrab;
+        $this->nivelpres = $nivelpres;
     
         return $this;
     }
 
-    public function getNiveltrab()
+    public function getNivelpres()
     {
-        return $this->niveltrab;
+        return $this->nivelpres;
     } 
-      
+
+//////////////////////////////////////
+    public function setCantvoto($cantvoto)
+    {
+        $this->cantvoto = $cantvoto;
+    
+        return $this;
+    }
+
+    public function getCantvoto()
+    {
+        return $this->cantvoto;
+    }    
+    
 }

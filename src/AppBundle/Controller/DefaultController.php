@@ -144,12 +144,21 @@ class DefaultController extends Controller
 
             }elseif ($_POST['tipovotante'] == "Docente"){
                 echo "nuevo docente";
+           
+           
+           
+           
+           
+           
+           
+           
             }elseif ($_POST['tipovotante'] == "Estudiante"){
                 
                 //foreach($_POST as $nombre => $valor){
                 //    echo $nombre. " = ".$valor."<br>";
                 //}
-                //die();                 
+                //die();     
+                
                 $configuracion = new Configuracion();
                 $configuracion->setCantcbsec(3);
                 $configuracion->setCantcssec(3);
@@ -158,8 +167,6 @@ class DefaultController extends Controller
                 $configuracion->setCantexpped(0);
                 $em->persist($configuracion);
                 $em->flush();
-                //$id = $configuracion->getId();                
-                
                 $trabajo = $em->getRepository('AppBundle:Trabajo')->find($_POST['trabajo']);
                 $estudiante = new Estudiante();
                 $estudiante->setDni($_POST['dni']);
@@ -297,11 +304,6 @@ class DefaultController extends Controller
     public function AgregarTrabajoAction(Request $request)
     {
         if ($request->isMethod('POST')) {
-//            echo "leo encargado <br>";
-//            foreach($_POST as $nombre => $valor){
-//                echo $nombre. " = ".$valor."<br>";
-//            }
-//            die();                
             $em = $this->getDoctrine()->getManager();
             $encargado = $em->getRepository('AppBundle:Encargado')->findOneByDni($_POST['encargado']);
             $escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);   
@@ -389,5 +391,44 @@ class DefaultController extends Controller
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
     }       
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    /**
+     * @Route("/nuevapresentacion", name="NuevaPresentacion")
+     */
+    public function MostrarFormularioPresAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
+        return $this->render('AppBundle:Presentacion:nuevapresentacion.html.twig',
+        array('escuela'=>$escuela));
+    }
+ 
+    /**
+     * @Route("/agregarpresentacion", name="AgregarPresentacion")
+     */
+    public function AgregarPresentacionAction(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
+            $escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);   
+            $presentacion = new Presentacion();
+            $presentacion->setAdpresentacion($_POST['adpresentacion']);
+            $presentacion->setCatpresentacion($_POST['catpresentacion']);
+            $presentacion->setEsppresentacion($_POST['esppresentacion']);
+            $presentacion->setPavpresentacion($_POST['pavpresentacion']);
+            $presentacion->setNapresentacion($_POST['napresentacion']);
+            $presentacion->setEscuela($escuela);
+            $presentacion->setNivelpres($_POST['nivelpres']);
+            $presentacion->setCantvoto(0);
+            $em->persist($presentacion);
+            $em->flush();            
+            $msj = "Trabajo cargado con exito.";              
+            return $this->render('AppBundle:Presentacion:mensajealtapress.html.twig', array('msj'=>$msj));            
+
+        }
+        $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
+        return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+    }
     
 }

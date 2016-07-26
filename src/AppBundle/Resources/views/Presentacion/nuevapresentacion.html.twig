@@ -1,0 +1,92 @@
+{% extends '::base.html.twig' %}
+{% block title %}Agregar Presentaci&oacuten{% endblock %}
+{% block body %}
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div>
+</nav>
+<div class="container">
+     <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+<form action="{{ path('AgregarPresentacion') }}" method="post" class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Ingresar datos Presentaci&oacuten</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="adpresentacion">A&ntildeo de Desarrollo:</label>  
+  <div class="col-md-8">
+  <input id="adpresentacion" name="adpresentacion" class="form-control input-md" required="" type="text">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="catpresentacion">Categor&iacutea:</label>  
+  <div class="col-md-8">
+  <input id="catpresentacion" name="catpresentacion" class="form-control input-md" required="" type="text">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="esppresentacion">Especificaci&oacuten:</label>  
+  <div class="col-md-8">
+  <input id="esppresentacion" name="esppresentacion" class="form-control input-md" required="" type="text">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="pavpresentacion">Presentaci&oacuten Audio Visual:</label>  
+  <div class="col-md-8">
+  <input id="pavpresentacion" name="pavpresentacion" class="form-control input-md" required="" type="text">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="napresentacion">Nombre Archivo:</label>  
+  <div class="col-md-8">
+  <input id="napresentacion" name="napresentacion" class="form-control input-md" required="" type="text" >
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="establecimiento">Establecimiento:</label>
+  <div class="col-md-8">
+    <select id="establecimiento" name="establecimiento" class="form-control">
+      <option value="0">Seleccionar Opción</option>
+      {% for esc in escuela %}
+      <option value="{{esc.id}}">{{esc.nombesc}}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+
+
+<!-- Button -->
+<div class="form-group">
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Aceptar</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+          </div> 
+          <div class="col-md-4">
+          </div>
+    </div>
+</div> 
+
+{% endblock %}
