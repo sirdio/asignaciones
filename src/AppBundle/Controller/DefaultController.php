@@ -100,7 +100,7 @@ class DefaultController extends Controller
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
             if ($_POST['tipovotante'] == "Directivo"){
-                $configuracion = new Configuration();
+                $configuracion = new Configuracion();
                 $configuracion->setCantcbsec(3);
                 $configuracion->setCantcssec(3);
                 $configuracion->setCantfp(0);
@@ -150,7 +150,7 @@ class DefaultController extends Controller
                 //    echo $nombre. " = ".$valor."<br>";
                 //}
                 //die();                 
-                $configuracion = new Configuration();
+                $configuracion = new Configuracion();
                 $configuracion->setCantcbsec(3);
                 $configuracion->setCantcssec(3);
                 $configuracion->setCantfp(0);
