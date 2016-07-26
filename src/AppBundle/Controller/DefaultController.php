@@ -13,6 +13,7 @@ use AppBundle\Entity\COPETyP;
 use AppBundle\Entity\Escuela;
 use AppBundle\Entity\Configuracion;
 use AppBundle\Entity\Trabajo;
+use AppBundle\Entity\Presentacion;
 class DefaultController extends Controller
 {
     /**
