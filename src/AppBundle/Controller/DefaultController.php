@@ -431,5 +431,62 @@ class DefaultController extends Controller
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
     }
+
+    /**
+     * @Route("/listarpresentacion", name="ListarPresentacion")
+     */
+    public function ListarPresentacionAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $presentacion = $em->getRepository('AppBundle:Presentacion')->findAll();
+        if (!$presentacion){
+            $msj = "No existen Presentaciones cargados.";              
+            return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+        }        
+        return $this->render('AppBundle:Presentacion:listarpresentacion.html.twig',array('presentacion'=>$presentacion));
+    }   
     
+    /**
+     * @Route("/mostrarpresentacion/{id}", name="MostrarPresentacion")
+     */
+    public function MostrarPresentacionAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
+        $presentacion = $em->getRepository('AppBundle:Presentacion')->find($id);
+        if (!$presentacion){
+            $msj = "No existe Presentaciones.";              
+            return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+        }        
+        $idesc = $trabajo->getEscuela()->getId();
+        $nombreescuela = $trabajo->getEscuela()->getNombesc();
+        return $this->render('AppBundle:Presentacion:editarpresentacion.html.twig',
+        array('presentacion'=>$presentacion, 'escuela'=>$escuela,
+        'nombreescuela'=>$nombreescuela, 'idescuela'=>$idesc));
+    }
+    
+    /**
+     * @Route("/guardarcambiospresentacion/{id}", name="GuardarCambiosPresentacion")
+     */
+    public function GuardarCambiosPresentacionAction(Request $request, $id)
+    {
+        if ($request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
+            $escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);   
+            $presentacion = $em->getRepository('AppBundle:Presentacion')->find($id);   
+            $presentacion->setAdpresentacion($_POST['adpresentacion']);
+            $presentacion->setCatpresentacion($_POST['catpresentacion']);
+            $presentacion->setEsppresentacion($_POST['esppresentacion']);
+            $presentacion->setPavpresentacion($_POST['pavpresentacion']);
+            $presentacion->setNapresentacion($_POST['napresentacion']);
+            $presentacion->setCantvoto(0);
+            $presentacion->setEscuela($escuela);
+            $em->persist($presentacion);
+            $em->flush();
+            $msj = "Los datos se modificaron con exito.";              
+            return $this->render('AppBundle:Default:mensajemodificacion.html.twig', array('msj'=>$msj));            
+        }
+        $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
+        return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+    }
 }
