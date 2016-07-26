@@ -52,7 +52,7 @@ class Estudiante  extends Usuariovotante
 
     /**
     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Configuracion")
-    * @ORM\JoinColumn(name="idconf", referencedColumnName="id")
+    * @ORM\JoinColumn(name="idconfig", referencedColumnName="id")
     */
     private $configuracion; 
     
