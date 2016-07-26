@@ -49,6 +49,12 @@ class Estudiante  extends Usuariovotante
     * @ORM\JoinColumn(name="idtrab", referencedColumnName="id")
     */
     private $trabajo;      
+
+    /**
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Configuracion")
+    * @ORM\JoinColumn(name="idconf", referencedColumnName="id")
+    */
+    private $configuracion; 
     
    /**
      * Get id
@@ -119,5 +125,27 @@ class Estudiante  extends Usuariovotante
     {
         return $this->trabajo;
     }    
-	
+//////////////////////////////////////
+    /**
+     * Set configuracion
+     *
+     * @param \appBundle\Entity\Configuracion $configuracion
+     * @return Estudiante
+     */
+    public function setConfiguracion(\AppBundle\Entity\Configuracion $configuracion = null)
+    {
+        $this->configuracion = $configuracion;
+    
+        return $this;
+    }
+
+    /**
+     * Get configuracion
+     *
+     * @return \appBundle\Entity\Configuracion
+     */
+    public function getConfiguracion()
+    {
+        return $this->configuracion;
+    }	
 }
