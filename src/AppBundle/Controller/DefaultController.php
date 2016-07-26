@@ -458,8 +458,8 @@ class DefaultController extends Controller
             $msj = "No existe Presentaciones.";              
             return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
         }        
-        $idesc = $trabajo->getEscuela()->getId();
-        $nombreescuela = $trabajo->getEscuela()->getNombesc();
+        $idesc = $presentacion->getEscuela()->getId();
+        $nombreescuela = $presentacion->getEscuela()->getNombesc();
         return $this->render('AppBundle:Presentacion:editarpresentacion.html.twig',
         array('presentacion'=>$presentacion, 'escuela'=>$escuela,
         'nombreescuela'=>$nombreescuela, 'idescuela'=>$idesc));
