@@ -170,7 +170,7 @@ class DefaultController extends Controller
                 $estudiante->setEspecialidada($_POST['especialidada']);
                 $estudiante->setNivel($_POST['nivel']);
                 $estudiante->setTrabajo($trabajo);
-                $estudiante->setTrabajo($configuracion);
+                $estudiante->setConfiguracion($configuracion);
                 $em->persist($estudiante);
                 $em->flush();
                 $msj = "Usuario cargado con exito.";              
