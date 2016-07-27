@@ -297,6 +297,7 @@ class DefaultController extends Controller
     public function GuardarModificacionAction(Request $request, $dni)
     {
         if ($request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
             $usuario = $em->getRepository('AppBundle:Usuarivotante')->findOneByDni($dni);
             if ($usuario->getTipovot() == "Directivo"){
             
