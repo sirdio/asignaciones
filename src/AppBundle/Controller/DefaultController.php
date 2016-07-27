@@ -151,14 +151,31 @@ class DefaultController extends Controller
                     echo $nombre. " = ".$valor."<br>";
                 }
                 die();     
-                               
-           
-           
-           
-           
-           
-           
-           
+                $configuracion = new Configuracion();
+                $configuracion->setCantcbsec(0);
+                $configuracion->setCantcssec(0);
+                $configuracion->setCantfp(0);
+                $configuracion->setCantts(0);
+                $configuracion->setCantexpped(3);
+                $em->persist($configuracion);
+                $em->flush();                                       
+                $presentacion = $em->getRepository('AppBundle:Presentacion')->find($_POST['presentacion']);
+                $docente = new Docente();
+                $docente->setDni();
+                $docente->setNombre();
+                $docente->setApellido();
+                $docente->setTipovot();
+                $docente->setEspacioc();
+                $docente->setEspecialidadd();
+                $docente->setEmaildoc();
+                $docente->setTeldoc();
+                $docente->setPresentacion($presentacion);
+                $docente->setConfiguracion($configuracion);
+                $docente->setNiveldoc('expped');
+                $em->persist($docente);
+                $em->flush();
+                $msj = "Usuario cargado con exito.";              
+                return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));            
            
             }elseif ($_POST['tipovotante'] == "Estudiante"){
                 $configuracion = new Configuracion();
@@ -192,7 +209,6 @@ class DefaultController extends Controller
                 return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));                
             }
             
-            //return $this->render('AppBundle:Default:nuevousuario.html.twig');
         }
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
