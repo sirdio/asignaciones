@@ -124,7 +124,7 @@ class Docente  extends Usuariovotante
 
     public function getTeldoc()
     {
-        return $this->Teldoc;
+        return $this->teldoc;
     }
 
 /////////////////////////////////////////////

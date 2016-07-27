@@ -92,7 +92,7 @@ class Encargado  extends Usuariovotante
 
     public function getTele()
     {
-        return $this->Tele;
+        return $this->tele;
     }
 
     public function setIdconf($idconf)

@@ -98,7 +98,7 @@ class Copetyp  extends Usuariovotante
 
     public function getTelcop()
     {
-        return $this->Telcop;
+        return $this->telcop;
     }
 
 //////////////////////////////////////
