@@ -297,9 +297,29 @@ class DefaultController extends Controller
     public function GuardarModificacionAction(Request $request, $dni)
     {
         if ($request->isMethod('POST')) {
+            $usuario = $em->getRepository('AppBundle:Usuarivotante')->findOneByDni($dni);
+            if ($usuario->getTipovot() == "Directivo"){
+            
+                echo $usuario->getTipovot();
+                
+            }elseif ($usuario->getTipovot() == "Encargado"){
 
+                echo $usuario->getTipovot();
 
+            }elseif ($usuario->getTipovot() == "Docente"){
 
+                echo $usuario->getTipovot();
+                
+            }elseif ($usuario->getTipovot() == "Estudiante"){
+                
+                echo $usuario->getTipovot();
+                
+            }elseif ($usuario->getTipovot() == "COPETyP"){
+
+                echo $usuario->getTipovot();
+                
+            }
+            die();
         }
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
