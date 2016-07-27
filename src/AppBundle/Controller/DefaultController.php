@@ -237,22 +237,12 @@ class DefaultController extends Controller
     public function ListarUsuariosAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $directivo = $em->getRepository('AppBundle:Directivo')->findAll();
-        $encargado = $em->getRepository('AppBundle:Encargado')->findAll();
-        $docente = $em->getRepository('AppBundle:Docente')->findAll();
-        $estudiante = $em->getRepository('AppBundle:Estudiante')->findAll();
-        $copetyp = $em->getRepository('AppBundle:Copetyp')->findAll();
-        $contd = count($directivo);
-        $contenc = count($encargado);
-        $contdoc = count($docente);
-        $contes = count($estudiante);
-        $contc = count($copetyp);
-        return $this->render('AppBundle:Default:listarusuarios.html.twig',array(
-            'directivo'=>$directivo, 'contd'=>$contd,
-            'encargado'=>$encargado, 'contenc'=>$contenc,
-            'docente'=>$docente, 'contdoc'=>$contdoc,
-            'estudiante'=>$estudiante, 'contes'=>$contes,
-            'copetyp'=>$copetyp, 'contc'=>$contc));
+        $usuarios = $em->getRepository('AppBundle:Usuariovotante')->findAll();
+        if (!$usuarios){
+            $msj = "No existe Usuarios cargados.";              
+            return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+        }        
+        return $this->render('AppBundle:Default:listarusuarios.html.twig',array('usuarios'=>$usuarios));
     }   
 
     /**

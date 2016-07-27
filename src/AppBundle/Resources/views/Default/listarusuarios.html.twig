@@ -21,65 +21,49 @@
         <th>Acción</th>
         
       </tr>
-      {% if contd != 0 %}
-        {% for direc in directivo %}
-            <tr>
-                <td>{{direc.dni}}</td>
-                <td>{{direc.nombre}}</td>
-                <td>{{direc.apellido}}</td>
-                <td>{{direc.tipovot}}</td>
-                <td><a href="{{path('MostrarUsuario',{ 'id': direc.dni})}}" class="btn btn-primary btn-lg enabled" role="button">Modificar</a></td>
-             </tr>
-        {% endfor %}
-      {% endif%}
-
-      {% if contenc != 0 %}
-        {% for enc in encargado %}
-            <tr>
-                <td>{{enc.dni}}</td>
-                <td>{{enc.nombre}}</td>
-                <td>{{enc.apellido}}</td>
-                <td>{{enc.tipovot}}</td>
-                <td><a href="{{path('MostrarUsuario',{ 'dni': enc.dni})}}" class="btn btn-primary btn-lg enabled" role="button">Modificar</a></td>
-             </tr>
-        {% endfor %}
-      {% endif%}
-      
-      {% if contdoc != 0 %}
-        {% for doc in docente %}
-            <tr>
-                <td>{{doc.dni}}</td>
-                <td>{{doc.nombre}}</td>
-                <td>{{doc.apellido}}</td>
-                <td>{{doc.tipovot}}</td>
-                <td><a href="{{path('MostrarUsuario',{ 'id': doc.dni})}}" class="btn btn-primary btn-lg enabled" role="button">Modificar</a></td>
-             </tr>
-        {% endfor %}
-      {% endif%}
-      
-      {% if contes != 0 %}
-        {% for est in estudiante %}
-            <tr>
-                <td>{{est.dni}}</td>
-                <td>{{est.nombre}}</td>
-                <td>{{est.apellido}}</td>
-                <td>{{est.tipovot}}</td>
-                <td><a href="{{path('MostrarUsuario',{ 'id': est.dni})}}" class="btn btn-primary btn-lg enabled" role="button">Modificar</a></td>
-             </tr>
-        {% endfor %}
-      {% endif%}
-      
-      {% if contc != 0 %}
-        {% for cope in copetyp %}
-            <tr>
-                <td>{{cope.dni}}</td>
-                <td>{{cope.nombre}}</td>
-                <td>{{cope.apellido}}</td>
-                <td>{{cope.tipovot}}</td>
-                <td><a href="{{path('MostrarUsuario',{ 'id': cope.dni})}}" class="btn btn-primary btn-lg enabled" role="button">Modificar</a></td>
-             </tr>
-        {% endfor %}
-      {% endif%}      
+      {% for uss in usuarios %}
+          {% if uss.tipovot == "Directivo" %}
+              <tr>
+                <td>{{uss.dni}}</td>
+                <td>{{uss.nombre}}</td>
+                <td>{{uss.apellido}}</td>
+                <td>{{uss.tipovot}}</td>
+                <td><a href="{{path('MostrarUsuario',{ 'id': uss.dni})}}" class="btn btn-primary btn-lg enabled" role="button">Modificar</a></td>
+              </tr>      
+          {% elseif uss.tipovot == "Encargado" %}
+              <tr>
+                <td>{{uss.dni}}</td>
+                <td>{{uss.nombre}}</td>
+                <td>{{uss.apellido}}</td>
+                <td>{{uss.tipovot}}</td>
+                <td><a href="{{path('MostrarUsuario',{ 'id': uss.dni})}}" class="btn btn-primary btn-lg enabled" role="button">Modificar</a></td>
+              </tr>          
+          {% elseif uss.tipovot == "Estudiante" %}
+              <tr>
+                <td>{{uss.dni}}</td>
+                <td>{{uss.nombre}}</td>
+                <td>{{uss.apellido}}</td>
+                <td>{{uss.tipovot}}</td>
+                <td><a href="{{path('MostrarUsuario',{ 'id': uss.dni})}}" class="btn btn-primary btn-lg enabled" role="button">Modificar</a></td>
+              </tr>          
+          {% elseif uss.tipovot == "Docente" %}
+              <tr>
+                <td>{{uss.dni}}</td>
+                <td>{{uss.nombre}}</td>
+                <td>{{uss.apellido}}</td>
+                <td>{{uss.tipovot}}</td>
+                <td><a href="{{path('MostrarUsuario',{ 'id': uss.dni})}}" class="btn btn-primary btn-lg enabled" role="button">Modificar</a></td>
+              </tr>          
+          {% else%}
+              <tr>
+                <td>{{uss.dni}}</td>
+                <td>{{uss.nombre}}</td>
+                <td>{{uss.apellido}}</td>
+                <td>{{uss.tipovot}}</td>
+                <td><a href="{{path('MostrarUsuario',{ 'id': uss.dni})}}" class="btn btn-primary btn-lg enabled" role="button">Modificar</a></td>
+              </tr>          
+          {% endif%}
+      {% endfor %}
       </table>
     </div>
 

@@ -96,7 +96,7 @@ class Usuariovotante
 
     public function getTipovot()
     {
-        return $this->$tipovot;
+        return $this->tipovot;
     }
 
     public function setNombre($nombre)
