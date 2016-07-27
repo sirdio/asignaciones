@@ -294,7 +294,7 @@ class DefaultController extends Controller
     /**
      * @Route("/guardarmodificacion/{id}", name="GuardarModificacion")
      */
-    public function GuardarModificacionAction(Request $request, $id)
+    public function GuardarModificacionAction(Request $request, $dni)
     {
         if ($request->isMethod('POST')) {
 
