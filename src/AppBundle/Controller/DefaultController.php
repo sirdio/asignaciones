@@ -147,10 +147,10 @@ class DefaultController extends Controller
                 
             }elseif ($_POST['tipovotante'] == "Docente"){
                  
-                foreach($_POST as $nombre => $valor){
-                    echo $nombre. " = ".$valor."<br>";
-                }
-                die();     
+                //foreach($_POST as $nombre => $valor){
+                //    echo $nombre. " = ".$valor."<br>";
+                //}
+                //die();     
                 $configuracion = new Configuracion();
                 $configuracion->setCantcbsec(0);
                 $configuracion->setCantcssec(0);
