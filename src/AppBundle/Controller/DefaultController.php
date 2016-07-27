@@ -85,7 +85,8 @@ class DefaultController extends Controller
                 
                 
             }elseif ($_POST['selectbasic'] == "COPETyP"){
-                echo "nuevo copetyp";
+                return $this->render('AppBundle:Default:nuevocopetyp.html.twig', 
+                array('tipovotante'=>$tipovotante));
             }else{
                 $msj = "error debe seleccinar un tipo de usuario valido";
                 return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj)); 
@@ -146,11 +147,6 @@ class DefaultController extends Controller
                 return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));                
                 
             }elseif ($_POST['tipovotante'] == "Docente"){
-                 
-                //foreach($_POST as $nombre => $valor){
-                //    echo $nombre. " = ".$valor."<br>";
-                //}
-                //die();     
                 $configuracion = new Configuracion();
                 $configuracion->setCantcbsec(0);
                 $configuracion->setCantcssec(0);
@@ -203,7 +199,12 @@ class DefaultController extends Controller
                 return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));     
                 
             }elseif ($_POST['tipovotante'] == "COPETyP"){
-                echo "nuevo copetyp";
+                foreach($_POST as $nombre => $valor){
+                    echo $nombre. " = ".$valor."<br>";
+                }
+                die(); 
+                
+                
             }else{
                 $msj = "Ocurrio un problema debe seleccinar un tipo de usuario valido.";        
                 return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));                

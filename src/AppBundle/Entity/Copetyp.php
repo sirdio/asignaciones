@@ -43,7 +43,15 @@ class Copetyp  extends Usuariovotante
     * @ORM\Column(name="telcop", type="string", length=30)
     */    
     private $telcop;	
-    
+
+    /**
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Configuracion")
+    * @ORM\JoinColumn(name="idconfig", referencedColumnName="id")
+    */
+    private $configuracion;    
+
+
+//////////////////////////////////////
    /**
      * Get id
      *
@@ -54,6 +62,7 @@ class Copetyp  extends Usuariovotante
         return $this->id;
     }
 
+//////////////////////////////////////
    public function setCargocop($cargocop)
     {
         $this->cargocop = $cargocop;
@@ -66,6 +75,7 @@ class Copetyp  extends Usuariovotante
         return $this->cargocop;
     }
 
+//////////////////////////////////////
 	    public function setEmailcop($emailcop)
     {
         $this->emailcop = $emailcop;
@@ -78,6 +88,7 @@ class Copetyp  extends Usuariovotante
         return $this->emailcop;
     }
 
+//////////////////////////////////////
     public function setTelcop($telcop)
     {
         $this->telcop = $telcop;
@@ -89,5 +100,29 @@ class Copetyp  extends Usuariovotante
     {
         return $this->Telcop;
     }
-  
+
+//////////////////////////////////////
+    /**
+     * Set configuracion
+     *
+     * @param \appBundle\Entity\Configuracion $configuracion
+     * @return Copetyp
+     */
+    public function setConfiguracion(\AppBundle\Entity\Configuracion $configuracion = null)
+    {
+        $this->configuracion = $configuracion;
+    
+        return $this;
+    }
+
+    /**
+     * Get configuracion
+     *
+     * @return \appBundle\Entity\Configuracion
+     */
+    public function getConfiguracion()
+    {
+        return $this->configuracion;
+    }
+    
 }
