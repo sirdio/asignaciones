@@ -97,7 +97,7 @@ class Directivo  extends Usuariovotante
 
     public function getTeld()
     {
-        return $this->Teld;
+        return $this->teld;
     }
 
     public function setIdesc($idesc)
