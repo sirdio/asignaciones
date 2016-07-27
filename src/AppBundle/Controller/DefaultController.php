@@ -292,7 +292,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/guardarmodificacion/{id}", name="GuardarModificacion")
+     * @Route("/guardarmodificacion/{dni}", name="GuardarModificacion")
      */
     public function GuardarModificacionAction(Request $request, $dni)
     {
