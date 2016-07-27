@@ -257,7 +257,7 @@ class DefaultController extends Controller
                 $idesc = $escuela->getId();
                 $nombesc = $escuela->getNombesc();
                 $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
-                return $this->render('AppBundle:Default:editardiretivo.html.twig',
+                return $this->render('AppBundle:Default:editardirectivo.html.twig',
                 array('idesc'=>$idesc, 'nombesc'=>$nombesc, 
                 'directivo'=>$directivo, 'escuela'=>$escuela));
                 
