@@ -164,7 +164,7 @@ class DefaultController extends Controller
                 $docente->setDni($_POST['dni']);
                 $docente->setNombre($_POST['nombre']);
                 $docente->setApellido($_POST['apellido']);
-                $docente->setTipovot$_POST['tipovot']);
+                $docente->setTipovot$_POST['tipovotante']);
                 $docente->setEspacioc($_POST['espacioc']);
                 $docente->setEspecialidadd($_POST['especialidadd']);
                 $docente->setEmaildoc($_POST['emaildoc']);
