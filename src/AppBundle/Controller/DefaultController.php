@@ -145,9 +145,13 @@ class DefaultController extends Controller
                 $msj = "Usuario cargado con exito.";              
                 return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));                
                 
-
             }elseif ($_POST['tipovotante'] == "Docente"){
-                echo "nuevo docente";
+                 
+                foreach($_POST as $nombre => $valor){
+                    echo $nombre. " = ".$valor."<br>";
+                }
+                die();     
+                               
            
            
            
@@ -157,12 +161,6 @@ class DefaultController extends Controller
            
            
             }elseif ($_POST['tipovotante'] == "Estudiante"){
-                
-                //foreach($_POST as $nombre => $valor){
-                //    echo $nombre. " = ".$valor."<br>";
-                //}
-                //die();     
-                
                 $configuracion = new Configuracion();
                 $configuracion->setCantcbsec(3);
                 $configuracion->setCantcssec(3);
