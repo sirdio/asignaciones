@@ -1,0 +1,76 @@
+{% extends '::base.html.twig' %}
+{% block title %}Lista de Usuarios{% endblock %}
+{% block body %}
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div>
+</nav>
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+      <tr>
+        <th>D.N.I.</th>
+        <th>Apellido</th>
+        <th>Nombre</th>
+        <th>Tipo Usuairo</th>
+        <th>Acción</th>
+        
+      </tr>
+      {% for uss in usuarios %}
+          {% if uss.tipovot == "Directivo" %}
+              <tr>
+                <td>{{uss.dni}}</td>
+                <td>{{uss.nombre}}</td>
+                <td>{{uss.apellido}}</td>
+                <td>{{uss.tipovot}}</td>
+                <td><a href="{{path('MostrarUsuario',{ 'id': uss.dni})}}" class="btn btn-primary btn-lg enabled" role="button">Modificar</a></td>
+              </tr>      
+          {% elseif uss.tipovot == "Encargado" %}
+              <tr>
+                <td>{{uss.dni}}</td>
+                <td>{{uss.nombre}}</td>
+                <td>{{uss.apellido}}</td>
+                <td>{{uss.tipovot}}</td>
+                <td><a href="{{path('MostrarUsuario',{ 'id': uss.dni})}}" class="btn btn-primary btn-lg enabled" role="button">Modificar</a></td>
+              </tr>          
+          {% elseif uss.tipovot == "Estudiante" %}
+              <tr>
+                <td>{{uss.dni}}</td>
+                <td>{{uss.nombre}}</td>
+                <td>{{uss.apellido}}</td>
+                <td>{{uss.tipovot}}</td>
+                <td><a href="{{path('MostrarUsuario',{ 'id': uss.dni})}}" class="btn btn-primary btn-lg enabled" role="button">Modificar</a></td>
+              </tr>          
+          {% elseif uss.tipovot == "Docente" %}
+              <tr>
+                <td>{{uss.dni}}</td>
+                <td>{{uss.nombre}}</td>
+                <td>{{uss.apellido}}</td>
+                <td>{{uss.tipovot}}</td>
+                <td><a href="{{path('MostrarUsuario',{ 'id': uss.dni})}}" class="btn btn-primary btn-lg enabled" role="button">Modificar</a></td>
+              </tr>          
+          {% else%}
+              <tr>
+                <td>{{uss.dni}}</td>
+                <td>{{uss.nombre}}</td>
+                <td>{{uss.apellido}}</td>
+                <td>{{uss.tipovot}}</td>
+                <td><a href="{{path('MostrarUsuario',{ 'id': uss.dni})}}" class="btn btn-primary btn-lg enabled" role="button">Modificar</a></td>
+              </tr>          
+          {% endif%}
+      {% endfor %}
+      </table>
+    </div>
+
+
+
+<footer>
+   <p>T&eacutecnicamente 2016 - Sistema de Votaci&oacuten - Creado por <a href="https://github.com/dsyph3r">Navarro Sergio Antonio</a>
+        &copy; {{ 'now' | date('Y') }}</p>
+</footer>
+{% endblock %}

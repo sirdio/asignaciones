@@ -230,6 +230,35 @@ class DefaultController extends Controller
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
     }
+    
+    /**
+     * @Route("/listarusuarios", name="ListarUsuarios")
+     */
+    public function ListarUsuariosAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $usuarios = $em->getRepository('AppBundle:Usuariovotante')->findAll();
+        if (!$usuarios){
+            $msj = "No existe Usuarios cargados.";              
+            return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+        }        
+        return $this->render('AppBundle:Default:listarusuarios.html.twig',array('usuarios'=>$usuarios));
+    }   
+
+    /**
+     * @Route("/mostrarusuario/{dni}", name="MostrarUsuario")
+     */
+    public function MostrarUsuarioAction($dni)
+    {
+        //$em = $this->getDoctrine()->getManager();
+        //$escuela = $em->getRepository('AppBundle:Escuela')->find($id);
+        //if (!$escuela){
+        //    $msj = "No existe Establecimiento.";              
+        //    return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+        //}        
+        //return $this->render('AppBundle:Default:editarestablecimiento.html.twig',array('escuela'=>$escuela));
+    }
+    
 ////////////////////////////////////////////////////////////////////////////////////////////////////////    
     /**
      * @Route("/nuevoestablecimiento", name="NuevoEstablecimiento")
