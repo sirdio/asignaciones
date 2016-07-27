@@ -253,8 +253,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
             if ($tv == "Directivo"){
                 $directivo = $em->getRepository('AppBundle:Directivo')->findOneByDni($dni);
-                print_r($directivo);
-                //echo $directivo->getIdesc();
+                echo $directivo->getIdesc();
                 die();
                 $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc());
                 $idesc = $escuela->getId();
