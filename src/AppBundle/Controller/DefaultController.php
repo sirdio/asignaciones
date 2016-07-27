@@ -9,7 +9,7 @@ use AppBundle\Entity\Directivo;
 use AppBundle\Entity\Encargado;
 use AppBundle\Entity\Docente;
 use AppBundle\Entity\Estudiante;
-use AppBundle\Entity\COPETyP;
+use AppBundle\Entity\Copetyp;
 use AppBundle\Entity\Escuela;
 use AppBundle\Entity\Configuracion;
 use AppBundle\Entity\Trabajo;
@@ -199,11 +199,27 @@ class DefaultController extends Controller
                 return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));     
                 
             }elseif ($_POST['tipovotante'] == "COPETyP"){
-                foreach($_POST as $nombre => $valor){
-                    echo $nombre. " = ".$valor."<br>";
-                }
-                die(); 
-                
+                $configuracion = new Configuracion();
+                $configuracion->setCantcbsec(1);
+                $configuracion->setCantcssec(1);
+                $configuracion->setCantfp(0);
+                $configuracion->setCantts(0);
+                $configuracion->setCantexpped(0);
+                $em->persist($configuracion);
+                $em->flush();
+                $copetyp = new Copetyp();
+                $copetyp->setDni($_POST['dni']);
+                $copetyp->setNombre($_POST['nombre']);
+                $copetyp->setApellido($_POST['apellido']);
+                $copetyp->setTipovot($_POST['tipovotante']);                
+                $copetyp->setCargocop($_POST['cargocop']);
+                $copetyp->setEmailcop($_POST['emailcop']);
+                $copetyp->setTelcop($_POST['telcop']);
+                $copetyp->setConfiguracion($_POST['configuracion']);
+                $em->persist($copetyp);
+                $em->flush();        
+                $msj = "Usuario cargado con exito.";              
+                return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));     
                 
             }else{
                 $msj = "Ocurrio un problema debe seleccinar un tipo de usuario valido.";        
