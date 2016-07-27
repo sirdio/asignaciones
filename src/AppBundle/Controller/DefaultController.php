@@ -215,7 +215,7 @@ class DefaultController extends Controller
                 $copetyp->setCargocop($_POST['cargocop']);
                 $copetyp->setEmailcop($_POST['emailcop']);
                 $copetyp->setTelcop($_POST['telcop']);
-                $copetyp->setConfiguracion($_POST['configuracion']);
+                $copetyp->setConfiguracion($configuracion);
                 $em->persist($copetyp);
                 $em->flush();        
                 $msj = "Usuario cargado con exito.";              
