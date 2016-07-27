@@ -253,8 +253,6 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
             if ($tv == "Directivo"){
                 $directivo = $em->getRepository('AppBundle:Directivo')->findOneByDni($dni);
-                echo $directivo->getIdesc();
-                die();
                 $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc());
                 $idesc = $escuela->getId();
                 $nombesc = $escuela->getNombesc();
@@ -264,12 +262,12 @@ class DefaultController extends Controller
                 'directivo'=>$directivo, 'escuela'=>$escuela));
                 
             }elseif ($tv == "Encargado"){
-                $encargado = $em->getRepository('AppBundle:Encargado')->find($dni);
+                $encargado = $em->getRepository('AppBundle:Encargado')->findOneByDni($dni);
                 return $this->render('AppBundle:Default:editarencargado.html.twig',
                 array('encargado'=>$encargado));
                 
             }elseif ($tv == "Docente"){
-                $docente = $em->getRepository('AppBundle:Docente')->find($dni);
+                $docente = $em->getRepository('AppBundle:Docente')->findOneByDni($dni);
                 $idpres = $docente->getPresentacion()->getId();
                 $nombpres = $docente->getPresentacion()->getEsppresentacion();                
                 $presentacion = $em->getRepository('AppBundle:Presentacion')->findAll();
@@ -278,7 +276,7 @@ class DefaultController extends Controller
                 'docente'=>$docente, 'presentacion'=>$presentacion));
                 
             }elseif ($tv == "Estudiante"){
-                $estudiante = $em->getRepository('AppBundle:Estudiante')->find($dni);
+                $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneByDni($dni);
                 $idtrab = $estudiante->getTrabajo()->getId();
                 $nombtrab = $estudiante->getTrabajo()->getNombproyecto();
                 $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
@@ -287,7 +285,7 @@ class DefaultController extends Controller
                 'estudiante'=>$estudiante, 'trabajos'=>$trabajo));
                 
             }elseif ($tv == "COPETyP"){
-                $copetyp = $em->getRepository('AppBundle:Copetyp')->find($dni);
+                $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneByDni($dni);
                 return $this->render('AppBundle:Default:editarcopetyp.html.twig',
                 array('copetyp'=>$copetyp));                
             }
