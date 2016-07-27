@@ -28,7 +28,7 @@
                 <td>{{uss.nombre}}</td>
                 <td>{{uss.apellido}}</td>
                 <td>{{uss.tipovot}}</td>
-                <td><a href="{{path('MostrarUsuario',{ 'dni': uss.dni})}}" class="btn btn-primary btn-sm enabled" role="button">Modificar</a></td>
+                <td><a href="{{path('MostrarUsuario',{ 'dni': uss.dni, 'tv': uss.tipovot})}}" class="btn btn-primary btn-sm enabled" role="button">Modificar</a></td>
               </tr>      
           {% elseif uss.tipovot == "Encargado" %}
               <tr>
@@ -36,7 +36,7 @@
                 <td>{{uss.nombre}}</td>
                 <td>{{uss.apellido}}</td>
                 <td>{{uss.tipovot}}</td>
-                <td><a href="{{path('MostrarUsuario',{ 'dni': uss.dni})}}" class="btn btn-primary btn-sm enabled" role="button">Modificar</a></td>
+                <td><a href="{{path('MostrarUsuario',{ 'dni': uss.dni, 'tv': uss.tipovot})}}" class="btn btn-primary btn-sm enabled" role="button">Modificar</a></td>
               </tr>          
           {% elseif uss.tipovot == "Estudiante" %}
               <tr>
@@ -44,7 +44,7 @@
                 <td>{{uss.nombre}}</td>
                 <td>{{uss.apellido}}</td>
                 <td>{{uss.tipovot}}</td>
-                <td><a href="{{path('MostrarUsuario',{ 'dni': uss.dni})}}" class="btn btn-primary btn-sm enabled" role="button">Modificar</a></td>
+                <td><a href="{{path('MostrarUsuario',{ 'dni': uss.dni, 'tv': uss.tipovot})}}" class="btn btn-primary btn-sm enabled" role="button">Modificar</a></td>
               </tr>          
           {% elseif uss.tipovot == "Docente" %}
               <tr>
@@ -52,7 +52,7 @@
                 <td>{{uss.nombre}}</td>
                 <td>{{uss.apellido}}</td>
                 <td>{{uss.tipovot}}</td>
-                <td><a href="{{path('MostrarUsuario',{ 'dni': uss.dni})}}" class="btn btn-primary btn-sm enabled" role="button">Modificar</a></td>
+                <td><a href="{{path('MostrarUsuario',{ 'dni': uss.dni, 'tv': uss.tipovot})}}" class="btn btn-primary btn-sm enabled" role="button">Modificar</a></td>
               </tr>          
           {% else%}
               <tr>
@@ -60,7 +60,7 @@
                 <td>{{uss.nombre}}</td>
                 <td>{{uss.apellido}}</td>
                 <td>{{uss.tipovot}}</td>
-                <td><a href="{{path('MostrarUsuario',{ 'dni': uss.dni})}}" class="btn btn-primary btn-sm enabled" role="button">Modificar</a></td>
+                <td><a href="{{path('MostrarUsuario',{ 'dni': uss.dni , 'tv': uss.tipovot})}}" class="btn btn-primary btn-sm enabled" role="button">Modificar</a></td>
               </tr>          
           {% endif%}
       {% endfor %}

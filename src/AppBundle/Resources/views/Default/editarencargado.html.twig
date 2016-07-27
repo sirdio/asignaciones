@@ -1,0 +1,92 @@
+{% extends '::base.html.twig' %}
+{% block title %}Modificar Usuario{% endblock %}
+{% block body %}
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div>
+</nav>
+<div class="container">
+     <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+<form action="{{ path('GuardarModificacion',{'id': encargado.id }) }}" method="post" class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Ingresar datos del Encargado</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="dni">D.N.I.:</label>  
+  <div class="col-md-8">
+  <input id="dni" name="dni" class="form-control input-md" required="" type="text" value="{{encargado.dni}}">
+  <span class="help-block">ej.: 26587458</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="nombre">Nombre:</label>  
+  <div class="col-md-8">
+  <input id="nombre" name="nombre" class="form-control input-md" required="" type="text" value="{{encargado.nombre}}">
+  <span class="help-block">ej.: Pedro A.</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="apellido">Apellido:</label>  
+  <div class="col-md-8">
+  <input id="apellido" name="apellido" class="form-control input-md" required="" type="text" value="{{encargado.apellido}}">
+  <span class="help-block">ej.: López</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="materiadic">Materia que Dicta:</label>  
+  <div class="col-md-8">
+  <input id="materiadic" name="materiadic" class="form-control input-md" required="" type="text" value="{{encargado.materiadic}}">
+  <span class="help-block">ej.: Laboratorio de Programación I</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="tele">Teléfono:</label>  
+  <div class="col-md-8">
+  <input id="tele" name="tele" class="form-control input-md" required="" type="text" value="{{encargado.tele}}">
+  <span class="help-block">ej.: 379-4457189</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="emaile">Email:</label>  
+  <div class="col-md-8">
+  <input id="emaile" name="emaile" class="form-control input-md" required="" type="text" value="{{encargado.emaile}}">
+  <span class="help-block">ej.: pablo2314@hotmail.com</span>  
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Aceptar</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+          </div> 
+          <div class="col-md-4">
+          </div>
+    </div>
+</div> 
+
+{% endblock %}

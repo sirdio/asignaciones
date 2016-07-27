@@ -246,18 +246,64 @@ class DefaultController extends Controller
     }   
 
     /**
-     * @Route("/mostrarusuario/{dni}", name="MostrarUsuario")
+     * @Route("/mostrarusuario/{dni}/{tv}", name="MostrarUsuario")
      */
-    public function MostrarUsuarioAction($dni)
+    public function MostrarUsuarioAction($dni, $tv)
     {
-        //$em = $this->getDoctrine()->getManager();
-        //$escuela = $em->getRepository('AppBundle:Escuela')->find($id);
-        //if (!$escuela){
-        //    $msj = "No existe Establecimiento.";              
-        //    return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
-        //}        
-        //return $this->render('AppBundle:Default:editarestablecimiento.html.twig',array('escuela'=>$escuela));
+        $em = $this->getDoctrine()->getManager();
+            if ($tv == "Directivo"){
+                $directivo = $em->getRepository('AppBundle:Directivo')->find($dni);
+                $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc());
+                $idesc = $escuela->getId();
+                $nombesc = $escuela->getNombesc();
+                $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
+                return $this->render('AppBundle:Default:editardiretivo.html.twig',
+                array('idesc'=>$idesc, 'nombesc'=>$nombesc, 
+                'directivo'=>$directivo, 'escuela'=>$escuela));
+                
+            }elseif ($tv == "Encargado"){
+                $encargado = $em->getRepository('AppBundle:Encargado')->find($dni);
+                return $this->render('AppBundle:Default:editarencargado.html.twig',
+                array('encargado'=>$encargado));
+                
+            }elseif ($tv == "Docente"){
+                $docente = $em->getRepository('AppBundle:Docente')->find($dni);
+                $idpres = $docente->getPresentacion()->getId();
+                $nombpres = $docente->getPresentacion()->getEsppresentacion();                
+                $presentacion = $em->getRepository('AppBundle:Presentacion')->findAll();
+                return $this->render('AppBundle:Default:editardocente.html.twig',
+                array('idpres'=>$idpres, 'nombpres'=>$nombpres, 
+                'docente'=>$docente, 'presentacion'=>$presentacion));
+                
+            }elseif ($tv == "Estudiante"){
+                $estudiante = $em->getRepository('AppBundle:Estudiante')->find($dni);
+                $idtrab = $estudiante->getTrabajo()->getId();
+                $nombtrab = $estudiante->getTrabajo()->getNombproyecto();
+                $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                return $this->render('AppBundle:Default:editarestudiante.html.twig',
+                array('idtrab'=>$idtrab, 'nombtrab'=>$nombtrab, 
+                'estudiante'=>$estudiante, 'trabajos'=>$trabajo));
+                
+            }elseif ($tv == "COPETyP"){
+                $copetyp = $em->getRepository('AppBundle:Copetyp')->find($dni);
+                return $this->render('AppBundle:Default:editarcopetyp.html.twig',
+                array('copetyp'=>$copetyp));                
+            }
     }
+    
+    /**
+     * @Route("/guardarmodificacion/{id}", name="GuardarModificacion")
+     */
+    public function GuardarModificacionAction(Request $request, $id)
+    {
+        if ($request->isMethod('POST')) {
+
+
+
+        }
+        $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
+        return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+    }   
     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////    
     /**

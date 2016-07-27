@@ -1,0 +1,92 @@
+{% extends '::base.html.twig' %}
+{% block title %}Modificar Usuario{% endblock %}
+{% block body %}
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div>
+</nav>
+<div class="container">
+     <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+<form action="{{ path('GuardarModificacion',{'id': copetyp.id }) }}" method="post" class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Ingresar datos </legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="dni">D.N.I.:</label>  
+  <div class="col-md-8">
+  <input id="dni" name="dni" class="form-control input-md" required="" type="text" value="{{copetyp.dni}}">
+  <span class="help-block">ej.: 26587458</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="nombre">Nombre:</label>  
+  <div class="col-md-8">
+  <input id="nombre" name="nombre" class="form-control input-md" required="" type="text" value="{{copetyp.nombre}}">
+  <span class="help-block">ej.: Pedro A.</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="apellido">Apellido:</label>  
+  <div class="col-md-8">
+  <input id="apellido" name="apellido" class="form-control input-md" required="" type="text" value="{{copetyp.apellido}}">
+  <span class="help-block">ej.: López</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cargocop">Cargo:</label>  
+  <div class="col-md-8">
+  <input id="cargocop" name="cargocop" class="form-control input-md" required="" type="text" value="{{copetyp.cargocop}}">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="telcop">Teléfono:</label>  
+  <div class="col-md-8">
+  <input id="telcop" name="telcop" class="form-control input-md" required="" type="text" value="{{copetyp.telcop}}">
+  <span class="help-block">ej.: 379-4457189</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="emailcop">Email:</label>  
+  <div class="col-md-8">
+  <input id="emailcop" name="emailcop" class="form-control input-md" required="" type="text" value="{{copetyp.emailcop}}">
+  <span class="help-block">ej.: pablo2314@hotmail.com</span>  
+  </div>
+</div>
+
+
+<!-- Button -->
+<div class="form-group">
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Aceptar</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+          </div> 
+          <div class="col-md-4">
+          </div>
+    </div>
+</div> 
+
+{% endblock %}
