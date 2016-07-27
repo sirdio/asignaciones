@@ -252,7 +252,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
             if ($tv == "Directivo"){
-                $directivo = $em->getRepository('AppBundle:Directivo')->find($dni);
+                $directivo = $em->getRepository('AppBundle:Directivo')->findOneByDni($dni);
                 print_r($directivo);
                 //echo $directivo->getIdesc();
                 die();
