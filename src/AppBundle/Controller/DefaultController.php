@@ -302,26 +302,69 @@ class DefaultController extends Controller
             }
             $em = $this->getDoctrine()->getManager();
             if ($tv == "Directivo"){
+                $establecimiento = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);
                 $directivo = $em->getRepository('AppBundle:Directivo')->findOneByDni($dni);
-
+                $directivo->setDni($_POST['dni']);
+                $directivo->setNombre($_POST['nombre']);
+                $directivo->setApellido($_POST['apellido']);
+                $directivo->setCargo($_POST['cargo']);
+                $directivo->setTeld($_POST['teld']);
+                $directivo->setEmaild($_POST['emaild']);
+                $directivo->setIdesc($establecimiento->getId());
+                $em->persist($directivo);
+                $em->flush();
             }elseif ($tv == "Encargado"){
                 $encargado = $em->getRepository('AppBundle:Encargado')->findOneByDni($dni);
-                echo $encargado->getTipovot();
+                $encargado->setDni($_POST['dni']);
+                $encargado->setNombre($_POST['nombre']);
+                $encargado->setApellido($_POST['apellido']);
+                $encargado->setMateriadic($_POST['materiadic']);
+                $encargado->setTele($_POST['tele']);
+                $encargado->setEmaile($_POST['emaile']);
+                $em->persist($encargado);
+                $em->flush();                
 
             }elseif ($tv == "Docente"){
+                $presentacion = $em->getRepository('AppBundle:Presentacion')->find($_POST['presentacion']);
                 $docente = $em->getRepository('AppBundle:Docente')->findOneByDni($dni);
-                echo $docente->getTipovot();
+                $docente->setDni($_POST['dni']);
+                $docente->setNombre($_POST['nombre']);
+                $docente->setApellido($_POST['apellido']);
+                $docente->setEspacioc($_POST['espacioc']);
+                $docente->setEspecialidadd($_POST['especialidadd']);
+                $docente->setTeldoc($_POST['teldoc']);
+                $docente->setEmaildoc($_POST['emaildoc']);
+                $docente->setPresentacion($presentacion);
+                $em->persist($docente);
+                $em->flush();                 
                 
             }elseif ($tv == "Estudiante"){
+                $trabajo = $em->getRepository('AppBundle:Trabajo')->find($_POST['trabajo']);
                 $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneByDni($dni);
-                echo $estudiante->getTipovot();
+                $estudiante->setDni($_POST['dni']);
+                $estudiante->setNombre($_POST['nombre']);
+                $estudiante->setApellido($_POST['apellido']);
+                $estudiante->setAniocursa($_POST['aniocursa']);
+                $estudiante->setEspecialidada($_POST['especialidada']);
+                $estudiante->setNivel($_POST['nivel']);
+                $estudiante->setPresentacion($trabajo);
+                $em->persist($estudiante);
+                $em->flush();                
                 
             }elseif ($tv == "COPETyP"){
                 $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneByDni($dni);
-                echo $copetyp->getTipovot();
+                $copetyp->setDni($_POST['dni']);
+                $copetyp->setNombre($_POST['nombre']);
+                $copetyp->setApellido($_POST['apellido']);
+                $copetyp->setCargocop($_POST['cargocop']);
+                $copetyp->setTelcop($_POST['telcop']);
+                $copetyp->setEmailcop($_POST['emailcop']);
+                $em->persist($copetyp);
+                $em->flush();                  
                 
             }
-            die();
+            $msj = "Los datos se modificaron con exito.";              
+            return $this->render('AppBundle:Default:mensajemodificacion.html.twig', array('msj'=>$msj));            
         }
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
