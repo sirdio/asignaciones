@@ -300,7 +300,7 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             if ($tv == "Directivo"){
                 $directivo = $em->getRepository('AppBundle:Directivo')->findOneByDni($dni);
-                echo $usuario->getTipovot();
+                echo $directivo->getTipovot();
                 
             }elseif ($tv == "Encargado"){
                 $encargado = $em->getRepository('AppBundle:Encargado')->findOneByDni($dni);
