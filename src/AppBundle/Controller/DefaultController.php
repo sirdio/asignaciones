@@ -344,7 +344,7 @@ class DefaultController extends Controller
                 $estudiante->setAniocursa($_POST['aniocursa']);
                 $estudiante->setEspecialidada($_POST['especialidada']);
                 $estudiante->setNivel($_POST['nivel']);
-                $estudiante->setPresentacion($trabajo);
+                $estudiante->setTrabajo($trabajo);
                 $em->persist($estudiante);
                 $em->flush();                
                 
