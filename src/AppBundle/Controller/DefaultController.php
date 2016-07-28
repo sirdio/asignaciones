@@ -27,7 +27,7 @@ class DefaultController extends Controller
         ));
     }
     /**
-     * @Route("/inicio", name="Inicio")
+     * @Route("/cargadatos/inicio", name="Inicio")
      */
     public function InicioAction()
     {
@@ -35,7 +35,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/seleccionatipousuario", name="Default_SelecU")
+     * @Route("/cargadatos/seleccionatipousuario", name="Default_SelecU")
      */
     public function SelecUAction()
     {
@@ -43,7 +43,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/nuevousuario", name="NuevoUsuario")
+     * @Route("/cargadatos/nuevousuario", name="NuevoUsuario")
      */
     public function NuevoUAction(Request $request)
     {
@@ -98,7 +98,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/guardarusuario", name="GuardarUsuario")
+     * @Route("/cargadatos/guardarusuario", name="GuardarUsuario")
      */
     public function GuardarUAction(Request $request)
     {
@@ -232,7 +232,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/listarusuarios", name="ListarUsuarios")
+     * @Route("/cargadatos/listarusuarios", name="ListarUsuarios")
      */
     public function ListarUsuariosAction()
     {
@@ -246,7 +246,7 @@ class DefaultController extends Controller
     }   
 
     /**
-     * @Route("/mostrarusuario/{dni}/{tv}", name="MostrarUsuario")
+     * @Route("/cargadatos/mostrarusuario/{dni}/{tv}", name="MostrarUsuario")
      */
     public function MostrarUsuarioAction($dni, $tv)
     {
@@ -292,7 +292,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/guardarmodificacion/{dni}/{tv}", name="GuardarModificacion")
+     * @Route("/cargadatos/guardarmodificacion/{dni}/{tv}", name="GuardarModificacion")
      */
     public function GuardarModificacionAction(Request $request, $dni, $tv)
     {
@@ -369,7 +369,7 @@ class DefaultController extends Controller
     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////    
     /**
-     * @Route("/nuevoestablecimiento", name="NuevoEstablecimiento")
+     * @Route("/cargadatos/nuevoestablecimiento", name="NuevoEstablecimiento")
      */
     public function MostrarFormularioAction()
     {
@@ -377,7 +377,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/agregarestablecimiento", name="AgregarEstablecimiento")
+     * @Route("/cargadatos/agregarestablecimiento", name="AgregarEstablecimiento")
      */
     public function AgregarEstAction(Request $request)
     {
@@ -403,7 +403,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/listarestablecimiento", name="ListarEstablecimiento")
+     * @Route("/cargadatos/listarestablecimiento", name="ListarEstablecimiento")
      */
     public function ListarEstAction()
     {
@@ -417,7 +417,7 @@ class DefaultController extends Controller
     }    
 
     /**
-     * @Route("/mostrarestablecimiento/{id}", name="MostrarEstablecimiento")
+     * @Route("/cargadatos/mostrarestablecimiento/{id}", name="MostrarEstablecimiento")
      */
     public function MostrarEstAction($id)
     {
@@ -431,7 +431,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/guardarcambiosest/{id}", name="GuardarCambiosEst")
+     * @Route("/cargadatos/guardarcambiosest/{id}", name="GuardarCambiosEst")
      */
     public function GuardarCambiosEstAction(Request $request, $id)
     {
@@ -459,7 +459,7 @@ class DefaultController extends Controller
     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////    
     /**
-     * @Route("/nuevotrabajo", name="NuevoTrabajo")
+     * @Route("/cargadatos/nuevotrabajo", name="NuevoTrabajo")
      */
     public function MostrarFormularioTrabAction()
     {
@@ -471,7 +471,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/agregartrabajo", name="AgregarTrabajo")
+     * @Route("/cargadatos/agregartrabajo", name="AgregarTrabajo")
      */
     public function AgregarTrabajoAction(Request $request)
     {
@@ -500,7 +500,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/listartrabajo", name="ListarTrabajo")
+     * @Route("/cargadatos/listartrabajo", name="ListarTrabajo")
      */
     public function ListarTrabajoAction()
     {
@@ -514,7 +514,7 @@ class DefaultController extends Controller
     }    
 
     /**
-     * @Route("/mostrartrabajo/{id}", name="MostrarTrabajo")
+     * @Route("/cargadatos/mostrartrabajo/{id}", name="MostrarTrabajo")
      */
     public function MostrarTrabajoAction($id)
     {
@@ -538,7 +538,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/guardarcambiostrabajo/{id}", name="GuardarCambiosTrabajo")
+     * @Route("/cargadatos/guardarcambiostrabajo/{id}", name="GuardarCambiosTrabajo")
      */
     public function GuardarCambiosTrabajoAction(Request $request, $id)
     {
@@ -566,7 +566,7 @@ class DefaultController extends Controller
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////    
     /**
-     * @Route("/nuevapresentacion", name="NuevaPresentacion")
+     * @Route("/cargadatos/nuevapresentacion", name="NuevaPresentacion")
      */
     public function MostrarFormularioPresAction()
     {
@@ -577,7 +577,7 @@ class DefaultController extends Controller
     }
  
     /**
-     * @Route("/agregarpresentacion", name="AgregarPresentacion")
+     * @Route("/cargadatos/agregarpresentacion", name="AgregarPresentacion")
      */
     public function AgregarPresentacionAction(Request $request)
     {
@@ -604,7 +604,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/listarpresentacion", name="ListarPresentacion")
+     * @Route("/cargadatos/listarpresentacion", name="ListarPresentacion")
      */
     public function ListarPresentacionAction()
     {
@@ -618,7 +618,7 @@ class DefaultController extends Controller
     }   
     
     /**
-     * @Route("/mostrarpresentacion/{id}", name="MostrarPresentacion")
+     * @Route("/cargadatos/mostrarpresentacion/{id}", name="MostrarPresentacion")
      */
     public function MostrarPresentacionAction($id)
     {
@@ -637,7 +637,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/guardarcambiospresentacion/{id}", name="GuardarCambiosPresentacion")
+     * @Route("/cargadatos/guardarcambiospresentacion/{id}", name="GuardarCambiosPresentacion")
      */
     public function GuardarCambiosPresentacionAction(Request $request, $id)
     {
