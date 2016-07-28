@@ -297,9 +297,6 @@ class DefaultController extends Controller
     public function GuardarModificacionAction(Request $request, $dni, $tv)
     {
         if ($request->isMethod('POST')) {
-            foreach($_POST as $nombre => $valor){
-                echo $nombre. " = ".$valor."<br>";
-            }
             $em = $this->getDoctrine()->getManager();
             if ($tv == "Directivo"){
                 $establecimiento = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);
