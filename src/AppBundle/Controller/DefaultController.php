@@ -292,32 +292,31 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/guardarmodificacion/{dni}", name="GuardarModificacion")
+     * @Route("/guardarmodificacion/{dni}/{tv}", name="GuardarModificacion")
      */
-    public function GuardarModificacionAction(Request $request, $dni)
+    public function GuardarModificacionAction(Request $request, $dni, $tv)
     {
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
-            $usuario = $em->getRepository('AppBundle:Usuarivotante')->findOneByDni($dni);
-            if ($usuario->getTipovot() == "Directivo"){
-            
+            if ($tv == "Directivo"){
+                $directivo = $em->getRepository('AppBundle:Directivo')->findOneByDni($dni);
                 echo $usuario->getTipovot();
                 
-            }elseif ($usuario->getTipovot() == "Encargado"){
+            }elseif ($tv == "Encargado"){
+                $encargado = $em->getRepository('AppBundle:Encargado')->findOneByDni($dni);
+                echo $encargado->getTipovot();
 
-                echo $usuario->getTipovot();
-
-            }elseif ($usuario->getTipovot() == "Docente"){
-
-                echo $usuario->getTipovot();
+            }elseif ($tv == "Docente"){
+                $docente = $em->getRepository('AppBundle:Docente')->findOneByDni($dni);
+                echo $docente->getTipovot();
                 
-            }elseif ($usuario->getTipovot() == "Estudiante"){
+            }elseif ($tv == "Estudiante"){
+                $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneByDni($dni);
+                echo $estudiante->getTipovot();
                 
-                echo $usuario->getTipovot();
-                
-            }elseif ($usuario->getTipovot() == "COPETyP"){
-
-                echo $usuario->getTipovot();
+            }elseif ($tv == "COPETyP"){
+                $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneByDni($dni);
+                echo $copetyp->getTipovot();
                 
             }
             die();
