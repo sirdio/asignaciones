@@ -297,11 +297,13 @@ class DefaultController extends Controller
     public function GuardarModificacionAction(Request $request, $dni, $tv)
     {
         if ($request->isMethod('POST')) {
+            foreach($_POST as $nombre => $valor){
+                echo $nombre. " = ".$valor."<br>";
+            }
             $em = $this->getDoctrine()->getManager();
             if ($tv == "Directivo"){
                 $directivo = $em->getRepository('AppBundle:Directivo')->findOneByDni($dni);
-                echo $directivo->getTipovot();
-                
+
             }elseif ($tv == "Encargado"){
                 $encargado = $em->getRepository('AppBundle:Encargado')->findOneByDni($dni);
                 echo $encargado->getTipovot();
