@@ -26,19 +26,22 @@ class DefaultController extends Controller
         
         
         if($request->isMethod('POST')){
-            $em = $this->getDoctrine->getManager();
-            $user = $em->getRepository('AppBundle:Users')->findOneBy(Array("username"=>$request->get('username'), "password"=>$request->get('password')));
-            if($user){
-                return $this->render('AppBundle:Default:inicio.html.twig');                                
-            }else{
-                return $this->render('AppBundle:Default:principal.html.twig');    
+            if($request->get('username')!= "" && $request->get('password')!=""){
+                $em = $this->getDoctrine()->getManager();
+                $user = $em->getRepository('AppBundle:Users')->findOneBy(
+                    Array("username"=>$request->get('username'), 
+                    "password"=>$request->get('password')));                
+                if($user){
+                    return $this->render('AppBundle:Default:inicio.html.twig');                                
+                }else{
+                    return $this->render('AppBundle:Default:principal.html.twig');    
+                }                                                
             }
+            return $this->render('AppBundle:Default:principal.html.twig');
+
         }
         return $this->render('AppBundle:Default:principal.html.twig');
-        // replace this example code with whatever you need
-        //return $this->render('default/index.html.twig', array(
-        //    'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-//        ));
+
     }
     
     
