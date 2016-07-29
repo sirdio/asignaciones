@@ -54,7 +54,7 @@ class DefaultController extends Controller
     /**
      * @Route("/cargadatos/inicio", name="Inicio")
      */
-    public function InicioAction()
+    public function InicioAction(Request $request)
     {
         $session=$request->getSession();
         if($session->has("id"))
