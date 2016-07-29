@@ -78,9 +78,18 @@ class DefaultController extends Controller
     /**
      * @Route("/cargadatos/seleccionatipousuario", name="Default_SelecU")
      */
-    public function SelecUAction()
+    public function SelecUAction(Request $request)
     {
-        return $this->render('AppBundle:Default:selectipouduario.html.twig');
+        $session=$request->getSession();
+        if($session->has("id"))
+        {
+            return $this->render('AppBundle:Default:selectipouduario.html.twig');
+        }else
+        {
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+        
+            
     }
 
     /**
@@ -88,53 +97,61 @@ class DefaultController extends Controller
      */
     public function NuevoUAction(Request $request)
     {
-        if ($request->isMethod('POST')) {
-            $em = $this->getDoctrine()->getManager();
-            $tipovotante = $_POST['selectbasic'];
-            if ($_POST['selectbasic'] == "Directivo"){
+        $session=$request->getSession();
+        if($session->has("id")){
+            
+            if ($request->isMethod('POST')) {
+                $em = $this->getDoctrine()->getManager();
+                $tipovotante = $_POST['selectbasic'];
+                if ($_POST['selectbasic'] == "Directivo"){
                 
-                $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
-                if (!$escuela){
-                    $msj = "Para cargar un usuario Directivo es necesario cargar antes datos del establecimiento.";              
-                    return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
-                }    
-                return $this->render('AppBundle:Default:nuevodirectivo.html.twig', 
-                array('tipovotante'=>$tipovotante, 'escuela'=>$escuela));
+                    $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
+                    if (!$escuela){
+                        $msj = "Para cargar un usuario Directivo es necesario cargar antes datos del establecimiento.";              
+                        return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+                    }    
+                    return $this->render('AppBundle:Default:nuevodirectivo.html.twig', 
+                    array('tipovotante'=>$tipovotante, 'escuela'=>$escuela));
                 
-            }elseif ($_POST['selectbasic'] == "Encargado"){
-                $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
-                return $this->render('AppBundle:Default:nuevoencargado.html.twig', 
-                array('tipovotante'=>$tipovotante, 'escuela'=>$escuela));
+                }elseif ($_POST['selectbasic'] == "Encargado"){
+                    $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
+                    return $this->render('AppBundle:Default:nuevoencargado.html.twig', 
+                    array('tipovotante'=>$tipovotante, 'escuela'=>$escuela));
                 
-            }elseif ($_POST['selectbasic'] == "Docente"){
-                $presentacion = $em->getRepository('AppBundle:Presentacion')->findAll();
-                if (!$presentacion){
-                    $msj = "Para cargar un usuario Docente es necesario cargar antes las presentaciones.";              
-                    return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
-                }    
-                return $this->render('AppBundle:Default:nuevodocente.html.twig', 
-                array('tipovotante'=>$tipovotante, 'presentacion'=>$presentacion));                
+                }elseif ($_POST['selectbasic'] == "Docente"){
+                    $presentacion = $em->getRepository('AppBundle:Presentacion')->findAll();
+                    if (!$presentacion){
+                        $msj = "Para cargar un usuario Docente es necesario cargar antes las presentaciones.";              
+                        return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+                    }    
+                    return $this->render('AppBundle:Default:nuevodocente.html.twig', 
+                    array('tipovotante'=>$tipovotante, 'presentacion'=>$presentacion));                
                 
-            }elseif ($_POST['selectbasic'] == "Estudiante"){
-                $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
-                if (!$trabajo){
-                    $msj = "Para cargar un usuario Estudiante es necesario cargar antes los trabajos.";              
-                    return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
-                }    
-                return $this->render('AppBundle:Default:nuevoestudiante.html.twig', 
-                array('tipovotante'=>$tipovotante, 'trabajo'=>$trabajo));           
+                }elseif ($_POST['selectbasic'] == "Estudiante"){
+                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                    if (!$trabajo){
+                        $msj = "Para cargar un usuario Estudiante es necesario cargar antes los trabajos.";              
+                        return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+                    }    
+                    return $this->render('AppBundle:Default:nuevoestudiante.html.twig', 
+                    array('tipovotante'=>$tipovotante, 'trabajo'=>$trabajo));           
                 
                 
-            }elseif ($_POST['selectbasic'] == "COPETyP"){
-                return $this->render('AppBundle:Default:nuevocopetyp.html.twig', 
-                array('tipovotante'=>$tipovotante));
-            }else{
-                $msj = "error debe seleccinar un tipo de usuario valido";
-                return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj)); 
+                }elseif ($_POST['selectbasic'] == "COPETyP"){
+                    return $this->render('AppBundle:Default:nuevocopetyp.html.twig', 
+                    array('tipovotante'=>$tipovotante));
+                }else{
+                    $msj = "error debe seleccinar un tipo de usuario valido";
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj)); 
+                }
             }
+            $msj = "Ocurrio un problema intente nuevamente.";
+            return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
         }
-        $msj = "Ocurrio un problema intente nuevamente.";
-        return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));         
+        
+         
         
     }
 
