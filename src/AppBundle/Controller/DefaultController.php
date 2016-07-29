@@ -14,17 +14,20 @@ use AppBundle\Entity\Escuela;
 use AppBundle\Entity\Configuracion;
 use AppBundle\Entity\Trabajo;
 use AppBundle\Entity\Presentacion;
+use AppBundle\Entity\Users;
+
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/principal", name="Principal")
      */
     public function indexAction(Request $request)
     {
+        return $this->render('AppBundle:Default:principal.html.twig');
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        ));
+        //return $this->render('default/index.html.twig', array(
+        //    'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+//        ));
     }
     /**
      * @Route("/cargadatos/inicio", name="Inicio")
