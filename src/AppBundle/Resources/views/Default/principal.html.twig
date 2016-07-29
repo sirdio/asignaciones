@@ -8,6 +8,7 @@
         <div class="top-content">
         	
             <div class="inner-bg">
+                <img src="{{ asset('public/img/backgrounds/1@2x.jpg') }}" alt="..." class="img-rounded">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text">
@@ -28,6 +29,7 @@
                             		<p>ingrese nombre de usuario y contrase&ntildea para iniciar la sesi&oacuten:</p>
                         		</div>
                         		<div class="form-top-right">
+                        		    
                         			<i class="fa fa-key"></i>
                         		</div>
                             </div>
@@ -41,7 +43,11 @@
 			                        	<label class="sr-only" for="form-password">Contrase&ntildea:</label>
 			                        	<input type="password" name="form-password" placeholder="Contraseña..." class="form-password form-control" id="form-password">
 			                        </div>
-			                        <button type="submit" class="btn">Aceptar</button>
+			                        <div class="form-group">
+                                        <div class="col-md-4">
+                                            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Aceptar</button>
+                                         </div>
+                                    </div>
 			                    </form>
 		                    </div>
                         </div>
