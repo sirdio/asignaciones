@@ -19,16 +19,32 @@ use AppBundle\Entity\Users;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/principal", name="Principal")
+     * @Route("/login", name="Login")
      */
-    public function indexAction(Request $request)
+    public function LoginAction(Request $request)
     {
+        
+        
+        if($request->isMethod('POST')){
+            $em = $this->getDoctrine->getManager();
+            $user = $em->getRepository('AppBundle:Users')->findOneBy(Array("username"=>$request->get('username'), "password"=>$request->get('password')));
+            if($user){
+                return $this->render('AppBundle:Default:inicio.html.twig');                                
+            }else{
+                return $this->render('AppBundle:Default:principal.html.twig');    
+            }
+        }
         return $this->render('AppBundle:Default:principal.html.twig');
         // replace this example code with whatever you need
         //return $this->render('default/index.html.twig', array(
         //    'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
 //        ));
     }
+    
+    
+    
+    
+///////////////////////////////////////////////////////////////////////////////    
     /**
      * @Route("/cargadatos/inicio", name="Inicio")
      */
