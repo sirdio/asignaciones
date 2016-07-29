@@ -47,7 +47,15 @@ class DefaultController extends Controller
 
     }
     
-    
+    /**
+     * @Route("/logout", name="Logout")
+     */    
+    public function LogoutAction(Request $request)
+    {
+        $session=$request->getSession();
+        $session->clear();
+        return $this->render('AppBundle:Default:principal.html.twig');
+    }
     
     
 ///////////////////////////////////////////////////////////////////////////////    
