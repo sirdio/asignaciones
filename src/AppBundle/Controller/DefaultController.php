@@ -32,6 +32,9 @@ class DefaultController extends Controller
                     Array("username"=>$request->get('username'), 
                     "password"=>$request->get('password')));                
                 if($user){
+                    $session=$request->getSession();
+                    $session->set("id",$user->getId());
+                    $session->set("username",$user->getUsername());                    
                     return $this->render('AppBundle:Default:inicio.html.twig');                                
                 }else{
                     return $this->render('AppBundle:Default:principal.html.twig');    
@@ -53,7 +56,15 @@ class DefaultController extends Controller
      */
     public function InicioAction()
     {
-        return $this->render('AppBundle:Default:inicio.html.twig');
+        $session=$request->getSession();
+        if($session->has("id"))
+        {
+            return $this->render('AppBundle:Default:inicio.html.twig');
+        }else
+        {
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+        
     }
 
     /**
