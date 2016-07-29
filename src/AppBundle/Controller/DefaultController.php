@@ -83,7 +83,9 @@ class DefaultController extends Controller
         $session=$request->getSession();
         if($session->has("id"))
         {
+            /////////////////////////////////////////////////////////////////////
             return $this->render('AppBundle:Default:selectipouduario.html.twig');
+            //////////////////////////////////////////////////////////////////////
         }else
         {
             return $this->render('AppBundle:Default:principal.html.twig');
@@ -160,193 +162,221 @@ class DefaultController extends Controller
      */
     public function GuardarUAction(Request $request)
     {
-        if ($request->isMethod('POST')) {
-            $em = $this->getDoctrine()->getManager();
-            if ($_POST['tipovotante'] == "Directivo"){
-                $configuracion = new Configuracion();
-                $configuracion->setCantcbsec(3);
-                $configuracion->setCantcssec(3);
-                $configuracion->setCantfp(0);
-                $configuracion->setCantts(0);
-                $configuracion->setCantexpped(0);
-                $em->persist($configuracion);
-                $em->flush();
-                $id = $configuracion->getId();
-                $directivo = new Directivo();
-                $directivo->setDni($_POST['dni']);
-                $directivo->setNombre($_POST['nombre']);
-                $directivo->setApellido($_POST['apellido']);
-                $directivo->setTipovot($_POST['tipovotante']);
-                $directivo->setCargo($_POST['cargo']);
-                $directivo->setTeld($_POST['tel']);
-                $directivo->setEmaild($_POST['email']);
-                $directivo->setIdesc($_POST['establecimiento']);
-                $directivo->setIdconf($id);
-                $em->persist($directivo);
-                $em->flush();
-                $msj = "Usuario cargado con exito.";              
-                return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));
-            }elseif ($_POST['tipovotante'] == "Encargado"){
+        $session=$request->getSession();
+        if($session->has("id"))
+        {
+        /////////////////////////////////////////////////////////////////////////    
+            if ($request->isMethod('POST')) {
+                $em = $this->getDoctrine()->getManager();
+                if ($_POST['tipovotante'] == "Directivo"){
+                    $configuracion = new Configuracion();
+                    $configuracion->setCantcbsec(3);
+                    $configuracion->setCantcssec(3);
+                    $configuracion->setCantfp(0);
+                    $configuracion->setCantts(0);
+                    $configuracion->setCantexpped(0);
+                    $em->persist($configuracion);
+                    $em->flush();
+                    $id = $configuracion->getId();
+                    $directivo = new Directivo();
+                    $directivo->setDni($_POST['dni']);
+                    $directivo->setNombre($_POST['nombre']);
+                    $directivo->setApellido($_POST['apellido']);
+                    $directivo->setTipovot($_POST['tipovotante']);
+                    $directivo->setCargo($_POST['cargo']);
+                    $directivo->setTeld($_POST['tel']);
+                    $directivo->setEmaild($_POST['email']);
+                    $directivo->setIdesc($_POST['establecimiento']);
+                    $directivo->setIdconf($id);
+                    $em->persist($directivo);
+                    $em->flush();
+                    $msj = "Usuario cargado con exito.";              
+                    return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));
+                }elseif ($_POST['tipovotante'] == "Encargado"){
                
-                $directivo = $em->getRepository('AppBundle:Directivo')->findOneByIdesc($_POST['establecimiento']);
-                $idconf = $directivo->getIdconf();
-                $encargado = new Encargado();
-                $encargado->setDni($_POST['dni']);
-                $encargado->setNombre($_POST['nombre']);
-                $encargado->setApellido($_POST['apellido']);
-                $encargado->setTipovot($_POST['tipovotante']);
-                $encargado->setMateriadic($_POST['materiadic']);
-                $encargado->setTele($_POST['tele']);
-                $encargado->setEmaile($_POST['emaile']);
-                $encargado->setIdconf($idconf);
-                $em->persist($encargado);
-                $em->flush();
-                $msj = "Usuario cargado con exito.";              
-                return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));                
+                    $directivo = $em->getRepository('AppBundle:Directivo')->findOneByIdesc($_POST['establecimiento']);
+                    $idconf = $directivo->getIdconf();
+                    $encargado = new Encargado();
+                    $encargado->setDni($_POST['dni']);
+                    $encargado->setNombre($_POST['nombre']);
+                    $encargado->setApellido($_POST['apellido']);
+                    $encargado->setTipovot($_POST['tipovotante']);
+                    $encargado->setMateriadic($_POST['materiadic']);
+                    $encargado->setTele($_POST['tele']);
+                    $encargado->setEmaile($_POST['emaile']);
+                    $encargado->setIdconf($idconf);
+                    $em->persist($encargado);
+                    $em->flush();
+                    $msj = "Usuario cargado con exito.";              
+                    return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));                
                 
-            }elseif ($_POST['tipovotante'] == "Docente"){
-                $configuracion = new Configuracion();
-                $configuracion->setCantcbsec(0);
-                $configuracion->setCantcssec(0);
-                $configuracion->setCantfp(0);
-                $configuracion->setCantts(0);
-                $configuracion->setCantexpped(3);
-                $em->persist($configuracion);
-                $em->flush();                                       
-                $presentacion = $em->getRepository('AppBundle:Presentacion')->find($_POST['presentacion']);
-                $docente = new Docente();
-                $docente->setDni($_POST['dni']);
-                $docente->setNombre($_POST['nombre']);
-                $docente->setApellido($_POST['apellido']);
-                $docente->setTipovot($_POST['tipovotante']);
-                $docente->setEspacioc($_POST['espacioc']);
-                $docente->setEspecialidadd($_POST['especialidadd']);
-                $docente->setEmaildoc($_POST['emaildoc']);
-                $docente->setTeldoc($_POST['teldoc']);
-                $docente->setPresentacion($presentacion);
-                $docente->setConfiguracion($configuracion);
-                $docente->setNiveldoc('expped');
-                $em->persist($docente);
-                $em->flush();
-                $msj = "Usuario cargado con exito.";              
-                return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));            
+                }elseif ($_POST['tipovotante'] == "Docente"){
+                    $configuracion = new Configuracion();
+                    $configuracion->setCantcbsec(0);
+                    $configuracion->setCantcssec(0);
+                    $configuracion->setCantfp(0);
+                    $configuracion->setCantts(0);
+                    $configuracion->setCantexpped(3);
+                    $em->persist($configuracion);
+                    $em->flush();                                       
+                    $presentacion = $em->getRepository('AppBundle:Presentacion')->find($_POST['presentacion']);
+                    $docente = new Docente();
+                    $docente->setDni($_POST['dni']);
+                    $docente->setNombre($_POST['nombre']);
+                    $docente->setApellido($_POST['apellido']);
+                    $docente->setTipovot($_POST['tipovotante']);
+                    $docente->setEspacioc($_POST['espacioc']);
+                    $docente->setEspecialidadd($_POST['especialidadd']);
+                    $docente->setEmaildoc($_POST['emaildoc']);
+                    $docente->setTeldoc($_POST['teldoc']);
+                    $docente->setPresentacion($presentacion);
+                    $docente->setConfiguracion($configuracion);
+                    $docente->setNiveldoc('expped');
+                    $em->persist($docente);
+                    $em->flush();
+                    $msj = "Usuario cargado con exito.";              
+                    return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));            
            
-            }elseif ($_POST['tipovotante'] == "Estudiante"){
-                $configuracion = new Configuracion();
-                $configuracion->setCantcbsec(3);
-                $configuracion->setCantcssec(3);
-                $configuracion->setCantfp(0);
-                $configuracion->setCantts(0);
-                $configuracion->setCantexpped(0);
-                $em->persist($configuracion);
-                $em->flush();
-                $trabajo = $em->getRepository('AppBundle:Trabajo')->find($_POST['trabajo']);
-                $estudiante = new Estudiante();
-                $estudiante->setDni($_POST['dni']);
-                $estudiante->setNombre($_POST['nombre']);
-                $estudiante->setApellido($_POST['apellido']);
-                $estudiante->setTipovot($_POST['tipovotante']);
-                $estudiante->setAniocursa($_POST['aniocursa']);
-                $estudiante->setEspecialidada($_POST['especialidada']);
-                $estudiante->setNivel($_POST['nivel']);
-                $estudiante->setTrabajo($trabajo);
-                $estudiante->setConfiguracion($configuracion);
-                $em->persist($estudiante);
-                $em->flush();
-                $msj = "Usuario cargado con exito.";              
-                return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));     
+                }elseif ($_POST['tipovotante'] == "Estudiante"){
+                    $configuracion = new Configuracion();
+                    $configuracion->setCantcbsec(3);
+                    $configuracion->setCantcssec(3);
+                    $configuracion->setCantfp(0);
+                    $configuracion->setCantts(0);
+                    $configuracion->setCantexpped(0);
+                    $em->persist($configuracion);
+                    $em->flush();
+                    $trabajo = $em->getRepository('AppBundle:Trabajo')->find($_POST['trabajo']);
+                    $estudiante = new Estudiante();
+                    $estudiante->setDni($_POST['dni']);
+                    $estudiante->setNombre($_POST['nombre']);
+                    $estudiante->setApellido($_POST['apellido']);
+                    $estudiante->setTipovot($_POST['tipovotante']);
+                    $estudiante->setAniocursa($_POST['aniocursa']);
+                    $estudiante->setEspecialidada($_POST['especialidada']);
+                    $estudiante->setNivel($_POST['nivel']);
+                    $estudiante->setTrabajo($trabajo);
+                    $estudiante->setConfiguracion($configuracion);
+                    $em->persist($estudiante);
+                    $em->flush();
+                    $msj = "Usuario cargado con exito.";              
+                    return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));     
                 
-            }elseif ($_POST['tipovotante'] == "COPETyP"){
-                $configuracion = new Configuracion();
-                $configuracion->setCantcbsec(1);
-                $configuracion->setCantcssec(1);
-                $configuracion->setCantfp(0);
-                $configuracion->setCantts(0);
-                $configuracion->setCantexpped(0);
-                $em->persist($configuracion);
-                $em->flush();
-                $copetyp = new Copetyp();
-                $copetyp->setDni($_POST['dni']);
-                $copetyp->setNombre($_POST['nombre']);
-                $copetyp->setApellido($_POST['apellido']);
-                $copetyp->setTipovot($_POST['tipovotante']);                
-                $copetyp->setCargocop($_POST['cargocop']);
-                $copetyp->setEmailcop($_POST['emailcop']);
-                $copetyp->setTelcop($_POST['telcop']);
-                $copetyp->setConfiguracion($configuracion);
-                $em->persist($copetyp);
-                $em->flush();        
-                $msj = "Usuario cargado con exito.";              
-                return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));     
+                }elseif ($_POST['tipovotante'] == "COPETyP"){
+                    $configuracion = new Configuracion();
+                    $configuracion->setCantcbsec(1);
+                    $configuracion->setCantcssec(1);
+                    $configuracion->setCantfp(0);
+                    $configuracion->setCantts(0);
+                    $configuracion->setCantexpped(0);
+                    $em->persist($configuracion);
+                    $em->flush();
+                    $copetyp = new Copetyp();
+                    $copetyp->setDni($_POST['dni']);
+                    $copetyp->setNombre($_POST['nombre']);
+                    $copetyp->setApellido($_POST['apellido']);
+                    $copetyp->setTipovot($_POST['tipovotante']);                
+                    $copetyp->setCargocop($_POST['cargocop']);
+                    $copetyp->setEmailcop($_POST['emailcop']);
+                    $copetyp->setTelcop($_POST['telcop']);
+                    $copetyp->setConfiguracion($configuracion);
+                    $em->persist($copetyp);
+                    $em->flush();        
+                    $msj = "Usuario cargado con exito.";              
+                    return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));     
                 
-            }else{
-                $msj = "Ocurrio un problema debe seleccinar un tipo de usuario valido.";        
-                return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));                
-            }
+                }else{
+                    $msj = "Ocurrio un problema debe seleccinar un tipo de usuario valido.";        
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));                
+                }
             
-        }
-        $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
-        return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+            }
+            $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
+            return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+        ///////////////////////////////////////////////////////////////////////////    
+        }else
+        {
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }        
+
     }
     
     /**
      * @Route("/cargadatos/listarusuarios", name="ListarUsuarios")
      */
-    public function ListarUsuariosAction()
+    public function ListarUsuariosAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $usuarios = $em->getRepository('AppBundle:Usuariovotante')->findAll();
-        if (!$usuarios){
-            $msj = "No existe Usuarios cargados.";              
-            return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+        $session=$request->getSession();
+        if($session->has("id"))
+        {
+            /////////////////////////////////////////////////////////////////////
+            $em = $this->getDoctrine()->getManager();
+            $usuarios = $em->getRepository('AppBundle:Usuariovotante')->findAll();
+            if (!$usuarios){
+                $msj = "No existe Usuarios cargados.";              
+                return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+            }        
+            return $this->render('AppBundle:Default:listarusuarios.html.twig',array('usuarios'=>$usuarios));
+            //////////////////////////////////////////////////////////////////////
+        }else
+        {
+            return $this->render('AppBundle:Default:principal.html.twig');
         }        
-        return $this->render('AppBundle:Default:listarusuarios.html.twig',array('usuarios'=>$usuarios));
+
     }   
 
     /**
      * @Route("/cargadatos/mostrarusuario/{dni}/{tv}", name="MostrarUsuario")
      */
-    public function MostrarUsuarioAction($dni, $tv)
+    public function MostrarUsuarioAction(Request $request, $dni, $tv)
     {
-        $em = $this->getDoctrine()->getManager();
-            if ($tv == "Directivo"){
-                $directivo = $em->getRepository('AppBundle:Directivo')->findOneByDni($dni);
-                $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc());
-                $idesc = $escuela->getId();
-                $nombesc = $escuela->getNombesc();
-                $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
-                return $this->render('AppBundle:Default:editardirectivo.html.twig',
-                array('idesc'=>$idesc, 'nombesc'=>$nombesc, 
-                'directivo'=>$directivo, 'escuela'=>$escuela));
+        $session=$request->getSession();
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
+            $em = $this->getDoctrine()->getManager();
+                if ($tv == "Directivo"){
+                    $directivo = $em->getRepository('AppBundle:Directivo')->findOneByDni($dni);
+                    $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc());
+                    $idesc = $escuela->getId();
+                    $nombesc = $escuela->getNombesc();
+                    $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
+                    return $this->render('AppBundle:Default:editardirectivo.html.twig',
+                    array('idesc'=>$idesc, 'nombesc'=>$nombesc, 
+                    'directivo'=>$directivo, 'escuela'=>$escuela));
                 
-            }elseif ($tv == "Encargado"){
-                $encargado = $em->getRepository('AppBundle:Encargado')->findOneByDni($dni);
-                return $this->render('AppBundle:Default:editarencargado.html.twig',
-                array('encargado'=>$encargado));
+                }elseif ($tv == "Encargado"){
+                    $encargado = $em->getRepository('AppBundle:Encargado')->findOneByDni($dni);
+                    return $this->render('AppBundle:Default:editarencargado.html.twig',
+                    array('encargado'=>$encargado));
+                    
+                }elseif ($tv == "Docente"){
+                    $docente = $em->getRepository('AppBundle:Docente')->findOneByDni($dni);
+                    $idpres = $docente->getPresentacion()->getId();
+                    $nombpres = $docente->getPresentacion()->getEsppresentacion();                
+                    $presentacion = $em->getRepository('AppBundle:Presentacion')->findAll();
+                    return $this->render('AppBundle:Default:editardocente.html.twig',
+                    array('idpres'=>$idpres, 'nombpres'=>$nombpres, 
+                    'docente'=>$docente, 'presentacion'=>$presentacion));
                 
-            }elseif ($tv == "Docente"){
-                $docente = $em->getRepository('AppBundle:Docente')->findOneByDni($dni);
-                $idpres = $docente->getPresentacion()->getId();
-                $nombpres = $docente->getPresentacion()->getEsppresentacion();                
-                $presentacion = $em->getRepository('AppBundle:Presentacion')->findAll();
-                return $this->render('AppBundle:Default:editardocente.html.twig',
-                array('idpres'=>$idpres, 'nombpres'=>$nombpres, 
-                'docente'=>$docente, 'presentacion'=>$presentacion));
-                
-            }elseif ($tv == "Estudiante"){
-                $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneByDni($dni);
-                $idtrab = $estudiante->getTrabajo()->getId();
-                $nombtrab = $estudiante->getTrabajo()->getNombproyecto();
-                $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
-                return $this->render('AppBundle:Default:editarestudiante.html.twig',
-                array('idtrab'=>$idtrab, 'nombtrab'=>$nombtrab, 
-                'estudiante'=>$estudiante, 'trabajos'=>$trabajo));
-                
-            }elseif ($tv == "COPETyP"){
-                $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneByDni($dni);
-                return $this->render('AppBundle:Default:editarcopetyp.html.twig',
-                array('copetyp'=>$copetyp));                
-            }
+                }elseif ($tv == "Estudiante"){
+                    $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneByDni($dni);
+                    $idtrab = $estudiante->getTrabajo()->getId();
+                    $nombtrab = $estudiante->getTrabajo()->getNombproyecto();
+                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                    return $this->render('AppBundle:Default:editarestudiante.html.twig',
+                    array('idtrab'=>$idtrab, 'nombtrab'=>$nombtrab, 
+                    'estudiante'=>$estudiante, 'trabajos'=>$trabajo));
+                    
+                }elseif ($tv == "COPETyP"){
+                    $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneByDni($dni);
+                    return $this->render('AppBundle:Default:editarcopetyp.html.twig',
+                    array('copetyp'=>$copetyp));                
+                }
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        } 
+        
     }
     
     /**
@@ -354,6 +384,9 @@ class DefaultController extends Controller
      */
     public function GuardarModificacionAction(Request $request, $dni, $tv)
     {
+        $session=$request->getSession();
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
             if ($tv == "Directivo"){
@@ -423,15 +456,27 @@ class DefaultController extends Controller
         }
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+
     }   
     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////    
     /**
      * @Route("/cargadatos/nuevoestablecimiento", name="NuevoEstablecimiento")
      */
-    public function MostrarFormularioAction()
+    public function MostrarFormularioAction(Request $request)
     {
-        return $this->render('AppBundle:Default:nuevaescuela.html.twig');
+        $session=$request->getSession();
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
+            return $this->render('AppBundle:Default:nuevaescuela.html.twig');
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }        
     }
 
     /**
@@ -439,6 +484,9 @@ class DefaultController extends Controller
      */
     public function AgregarEstAction(Request $request)
     {
+        $session=$request->getSession();
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
         if ($request->isMethod('POST')) {
             $escuela = new Escuela();
             $escuela->setCue($_POST['cue']);
@@ -458,13 +506,21 @@ class DefaultController extends Controller
         }
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+        
     }
     
     /**
      * @Route("/cargadatos/listarestablecimiento", name="ListarEstablecimiento")
      */
-    public function ListarEstAction()
+    public function ListarEstAction(Request $request)
     {
+        $session=$request->getSession();
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
         $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
         if (!$escuela){
@@ -472,13 +528,21 @@ class DefaultController extends Controller
             return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
         }        
         return $this->render('AppBundle:Default:listarestablecimiento.html.twig',array('escuela'=>$escuela));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }        
+
     }    
 
     /**
      * @Route("/cargadatos/mostrarestablecimiento/{id}", name="MostrarEstablecimiento")
      */
-    public function MostrarEstAction($id)
+    public function MostrarEstAction(Request $request, $id)
     {
+        $session=$request->getSession();
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
         $escuela = $em->getRepository('AppBundle:Escuela')->find($id);
         if (!$escuela){
@@ -486,6 +550,11 @@ class DefaultController extends Controller
             return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
         }        
         return $this->render('AppBundle:Default:editarestablecimiento.html.twig',array('escuela'=>$escuela));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        } 
+        
     }
 
     /**
@@ -493,6 +562,9 @@ class DefaultController extends Controller
      */
     public function GuardarCambiosEstAction(Request $request, $id)
     {
+        $session=$request->getSession();
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
             $escuela = $em->getRepository('AppBundle:Escuela')->find($id);
@@ -513,19 +585,32 @@ class DefaultController extends Controller
         }
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }         
+
     }    
     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////    
     /**
      * @Route("/cargadatos/nuevotrabajo", name="NuevoTrabajo")
      */
-    public function MostrarFormularioTrabAction()
+    public function MostrarFormularioTrabAction(Request $request)
     {
+        $session=$request->getSession();
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
         $encargado = $em->getRepository('AppBundle:Encargado')->findAll();
         $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
         return $this->render('AppBundle:Trabajo:nuevotrabajo.html.twig',
         array('encargado'=>$encargado, 'escuela'=>$escuela));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+
     }
 
     /**
@@ -533,6 +618,9 @@ class DefaultController extends Controller
      */
     public function AgregarTrabajoAction(Request $request)
     {
+        $session=$request->getSession();
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
             $encargado = $em->getRepository('AppBundle:Encargado')->findOneByDni($_POST['encargado']);
@@ -555,13 +643,21 @@ class DefaultController extends Controller
         }
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+        
     }
     
     /**
      * @Route("/cargadatos/listartrabajo", name="ListarTrabajo")
      */
-    public function ListarTrabajoAction()
+    public function ListarTrabajoAction(Request $request)
     {
+        $session=$request->getSession();
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
         $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
         if (!$trabajo){
@@ -569,13 +665,20 @@ class DefaultController extends Controller
             return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
         }        
         return $this->render('AppBundle:Trabajo:listartrabajo.html.twig',array('trabajo'=>$trabajo));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }        
+
     }    
 
     /**
      * @Route("/cargadatos/mostrartrabajo/{id}", name="MostrarTrabajo")
      */
-    public function MostrarTrabajoAction($id)
+    public function MostrarTrabajoAction(Request $request, $id)
     {
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
         $encargado = $em->getRepository('AppBundle:Encargado')->findAll();
         $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
@@ -593,6 +696,11 @@ class DefaultController extends Controller
         'encargado'=>$encargado, 'escuela'=>$escuela,
         'aynenc'=>$aynenc, 'nombreescuela'=>$nombreescuela,
         'dnienc'=>$dnienc, 'idescuela'=>$idesc));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+        
     }
     
     /**
@@ -600,6 +708,8 @@ class DefaultController extends Controller
      */
     public function GuardarCambiosTrabajoAction(Request $request, $id)
     {
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
             $encargado = $em->getRepository('AppBundle:Encargado')->findOneByDni($_POST['encargado']);
@@ -620,18 +730,30 @@ class DefaultController extends Controller
         }
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+        
     }       
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////    
     /**
      * @Route("/cargadatos/nuevapresentacion", name="NuevaPresentacion")
      */
-    public function MostrarFormularioPresAction()
+    public function MostrarFormularioPresAction(Request $request)
     {
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
         $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
         return $this->render('AppBundle:Presentacion:nuevapresentacion.html.twig',
         array('escuela'=>$escuela));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+        
     }
  
     /**
@@ -639,6 +761,8 @@ class DefaultController extends Controller
      */
     public function AgregarPresentacionAction(Request $request)
     {
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
             $escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);   
@@ -659,13 +783,20 @@ class DefaultController extends Controller
         }
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+        
     }
 
     /**
      * @Route("/cargadatos/listarpresentacion", name="ListarPresentacion")
      */
-    public function ListarPresentacionAction()
+    public function ListarPresentacionAction(Request $request)
     {
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
         $presentacion = $em->getRepository('AppBundle:Presentacion')->findAll();
         if (!$presentacion){
@@ -673,13 +804,20 @@ class DefaultController extends Controller
             return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
         }        
         return $this->render('AppBundle:Presentacion:listarpresentacion.html.twig',array('presentacion'=>$presentacion));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+        
     }   
     
     /**
      * @Route("/cargadatos/mostrarpresentacion/{id}", name="MostrarPresentacion")
      */
-    public function MostrarPresentacionAction($id)
+    public function MostrarPresentacionAction(Request $request, $id)
     {
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
         $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
         $presentacion = $em->getRepository('AppBundle:Presentacion')->find($id);
@@ -692,6 +830,11 @@ class DefaultController extends Controller
         return $this->render('AppBundle:Presentacion:editarpresentacion.html.twig',
         array('presentacion'=>$presentacion, 'escuela'=>$escuela,
         'nombreescuela'=>$nombreescuela, 'idescuela'=>$idesc));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+        
     }
     
     /**
@@ -699,6 +842,8 @@ class DefaultController extends Controller
      */
     public function GuardarCambiosPresentacionAction(Request $request, $id)
     {
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
             $escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);   
@@ -717,5 +862,10 @@ class DefaultController extends Controller
         }
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+        
     }
 }
