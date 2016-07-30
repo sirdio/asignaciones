@@ -68,6 +68,11 @@ class Docente  extends Usuariovotante
     * @ORM\JoinColumn(name="idconfig", referencedColumnName="id")
     */
     private $configuracion; 
+
+    /**
+    * @ORM\Column(name="cantexpped", type="integer")
+    */    
+    private $cantexpped; 
     
    /**
      * Get id
@@ -186,5 +191,17 @@ class Docente  extends Usuariovotante
     {
         return $this->configuracion;
     }
+///////////////////////////////////////////////////
+
+    public function setCantexpped($cantexpped)
+    {
+        $this->cantexpped = $cantexpped;
     
+        return $this;
+    }
+
+    public function getCantexpped()
+    {
+        return $this->cantexpped;
+    } 
 }

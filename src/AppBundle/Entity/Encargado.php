@@ -48,6 +48,11 @@ class Encargado  extends Usuariovotante
     * @ORM\Column(name="idconf", type="integer")
     */    
     private $idconf;
+
+    /**
+    * @ORM\Column(name="cantexpped", type="integer")
+    */    
+    private $cantexpped;    
     
    /**
      * Get id
@@ -106,4 +111,16 @@ class Encargado  extends Usuariovotante
     {
         return $this->idconf;
     }	
+    
+    public function setCantexpped($cantexpped)
+    {
+        $this->cantexpped = $cantexpped;
+    
+        return $this;
+    }
+
+    public function getCantexpped()
+    {
+        return $this->cantexpped;
+    }    
 }

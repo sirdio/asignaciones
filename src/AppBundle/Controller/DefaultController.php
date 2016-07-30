@@ -172,8 +172,8 @@ class DefaultController extends Controller
                     $configuracion = new Configuracion();
                     $configuracion->setCantcbsec(3);
                     $configuracion->setCantcssec(3);
-                    $configuracion->setCantfp(0);
-                    $configuracion->setCantts(0);
+                    $configuracion->setCantfp(2);
+                    $configuracion->setCantts(2);
                     $configuracion->setCantexpped(0);
                     $em->persist($configuracion);
                     $em->flush();
@@ -205,6 +205,7 @@ class DefaultController extends Controller
                     $encargado->setTele($_POST['tele']);
                     $encargado->setEmaile($_POST['emaile']);
                     $encargado->setIdconf($idconf);
+                    $encargado->SetCantexpped(2);
                     $em->persist($encargado);
                     $em->flush();
                     $msj = "Usuario cargado con exito.";              
@@ -232,6 +233,7 @@ class DefaultController extends Controller
                     $docente->setPresentacion($presentacion);
                     $docente->setConfiguracion($configuracion);
                     $docente->setNiveldoc('expped');
+                    $docente->SetCantexpped(2);
                     $em->persist($docente);
                     $em->flush();
                     $msj = "Usuario cargado con exito.";              
@@ -241,8 +243,8 @@ class DefaultController extends Controller
                     $configuracion = new Configuracion();
                     $configuracion->setCantcbsec(3);
                     $configuracion->setCantcssec(3);
-                    $configuracion->setCantfp(0);
-                    $configuracion->setCantts(0);
+                    $configuracion->setCantfp(2);
+                    $configuracion->setCantts(2);
                     $configuracion->setCantexpped(0);
                     $em->persist($configuracion);
                     $em->flush();
@@ -266,8 +268,8 @@ class DefaultController extends Controller
                     $configuracion = new Configuracion();
                     $configuracion->setCantcbsec(1);
                     $configuracion->setCantcssec(1);
-                    $configuracion->setCantfp(0);
-                    $configuracion->setCantts(0);
+                    $configuracion->setCantfp(1);
+                    $configuracion->setCantts(1);
                     $configuracion->setCantexpped(0);
                     $em->persist($configuracion);
                     $em->flush();
