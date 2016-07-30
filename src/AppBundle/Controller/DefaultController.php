@@ -217,7 +217,7 @@ class DefaultController extends Controller
                     $configuracion->setCantcssec(0);
                     $configuracion->setCantfp(0);
                     $configuracion->setCantts(0);
-                    $configuracion->setCantexpped(3);
+                    $configuracion->setCantexpped(2);
                     $em->persist($configuracion);
                     $em->flush();                                       
                     $presentacion = $em->getRepository('AppBundle:Presentacion')->find($_POST['presentacion']);
