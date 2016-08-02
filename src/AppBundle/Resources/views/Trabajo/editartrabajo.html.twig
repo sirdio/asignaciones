@@ -65,10 +65,10 @@
   <label class="col-md-4 control-label" for="encargado">Encargado:</label>
   <div class="col-md-8">
     <select id="encargado" name="encargado" class="form-control">
-      <option value="{{dnienc}}">{{aynenc}}</option>
+      <option value="{{dnienc}}">{{dnienc}} - {{aynenc}}</option>
       {% for enc in encargado %}
         {% if enc.dni != dnienc %}
-          <option value="{{enc.dni}}">{{enc.apellido}}, {{enc.nombre}}</option>
+          <option value="{{enc.dni}}">{{enc.dni}} - {{enc.apellido}}, {{enc.nombre}}</option>
         {% endif%}
       {% endfor %}
     </select>

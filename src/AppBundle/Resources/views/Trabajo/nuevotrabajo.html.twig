@@ -67,7 +67,7 @@
     <select id="encargado" name="encargado" class="form-control">
       <option value="0">Seleccionar Opción</option>
       {% for enc in encargado %}
-      <option value="{{enc.dni}}">{{enc.apellido}}, {{enc.nombre}}</option>
+      <option value="{{enc.dni}}">{{enc.dni}} - {{enc.apellido}}, {{enc.nombre}}</option>
       {% endfor %}
     </select>
   </div>
