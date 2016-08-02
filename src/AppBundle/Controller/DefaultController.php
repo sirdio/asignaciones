@@ -604,7 +604,8 @@ class DefaultController extends Controller
         if($session->has("id")){
             /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
-        $encargado = $em->getRepository('AppBundle:Encargado')->findAll();
+        //$encargado = $em->getRepository('AppBundle:Encargado')->findAll();
+        $encargado = $em->getRepository('AppBundle:Encargado')->findBy(array('apellido' => 'ASC'));
         $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
         return $this->render('AppBundle:Trabajo:nuevotrabajo.html.twig',
         array('encargado'=>$encargado, 'escuela'=>$escuela));
