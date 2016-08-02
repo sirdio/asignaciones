@@ -41,7 +41,7 @@ class Trabajo
      */    
     private $descproyecto;
     /**
-    * @ORM\Column(name="pavproyecto", type="string", length=500)
+    * @ORM\Column(name="pavproyecto", type="string", length=2500)
     */    
     private $pavproyecto;
     /**

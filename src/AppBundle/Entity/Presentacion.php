@@ -43,7 +43,7 @@ class Presentacion
     /**
     * @var string
     * 
-    * @ORM\Column(name="esppresentacion", type="string", length=500)
+    * @ORM\Column(name="esppresentacion", type="string", length=2500)
     */    
     private $esppresentacion;
     /**
