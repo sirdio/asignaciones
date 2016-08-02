@@ -605,7 +605,7 @@ class DefaultController extends Controller
             /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
         //$encargado = $em->getRepository('AppBundle:Encargado')->findAll();
-        $encargado = $em->getRepository('AppBundle:Encargado')->findBy(array('isActive'=> true, 'apellido' => 'ASC'));
+        $encargado = $em->getRepository('AppBundle:Encargado')->findBy(array('is_active'=> true, 'apellido' => 'ASC'));
         $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
         return $this->render('AppBundle:Trabajo:nuevotrabajo.html.twig',
         array('encargado'=>$encargado, 'escuela'=>$escuela));
