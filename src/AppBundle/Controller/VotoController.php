@@ -43,7 +43,13 @@ class VotoController extends Controller
                 $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneBy(Array("dni"=>$request->get('dni'))); 
                 $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneBy(Array("dni"=>$request->get('dni'))); 
                 if($directivo){
-                    echo "es directivo";                    
+                    $escuela = $em->getRepository('AppBundle:Escuela')->findOneBy($directivo->getIdesc()); 
+                    if($escuela->getCue() == $request->get('password')){
+                        echo "es directivo";    
+                    }else{
+                        $msj = "La Contraseña que ingreso es incorrecta.";
+                        return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj)); 
+                    }
                 }elseif($encargado){
                     echo "es encargado";
                 }elseif($estudiante){
@@ -51,7 +57,7 @@ class VotoController extends Controller
                 }elseif($copetyp){
                     echo "es copetyp";
                 }else{
-                    $msj = "El usuario que intenta acceder, no se encuentra autorizado para votar.";
+                    $msj = "El D.N.I. del usuario que intenta acceder, no se encuentra autorizado para votar.";
                     return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj)); 
                 }
                 die();
