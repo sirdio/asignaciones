@@ -18,5 +18,13 @@ use AppBundle\Entity\Users;
 
 class VotoController extends Controller
 {
-
+    /**
+     * @Route("/presentartrabajos", name="PresentarTrabajos")
+     */
+    public function PresentarTrabajosAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
+    }
 }

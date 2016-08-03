@@ -1,0 +1,99 @@
+{% extends '::base.html.twig' %}
+{% block title %}Lista de Trabajos{% endblock %}
+{% block body %}  
+   <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+			    
+			{% for i in 0..10 %}
+			{% if i < 5 %}
+				<div class="col-md-4">
+					<div class="alert  alert-info">
+						<img class="img-thumbnail" alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">
+						<div class="caption">
+						    <h1 class="text-primary"> Thumbnail label {{i}} </h1>
+							<h2 class="text-primary"> Thumbnail label {{i}} </h2>
+							<h3 class="text-primary"> Thumbnail label {{i}} </h3>
+							<h4 class="text-primary"> Thumbnail label {{i}} </h4>
+							
+							<p>
+								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+							</p>
+							<p>
+								<a class="btn btn-primary" href="#">Votar</a> 
+							</p>
+						</div>
+					</div>
+				</div>
+			{% elseif i > 4 and i < 7 %}
+				<div class="col-md-4">
+					<div class="alert alert-success">
+						<img class="img-thumbnail" alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">
+						<div class="caption">
+						    <h1 class="text-success"> Thumbnail label {{i}} </h1>
+							<h2 class="text-success"> Thumbnail label {{i}} </h2>
+							<h3 class="text-success"> Thumbnail label {{i}} </h3>
+							<h4 class="text-success"> Thumbnail label {{i}} </h4>
+							
+							<p>
+								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+							</p>
+							<p>
+								<a class="btn btn-success" href="#">Votar</a> 
+							</p>
+						</div>
+					</div>
+				</div>
+			{% elseif i > 6 and i < 9 %}
+				<div class="col-md-4">
+					<div class="alert alert-warning">
+						<img class="img-thumbnail" alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">
+						<div class="caption">
+						    <h1 class="text-warning"> Thumbnail label {{i}} </h1>
+							<h2 class="text-warning"> Thumbnail label {{i}} </h2>
+							<h3 class="text-warning"> Thumbnail label {{i}} </h3>
+							<h4 class="text-warning"> Thumbnail label {{i}} </h4>
+							
+							<p>
+								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+							</p>
+							<p>
+								<a class="btn btn-warning" href="#">Votar</a> 
+							</p>
+						</div>
+					</div>
+				</div>	
+			{% elseif i > 8 %}
+				<div class="col-md-4">
+					<div class="alert alert-danger">
+						<img class="img-thumbnail" alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">
+						<div class="caption">
+						    <h1 class="text-danger"> Thumbnail label {{i}} </h1>
+							<h2 class="text-danger"> Thumbnail label {{i}} </h2>
+							<h3 class="text-danger"> Thumbnail label {{i}} </h3>
+							<h4 class="text-danger"> Thumbnail label {{i}} </h4>
+							
+							<p>
+								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+							</p>
+							<p>
+								<a class="btn btn-danger" href="#">Votar</a> 
+							</p>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+            {% endfor %}
+
+
+			</div>
+		</div>
+	</div>
+</div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+
+{% endblock %}
