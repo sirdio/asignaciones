@@ -19,15 +19,15 @@
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                         	<div class="form-top">
                         		<div class="form-top-left">
-                        			<h3>Iniciar sesi&oacuten</h3>
-                            		<p>ingrese nombre de usuario y contrase&ntildea para iniciar la sesi&oacuten:</p>
+                        			<h3>Validar Voto</h3>
+                            		<p>ingrese D.N.I. y contrase&ntildea para validar su voto:</p>
                         		</div>
                             </div>
                             <div class="form-bottom">
-			                    <form role="form" action="{{path('Login')}}" method="post" class="login-form">
+			                    <form role="form" action="{{path('ConfirmarVoto',{ 'id': trabid})}}" method="post" class="login-form">
 			                    	<div class="form-group">
-			                    		<label class="sr-only" for="form-username">Nombre de Usuario:</label>
-			                        	<input type="text" name="username" placeholder="nombre de usuario..." class="form-username form-control" id="form-username">
+			                    		<label class="sr-only" for="form-username">D.N.I.:</label>
+			                        	<input type="text" name="dni" placeholder="D.N.I..." class="form-username form-control" id="form-username">
 			                        </div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="form-password">Contrase&ntildea:</label>

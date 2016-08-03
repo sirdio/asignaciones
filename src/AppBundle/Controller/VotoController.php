@@ -36,6 +36,6 @@ class VotoController extends Controller
         if($request->isMethod('POST')){
      
         }
-        return $this->render('AppBundle:PesVotos:identificarvotante.html.twig');
+        return $this->render('AppBundle:PesVotos:identificarvotante.html.twig', array('trabid'=>$id));
     }
 }
