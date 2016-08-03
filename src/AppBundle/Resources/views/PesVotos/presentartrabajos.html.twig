@@ -6,8 +6,8 @@
 		<div class="col-md-12">
 			<div class="row">
 			    
-			{% for i in 0..10 %}
-			{% if i < 5 %}
+			{% for trab in trabajo %}
+			{% if trab.niveltrab == 'cbs' %}
 				<div class="col-md-4">
 					<div class="alert  alert-info">
 						<img class="img-thumbnail" alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">
@@ -26,7 +26,7 @@
 						</div>
 					</div>
 				</div>
-			{% elseif i > 4 and i < 7 %}
+			{% elseif trab.niveltrab == 'css' %}
 				<div class="col-md-4">
 					<div class="alert alert-success">
 						<img class="img-thumbnail" alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">
@@ -45,7 +45,7 @@
 						</div>
 					</div>
 				</div>
-			{% elseif i > 6 and i < 9 %}
+			{% elseif trab.niveltrab == 'fp' %}
 				<div class="col-md-4">
 					<div class="alert alert-warning">
 						<img class="img-thumbnail" alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">
@@ -64,7 +64,7 @@
 						</div>
 					</div>
 				</div>	
-			{% elseif i > 8 %}
+			{% elseif trab.niveltrab == 'ts' %}
 				<div class="col-md-4">
 					<div class="alert alert-danger">
 						<img class="img-thumbnail" alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">
