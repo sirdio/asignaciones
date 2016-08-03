@@ -34,11 +34,9 @@ class VotoController extends Controller
     public function ConfirmarVotoAction(Request $request, $id)
     {
         if($request->isMethod('POST')){
-//            foreach($_POST as $nombre => $valor){
-//                echo $nombre. " = ".$valor."<br>";
-//            }
-        echo $request->get('confirmarvoto');
-        echo $request->get('cancelarvoto');
+            foreach($_POST as $nombre => $valor){
+                echo $nombre. " = ".$valor."<br>";
+            }
         die();
         }
         return $this->render('AppBundle:PesVotos:identificarvotante.html.twig', array('trabid'=>$id));
