@@ -19,10 +19,24 @@ use AppBundle\Entity\Users;
 class VotoController extends Controller
 {
     /**
-     * @Route("/presentartrabajos", name="PresentarTrabajos")
+     * @Route("/vototrabajo/{id}", name="VotoTrabajo")
      */
-    public function PresentarTrabajosAction()
+    public function VotoTrabajoAction(Request $request, $id)
     {
+        $session=$request->getSession();
+        echo $request->get('dni');
+        echo $request->get('cue');
+        die();
+        if($session->has("dni") and $session->has("cue"))
+        {
+        /////////////////////////////////////////////////////////////////////
+
+
+        //////////////////////////////////////////////////////////////////////
+        }else
+        {
+            return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
+        }        
         //$em = $this->getDoctrine()->getManager(Request $request);
         //$trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
         //return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
@@ -35,8 +49,6 @@ class VotoController extends Controller
     {
         if($request->isMethod('POST')){
             if($request->get('dni')!= "" && $request->get('password')!=""){
-                $request->get('dni');
-                $request->get('password');
                 $em = $this->getDoctrine()->getManager();
                 $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy(Array("dni"=>$request->get('dni'))); 
                 $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array("dni"=>$request->get('dni'))); 
@@ -45,7 +57,12 @@ class VotoController extends Controller
                 if($directivo){
                     $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
                     if($escuela->getCue() == $request->get('password')){
-                        echo "es directivo";    
+                        $session=$request->getSession();
+                        $session->set("dni",$directivo->getDni());
+                        $session->set("cue",$escuela->getCue());              
+                        $em = $this->getDoctrine()->getManager();
+                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));                        
                     }else{
                         $msj = "La Contraseña que ingreso es incorrecta.";
                         return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj)); 
