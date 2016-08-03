@@ -9,7 +9,6 @@
 			{% for trab in trabajo %}
 			{% if trab.niveltrab == 'cbs' %}
 				<div class="col-md-4">
-					<div class="row">
 					<div class="alert  alert-info">
 						{#<img class="img-thumbnail" alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">#}
 						<div class="caption">
@@ -23,15 +22,13 @@
 								{{trab.descproyecto}}
 							</p>
 							<p>
-								<a class="btn btn-primary" href="#">Votar</a> 
+								<a class="btn btn-primary" href="{{path('ConfirmarVoto',{ 'id': trab.id})}}">Votar</a> 
 							</p>
 						</div>
-					</div>
 					</div>
 				</div>
 			{% elseif trab.niveltrab == 'css' %}
 				<div class="col-md-4">
-					<div class="row">
 					<div class="alert alert-success">
 						{#<img class="img-thumbnail" alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">#}
 						<div class="caption">
@@ -44,15 +41,13 @@
 								{{trab.descproyecto}}
 							</p>
 							<p>
-								<a class="btn btn-success" href="#">Votar</a> 
+								<a class="btn btn-success" href="{{path('ConfirmarVoto',{ 'id': trab.id})}}">Votar</a> 
 							</p>
 						</div>
-					</div>
 					</div>
 				</div>
 			{% elseif trab.niveltrab == 'fp' %}
 				<div class="col-md-4">
-					<div class="row">
 					<div class="alert alert-warning">
 						{#<img class="img-thumbnail" alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">#}
 						<div class="caption">
@@ -65,15 +60,13 @@
 								{{trab.descproyecto}}
 							</p>
 							<p>
-								<a class="btn btn-warning" href="#">Votar</a> 
+								<a class="btn btn-warning" href="{{path('ConfirmarVoto',{ 'id': trab.id})}}">Votar</a> 
 							</p>
 						</div>
-					</div>
 					</div>
 				</div>	
 			{% elseif trab.niveltrab == 'ts' %}
 				<div class="col-md-4">
-					<div class="row">
 					<div class="alert alert-danger">
 						{#<img class="img-thumbnail" alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">#}
 						<div class="caption">
@@ -86,10 +79,9 @@
 								{{trab.descproyecto}}
 							</p>
 							<p>
-								<a class="btn btn-danger" href="#">Votar</a> 
+								<a class="btn btn-danger" href="{{path('ConfirmarVoto',{ 'id': trab.id})}}">Votar</a> 
 							</p>
 						</div>
-					</div>
 					</div>
 				</div>
 			{% endif %}

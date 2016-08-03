@@ -27,4 +27,15 @@ class VotoController extends Controller
         $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
         return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
     }
+    
+    /**
+     * @Route("/confirmarvoto/{id}", name="ConfirmarVoto")
+     */
+    public function ConfirmarVotoAction(Request $request, $id)
+    {
+        if($request->isMethod('POST')){
+     
+        }
+        return $this->render('AppBundle:PesVotos:identificarvotante.html.twig');
+    }
 }
