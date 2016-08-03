@@ -23,22 +23,42 @@ class VotoController extends Controller
      */
     public function PresentarTrabajosAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
-        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
+        //$em = $this->getDoctrine()->getManager(Request $request);
+        //$trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+        //return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
     }
     
     /**
-     * @Route("/confirmarvoto/{id}", name="ConfirmarVoto")
+     * @Route("/iniciarselecciondetrabajo", name="IniciarSelecdeTrabajo")
      */
-    public function ConfirmarVotoAction(Request $request, $id)
+    public function IniciarSelecTrabajoAction(Request $request)
     {
         if($request->isMethod('POST')){
-            foreach($_POST as $nombre => $valor){
-                echo $nombre. " = ".$valor."<br>";
-            }
-        die();
+            if($request->get('dni')!= "" && $request->get('password')!=""){
+                $request->get('dni');
+                $request->get('password');
+                $em = $this->getDoctrine()->getManager();
+                $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy(Array("dni"=>$request->get('dni'))); 
+                $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array("dni"=>$request->get('dni'))); 
+                $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneBy(Array("dni"=>$request->get('dni'))); 
+                $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneBy(Array("dni"=>$request->get('dni'))); 
+                if($directivo){
+                    echo "es directivo";                    
+                }elseif($encargado){
+                    echo "es encargado";
+                }elseif($estudiante){
+                    echo "es estudiante";
+                }elseif($copetyp){
+                    echo "es copetyp";
+                }else{
+                    $msj = "El usuario que intenta acceder, no se encuentra autorizado para votar.";
+                    return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj)); 
+                }
+                die();
+            }else{
+                return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');    
+            }    
         }
-        return $this->render('AppBundle:PesVotos:identificarvotante.html.twig', array('trabid'=>$id));
+        return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
     }
 }
