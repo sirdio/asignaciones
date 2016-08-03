@@ -43,7 +43,7 @@ class VotoController extends Controller
                 $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneBy(Array("dni"=>$request->get('dni'))); 
                 $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneBy(Array("dni"=>$request->get('dni'))); 
                 if($directivo){
-                    $escuela = $em->getRepository('AppBundle:Escuela')->findOneBy($directivo->getIdesc()); 
+                    $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
                     if($escuela->getCue() == $request->get('password')){
                         echo "es directivo";    
                     }else{
