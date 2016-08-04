@@ -50,8 +50,6 @@ class VotoController extends Controller
                     if(!$historialvoto){
                         $configuracion = $em->getRepository('AppBundle:Configuracion')->find($directivo->getIdconf());
                         if($trabajo->getNiveltrab() == 'cbs'){
-                            echo $configuracion->getCantcbsec();
-                            die();
                             if($configuracion->getCantcbsec() != 0){
 //                                $suma = $trabajo->getCantvoto() + 1;
 //                                $resta = $configuracion->getCantcbsec() - 1;
