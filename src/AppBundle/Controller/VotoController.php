@@ -46,7 +46,8 @@ class VotoController extends Controller
                 }else{
                     $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy( Array("dni"=>$session->get('dni')));
                     $historialvoto = $em->getRepository('AppBundle:Historialvoto')->findOneBy(
-                        Array("dni"=>$directivo->getDni(), "nembre"=>$directivo->getNombre(), "apellido"=>$directivo->getApellido()));
+                        Array("dni"=>$directivo->getDni(), "nembre"=>$directivo->getNombre(), "apellido"=>$directivo->getApellido()),
+                        Array("trabajo"=>$trabajo));
                     echo count($historialvoto);
                     die();
                     if(!$historialvoto){
