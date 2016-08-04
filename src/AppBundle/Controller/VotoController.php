@@ -69,6 +69,7 @@ echo $suma." ".$resta;
                             if($configuracion->getCantcssec() != 0){
                             
                             }
+                            echo $suma." ".$resta;
                             $msj = "Supero la cantidad disponible para votar los trabajos de Nivel Ciclo Superior Secundario.";
                             return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                        
                         }elseif($trabajo->getNiveltrab() == 'fp'){
