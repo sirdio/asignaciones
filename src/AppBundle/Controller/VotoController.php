@@ -15,6 +15,7 @@ use AppBundle\Entity\Configuracion;
 use AppBundle\Entity\Trabajo;
 use AppBundle\Entity\Presentacion;
 use AppBundle\Entity\Users;
+use AppBundle\Entity\Historialvoto;
 
 class VotoController extends Controller
 {
@@ -53,13 +54,23 @@ class VotoController extends Controller
                             if($configuracion->getCantcbsec() != 0){
 //                                $suma = $trabajo->getCantvoto() + 1;
 //                                $resta = $configuracion->getCantcbsec() - 1;
-                                $trabajo->setCantvoto($trabajo->getCantvoto() + 1);
-                                $em->persist($trabajo);
-                                $em->flush();
-                                $configuracion->setCantcbsec($configuracion->getCantcbsec() - 1);
-                                $em->persist($configuracion);
-                                $em->flush();
-//echo $suma." ".$resta;
+                                //$trabajo->setCantvoto($trabajo->getCantvoto() + 1);
+                                //$em->persist($trabajo);
+                                //$em->flush();
+                                //$configuracion->setCantcbsec($configuracion->getCantcbsec() - 1);
+                                //$em->persist($configuracion);
+                                //$em->flush();
+                                //$hvoto = new Historialvoto();
+                                //$hvoto->setDni($session->get('dni'));
+                                //$hvoto->setNombre($directivo->getNombre());
+                                //$hvoto->setApellido($directivo->getApellido());
+                                $fechaactual = date("j-n-Y");
+                                $horaactual = date("H:i:s");
+                                //$hvoto->setFecha();
+                                //$hvoto->setHora();
+                                //$hvoto->setTrabajo($trabajo);
+                                //$em->persist($hvoto);
+                                //$em->flush();                                
                                 $msj = "Gracias por votar.";
                                 return $this->render('AppBundle:PesVotos:mensajevoto2.html.twig', array('msj'=>$msj));                                                            
                             }
