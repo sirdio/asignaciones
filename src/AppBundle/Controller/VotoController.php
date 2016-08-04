@@ -27,9 +27,21 @@ class VotoController extends Controller
         if($session->has("dni") and $session->has("cue"))
         {
         /////////////////////////////////////////////////////////////////////
-        echo $session->get("dni");
-        echo $session->get("cue");
-        die();
+            $em = $this->getDoctrine()->getManager();
+            $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);
+            if($session->has("tipovot") == "Directivo"){
+                if ($trabajo->getEscuela()->getCue() == $session->get('cue')){
+                        $msj = "No puede votar a los trabajos.";
+                        return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj));                    
+                }
+                
+            }elseif($session->has("tipovot") == "Encargado"){
+                
+            }elseif($session->has("tipovot") == "Estudiante"){
+                
+            }elseif($session->has("tipovot") == "Copetyp"){
+                
+            }
         //////////////////////////////////////////////////////////////////////
         }else
         {
@@ -57,6 +69,7 @@ class VotoController extends Controller
                     if($escuela->getCue() == $request->get('password')){
                         $session=$request->getSession();
                         $session->set("dni",$directivo->getDni());
+                        $session->set("tipovot",$directivo->getTipovot());
                         $session->set("cue",$escuela->getCue());              
                         $em = $this->getDoctrine()->getManager();
                         $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
@@ -82,4 +95,27 @@ class VotoController extends Controller
         }
         return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
     }
+
+    /**
+     * @Route("/vertrabajos", name="VerTrabajos")
+     */
+    public function VerTrabajosAction(Request $request)
+    {
+        //{{app.session.get('nombre')}}
+        $session=$request->getSession();
+        if($session->has("dni") and $session->has("cue"))
+        {
+        /////////////////////////////////////////////////////////////////////
+            $em = $this->getDoctrine()->getManager();
+            $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+            return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig',
+            array('trabajo'=>$trabajo));
+        //////////////////////////////////////////////////////////////////////
+        }else
+        {
+            return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
+        }        
+
+    }    
+    
 }
