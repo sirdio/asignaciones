@@ -31,8 +31,8 @@ class VotoController extends Controller
             $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);
             if($session->has("tipovot") == "Directivo"){
                 if ($trabajo->getEscuela()->getCue() == $session->get('cue')){
-                        $msj = "No puede votar a los trabajos.";
-                        return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj));                    
+                        $msj = "No puede votar los trabajos que su establecimiento representa.";
+                        return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                    
                 }
                 
             }elseif($session->has("tipovot") == "Encargado"){
