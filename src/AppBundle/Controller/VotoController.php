@@ -48,7 +48,9 @@ class VotoController extends Controller
                     $historialvoto = $em->getRepository('AppBundle:Historialvoto')->findOneBy(
                         Array("dni"=>$directivo->getDni(), "nombre"=>$directivo->getNombre(), "apellido"=>$directivo->getApellido(),
                         "trabajo"=>$trabajo));
-                    if(!$trabajo){
+                    echo count($historialvoto);
+                    die();
+                    if(!$historialvoto){
                         $configuracion = $em->getRepository('AppBundle:Configuracion')->find($directivo->getIdconf());
                         if($trabajo->getNiveltrab() == 'cbs'){
                             if($configuracion->getCantcbsec() != 0){
