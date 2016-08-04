@@ -19,6 +19,16 @@ use AppBundle\Entity\Users;
 class VotoController extends Controller
 {
     /**
+     * @Route("/salir", name="LogoutSalir")
+     */    
+    public function LogoutSalirAction(Request $request)
+    {
+        $session=$request->getSession();
+        $session->clear();
+        return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
+    }
+    
+    /**
      * @Route("/vototrabajo/{id}", name="VotoTrabajo")
      */
     public function VotoTrabajoAction(Request $request, $id)
@@ -31,8 +41,53 @@ class VotoController extends Controller
             $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);
             if($session->has("tipovot") == "Directivo"){
                 if ($trabajo->getEscuela()->getCue() == $session->get('cue')){
-                        $msj = "No puede votar los trabajos que su establecimiento representa.";
-                        return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                    
+                    $msj = "No puede votar los trabajos que su establecimiento representa.";
+                    return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                    
+                }else{
+                    $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy( Array("dni"=>$session->get('dni')));
+                    $historialvoto = $em->getRepository('AppBundle:Historialvoto')->findOneBy(
+                        Array("dni"=>$directivo->getDni(), "nombre"=>$directivo->getNombre(), "apellido"=>$directivo->getApellido(),
+                        "trabajo"=>$trabajo));
+                    if(!$trabajo){
+                        $configuracion = $em->getRepository('AppBundle:Configuracion')->find($directivo->getIdconf());
+                        if($trabajo->getNiveltrab() == 'cbs'){
+                            if($configuracion->getCantcbsec() != 0){
+                                $suma = $trabajo->getCantvoto() + 1;
+                                $resta = $configuracion->getCantcbsec() - 1;
+                                $trabajo->setCantvoto($suma);
+                                $em->persist($trabajo);
+                                $em->flush();
+                                $configuracion->setCantcbsec($resta);
+                                $em->persist($configuracion);
+                                $em->flush();
+                                $msj = "Gracias por votar.";
+                                return $this->render('AppBundle:PesVotos:mensajevoto2.html.twig', array('msj'=>$msj));                                                            
+                            }
+                            $msj = "Supero la cantidad disponible para votar los trabajos de Nivel Ciclo Básico Secundario.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                            
+                        }elseif($trabajo->getNiveltrab() == 'css'){
+                            if($configuracion->getCantcssec() != 0){
+                            
+                            }
+                            $msj = "Supero la cantidad disponible para votar los trabajos de Nivel Ciclo Superior Secundario.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                        
+                        }elseif($trabajo->getNiveltrab() == 'fp'){
+                            if($configuracion->getCantfp() != 0){
+                            
+                            }
+                            $msj = "Supero la cantidad disponible para votar los trabajos de Nivel Formación Profesional.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                        
+                        }elseif($trabajo->getNiveltrab() == 'ts'){
+                            if($configuracion->getCantts() != 0){
+                            
+                            }
+                            $msj = "Supero la cantidad disponible para votar los trabajos de Nivel Técnico Superior.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                        
+                        }
+                    }else{
+                        $msj = "Usted ya voto este trabajo.";
+                        return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                        
+                    }
                 }
                 
             }elseif($session->has("tipovot") == "Encargado"){

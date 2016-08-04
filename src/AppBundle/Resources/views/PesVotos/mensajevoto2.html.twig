@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+{% block title %}Mensaje{% endblock %}
+{% block body %}
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('VerTrabajos')}}">Volver <span class="sr-only">(current)</span></a></li>
+         <li class="active"><a href="{{path('LogoutSalir')}}">Salir <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div>
+</nav>
+
+<div class="container">
+            <div class="alert alert-danger">{{msj}}</div>      
+</div> 
+
+
+<footer>
+   <p>T&eacutecnicamente 2016 - Sistema de Votaci&oacuten - Creado por <a href="https://github.com/dsyph3r">Navarro Sergio Antonio</a>
+        &copy; {{ 'now' | date('Y') }}</p>
+</footer>
+{% endblock %}
