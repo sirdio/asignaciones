@@ -51,14 +51,14 @@ class VotoController extends Controller
                         $configuracion = $em->getRepository('AppBundle:Configuracion')->find($directivo->getIdconf());
                         if($trabajo->getNiveltrab() == 'cbs'){
                             if($configuracion->getCantcbsec() != 0){
-                                $suma = $trabajo->getCantvoto() + 1;
-                                $resta = $configuracion->getCantcbsec() - 1;
-//                                $trabajo->setCantvoto($suma);
-//                                $em->persist($trabajo);
-//                                $em->flush();
-//                                $configuracion->setCantcbsec($resta);
-//                                $em->persist($configuracion);
-//                                $em->flush();
+//                                $suma = $trabajo->getCantvoto() + 1;
+//                                $resta = $configuracion->getCantcbsec() - 1;
+                                $trabajo->setCantvoto($trabajo->getCantvoto() + 1);
+                                $em->persist($trabajo);
+                                $em->flush();
+                                $configuracion->setCantcbsec($configuracion->getCantcbsec() - 1);
+                                $em->persist($configuracion);
+                                $em->flush();
 echo $suma." ".$resta;
                                 $msj = "Gracias por votar.";
                                 return $this->render('AppBundle:PesVotos:mensajevoto2.html.twig', array('msj'=>$msj));                                                            
@@ -69,7 +69,6 @@ echo $suma." ".$resta;
                             if($configuracion->getCantcssec() != 0){
                             
                             }
-                            echo $suma." ".$resta;
                             $msj = "Supero la cantidad disponible para votar los trabajos de Nivel Ciclo Superior Secundario.";
                             return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                        
                         }elseif($trabajo->getNiveltrab() == 'fp'){
