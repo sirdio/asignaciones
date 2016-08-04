@@ -33,10 +33,10 @@ class Historialvoto
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=150)
+     * @ORM\Column(name="nembre", type="string", length=150)
      * 
      */    
-    private $nombre;
+    private $nembre;
     /**
     * @ORM\Column(name="apellido", type="string", length=150)
     */    
@@ -76,16 +76,16 @@ class Historialvoto
         return $this->dni;
     }
 ///////////////////////////////////////
-    public function setNombre($nombre)
+    public function setNembre($nembre)
     {
-        $this->nombre = $nombre;
+        $this->nembre = $nembre;
     
         return $this;
     }
 
-    public function getNombre()
+    public function getNembre()
     {
-        return $this->nombre;
+        return $this->nembre;
     }
 //////////////////////////////////////////
     public function setApellido($apellido)
