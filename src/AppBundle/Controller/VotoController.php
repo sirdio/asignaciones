@@ -49,6 +49,8 @@ class VotoController extends Controller
                         Array("dni"=>$directivo->getDni(), "nembre"=>$directivo->getNombre(), "apellido"=>$directivo->getApellido(), "trabajo"=>$trabajo));
                     if(!$historialvoto){
                         $configuracion = $em->getRepository('AppBundle:Configuracion')->find($directivo->getIdconf());
+                        echo $trabajo->getNiveltrab();
+                        die();
                         if($trabajo->getNiveltrab() == 'cbs'){
                             echo $configuracion->getCantcbsec();
                             die();
