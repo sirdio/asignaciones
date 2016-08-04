@@ -59,7 +59,7 @@ class VotoController extends Controller
                                 $configuracion->setCantcbsec($configuracion->getCantcbsec() - 1);
                                 $em->persist($configuracion);
                                 $em->flush();
-echo $suma." ".$resta;
+//echo $suma." ".$resta;
                                 $msj = "Gracias por votar.";
                                 return $this->render('AppBundle:PesVotos:mensajevoto2.html.twig', array('msj'=>$msj));                                                            
                             }
