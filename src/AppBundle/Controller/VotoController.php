@@ -66,6 +66,9 @@ class VotoController extends Controller
                                 //$hvoto->setApellido($directivo->getApellido());
                                 $fechaactual = date("j-n-Y");
                                 $horaactual = date("H:i:s");
+                                echo $fechaactual;
+                                echo "<br>";
+                                echo $horaactual;
                                 //$hvoto->setFecha();
                                 //$hvoto->setHora();
                                 //$hvoto->setTrabajo($trabajo);
