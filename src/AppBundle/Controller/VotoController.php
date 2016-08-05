@@ -35,8 +35,6 @@ class VotoController extends Controller
     public function VotoTrabajoAction(Request $request, $id)
     {
         $session=$request->getSession();
-        echo $session->get('tipovot');
-        die();
         if($session->has("dni") and $session->has("cue"))
         {
         /////////////////////////////////////////////////////////////////////
@@ -164,7 +162,8 @@ class VotoController extends Controller
                 }
                 
             }elseif($session->has("tipovot") == "Encargado"){
-                
+                echo $session->get('tipovot');
+                die();
                 if ($trabajo->getEscuela()->getCue() == $session->get('cue')){
                     $msj = "No puede votar los trabajos que su establecimiento representa.";
                     return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                    
