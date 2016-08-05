@@ -407,8 +407,121 @@ class VotoController extends Controller
                 }
 
             }elseif($session->get("tipovot") == "COPETyP"){
-               echo "copetyp";
-               die();
+                
+                    $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneBy( Array("dni"=>$session->get('dni')));
+                    $historialvoto = $em->getRepository('AppBundle:Historialvoto')->findOneBy(
+                        Array("dni"=>$directivo->getDni(), "nembre"=>$copetyp->getNombre(), "apellido"=>$copetyp->getApellido(), "trabajo"=>$trabajo));
+                    if(!$historialvoto){
+                        $configuracion = $em->getRepository('AppBundle:Configuracion')->find($copetyp->getConfiguracion()->getId());
+                        if($trabajo->getNiveltrab() == 'cbs'){
+                            if($configuracion->getCantcbsec() != 0){
+                                $trabajo->setCantvoto($trabajo->getCantvoto() + 1);
+                                $em->persist($trabajo);
+                                $em->flush();
+                                $configuracion->setCantcbsec($configuracion->getCantcbsec() - 1);
+                                $em->persist($configuracion);
+                                $em->flush();
+                                $hvoto = new Historialvoto();
+                                $hvoto->setDni($session->get('dni'));
+                                $hvoto->setNembre($copetyp->getNombre());
+                                $hvoto->setApellido($copetyp->getApellido());
+                                date_default_timezone_set("America/Argentina/Buenos_Aires");
+                                $horaactual = date("H:i:s");
+                                $fechaactual = date("d-m-Y");
+                                $hvoto->setFecha($fechaactual);
+                                $hvoto->setHora($horaactual);
+                                $hvoto->setTrabajo($trabajo);
+                                $em->persist($hvoto);
+                                $em->flush();                                
+                                $msj = "Gracias por votar.";
+                                return $this->render('AppBundle:PesVotos:mensajevoto2.html.twig', array('msj'=>$msj));                                                            
+                            }
+                            $msj = "Supero la cantidad disponible para votar los trabajos de Nivel Ciclo Básico Secundario.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                            
+                            
+                        }elseif($trabajo->getNiveltrab() == 'css'){
+                            if($configuracion->getCantcssec() != 0){
+                                $trabajo->setCantvoto($trabajo->getCantvoto() + 1);
+                                $em->persist($trabajo);
+                                $em->flush();
+                                $configuracion->setCantcssec($configuracion->getCantcssec() - 1);
+                                $em->persist($configuracion);
+                                $em->flush();
+                                $hvoto = new Historialvoto();
+                                $hvoto->setDni($session->get('dni'));
+                                $hvoto->setNembre($copetyp->getNombre());
+                                $hvoto->setApellido($copetyp->getApellido());
+                                date_default_timezone_set("America/Argentina/Buenos_Aires");
+                                $horaactual = date("H:i:s");
+                                $fechaactual = date("d-m-Y");
+                                $hvoto->setFecha($fechaactual);
+                                $hvoto->setHora($horaactual);
+                                $hvoto->setTrabajo($trabajo);
+                                $em->persist($hvoto);
+                                $em->flush();                                
+                                $msj = "Gracias por votar.";
+                                return $this->render('AppBundle:PesVotos:mensajevoto2.html.twig', array('msj'=>$msj));                            
+                            }
+                            $msj = "Supero la cantidad disponible para votar los trabajos de Nivel Ciclo Superior Secundario.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                        
+                            
+                        }elseif($trabajo->getNiveltrab() == 'fp'){
+                            if($configuracion->getCantfp() != 0){
+                                $trabajo->setCantvoto($trabajo->getCantvoto() + 1);
+                                $em->persist($trabajo);
+                                $em->flush();
+                                $configuracion->setCantfp($configuracion->getCantfp() - 1);
+                                $em->persist($configuracion);
+                                $em->flush();
+                                $hvoto = new Historialvoto();
+                                $hvoto->setDni($session->get('dni'));
+                                $hvoto->setNembre($copetyp->getNombre());
+                                $hvoto->setApellido($copetyp->getApellido());
+                                date_default_timezone_set("America/Argentina/Buenos_Aires");
+                                $horaactual = date("H:i:s");
+                                $fechaactual = date("d-m-Y");
+                                $hvoto->setFecha($fechaactual);
+                                $hvoto->setHora($horaactual);
+                                $hvoto->setTrabajo($trabajo);
+                                $em->persist($hvoto);
+                                $em->flush();                                
+                                $msj = "Gracias por votar.";
+                                return $this->render('AppBundle:PesVotos:mensajevoto2.html.twig', array('msj'=>$msj));                            
+                            }
+                            $msj = "Supero la cantidad disponible para votar los trabajos de Nivel Formación Profesional.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));    
+                            
+                        }elseif($trabajo->getNiveltrab() == 'ts'){
+                            if($configuracion->getCantts() != 0){
+                                $trabajo->setCantvoto($trabajo->getCantvoto() + 1);
+                                $em->persist($trabajo);
+                                $em->flush();
+                                $configuracion->setCantts($configuracion->getCantts() - 1);
+                                $em->persist($configuracion);
+                                $em->flush();
+                                $hvoto = new Historialvoto();
+                                $hvoto->setDni($session->get('dni'));
+                                $hvoto->setNembre($copetyp->getNombre());
+                                $hvoto->setApellido($copetyp->getApellido());
+                                date_default_timezone_set("America/Argentina/Buenos_Aires");
+                                $horaactual = date("H:i:s");
+                                $fechaactual = date("d-m-Y");
+                                $hvoto->setFecha($fechaactual);
+                                $hvoto->setHora($horaactual);
+                                $hvoto->setTrabajo($trabajo);
+                                $em->persist($hvoto);
+                                $em->flush();                                
+                                $msj = "Gracias por votar.";
+                                return $this->render('AppBundle:PesVotos:mensajevoto2.html.twig', array('msj'=>$msj));                            
+                            }
+                            $msj = "Supero la cantidad disponible para votar los trabajos de Nivel Técnico Superior.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                        
+                        }
+                        
+                    }else{
+                        $msj = "Usted ya voto este trabajo.";
+                        return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                        
+                    }
             }
         //////////////////////////////////////////////////////////////////////
         }else
