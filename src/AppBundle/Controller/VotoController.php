@@ -41,7 +41,7 @@ class VotoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);
 
-            if($session->has("tipovot") == "Directivo"){
+            if($session->get("tipovot") == "Directivo"){
              echo $session->get('tipovot');
              echo "<br> despues de verificar el tipo de votante";
              die();                
@@ -165,7 +165,7 @@ class VotoController extends Controller
                     }
                 }
                 
-            }elseif($session->has("tipovot") == "Encargado"){
+            }elseif($session->get("tipovot") == "Encargado"){
                 echo $session->get('tipovot');
                 die();
                 if ($trabajo->getEscuela()->getCue() == $session->get('cue')){
