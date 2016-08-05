@@ -295,7 +295,9 @@ class VotoController extends Controller
                     if(!$historialvoto){
 
                         $configuracion = $em->getRepository('AppBundle:Configuracion')->find($estudiante->getConfiguracion()->getId());
-                        print_r($configuracion);
+                        echo $estudiante->getConfiguracion()->getId();
+                        echo "<br>";
+                        echo $configuracion->getId();
                         die();
                         if($trabajo->getNiveltrab() == 'cbs'){
                             if($configuracion->getCantcbsec() != 0){
