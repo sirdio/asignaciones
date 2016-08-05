@@ -46,7 +46,7 @@ class Historialvoto
     */    
     private $fecha;
     /**
-    * @ORM\Column(name="hora",type="string", length=10)
+    * @ORM\Column(name="hora", type="string", length=10)
     */    
     private $hora;    
     /**
