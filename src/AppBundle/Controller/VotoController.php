@@ -35,12 +35,14 @@ class VotoController extends Controller
     public function VotoTrabajoAction(Request $request, $id)
     {
         $session=$request->getSession();
+        echo "antes de verificar si inicio session<br>";
         if($session->has("dni") and $session->has("cue"))
         {
         /////////////////////////////////////////////////////////////////////
             $em = $this->getDoctrine()->getManager();
             $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);
-
+            echo "despues de confirmar que inicio session <br>";
+            echo "antes de verificar el tipo de usuario <br>";
             if($session->get("tipovot") == "Directivo"){
               
                 if ($trabajo->getEscuela()->getCue() == $session->get('cue')){
@@ -284,9 +286,11 @@ class VotoController extends Controller
                         return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                        
                     }                        
                 }    
-            }elseif($session->has("tipovot") == "Estudiante"){
+            }elseif($session->get("tipovot") == "Estudiante"){
                 
-            }elseif($session->has("tipovot") == "Copetyp"){
+                echo "entro en estudiante";
+                die();
+            }elseif($session->get("tipovot") == "Copetyp"){
                 
             }
         //////////////////////////////////////////////////////////////////////
@@ -368,7 +372,7 @@ class VotoController extends Controller
                     $msj = "El D.N.I. del usuario que intenta acceder, no se encuentra autorizado para votar.";
                     return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj)); 
                 }
-                die();
+                //die();
             }else{
                 return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');    
             }    
