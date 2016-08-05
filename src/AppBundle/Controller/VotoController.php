@@ -163,6 +163,13 @@ class VotoController extends Controller
                 
             }elseif($session->has("tipovot") == "Encargado"){
                 
+                if ($trabajo->getEscuela()->getCue() == $session->get('cue')){
+                    $msj = "No puede votar los trabajos que su establecimiento representa.";
+                    return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                    
+                }else{
+                    echo "votar";
+                    die();
+                }    
             }elseif($session->has("tipovot") == "Estudiante"){
                 
             }elseif($session->has("tipovot") == "Copetyp"){
