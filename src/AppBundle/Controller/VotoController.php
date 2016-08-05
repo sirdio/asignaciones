@@ -345,7 +345,11 @@ class VotoController extends Controller
                     }
                     
                 }elseif($estudiante){
+                    
+                    echo $estudiante->getTrabajo()->getEscuela()->getCue();
+                    
                     echo "es estudiante";
+                    die();
                 }elseif($copetyp){
                     echo "es copetyp";
                 }else{
