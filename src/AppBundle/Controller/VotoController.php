@@ -40,7 +40,7 @@ class VotoController extends Controller
         {
         echo "verifico";
         echo $session->get('dni');
-        $session->get('cue')
+        echo $session->get('cue');
         die();
         /////////////////////////////////////////////////////////////////////
             $em = $this->getDoctrine()->getManager();
