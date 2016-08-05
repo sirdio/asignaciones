@@ -42,11 +42,11 @@ class Historialvoto
     */    
     private $apellido;
     /**
-    * @ORM\Column(name="fecha", type="DateTime")
+    * @ORM\Column(name="fecha", type="string", length=10)
     */    
     private $fecha;
     /**
-    * @ORM\Column(name="hora", type="DateTime")
+    * @ORM\Column(name="hora",type="string", length=10)
     */    
     private $hora;    
     /**
