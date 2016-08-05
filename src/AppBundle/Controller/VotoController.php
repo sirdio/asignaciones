@@ -66,11 +66,11 @@ class VotoController extends Controller
                                 $hvoto->setApellido($directivo->getApellido());
                                 $fechaactual = date("j-n-Y");
                                 $horaactual = date("H:i:s");
-//                                $hvoto->setFecha($fechaactual);
-//                                $hvoto->setHora($horaactual);
-//                                $hvoto->setTrabajo($trabajo);
-//                                $em->persist($hvoto);
-//                                $em->flush();                                
+                                $hvoto->setFecha($fechaactual);
+                                $hvoto->setHora($horaactual);
+                                $hvoto->setTrabajo($trabajo);
+                                $em->persist($hvoto);
+                                $em->flush();                                
                                 $msj = "Gracias por votar.";
                                 return $this->render('AppBundle:PesVotos:mensajevoto2.html.twig', array('msj'=>$msj));                                                            
                             }
