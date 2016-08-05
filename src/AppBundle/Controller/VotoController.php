@@ -631,7 +631,7 @@ class VotoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);
             return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig',
-            array('trabajo'=>$trabajo));        
+            array('trab'=>$trabajo));        
     }
     
     
