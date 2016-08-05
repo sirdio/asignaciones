@@ -483,7 +483,19 @@ class VotoController extends Controller
                     
 
                 }elseif($copetyp){
-                    echo "es copetyp";
+                   if($copetyp->getNombre() == $request->get('password')){
+                        $session=$request->getSession();
+                        $session->set("dni",$estudiante->getDni());
+                        $session->set("tipovot",$estudiante->getTipovot());
+                        $em = $this->getDoctrine()->getManager();
+                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
+
+
+                   }else{
+                        $msj = "La Contraseña que ingreso es incorrecta.";
+                        return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj));                       
+                   }
                 }else{
                     $msj = "El D.N.I. del usuario que intenta acceder, no se encuentra autorizado para votar.";
                     return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj)); 
