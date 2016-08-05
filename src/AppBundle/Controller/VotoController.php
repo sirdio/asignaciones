@@ -346,10 +346,15 @@ class VotoController extends Controller
                     
                 }elseif($estudiante){
                     
-                    echo $estudiante->getTrabajo()->getEscuela()->getCue();
+                   if($estudiante->getTrabajo()->getEscuela()->getCue() == $request->get('password')){
+                       echo "usuario correcto";
+                       die();
+                   }else{
+                        $msj = "La Contraseña que ingreso es incorrecta.";
+                        return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj));                       
+                   }
                     
-                    echo "es estudiante";
-                    die();
+
                 }elseif($copetyp){
                     echo "es copetyp";
                 }else{
