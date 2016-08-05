@@ -410,7 +410,7 @@ class VotoController extends Controller
                 
                     $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneBy( Array("dni"=>$session->get('dni')));
                     $historialvoto = $em->getRepository('AppBundle:Historialvoto')->findOneBy(
-                        Array("dni"=>$directivo->getDni(), "nembre"=>$copetyp->getNombre(), "apellido"=>$copetyp->getApellido(), "trabajo"=>$trabajo));
+                        Array("dni"=>$copetyp->getDni(), "nembre"=>$copetyp->getNombre(), "apellido"=>$copetyp->getApellido(), "trabajo"=>$trabajo));
                     if(!$historialvoto){
                         $configuracion = $em->getRepository('AppBundle:Configuracion')->find($copetyp->getConfiguracion()->getId());
                         if($trabajo->getNiveltrab() == 'cbs'){
