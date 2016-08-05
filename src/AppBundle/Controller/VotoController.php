@@ -487,6 +487,7 @@ class VotoController extends Controller
                         $session=$request->getSession();
                         $session->set("dni",$copetyp->getDni());
                         $session->set("tipovot",$copetyp->getTipovot());
+                        $session->set("cue",$copetyp->getNombre());
                         $em = $this->getDoctrine()->getManager();
                         $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
                         return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
