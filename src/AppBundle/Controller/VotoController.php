@@ -485,8 +485,8 @@ class VotoController extends Controller
                 }elseif($copetyp){
                    if($copetyp->getNombre() == $request->get('password')){
                         $session=$request->getSession();
-                        $session->set("dni",$estudiante->getDni());
-                        $session->set("tipovot",$estudiante->getTipovot());
+                        $session->set("dni",$copetyp->getDni());
+                        $session->set("tipovot",$copetyp->getTipovot());
                         $em = $this->getDoctrine()->getManager();
                         $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
                         return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
