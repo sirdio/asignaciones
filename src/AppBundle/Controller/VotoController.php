@@ -215,7 +215,7 @@ class VotoController extends Controller
                     
                 }elseif($encargado){
                     
-                    $directivo = $em->getRepository('AppBundle:Directivo')->find($trabajo->getIdconf());
+                    $directivo = $em->getRepository('AppBundle:Directivo')->find($encargado->getIdconf());
                     echo $directivo->getNombre();
                     die();
                     $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
