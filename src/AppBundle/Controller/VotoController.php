@@ -40,10 +40,11 @@ class VotoController extends Controller
         /////////////////////////////////////////////////////////////////////
             $em = $this->getDoctrine()->getManager();
             $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);
-            echo $session->get('tipovot');
-            echo "<br> antes de verificar el tipo de votante";
-            die();
+
             if($session->has("tipovot") == "Directivo"){
+             echo $session->get('tipovot');
+             echo "<br> despues de verificar el tipo de votante";
+             die();                
                 if ($trabajo->getEscuela()->getCue() == $session->get('cue')){
                     $msj = "No puede votar los trabajos que su establecimiento representa.";
                     return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                    
