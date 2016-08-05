@@ -34,9 +34,14 @@ class VotoController extends Controller
      */
     public function VotoTrabajoAction(Request $request, $id)
     {
+        echo "antes de verificar";
         $session=$request->getSession();
         if($session->has("dni") and $session->has("cue"))
         {
+        echo "verifico";
+        echo $session->get('dni');
+        $session->get('cue')
+        die();
         /////////////////////////////////////////////////////////////////////
             $em = $this->getDoctrine()->getManager();
             $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);
