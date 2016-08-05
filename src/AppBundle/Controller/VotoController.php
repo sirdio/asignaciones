@@ -347,8 +347,15 @@ class VotoController extends Controller
                 }elseif($estudiante){
                     
                    if($estudiante->getTrabajo()->getEscuela()->getCue() == $request->get('password')){
-                       echo "usuario correcto";
-                       die();
+                        $session=$request->getSession();
+                        $session->set("dni",$estudiante->getDni());
+                        $session->set("tipovot",$estudiante->getTipovot());
+                        $session->set("cue",$estudiante->getTrabajo()->getEscuela()->getCue());              
+                        $em = $this->getDoctrine()->getManager();
+                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
+
+
                    }else{
                         $msj = "La Contraseña que ingreso es incorrecta.";
                         return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj));                       
