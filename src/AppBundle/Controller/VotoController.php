@@ -285,7 +285,7 @@ class VotoController extends Controller
                 }
                 
             }elseif($session->get("tipovot") == "Estudiante"){
-                $estudiante =  = $em->getRepository('AppBundle:Estudiante')->findOneBy( Array("dni"=>$session->get('dni')));
+                $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneBy( Array("dni"=>$session->get('dni')));
                 if($estudiante->getTrabajo()->getId() == $trabajo->getId()){
                     $msj = "No puede votar su propio trabajo.";
                     return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                    
