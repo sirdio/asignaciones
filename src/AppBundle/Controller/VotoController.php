@@ -35,6 +35,8 @@ class VotoController extends Controller
     public function VotoTrabajoAction(Request $request, $id)
     {
         $session=$request->getSession();
+        echo $session->get('tipovot');
+        die();
         if($session->has("dni") and $session->has("cue"))
         {
         /////////////////////////////////////////////////////////////////////
