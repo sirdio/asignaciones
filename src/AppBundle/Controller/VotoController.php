@@ -52,14 +52,14 @@ class VotoController extends Controller
                         $configuracion = $em->getRepository('AppBundle:Configuracion')->find($directivo->getIdconf());
                         if($trabajo->getNiveltrab() == 'cbs'){
                             if($configuracion->getCantcbsec() != 0){
-//                                $suma = $trabajo->getCantvoto() + 1;
-//                                $resta = $configuracion->getCantcbsec() - 1;
-//                                $trabajo->setCantvoto($trabajo->getCantvoto() + 1);
-//                                $em->persist($trabajo);
-//                                $em->flush();
-//                                $configuracion->setCantcbsec($configuracion->getCantcbsec() - 1);
-//                                $em->persist($configuracion);
-//                                $em->flush();
+                                $suma = $trabajo->getCantvoto() + 1;
+                                $resta = $configuracion->getCantcbsec() - 1;
+                                $trabajo->setCantvoto($trabajo->getCantvoto() + 1);
+                                $em->persist($trabajo);
+                                $em->flush();
+                                $configuracion->setCantcbsec($configuracion->getCantcbsec() - 1);
+                                $em->persist($configuracion);
+                                $em->flush();
                                 $hvoto = new Historialvoto();
                                 $hvoto->setDni($session->get('dni'));
                                 $hvoto->setNembre($directivo->getNombre());
