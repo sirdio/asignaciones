@@ -407,7 +407,8 @@ class VotoController extends Controller
                 }
 
             }elseif($session->get("tipovot") == "Copetyp"){
-                
+               echo "copetyp";
+               die();
             }
         //////////////////////////////////////////////////////////////////////
         }else
