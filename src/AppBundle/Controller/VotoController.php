@@ -624,25 +624,17 @@ class VotoController extends Controller
     }
 
     /**
-     * @Route("/vertrabajos", name="VerTrabajos")
+     * @Route("/vertrabajo/{id}", name="VerTrabajo")
      */
-    public function VerTrabajosAction(Request $request)
+    public function VerTrabajoAction(Request $request, $id)
     {
-        //{{app.session.get('nombre')}}
-        $session=$request->getSession();
-        if($session->has("dni") and $session->has("cue"))
-        {
-        /////////////////////////////////////////////////////////////////////
             $em = $this->getDoctrine()->getManager();
-            $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
-            return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig',
-            array('trabajo'=>$trabajo));
-        //////////////////////////////////////////////////////////////////////
-        }else
-        {
-            return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
-        }        
-
-    }    
+            $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);
+            return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig',
+            array('trabajo'=>$trabajo));        
+    }
+    
+    
+ 
     
 }
