@@ -34,15 +34,9 @@ class VotoController extends Controller
      */
     public function VotoTrabajoAction(Request $request, $id)
     {
-        echo "antes de verificar";
         $session=$request->getSession();
         if($session->has("dni") and $session->has("cue"))
         {
-        echo "verifico";
-        echo $session->get('dni');
-        echo $session->get('cue');
-        echo $session->get('tipovot');
-        die();
         /////////////////////////////////////////////////////////////////////
             $em = $this->getDoctrine()->getManager();
             $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);
@@ -412,7 +406,7 @@ class VotoController extends Controller
                     }
                 }
 
-            }elseif($session->get("tipovot") == "Copetyp"){
+            }elseif($session->get("tipovot") == "COPETyP"){
                echo "copetyp";
                die();
             }
