@@ -62,7 +62,7 @@ class VotoController extends Controller
                                 $em->flush();
                                 $hvoto = new Historialvoto();
                                 $hvoto->setDni($session->get('dni'));
-                                $hvoto->setNombre($directivo->getNombre());
+                                $hvoto->setNembre($directivo->getNombre());
                                 $hvoto->setApellido($directivo->getApellido());
                                 $fechaactual = date("j-n-Y");
                                 $horaactual = date("H:i:s");
