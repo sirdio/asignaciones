@@ -295,10 +295,6 @@ class VotoController extends Controller
                     if(!$historialvoto){
 
                         $configuracion = $em->getRepository('AppBundle:Configuracion')->find($estudiante->getConfiguracion()->getId());
-                        echo $estudiante->getConfiguracion()->getId();
-                        echo "<br>";
-                        echo $configuracion->getId();
-                        die();
                         if($trabajo->getNiveltrab() == 'cbs'){
                             if($configuracion->getCantcbsec() != 0){
                                 $trabajo->setCantvoto($trabajo->getCantvoto() + 1);
@@ -309,8 +305,8 @@ class VotoController extends Controller
                                 $em->flush();
                                 $hvoto = new Historialvoto();
                                 $hvoto->setDni($session->get('dni'));
-                                $hvoto->setNembre($encargado->getNombre());
-                                $hvoto->setApellido($encargado->getApellido());
+                                $hvoto->setNembre($estudiante->getNombre());
+                                $hvoto->setApellido($estudiante->getApellido());
                                 date_default_timezone_set("America/Argentina/Buenos_Aires");
                                 $horaactual = date("H:i:s");
                                 $fechaactual = date("d-m-Y");
@@ -335,8 +331,8 @@ class VotoController extends Controller
                                 $em->flush();
                                 $hvoto = new Historialvoto();
                                 $hvoto->setDni($session->get('dni'));
-                                $hvoto->setNembre($encargado->getNombre());
-                                $hvoto->setApellido($encargado->getApellido());
+                                $hvoto->setNembre($estudiante->getNombre());
+                                $hvoto->setApellido($estudiante->getApellido());
                                 date_default_timezone_set("America/Argentina/Buenos_Aires");
                                 $horaactual = date("H:i:s");
                                 $fechaactual = date("d-m-Y");
@@ -361,8 +357,8 @@ class VotoController extends Controller
                                 $em->flush();
                                 $hvoto = new Historialvoto();
                                 $hvoto->setDni($session->get('dni'));
-                                $hvoto->setNembre($encargado->getNombre());
-                                $hvoto->setApellido($encargado->getApellido());
+                                $hvoto->setNembre($estudiante->getNombre());
+                                $hvoto->setApellido($estudiante->getApellido());
                                 date_default_timezone_set("America/Argentina/Buenos_Aires");
                                 $horaactual = date("H:i:s");
                                 $fechaactual = date("d-m-Y");
@@ -387,8 +383,8 @@ class VotoController extends Controller
                                 $em->flush();
                                 $hvoto = new Historialvoto();
                                 $hvoto->setDni($session->get('dni'));
-                                $hvoto->setNembre($encargado->getNombre());
-                                $hvoto->setApellido($encargado->getApellido());
+                                $hvoto->setNembre($estudiante->getNombre());
+                                $hvoto->setApellido($estudiante->getApellido());
                                 date_default_timezone_set("America/Argentina/Buenos_Aires");
                                 $horaactual = date("H:i:s");
                                 $fechaactual = date("d-m-Y");
