@@ -35,14 +35,11 @@ class VotoController extends Controller
     public function VotoTrabajoAction(Request $request, $id)
     {
         $session=$request->getSession();
-        echo "antes de verificar si inicio session<br>";
         if($session->has("dni") and $session->has("cue"))
         {
         /////////////////////////////////////////////////////////////////////
             $em = $this->getDoctrine()->getManager();
             $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);
-            echo "despues de confirmar que inicio session <br>";
-            echo "antes de verificar el tipo de usuario <br>";
             if($session->get("tipovot") == "Directivo"){
               
                 if ($trabajo->getEscuela()->getCue() == $session->get('cue')){
@@ -285,11 +282,132 @@ class VotoController extends Controller
                         $msj = "Usted ya voto este trabajo.";
                         return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                        
                     }                        
-                }    
-            }elseif($session->get("tipovot") == "Estudiante"){
+                }
                 
-                echo "entro en estudiante";
-                die();
+            }elseif($session->get("tipovot") == "Estudiante"){
+                $estudiante =  = $em->getRepository('AppBundle:Estudiante')->findOneBy( Array("dni"=>$session->get('dni')));
+                if($estudiante->getTrabajo()->getId() == $trabajo->getId()){
+                    $msj = "No puede votar su propio trabajo.";
+                    return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                    
+                }else{
+                    $historialvoto = $em->getRepository('AppBundle:Historialvoto')->findOneBy(
+                    Array("dni"=>$estudiante->getDni(), "nembre"=>$estudiante->getNombre(), "apellido"=>$estudiante->getApellido(), "trabajo"=>$trabajo));   
+                    if(!$historialvoto){
+
+                        $configuracion = $em->getRepository('AppBundle:Configuracion')->find($estudiante->getConfiguracion()->getId());
+                        print_r($configuracion);
+                        die();
+                        if($trabajo->getNiveltrab() == 'cbs'){
+                            if($configuracion->getCantcbsec() != 0){
+                                $trabajo->setCantvoto($trabajo->getCantvoto() + 1);
+                                $em->persist($trabajo);
+                                $em->flush();
+                                $configuracion->setCantcbsec($configuracion->getCantcbsec() - 1);
+                                $em->persist($configuracion);
+                                $em->flush();
+                                $hvoto = new Historialvoto();
+                                $hvoto->setDni($session->get('dni'));
+                                $hvoto->setNembre($encargado->getNombre());
+                                $hvoto->setApellido($encargado->getApellido());
+                                date_default_timezone_set("America/Argentina/Buenos_Aires");
+                                $horaactual = date("H:i:s");
+                                $fechaactual = date("d-m-Y");
+                                $hvoto->setFecha($fechaactual);
+                                $hvoto->setHora($horaactual);
+                                $hvoto->setTrabajo($trabajo);
+                                $em->persist($hvoto);
+                                $em->flush();                                
+                                $msj = "Gracias por votar.";
+                                return $this->render('AppBundle:PesVotos:mensajevoto2.html.twig', array('msj'=>$msj));                                                            
+                            }
+                            $msj = "Supero la cantidad disponible para votar los trabajos de Nivel Ciclo Básico Secundario.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                            
+                            
+                        }elseif($trabajo->getNiveltrab() == 'css'){
+                            if($configuracion->getCantcssec() != 0){
+                                $trabajo->setCantvoto($trabajo->getCantvoto() + 1);
+                                $em->persist($trabajo);
+                                $em->flush();
+                                $configuracion->setCantcssec($configuracion->getCantcssec() - 1);
+                                $em->persist($configuracion);
+                                $em->flush();
+                                $hvoto = new Historialvoto();
+                                $hvoto->setDni($session->get('dni'));
+                                $hvoto->setNembre($encargado->getNombre());
+                                $hvoto->setApellido($encargado->getApellido());
+                                date_default_timezone_set("America/Argentina/Buenos_Aires");
+                                $horaactual = date("H:i:s");
+                                $fechaactual = date("d-m-Y");
+                                $hvoto->setFecha($fechaactual);
+                                $hvoto->setHora($horaactual);
+                                $hvoto->setTrabajo($trabajo);
+                                $em->persist($hvoto);
+                                $em->flush();                                
+                                $msj = "Gracias por votar.";
+                                return $this->render('AppBundle:PesVotos:mensajevoto2.html.twig', array('msj'=>$msj));                            
+                            }
+                            $msj = "Supero la cantidad disponible para votar los trabajos de Nivel Ciclo Superior Secundario.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                        
+                            
+                        }elseif($trabajo->getNiveltrab() == 'fp'){
+                            if($configuracion->getCantfp() != 0){
+                                $trabajo->setCantvoto($trabajo->getCantvoto() + 1);
+                                $em->persist($trabajo);
+                                $em->flush();
+                                $configuracion->setCantfp($configuracion->getCantfp() - 1);
+                                $em->persist($configuracion);
+                                $em->flush();
+                                $hvoto = new Historialvoto();
+                                $hvoto->setDni($session->get('dni'));
+                                $hvoto->setNembre($encargado->getNombre());
+                                $hvoto->setApellido($encargado->getApellido());
+                                date_default_timezone_set("America/Argentina/Buenos_Aires");
+                                $horaactual = date("H:i:s");
+                                $fechaactual = date("d-m-Y");
+                                $hvoto->setFecha($fechaactual);
+                                $hvoto->setHora($horaactual);
+                                $hvoto->setTrabajo($trabajo);
+                                $em->persist($hvoto);
+                                $em->flush();                                
+                                $msj = "Gracias por votar.";
+                                return $this->render('AppBundle:PesVotos:mensajevoto2.html.twig', array('msj'=>$msj));                            
+                            }
+                            $msj = "Supero la cantidad disponible para votar los trabajos de Nivel Formación Profesional.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));    
+                            
+                        }elseif($trabajo->getNiveltrab() == 'ts'){
+                            if($configuracion->getCantts() != 0){
+                                $trabajo->setCantvoto($trabajo->getCantvoto() + 1);
+                                $em->persist($trabajo);
+                                $em->flush();
+                                $configuracion->setCantts($configuracion->getCantts() - 1);
+                                $em->persist($configuracion);
+                                $em->flush();
+                                $hvoto = new Historialvoto();
+                                $hvoto->setDni($session->get('dni'));
+                                $hvoto->setNembre($encargado->getNombre());
+                                $hvoto->setApellido($encargado->getApellido());
+                                date_default_timezone_set("America/Argentina/Buenos_Aires");
+                                $horaactual = date("H:i:s");
+                                $fechaactual = date("d-m-Y");
+                                $hvoto->setFecha($fechaactual);
+                                $hvoto->setHora($horaactual);
+                                $hvoto->setTrabajo($trabajo);
+                                $em->persist($hvoto);
+                                $em->flush();                                
+                                $msj = "Gracias por votar.";
+                                return $this->render('AppBundle:PesVotos:mensajevoto2.html.twig', array('msj'=>$msj));                            
+                            }
+                            $msj = "Supero la cantidad disponible para votar los trabajos de Nivel Técnico Superior.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                        
+                        }
+                        
+                    }else{
+                        $msj = "Usted ya voto este trabajo.";
+                        return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));                        
+                    }
+                }
+
             }elseif($session->get("tipovot") == "Copetyp"){
                 
             }
