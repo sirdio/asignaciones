@@ -171,7 +171,7 @@ class VotoController extends Controller
                 }else{
                     $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy( Array("dni"=>$session->get('dni')));
                     $historialvoto = $em->getRepository('AppBundle:Historialvoto')->findOneBy(
-                        Array("dni"=>$directivo->getDni(), "nembre"=>$encargado->getNombre(), "apellido"=>$encargado->getApellido(), "trabajo"=>$trabajo));
+                        Array("dni"=>$encargado->getDni(), "nembre"=>$encargado->getNombre(), "apellido"=>$encargado->getApellido(), "trabajo"=>$trabajo));
                     if(!$historialvoto){
                         $configuracion = $em->getRepository('AppBundle:Configuracion')->find($encargado->getIdconf());
                         if($trabajo->getNiveltrab() == 'cbs'){
