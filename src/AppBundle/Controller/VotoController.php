@@ -216,13 +216,11 @@ class VotoController extends Controller
                 }elseif($encargado){
                     
                     $directivo = $em->getRepository('AppBundle:Directivo')->find($encargado->getIdconf());
-                    echo $directivo->getNombre();
-                    die();
                     $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
                     if($escuela->getCue() == $request->get('password')){
                         $session=$request->getSession();
-                        $session->set("dni",$directivo->getDni());
-                        $session->set("tipovot",$directivo->getTipovot());
+                        $session->set("dni",$encargado->getDni());
+                        $session->set("tipovot",$encargado->getTipovot());
                         $session->set("cue",$escuela->getCue());              
                         $em = $this->getDoctrine()->getManager();
                         $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
