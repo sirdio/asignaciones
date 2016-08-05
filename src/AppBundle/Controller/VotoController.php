@@ -198,6 +198,7 @@ class VotoController extends Controller
                 $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneBy(Array("dni"=>$request->get('dni'))); 
                 $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneBy(Array("dni"=>$request->get('dni'))); 
                 if($directivo){
+                    
                     $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
                     if($escuela->getCue() == $request->get('password')){
                         $session=$request->getSession();
@@ -211,8 +212,26 @@ class VotoController extends Controller
                         $msj = "La Contraseña que ingreso es incorrecta.";
                         return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj)); 
                     }
+                    
                 }elseif($encargado){
-                    echo "es encargado";
+                    
+                    $directivo = $em->getRepository('AppBundle:Directivo')->find($trabajo->getIdconf());
+                    echo $directivo->getNombre();
+                    die();
+                    $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
+                    if($escuela->getCue() == $request->get('password')){
+                        $session=$request->getSession();
+                        $session->set("dni",$directivo->getDni());
+                        $session->set("tipovot",$directivo->getTipovot());
+                        $session->set("cue",$escuela->getCue());              
+                        $em = $this->getDoctrine()->getManager();
+                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));                        
+                    }else{
+                        $msj = "La Contraseña que ingreso es incorrecta.";
+                        return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj)); 
+                    }
+                    
                 }elseif($estudiante){
                     echo "es estudiante";
                 }elseif($copetyp){
