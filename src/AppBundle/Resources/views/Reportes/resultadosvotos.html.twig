@@ -10,25 +10,33 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-    <div class="table-responsive">
-      <table class="table table-striped">
-      <tr>
-        <th>Nombre Proyecto</th>
-        <th>Establecimineto</th>
-        <th>Cantidad de Votos</th>
-        
-      </tr>
-      {% for trab in trabajo %}
-      <tr>
-        <td>{{trab.nombproyecto}}</td>
-        <td>{{trab.escuela.nombesc}}</td>
-        <td>{{trab.cantvoto}}</td>
-      </tr>
-      {% endfor %}
-      </table>
-    </div>
-
-
+<section class="Container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>Resultados</h3>
+				</div>
+				<div class="panel-body">
+                    <table class="table">
+                            <tr>
+                                <th>Nombre Proyecto</th>
+                                <th>Establecimineto</th>
+                                <th>Cantidad de Votos</th>
+                            </tr>
+                        {% for trab in trabajo %}
+                            <tr>
+                                <td>{{trab.nombproyecto}}</td>
+                                <td>{{trab.escuela.nombesc}}</td>
+                                <td>{{trab.cantvoto}}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>				
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
 <footer>
    <p>T&eacutecnicamente 2016 - Sistema de Votaci&oacuten - Creado por <a href="https://github.com/dsyph3r">Navarro Sergio Antonio</a>
