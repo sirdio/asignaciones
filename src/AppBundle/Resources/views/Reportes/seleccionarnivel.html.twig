@@ -13,10 +13,9 @@
   <div class="row">
     <div class="col-md-12">
       <form action="{{ path('SeleccionarNivel') }}" method="post" class="form-inline" role="form">
-        <fieldset>
 	    <div class="control-group">
-            <label class="col-md-4 control-label" for="nivel">Nivel:</label>
-            <select id="nivel" name="nivel" class="form-control">
+            <label for="nivel">Nivel:</label>
+            <select id="nivel" name="nivel">
                 <option value="0">Seleccionar Opción</option>
                 <option value="cbs">Ciclo B&aacutesico Secundaria</option>
                 <option value="css">Ciclo Superior Secundaria</option>
@@ -26,7 +25,6 @@
 	    </div>
 
 	        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Mostrar Resultados</button>
-         </fieldset>
        </form>
      </div> 
   </div>
