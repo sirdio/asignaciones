@@ -549,8 +549,13 @@ class VotoController extends Controller
                     
                     $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
                     if($escuela->getCue() == $request->get('password')){
-                        echo "es directivo";
-                        die();
+                        $session=$request->getSession();
+                        $session->set("dni",$directivo->getDni());
+                        $session->set("tipovot",$directivo->getTipovot());
+                        $session->set("cue",$escuela->getCue());              
+                        $em = $this->getDoctrine()->getManager();
+                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));                        
                     }else{
                         $msj = "La Contraseña que ingreso es incorrecta.";
                         return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj)); 
@@ -561,8 +566,13 @@ class VotoController extends Controller
                     $directivo = $em->getRepository('AppBundle:Directivo')->find($encargado->getIdconf());
                     $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
                     if($escuela->getCue() == $request->get('password')){
-                        echo "es encargado";
-                        die();
+                        $session=$request->getSession();
+                        $session->set("dni",$encargado->getDni());
+                        $session->set("tipovot",$encargado->getTipovot());
+                        $session->set("cue",$escuela->getCue());              
+                        $em = $this->getDoctrine()->getManager();
+                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));                        
                     }else{
                         $msj = "La Contraseña que ingreso es incorrecta.";
                         return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj)); 
@@ -571,8 +581,14 @@ class VotoController extends Controller
                 }elseif($estudiante){
                     
                    if($estudiante->getTrabajo()->getEscuela()->getCue() == $request->get('password')){
-                         echo "es estudiante";
-                        die();
+                        $session=$request->getSession();
+                        $session->set("dni",$estudiante->getDni());
+                        $session->set("tipovot",$estudiante->getTipovot());
+                        $session->set("cue",$estudiante->getTrabajo()->getEscuela()->getCue());              
+                        $em = $this->getDoctrine()->getManager();
+                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
+
 
                    }else{
                         $msj = "La Contraseña que ingreso es incorrecta.";
@@ -582,8 +598,13 @@ class VotoController extends Controller
 
                 }elseif($copetyp){
                    if($copetyp->getNombre() == $request->get('password')){
-                        echo "es copetyp";
-                        die();
+                        $session=$request->getSession();
+                        $session->set("dni",$copetyp->getDni());
+                        $session->set("tipovot",$copetyp->getTipovot());
+                        $session->set("cue",$copetyp->getNombre());
+                        $em = $this->getDoctrine()->getManager();
+                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
 
 
                    }else{
@@ -620,13 +641,10 @@ class VotoController extends Controller
                     
                     $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
                     if($escuela->getCue() == $request->get('password')){
-                        $session=$request->getSession();
-                        $session->set("dni",$directivo->getDni());
-                        $session->set("tipovot",$directivo->getTipovot());
-                        $session->set("cue",$escuela->getCue());              
-                        $em = $this->getDoctrine()->getManager();
-                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
-                        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));                        
+                        echo "es directivo";
+                        die();
+                        
+                        
                     }else{
                     $this->get('session')->getFlashBag()->add('mensaje','La Contraseña que ingreso es incorrecta.');
                     return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));
@@ -637,13 +655,10 @@ class VotoController extends Controller
                     $directivo = $em->getRepository('AppBundle:Directivo')->find($encargado->getIdconf());
                     $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
                     if($escuela->getCue() == $request->get('password')){
-                        $session=$request->getSession();
-                        $session->set("dni",$encargado->getDni());
-                        $session->set("tipovot",$encargado->getTipovot());
-                        $session->set("cue",$escuela->getCue());              
-                        $em = $this->getDoctrine()->getManager();
-                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
-                        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));                        
+                        echo "es encargado";
+                        die();
+                        
+                        
                     }else{
                     $this->get('session')->getFlashBag()->add('mensaje','La Contraseña que ingreso es incorrecta.');
                     return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));
@@ -652,13 +667,8 @@ class VotoController extends Controller
                 }elseif($estudiante){
                     
                    if($estudiante->getTrabajo()->getEscuela()->getCue() == $request->get('password')){
-                        $session=$request->getSession();
-                        $session->set("dni",$estudiante->getDni());
-                        $session->set("tipovot",$estudiante->getTipovot());
-                        $session->set("cue",$estudiante->getTrabajo()->getEscuela()->getCue());              
-                        $em = $this->getDoctrine()->getManager();
-                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
-                        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
+                        echo "es estudiante";
+                        die();
 
 
                    }else{
@@ -669,13 +679,8 @@ class VotoController extends Controller
 
                 }elseif($copetyp){
                    if($copetyp->getNombre() == $request->get('password')){
-                        $session=$request->getSession();
-                        $session->set("dni",$copetyp->getDni());
-                        $session->set("tipovot",$copetyp->getTipovot());
-                        $session->set("cue",$copetyp->getNombre());
-                        $em = $this->getDoctrine()->getManager();
-                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
-                        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
+                        echo "es copetyp";
+                        die();
 
 
                    }else{
