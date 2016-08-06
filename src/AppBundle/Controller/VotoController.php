@@ -643,7 +643,7 @@ class VotoController extends Controller
                     if($escuela->getCue() == $request->get('password')){
 ///////////////////////////////////////////////////
 //////////////////////////////////////////////////
-                    if ($trabajo->getEscuela()->getCue() == $request->get('cue')){
+                    if ($trabajo->getEscuela()->getCue() ==  $request->get('password')){
                         $msj = "No puede votar los trabajos que su establecimiento representa.";
                         return $this->render('AppBundle:PesVotos:msjvotoQR.html.twig', array('msj'=>$msj));                    
                     }else{
