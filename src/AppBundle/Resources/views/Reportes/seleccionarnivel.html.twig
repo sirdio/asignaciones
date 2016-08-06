@@ -12,7 +12,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <form action="{{ path('SeleccionarNivel') }}" method="post" class="form-inline">
+      <form action="{{ path('SeleccionarNivel') }}" method="post" class="form-inline" role="form">
         <fieldset>
 	    <div class="control-group">
             <label class="col-md-4 control-label" for="nivel">Nivel:</label>
@@ -24,9 +24,8 @@
                 <option value="ts">Tecnicaturas Superiores</option>
             </select>
 	    </div>
-	    <div class="control-group">
+
 	        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Mostrar Resultados</button>
-	    </div>
          </fieldset>
        </form>
      </div> 
