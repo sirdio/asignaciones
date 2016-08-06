@@ -2,7 +2,7 @@
 {% block title %}Ver Trabajo{% endblock %}
 {% block body %}  
    {% for flashMessage in app.session.flashbag.get('mensaje') %}
-    <span class="alert-success">
+    <span class="alert-danger">
         {{ flashMessage }}
         <hr />
     </span>
