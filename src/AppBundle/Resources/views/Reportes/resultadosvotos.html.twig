@@ -14,13 +14,14 @@
       <table class="table table-striped">
       <tr>
         <th>Nombre Proyecto</th>
+        <th>Establecimineto</th>
         <th>Cantidad de Votos</th>
         
       </tr>
       {% for trab in trabajo %}
       <tr>
         <td>{{trab.nombproyecto}}</td>
-        <td>{{trab.escuela.id}}</td>
+        <td>{{trab.escuela.nombesc}}</td>
         <td>{{trab.cantvoto}}</td>
       </tr>
       {% endfor %}
