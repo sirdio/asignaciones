@@ -19,7 +19,8 @@
       </tr>
       {% for trab in trabajo %}
       <tr>
-        <td>{{trab.id}}</td>
+        <td>{{trab.nombproyecto}}</td>
+        <td>{{trab.escuela.id}}</td>
         <td>{{trab.cantvoto}}</td>
       </tr>
       {% endfor %}
