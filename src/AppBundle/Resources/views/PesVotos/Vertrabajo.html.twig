@@ -20,9 +20,7 @@
 							<p>
 								{{trab.descproyecto}}
 							</p>
-							<p>
-								<a class="btn btn-primary" href="{{path('VotoTrabajo',{ 'id': trab.id})}}">Votar</a> 
-							</p>
+
 						</div>
 					</div>
 				</div>
@@ -39,9 +37,7 @@
 							<p>
 								{{trab.descproyecto}}
 							</p>
-							<p>
-								<a class="btn btn-success" href="{{path('VotoTrabajo',{ 'id': trab.id})}}">Votar</a> 
-							</p>
+
 						</div>
 					</div>
 				</div>
@@ -58,9 +54,7 @@
 							<p>
 								{{trab.descproyecto}}
 							</p>
-							<p>
-								<a class="btn btn-warning" href="{{path('VotoTrabajo',{ 'id': trab.id})}}">Votar</a> 
-							</p>
+
 						</div>
 					</div>
 				</div>	
@@ -77,9 +71,7 @@
 							<p>
 								{{trab.descproyecto}}
 							</p>
-							<p>
-								<a class="btn btn-danger" href="{{path('VotoTrabajo',{ 'id': trab.id})}}">Votar</a> 
-							</p>
+
 						</div>
 					</div>
 				</div>
@@ -92,7 +84,7 @@
                         		</div>
                             </div>
                             <div class="form-bottom">
-			                    <form role="form" action="{{path('IniciarSelecdeTrabajo')}}" method="post" class="login-form">
+			                    <form role="form" action="{#{path('IniciarSelecdeTrabajo')}#}" method="post" class="login-form">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">D.N.I.:</label>
 			                        	<input type="text" name="dni" placeholder="D.N.I..." class="form-username form-control" id="form-username">
