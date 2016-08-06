@@ -9,31 +9,23 @@
       </ul>
   </div><!-- /.container-fluid -->
 </nav>
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <form action="{{ path('SeleccionarNivel') }}" method="post" class="form-inline">
         <fieldset>
 	    <div class="control-group">
-	      <div class="controls">
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="nivel">Nivel:</label>
-                <div class="col-md-8">
-                    <select id="nivel" name="nivel" class="form-control">
-                      <option value="0">Seleccionar Opción</option>
-                      <option value="cbs">Ciclo B&aacutesico Secundaria</option>
-                      <option value="css">Ciclo Superior Secundaria</option>
-                      <option value="fp">Formaci&oacuten Profesional</option>
-                      <option value="ts">Tecnicaturas Superiores</option>
-                    </select>
-                </div>
-            </div>
-	      </div>
+            <label class="col-md-4 control-label" for="nivel">Nivel:</label>
+            <select id="nivel" name="nivel" class="form-control">
+                <option value="0">Seleccionar Opción</option>
+                <option value="cbs">Ciclo B&aacutesico Secundaria</option>
+                <option value="css">Ciclo Superior Secundaria</option>
+                <option value="fp">Formaci&oacuten Profesional</option>
+                <option value="ts">Tecnicaturas Superiores</option>
+            </select>
 	    </div>
 	    <div class="control-group">
-	      <div class="controls">
 	        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Mostrar Resultados</button>
-	      </div>
 	    </div>
          </fieldset>
        </form>
