@@ -22,30 +22,6 @@
 							</p>
 
 						</div>
-						
-                        	<div class="form-top">
-                        		<div class="form-top-left">
-                        			<h3> Iniciar Sessión </h3>
-                            		<p>ingrese D.N.I. y contrase&ntildea para ver y votar un trabajo:</p>
-                        		</div>
-                            </div>
-                            <div class="form-bottom">
-			                    <form role="form" action="{#{path('IniciarSelecdeTrabajo')}#}" method="post" class="login-form">
-			                    	<div class="form-group">
-			                    		<label class="sr-only" for="form-username">D.N.I.:</label>
-			                        	<input type="text" name="dni" placeholder="D.N.I..." class="form-username form-control" id="form-username">
-			                        </div>
-			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-password">Contrase&ntildea:</label>
-			                        	<input type="password" name="password" placeholder="Contraseña..." class="form-password form-control" id="form-password">
-			                        </div>
-			                        <div class="form-group">
-                                        <div class="col-md-4">
-                                            <button id="singlebutton" name="confirmarvoto" value="Confirmar" class="btn btn-primary">Confirmar</button>
-                                         </div>
-                                    </div>
-			                    </form>
-		                    </div>						
 					</div>
 				</div>
 			{% elseif trab.niveltrab == 'css' %}
@@ -63,31 +39,6 @@
 							</p>
 
 						</div>
-						
-                        	<div class="form-top">
-                        		<div class="form-top-left">
-                        			<h3> Iniciar Sessión </h3>
-                            		<p>ingrese D.N.I. y contrase&ntildea para ver y votar un trabajo:</p>
-                        		</div>
-                            </div>
-                            <div class="form-bottom">
-			                    <form role="form" action="{#{path('IniciarSelecdeTrabajo')}#}" method="post" class="login-form">
-			                    	<div class="form-group">
-			                    		<label class="sr-only" for="form-username">D.N.I.:</label>
-			                        	<input type="text" name="dni" placeholder="D.N.I..." class="form-username form-control" id="form-username">
-			                        </div>
-			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-password">Contrase&ntildea:</label>
-			                        	<input type="password" name="password" placeholder="Contraseña..." class="form-password form-control" id="form-password">
-			                        </div>
-			                        <div class="form-group">
-                                        <div class="col-md-4">
-                                            <button id="singlebutton" name="confirmarvoto" value="Confirmar" class="btn btn-success">Confirmar</button>
-                                         </div>
-                                    </div>
-			                    </form>
-		                    </div>						
-						
 					</div>
 				</div>
 			{% elseif trab.niveltrab == 'fp' %}
@@ -105,30 +56,6 @@
 							</p>
 
 						</div>
-						
-						                        	<div class="form-top">
-                        		<div class="form-top-left">
-                        			<h3> Iniciar Sessión </h3>
-                            		<p>ingrese D.N.I. y contrase&ntildea para ver y votar un trabajo:</p>
-                        		</div>
-                            </div>
-                            <div class="form-bottom">
-			                    <form role="form" action="{#{path('IniciarSelecdeTrabajo')}#}" method="post" class="login-form">
-			                    	<div class="form-group">
-			                    		<label class="sr-only" for="form-username">D.N.I.:</label>
-			                        	<input type="text" name="dni" placeholder="D.N.I..." class="form-username form-control" id="form-username">
-			                        </div>
-			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-password">Contrase&ntildea:</label>
-			                        	<input type="password" name="password" placeholder="Contraseña..." class="form-password form-control" id="form-password">
-			                        </div>
-			                        <div class="form-group">
-                                        <div class="col-md-4">
-                                            <button id="singlebutton" name="confirmarvoto" value="Confirmar" class="btn btn-warning">Confirmar</button>
-                                         </div>
-                                    </div>
-			                    </form>
-		                    </div>
 					</div>
 				</div>	
 			{% elseif trab.niveltrab == 'ts' %}
@@ -146,7 +73,10 @@
 							</p>
 
 						</div>
-						
+					</div>
+				</div>
+			{% endif %}
+                        <div class="col-md-4">
                         	<div class="form-top">
                         		<div class="form-top-left">
                         			<h3> Iniciar Sessión </h3>
@@ -154,7 +84,7 @@
                         		</div>
                             </div>
                             <div class="form-bottom">
-			                    <form role="form" action="{#{path('IniciarSelecdeTrabajo')}#}" method="post" class="login-form">
+			                    <form role="form" action="{{path('VerTrabajo',{ 'id': trab.id})}}" method="post" class="login-form">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">D.N.I.:</label>
 			                        	<input type="text" name="dni" placeholder="D.N.I..." class="form-username form-control" id="form-username">
@@ -165,32 +95,11 @@
 			                        </div>
 			                        <div class="form-group">
                                         <div class="col-md-4">
-                                            <button id="singlebutton" name="confirmarvoto" value="Confirmar" class="btn btn-danger">Confirmar</button>
+                                            <button id="singlebutton" name="confirmarvoto" value="Confirmar" class="btn btn-primary">Confirmar</button>
                                          </div>
                                     </div>
 			                    </form>
-		                    </div>						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-					</div>
-				</div>
-			{% endif %}
-                        <div class="col-md-4">
-
+		                    </div>
                         </div>
                         
                     </div>

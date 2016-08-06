@@ -628,10 +628,15 @@ class VotoController extends Controller
      */
     public function VerTrabajoAction(Request $request, $id)
     {
-            $em = $this->getDoctrine()->getManager();
-            $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);
-            return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig',
-            array('trab'=>$trabajo));        
+        $em = $this->getDoctrine()->getManager();
+        $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);        
+        if($request->isMethod('POST')){
+            if($request->get('dni')!= "" && $request->get('password')!=""){
+                
+            }
+            return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));
+        }
+        return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));        
     }
     
     
