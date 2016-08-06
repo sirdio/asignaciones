@@ -632,8 +632,85 @@ class VotoController extends Controller
         $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);        
         if($request->isMethod('POST')){
             if($request->get('dni')!= "" && $request->get('password')!=""){
-                
+///////////////////////////////////////////////////////////////////////////////
+                $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy(Array("dni"=>$request->get('dni'))); 
+                $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array("dni"=>$request->get('dni'))); 
+                $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneBy(Array("dni"=>$request->get('dni'))); 
+                $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneBy(Array("dni"=>$request->get('dni'))); 
+                if($directivo){
+                    
+                    $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
+                    if($escuela->getCue() == $request->get('password')){
+                        $session=$request->getSession();
+                        $session->set("dni",$directivo->getDni());
+                        $session->set("tipovot",$directivo->getTipovot());
+                        $session->set("cue",$escuela->getCue());              
+                        $em = $this->getDoctrine()->getManager();
+                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));                        
+                    }else{
+                        $msj = "La Contraseña que ingreso es incorrecta.";
+                        return $this->render('AppBundle:PesVotos:msjvotoQR.html.twig', array('msj'=>$msj)); 
+                    }
+                    
+                }elseif($encargado){
+                    
+                    $directivo = $em->getRepository('AppBundle:Directivo')->find($encargado->getIdconf());
+                    $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
+                    if($escuela->getCue() == $request->get('password')){
+                        $session=$request->getSession();
+                        $session->set("dni",$encargado->getDni());
+                        $session->set("tipovot",$encargado->getTipovot());
+                        $session->set("cue",$escuela->getCue());              
+                        $em = $this->getDoctrine()->getManager();
+                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));                        
+                    }else{
+                        $msj = "La Contraseña que ingreso es incorrecta.";
+                        return $this->render('AppBundle:PesVotos:msjvotoQR.html.twig', array('msj'=>$msj)); 
+                    }
+                    
+                }elseif($estudiante){
+                    
+                   if($estudiante->getTrabajo()->getEscuela()->getCue() == $request->get('password')){
+                        $session=$request->getSession();
+                        $session->set("dni",$estudiante->getDni());
+                        $session->set("tipovot",$estudiante->getTipovot());
+                        $session->set("cue",$estudiante->getTrabajo()->getEscuela()->getCue());              
+                        $em = $this->getDoctrine()->getManager();
+                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
+
+
+                   }else{
+                        $msj = "La Contraseña que ingreso es incorrecta.";
+                        return $this->render('AppBundle:PesVotos:msjvotoQR.html.twig', array('msj'=>$msj));                       
+                   }
+                    
+
+                }elseif($copetyp){
+                   if($copetyp->getNombre() == $request->get('password')){
+                        $session=$request->getSession();
+                        $session->set("dni",$copetyp->getDni());
+                        $session->set("tipovot",$copetyp->getTipovot());
+                        $session->set("cue",$copetyp->getNombre());
+                        $em = $this->getDoctrine()->getManager();
+                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                        return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
+
+
+                   }else{
+                        $msj = "La Contraseña que ingreso es incorrecta.";
+                        return $this->render('AppBundle:PesVotos:msjvotoQR.html.twig', array('msj'=>$msj));                       
+                   }
+                }else{
+                    $msj = "El D.N.I. del usuario que intenta acceder, no se encuentra autorizado para votar.";
+                    return $this->render('AppBundle:PesVotos:msjvotoQR.html.twig', array('msj'=>$msj)); 
+                }
+///////////////////////////////////////////////////////////////////////////////
             }
+            $this->get('session')->getFlashBag()->add('mensaje','Debe ingresar su D.N.I. y Contraseña.');
+                    
             return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));
         }
         return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));        

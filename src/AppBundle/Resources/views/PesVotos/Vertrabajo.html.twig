@@ -1,6 +1,12 @@
 {% extends '::base.html.twig' %}
 {% block title %}Ver Trabajo{% endblock %}
 {% block body %}  
+   {% for flashMessage in app.session.flashbag.get('mensaje') %}
+    <span class="alert-success">
+        {{ flashMessage }}
+        <hr />
+    </span>
+    {% endfor %}
    <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -79,8 +85,8 @@
                         <div class="col-md-4">
                         	<div class="form-top">
                         		<div class="form-top-left">
-                        			<h3> Iniciar Sessión </h3>
-                            		<p>ingrese D.N.I. y contrase&ntildea para ver y votar un trabajo:</p>
+                        			<h3>Votar Trabajo </h3>
+                            		<p>ingrese D.N.I. y contrase&ntildea para confirmar su voto:</p>
                         		</div>
                             </div>
                             <div class="form-bottom">
