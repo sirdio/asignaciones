@@ -679,6 +679,7 @@ class DefaultController extends Controller
      */
     public function MostrarTrabajoAction(Request $request, $id)
     {
+        $session=$request->getSession();
         if($session->has("id")){
             /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
@@ -710,6 +711,7 @@ class DefaultController extends Controller
      */
     public function GuardarCambiosTrabajoAction(Request $request, $id)
     {
+        $session=$request->getSession();
         if($session->has("id")){
             /////////////////////////////////////////////////////////////////////
         if ($request->isMethod('POST')) {
@@ -745,6 +747,7 @@ class DefaultController extends Controller
      */
     public function MostrarFormularioPresAction(Request $request)
     {
+        $session=$request->getSession();
         if($session->has("id")){
             /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
@@ -763,6 +766,7 @@ class DefaultController extends Controller
      */
     public function AgregarPresentacionAction(Request $request)
     {
+        $session=$request->getSession();
         if($session->has("id")){
             /////////////////////////////////////////////////////////////////////
         if ($request->isMethod('POST')) {
@@ -797,6 +801,7 @@ class DefaultController extends Controller
      */
     public function ListarPresentacionAction(Request $request)
     {
+        $session=$request->getSession();
         if($session->has("id")){
             /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
@@ -818,6 +823,7 @@ class DefaultController extends Controller
      */
     public function MostrarPresentacionAction(Request $request, $id)
     {
+        $session=$request->getSession();
         if($session->has("id")){
             /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
@@ -844,6 +850,7 @@ class DefaultController extends Controller
      */
     public function GuardarCambiosPresentacionAction(Request $request, $id)
     {
+        $session=$request->getSession();
         if($session->has("id")){
             /////////////////////////////////////////////////////////////////////
         if ($request->isMethod('POST')) {
