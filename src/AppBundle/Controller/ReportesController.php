@@ -80,16 +80,16 @@ class ReportesController extends Controller
     {
         $session=$request->getSession();
         if($session->has("id")){
-                //$em = $this->getDoctrine()->getManager();
-                $em=$this->getDoctrine()
-                        ->getManager()
-                        ->createQueryBuilder('AppBundleHistorialvoto')
-                        ->select('hv')
-                        ->from('AppBundle:Historialvoto','hv')
-                        ->orderBy("hv.fecha","asc")
-                        ->getQuery();
-            $historial = $em->getArrayResult();
-                //$historial = $em->getRepository('AppBundle:Historialvoto')->findAll();
+                $em = $this->getDoctrine()->getManager();
+               // $em=$this->getDoctrine()
+            //            ->getManager()
+             //           ->createQueryBuilder('AppBundleHistorialvoto')
+               //         ->select('hv')
+            //            ->from('AppBundle:Historialvoto','hv')
+              //          ->orderBy("hv.fecha","asc")
+            //            ->getQuery();
+            //$historial = $em->getArrayResult();
+                $historial = $em->getRepository('AppBundle:Historialvoto')->findAll();
                 if($historial){
                     return $this->render('AppBundle:Reportes:historialvotos.html.twig', 
                     array("historial"=>$historial));
