@@ -113,6 +113,9 @@
                                 <th>D.N.I.</th>
                                 <th>apellido</th>
                                 <th>Nombre</th>
+                                <th>Año que cursa</th>
+                                <th>Especialidad</th>
+                                <th>nivel</th>
                             </tr>
                             {% for est in estudiante %}
                                 {% if est.trabajo.id == trab.id %}
@@ -120,6 +123,9 @@
                                         <td>{{est.dni}}</td>
                                         <td>{{est.apellido}}</td>
                                         <td>{{est.nombre}}</td>
+                                        <td>{{est.especialidada}}</td>
+                                        <td>{{est.aniocursa}}</td>
+                                        <td>{{est.nivel}}</td>
                                     </tr>
                                 {%endif%}
                             {% endfor %}
