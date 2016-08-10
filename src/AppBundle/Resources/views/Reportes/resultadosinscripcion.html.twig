@@ -78,18 +78,18 @@
 				    {% for trab in trabajo %}
 				    <h3>Trabajo</h3>
                     <table class="table table-hover">
-                            <tr class="danger">
+                            <tr class="info">
                                 <th>Nombre Proyecto</th>
                                 <th>Nivel</th>
                             </tr>
                         
-                            <tr class="danger">
+                            <tr>
                                 <td>{{trab.nombproyecto}}</td>
                                 <td>{{trab.niveltrab}}</td>
                             </tr>
-                            </table>
-                        <h3>Encargado</h3>
-                    <table class="table table-hover">
+                            <tr class="info">    
+                                <h3>Encargado</h3>
+                            </tr>
                             <tr class="danger">
                                 <th>D.N.I.</th>
                                 <th>apellido</th>
@@ -98,7 +98,7 @@
                                 <th>Correo Electrónico</th>
                                 <th>Teléfono</th>
                             </tr>
-                                <tr class="danger">
+                                <tr class="info">
                                     <td>{{trab.encargado.dni}}</td>
                                     <td>{{trab.encargado.apellido}}</td>
                                     <td>{{trab.encargado.nombre}}</td>
