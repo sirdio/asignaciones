@@ -1,0 +1,86 @@
+{% extends '::base.html.twig' %}
+{% block title %}Bienvenido a TECNICAMENTE 2016!!!{% endblock %}
+{% block body %}
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('SeleccionarNivel')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div><!-- /.container-fluid -->
+</nav>
+
+<section class="Container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>TécnicaMente 2016</h3>
+				</div>
+				<div class="panel-body">
+				    <h3>Escuela</h3>
+                    <table class="table table-hover">
+                            <tr class="danger">
+                                <th>Cue</th>
+                                <th>Nombre Establecimineto</th>
+                                <th>Jurisdicción</th>
+                                <th>Departamento</th>
+                                <th>Localidad</th>
+                                <th>Domicilio</th>
+                                <th>Teléfono</th>
+                                <th>Correo Electrónico</th>
+                                <th>Ámbito de Gestión</th>
+                            </tr>
+                            <tr class="danger">
+                                <th>{{escuela.cue}}</th>
+                                <th>{{escuela.nombesc}}</th>
+                                <th>{{escuela.jurisdiccion}}</th>
+                                <th>{{escuela.departamento}}</th>
+                                <th>{{escuela.localidad}}</th>
+                                <th>{{escuela.domicilio}}</th>
+                                <th>{{escuela.telefono}}</th>
+                                <th>{{escuela.emailesc}}</th>
+                                <th>{{escuela.ambitogestion}}</th>
+                            </tr>                            
+                    </table>				
+				</div>
+				
+				<div class="panel-body">
+				    <h3>Directivo</h3>
+                    <table class="table table-hover">
+                            <tr class="danger">
+                                <th>D.N.I.</th>
+                                <th>apellido</th>
+                                <th>Nombre</th>
+                                <th>Cargo</th>
+                                <th>Correo Electrónico</th>
+                                <th>Nro. de contacto</th>
+                            </tr>
+                            <tr class="danger">
+                                <th>{{directivo.dni}}</th>
+                                <th>{{directivo.apellido}}</th>
+                                <th>{{directivo.nombre}}</th>
+                                <th>{{directivo.cargo}}</th>
+                                <th>{{directivo.emaild}}</th>
+                                <th>{{directivo.teld}}</th>
+                            </tr>                            
+                        {#% for trab in trabajo %}
+                            <tr class="danger">
+                                <td>{{trab.nombproyecto}}</td>
+                                <td>{{trab.escuela.nombesc}}</td>
+                                <td>{{trab.cantvoto}}</td>
+                            </tr>
+                        {% endfor %#}
+                    </table>				
+				</div>				
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer>
+   <p>T&eacutecnicamente 2016 - Sistema de Votaci&oacuten - Creado por <a href="#">Navarro Sergio Antonio</a>
+        &copy; {{ 'now' | date('Y') }}</p>
+</footer>
+
+{% endblock %}
