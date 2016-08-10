@@ -78,12 +78,12 @@
 				    {% for trab in trabajo %}
 				    <h3>Trabajo</h3>
                     <table class="table table-hover">
-                            <tr class="info">
+                            <tr class="danger">
                                 <th>Nombre Proyecto</th>
                                 <th>Nivel</th>
                             </tr>
                         
-                            <tr class="info">
+                            <tr class="danger">
                                 <td>{{trab.nombproyecto}}</td>
                                 <td>{{trab.niveltrab}}</td>
                             </tr>
@@ -98,17 +98,32 @@
                                 <th>Correo Electrónico</th>
                                 <th>Teléfono</th>
                             </tr>
-                                <tr class="info">
-                                    <td>{{trab.encargado.dni}}</td>
-                                    <td>{{trab.encargado.apellido}}</td>
-                                    <td>{{trab.encargado.nombre}}</td>
-                                    <td>{{trab.encargado.materiadic}}</td>
-                                    <td>{{trab.encargado.emaile}}</td>
-                                    <td>{{trab.encargado.tele}}</td>
-                                </tr>
-                            </table>
-                        
-                    				
+                            <tr class="info">
+                                <td>{{trab.encargado.dni}}</td>
+                                <td>{{trab.encargado.apellido}}</td>
+                                <td>{{trab.encargado.nombre}}</td>
+                                <td>{{trab.encargado.materiadic}}</td>
+                                <td>{{trab.encargado.emaile}}</td>
+                                <td>{{trab.encargado.tele}}</td>
+                            </tr>
+                            <tr class="info">    
+                                <td><h3>Alumnos</h3></td>
+                            </tr>
+                            <tr class="info">
+                                <th>D.N.I.</th>
+                                <th>apellido</th>
+                                <th>Nombre</th>
+                            </tr>
+                            {% for est in estudiante %}
+                                {% if est.trabajo.id == trab.id %}
+                                    <tr class="primary">
+                                        <td>{{est.dni}}</td>
+                                        <td>{{est.apellido}}</td>
+                                        <td>{{est.nombre}}</td>
+                                    </tr>
+                                {%endif%}
+                            {% endfor %}
+                    </table>
                     {% endfor %}
 				</div>				
 				
