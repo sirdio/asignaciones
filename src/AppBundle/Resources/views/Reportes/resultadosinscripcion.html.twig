@@ -106,17 +106,17 @@
                                 <td>{{trab.encargado.emaile}}</td>
                                 <td>{{trab.encargado.tele}}</td>
                             </tr>
-                            <tr class="info">    
+                            <tr class="success">    
                                 <td><h3>Alumnos</h3></td>
                             </tr>
-                            <tr class="info">
+                            <tr class="success">
                                 <th>D.N.I.</th>
                                 <th>apellido</th>
                                 <th>Nombre</th>
                             </tr>
                             {% for est in estudiante %}
                                 {% if est.trabajo.id == trab.id %}
-                                    <tr class="primary">
+                                    <tr class="success">
                                         <td>{{est.dni}}</td>
                                         <td>{{est.apellido}}</td>
                                         <td>{{est.nombre}}</td>
