@@ -53,7 +53,7 @@ class ReportesController extends Controller
                 $escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);
                 $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array("escuela"=>$escuela));
                 $directivo = $em->getRepository('AppBundle:Directivo')->findBy(Array("idesc"=>$escuela->getId()));
-                echo count($directivo);
+                echo $directivo->getDni();
                 die();
                 $estudiante = $em->getRepository('AppBundle:Estudiante')->findAll();
                 return $this->render('AppBundle:Reportes:resultadosinscripcion.html.twig', 
