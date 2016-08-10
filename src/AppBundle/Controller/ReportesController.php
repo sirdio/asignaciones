@@ -48,9 +48,13 @@ class ReportesController extends Controller
     {
         $session=$request->getSession();
         if($session->has("id")){
-                $em = $this->getDoctrine()->getManager();
             if ($request->isMethod('POST')) {
-                $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array("niveltrab"=>$_POST['nivel']),Array("cantvoto"=>'DESC'));
+                $em = $this->getDoctrine()->getManager();
+                $escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);
+                $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array("escuela"=>$escuela));
+                echo count($escuela);
+                die();
+                $estudiante = $em->getRepository('AppBundle:Estudiante')->findAll();
                 return $this->render('AppBundle:Reportes:resultadosinscripcion.html.twig', array("trabajo"=>$trabajo));
             }
             $em=$this->getDoctrine()

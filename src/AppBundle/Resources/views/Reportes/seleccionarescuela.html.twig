@@ -18,7 +18,7 @@
             <select id="establecimiento" name="establecimiento">
                 <option value="0">Seleccionar Opción</option>
                 {% for esc in escuela %}
-                  <option value="{{esc.id}}">{{esc.nombesc}}</option>
+                  <option value="{{esc.id}}">{{esc.cue}} - {{esc.nombesc}}</option>
                 {% endfor %}                
             </select>
 	    </div>
