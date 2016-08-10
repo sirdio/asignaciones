@@ -12,15 +12,14 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <form action="{{ path('SeleccionarNivel') }}" method="post" class="form-inline" role="form">
+      <form action="{{ path('SeleccionarEst') }}" method="post" class="form-inline" role="form">
 	    <div class="control-group">
-            <label for="nivel">Nivel:</label>
-            <select id="nivel" name="nivel">
+            <label for="establecimiento">Establecimiento:</label>
+            <select id="establecimiento" name="establecimiento">
                 <option value="0">Seleccionar Opción</option>
-                <option value="cbs">Ciclo B&aacutesico Secundaria</option>
-                <option value="css">Ciclo Superior Secundaria</option>
-                <option value="fp">Formaci&oacuten Profesional</option>
-                <option value="ts">Tecnicaturas Superiores</option>
+                {% for esc in escuela %}
+                  <option value="{{esc.id}}">{{esc.nombesc}}</option>
+                {% endfor %}                
             </select>
 	    </div>
 

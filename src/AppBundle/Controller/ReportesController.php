@@ -39,13 +39,40 @@ class ReportesController extends Controller
         {
             return $this->render('AppBundle:Default:principal.html.twig');
         }
-
-
-
-
     }
     
-
+    /**
+     * @Route("/seleccionarestablecimiento", name="SeleccionarEst")
+     */
+    public function SeleccionarEstAction(Request $request)
+    {
+        $session=$request->getSession();
+        if($session->has("id")){
+                $em = $this->getDoctrine()->getManager();
+            if ($request->isMethod('POST')) {
+                $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array("niveltrab"=>$_POST['nivel']),Array("cantvoto"=>'DESC'));
+                return $this->render('AppBundle:Reportes:resultadosinscripcion.html.twig', array("trabajo"=>$trabajo));
+            }
+            $em=$this->getDoctrine()
+                        ->getManager()
+                        ->createQueryBuilder('AppBundle:Escuela')
+                        ->select('e')
+                        ->from('AppBundle:Escuela','e')
+                        ->orderBy("e.cue","asc")
+                        ->getQuery();
+        $escuela=$em->getArrayResult();
+        echo count($escuela);
+        die();
+            
+            
+            
+            //$escuela = $em->getRepository('AppBundle:Escuela')->findBy(Array("nombesc"=>$_POST['establecimiento']),Array("cantvoto"=>'DESC'));
+            return $this->render('AppBundle:Reportes:seleccionarescuela.html.twig', array("escuela"=>$escuela));
+        }else
+        {
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+    }
     
     
  
