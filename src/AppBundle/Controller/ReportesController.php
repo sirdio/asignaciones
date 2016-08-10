@@ -60,12 +60,7 @@ class ReportesController extends Controller
                         ->from('AppBundle:Escuela','e')
                         ->orderBy("e.cue","asc")
                         ->getQuery();
-        $escuela=$em->getArrayResult();
-        echo count($escuela);
-        die();
-            
-            
-            
+            $escuela=$em->getArrayResult();
             //$escuela = $em->getRepository('AppBundle:Escuela')->findBy(Array("nombesc"=>$_POST['establecimiento']),Array("cantvoto"=>'DESC'));
             return $this->render('AppBundle:Reportes:seleccionarescuela.html.twig', array("escuela"=>$escuela));
         }else
