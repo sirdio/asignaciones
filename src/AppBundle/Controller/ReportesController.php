@@ -73,7 +73,33 @@ class ReportesController extends Controller
         }
     }
     
-    
+    /**
+     * @Route("/mostrarhistorialvotos", name="MostrarHistorialTrab")
+     */
+    public function MostrarHistorialTrabAction(Request $request)
+    {
+        $session=$request->getSession();
+        if($session->has("id")){
+                //$em = $this->getDoctrine()->getManager();
+                $em=$this->getDoctrine()
+                        ->getManager()
+                        ->createQueryBuilder('AppBundleHistorialvoto')
+                        ->select('hv')
+                        ->from('AppBundle:Historialvoto','hv')
+                        ->orderBy("hv.fecha","asc")
+                        ->getQuery();
+            $historial = $em->getArrayResult();
+                //$historial = $em->getRepository('AppBundle:Historialvoto')->findAll();
+                if($historial){
+                    return $this->render('AppBundle:Reportes:historialvotos.html.twig', 
+                    array("historial"=>$historial));
+                }
+                return $this->render('AppBundle:Default:principal.html.twig');
+        }else
+        {
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+    }    
  
     
 }

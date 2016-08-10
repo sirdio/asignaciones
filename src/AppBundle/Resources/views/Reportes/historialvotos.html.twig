@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+{% block title %}Bienvenido a TECNICAMENTE 2016!!!{% endblock %}
+{% block body %}
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('SeleccionarEst')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div><!-- /.container-fluid -->
+</nav>
+
+<section class="Container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>TécnicaMente 2016</h3>
+				</div>
+				<div class="panel-body">
+				    <h3>Escuela</h3>
+                    <table class="table table-hover">
+                            <tr class="danger">
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>D.N.I.</th>
+                                <th>Apellido</th>
+                                <th>Nombre</th>
+                                <th>Nombre del Trabajo</th>
+                            </tr>
+                            {% for hv in historial %}
+                            <tr class="danger">
+                                <th>{{hv.fecha}}</th>
+                                <th>{{hv.hora}}</th>
+                                <th>{{hv.dni}}</th>
+                                <th>{{hv.nembre}}</th>
+                                <th>{{hv.apellido}}</th>
+                                <th>{{hv.trabajo.nombproyecto}}</th>
+                            </tr>
+                            {% endfor %}
+                    </table>				
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer>
+   <p>T&eacutecnicamente 2016 - Sistema de Votaci&oacuten - Creado por <a href="#">Navarro Sergio Antonio</a>
+        &copy; {{ 'now' | date('Y') }}</p>
+</footer>
+
+{% endblock %}
