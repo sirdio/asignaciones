@@ -52,7 +52,7 @@ class ReportesController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);
                 $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array("escuela"=>$escuela));
-                $directivo = $em->getRepository('AppBundle:Directivo')->findBy(Array("idesc"=>$escuela->getId()));
+                $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy(Array("idesc"=>$escuela->getId()));
                 echo $directivo->getDni();
                 die();
                 $estudiante = $em->getRepository('AppBundle:Estudiante')->findAll();
