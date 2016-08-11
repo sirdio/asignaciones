@@ -33,27 +33,37 @@ class AsistenciaController extends Controller
                 $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array("dni"=>$request->get('dni')));
                 $docente = $em->getRepository('AppBundle:Docente')->findOneBy(Array("dni"=>$request->get('dni')));
                 if($encargado){
-                    $asistencia = new Asistencia();
-                    $asistencia->setDniasist($encargado->getDni());
-                    date_default_timezone_set("America/Argentina/Buenos_Aires");
-                    $fechaactual = date("d-m-Y");                    
-                    $asistencia->setFechaasist($fechaactual);
-                    $em->persist($asistencia);
-                    $em->flush();
-                    $msja = "Gracias por asistir, recuerde que al finalizar las presentación podra votar por 2 trabajos.";
-                    return $this->render('AppBundle:Presentacion:msjasistencia.html.twig', array('msja'=>$msja));                                
-                
+                    $asis = $em->getRepository('AppBundle:Asistencia')->findOneBy(Array("dniasist"=>$encargado->getDni()));
+                    if($asis){
+                        $msja = "Su asistencia ya se registro Gracias.";
+                        return $this->render('AppBundle:Presentacion:msjasistencia.html.twig', array('msja'=>$msja));                                                        
+                    }else{    
+                        $asistencia = new Asistencia();
+                        $asistencia->setDniasist($encargado->getDni());
+                        date_default_timezone_set("America/Argentina/Buenos_Aires");
+                        $fechaactual = date("d-m-Y");                    
+                        $asistencia->setFechaasist($fechaactual);
+                        $em->persist($asistencia);
+                        $em->flush();
+                        $msja = "Gracias por asistir, recuerde que al finalizar las presentaciones podrá votar por 2 trabajos.";
+                        return $this->render('AppBundle:Presentacion:msjasistencia.html.twig', array('msja'=>$msja));                                
+                    }
                 }elseif($docente){
-                    $asistencia = new Asistencia();
-                    $asistencia->setDniasist($docente->getDni());
-                    date_default_timezone_set("America/Argentina/Buenos_Aires");
-                    $fechaactual = date("d-m-Y");                    
-                    $asistencia->setFechaasist($fechaactual);
-                    $em->persist($asistencia);
-                    $em->flush();                    
-                    $msja = "Gracias por asistir, recuerde que al finalizar las presentación podra votar por 2 trabajos..";
-                    return $this->render('AppBundle:Presentacion:msjasistencia.html.twig', array('msja'=>$msja)); 
-                    
+                    $asis = $em->getRepository('AppBundle:Asistencia')->findOneBy(Array("dniasist"=>$docente->getDni()));
+                    if($asis){
+                        $msja = "Su asistencia ya se registro Gracias.";
+                        return $this->render('AppBundle:Presentacion:msjasistencia.html.twig', array('msja'=>$msja));                                                        
+                    }else{                    
+                        $asistencia = new Asistencia();
+                        $asistencia->setDniasist($docente->getDni());
+                        date_default_timezone_set("America/Argentina/Buenos_Aires");
+                        $fechaactual = date("d-m-Y");                    
+                        $asistencia->setFechaasist($fechaactual);
+                        $em->persist($asistencia);
+                        $em->flush();                    
+                        $msja = "Gracias por asistir, recuerde que al finalizar las presentaciones podrá votar por 2 trabajos..";
+                        return $this->render('AppBundle:Presentacion:msjasistencia.html.twig', array('msja'=>$msja)); 
+                    }
                 }else{
                     $msja = "Usted puede asistir, pero no esta autorizado para votar las presentaciones.";
                     return $this->render('AppBundle:Presentacion:msjasistencia.html.twig', array('msja'=>$msja));    
