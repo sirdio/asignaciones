@@ -50,7 +50,7 @@ class AsistenciaController extends Controller
 
         }
         return $this->render('AppBundle:Presentacion:asistenciapresentacion.html.twig');
-    
+    }   
  
  
     
