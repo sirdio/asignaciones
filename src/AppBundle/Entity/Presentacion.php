@@ -36,7 +36,7 @@ class Presentacion
     /**
      * @var string
      *
-     * @ORM\Column(name="catpresentacion", type="string", length=150)
+     * @ORM\Column(name="catpresentacion", type="string", length=250)
      * 
      */    
     private $catpresentacion;
@@ -49,7 +49,7 @@ class Presentacion
     /**
     * @var string
     * 
-    * @ORM\Column(name="pavpresentacion", type="string", length=150)
+    * @ORM\Column(name="pavpresentacion", type="string", length=250)
     */
     private $pavpresentacion;  
 
