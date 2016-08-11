@@ -17,7 +17,7 @@ use AppBundle\Entity\Presentacion;
 use AppBundle\Entity\Users;
 use AppBundle\Entity\Historialvoto;
 
-class ReportesController extends Controller
+class AsistenciaController extends Controller
 {
 
     
