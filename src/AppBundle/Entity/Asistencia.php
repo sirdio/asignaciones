@@ -28,7 +28,7 @@ class Asistencia
     /**
     * @var string
     *
-    * @ORM\Column(name="dniasist", type="string", length=250)
+    * @ORM\Column(name="dniasist", type="string", length=15)
     */    
     private $dniasist;    
     /**

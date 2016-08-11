@@ -16,6 +16,7 @@ use AppBundle\Entity\Trabajo;
 use AppBundle\Entity\Presentacion;
 use AppBundle\Entity\Users;
 use AppBundle\Entity\Historialvoto;
+use AppBundle\Entity\Asistencia;
 
 class AsistenciaController extends Controller
 {
@@ -32,13 +33,25 @@ class AsistenciaController extends Controller
                 $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array("dni"=>$request->get('dni')));
                 $docente = $em->getRepository('AppBundle:Docente')->findOneBy(Array("dni"=>$request->get('dni')));
                 if($encargado){
-
-                    $msja = "Gracias por asistir.";
+                    $asistencia = new Asistencia();
+                    $asistencia->setDniasist($encargado->getDni());
+                    date_default_timezone_set("America/Argentina/Buenos_Aires");
+                    $fechaactual = date("d-m-Y");                    
+                    $asistencia->setFechaasist($fechaactual);
+                    $em->persist($asistencia);
+                    $em->flush();
+                    $msja = "Gracias por asistir, recuerde que al finalizar las presentación podra votar por 2 trabajos.";
                     return $this->render('AppBundle:Presentacion:msjasistencia.html.twig', array('msja'=>$msja));                                
                 
                 }elseif($docente){
-
-                    $msja = "Gracias por asistir.";
+                    $asistencia = new Asistencia();
+                    $asistencia->setDniasist($docente->getDni());
+                    date_default_timezone_set("America/Argentina/Buenos_Aires");
+                    $fechaactual = date("d-m-Y");                    
+                    $asistencia->setFechaasist($fechaactual);
+                    $em->persist($asistencia);
+                    $em->flush();                    
+                    $msja = "Gracias por asistir, recuerde que al finalizar las presentación podra votar por 2 trabajos..";
                     return $this->render('AppBundle:Presentacion:msjasistencia.html.twig', array('msja'=>$msja)); 
                     
                 }else{
