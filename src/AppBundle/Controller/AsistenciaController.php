@@ -34,16 +34,16 @@ class AsistenciaController extends Controller
                 if($encargado){
 
                     $msja = "Gracias por asistir.";
-                    return $this->render('AppBundle:Presentacion:msjasistencia.html.twig');                                
+                    return $this->render('AppBundle:Presentacion:msjasistencia.html.twig', array('msja'=>$msja));                                
                 
                 }elseif($docente){
 
                     $msja = "Gracias por asistir.";
-                    return $this->render('AppBundle:Presentacion:msjasistencia.html.twig'); 
+                    return $this->render('AppBundle:Presentacion:msjasistencia.html.twig', array('msja'=>$msja)); 
                     
                 }else{
                     $msja = "Usted puede asistir, pero no esta autorizado para votar las presentaciones.";
-                    return $this->render('AppBundle:Presentacion:msjasistencia.html.twig');    
+                    return $this->render('AppBundle:Presentacion:msjasistencia.html.twig', array('msja'=>$msja));    
                 }                                                
             }
             return $this->render('AppBundle:Presentacion:asistenciapresentacion.html.twig');
