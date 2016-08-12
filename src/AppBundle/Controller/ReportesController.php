@@ -115,4 +115,28 @@ class ReportesController extends Controller
         }
     } 
     
+    /**
+     * @Route("/mostrarasistemcia", name="VerAsistencia")
+     */
+    public function VerAsistenciaAction(Request $request)
+    {
+        $session=$request->getSession();
+        if($session->has("id")){
+                $em = $this->getDoctrine()->getManager();
+                $asistencia = $em->getRepository('AppBundle:Asistencia')->findAll();
+                if($asistencia){
+                    foreach($asistencia as $linea){
+                        echo $linea->getDniasist();
+                    }
+                    die();
+                    return $this->render('AppBundle:Reportes:historialvotosexp.html.twig', 
+                    array("listaasist"=>$listaasist));
+                }
+                $msj = "No existe registro de asistencia.";              
+                return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj)); 
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+    } 
+    
 }
