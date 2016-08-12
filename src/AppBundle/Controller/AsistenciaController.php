@@ -94,7 +94,7 @@ class AsistenciaController extends Controller
                         echo "docente";
                     }
                     $msjvotoexpe = "Gracias por votar.";
-                    return $this->render('AppBundle:Presentacion:verpresentacionexped.html.twig', array('msjvotoexpe'=>$msjvotoexpe));
+                    return $this->render('AppBundle:Presentacion:msjvotoexpe.html.twig', array('msjvotoexpe'=>$msjvotoexpe));
                 }else{
                     $this->get('session')->getFlashBag()->add('mensaje','Usted no no puede votar.');
                     return $this->render('AppBundle:Presentacion:verpresentacionexped.html.twig', array('expe'=>$presentacion));
