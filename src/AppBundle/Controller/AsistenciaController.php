@@ -78,7 +78,7 @@ class AsistenciaController extends Controller
      /**
      * @Route("/verpresentacion/{id}", name="VerPresentacionEXPed")
      */
-    public function VerPresentacionEXPedAction(Request $request)
+    public function VerPresentacionEXPedAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $presentacion = $em->getRepository('AppBundle:Presentacion')->find($id);
