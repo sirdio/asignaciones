@@ -98,7 +98,7 @@ class AsistenciaController extends Controller
                             $encargado->setCantexpped($restarvoto);
                             $em->persist($encargado);
                             $em->flush();
-                            $presentacion->setCantexpped($sumarvoto);
+                            $presentacion->setCantvoto($sumarvoto);
                             $em->persist($presentacion);
                             $em->flush();
                         }
