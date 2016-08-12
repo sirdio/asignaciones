@@ -92,7 +92,27 @@ class ReportesController extends Controller
         {
             return $this->render('AppBundle:Default:principal.html.twig');
         }
-    }    
- 
+    }
+    
+    /**
+     * @Route("/mostrarhistorialvotosexp", name="MostrarHistorialPress")
+     */
+    public function MostrarHistorialPressAction(Request $request)
+    {
+        $session=$request->getSession();
+        if($session->has("id")){
+                $em = $this->getDoctrine()->getManager();
+                $historial = $em->getRepository('AppBundle:Historialvotoexp')->findAll();
+                if($historial){
+                    return $this->render('AppBundle:Reportes:historialvotosexp.html.twig', 
+                    array("historial"=>$historial));
+                }
+                $msj = "No existen Votos registrados.";              
+                return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj)); 
+        }else
+        {
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+    } 
     
 }

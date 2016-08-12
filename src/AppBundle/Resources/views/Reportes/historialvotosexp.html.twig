@@ -26,16 +26,16 @@
                                 <th>D.N.I.</th>
                                 <th>Apellido</th>
                                 <th>Nombre</th>
-                                <th>Nombre del Trabajo</th>
+                                <th>Especificación</th>
                             </tr>
                             {% for hv in historial %}
                             <tr class="danger">
                                 <th>{{hv.fecha}}</th>
                                 <th>{{hv.hora}}</th>
                                 <th>{{hv.dni}}</th>
-                                <th>{{hv.nembre}}</th>
+                                <th>{{hv.nombre}}</th>
                                 <th>{{hv.apellido}}</th>
-                                <th>{{hv.trabajo.nombproyecto}}</th>
+                                <th>{{hv.presentacion.esppresentacion}}</th>
                             </tr>
                             {% endfor %}
                     </table>				
