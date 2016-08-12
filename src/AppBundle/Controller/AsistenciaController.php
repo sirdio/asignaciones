@@ -98,7 +98,7 @@ class AsistenciaController extends Controller
                             $historicoexp = $em->getRepository('AppBundle:Historicovotoexp')->findOneBy(
                                 Array("dni"=>$encargado->getDni(), "presentacion"=>$presentacion));
                             if($historicoexp){
-                                $this->get('session')->getFlashBag()->add('mensaje','Usted ya superó la cantidad de voto disponible.');
+                                $this->get('session')->getFlashBag()->add('mensaje','Usted ya voto por este trabajo.');
                                 return $this->render('AppBundle:Presentacion:verpresentacionexped.html.twig', array('expe'=>$presentacion));
                             }else{
                                 $restarvoto = $encargado->getCantexpped() - 1;
@@ -135,7 +135,7 @@ class AsistenciaController extends Controller
                             $historicoexp = $em->getRepository('AppBundle:Historicovotoexp')->findOneBy(
                                 Array("dni"=>$docente->getDni(), "presentacion"=>$presentacion));
                             if($historicoexp){
-                                $this->get('session')->getFlashBag()->add('mensaje','Usted ya superó la cantidad de voto disponible.');
+                                $this->get('session')->getFlashBag()->add('mensaje','Usted ya voto por este trabajo.');
                                 return $this->render('AppBundle:Presentacion:verpresentacionexped.html.twig', array('expe'=>$presentacion));
                             }else{
                                 $restarvoto = $docente->getCantexpped() - 1;
