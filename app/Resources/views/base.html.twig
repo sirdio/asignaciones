@@ -28,6 +28,15 @@
         {% block body %}
         {{include('menu.html.twig')}}
         {% endblock %}
+        
+        
+        
+        
+        
+        <footer>
+           <p>T&eacutecnicamente 2016 - Sistema de Voto Electrónico - Desarrollado por <a href="#">Navarro Sergio Antonio</a>
+            &copy; {{ 'now' | date('Y') }}</p>
+        </footer>
         {% block javascripts %}
            <!-- Latest compiled and minified JavaScript -->
            <script src="{{ asset('public/js/jquery-3.1.0.min.js') }}"></script>
