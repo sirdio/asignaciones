@@ -141,10 +141,10 @@ class ReportesController extends Controller
                         $i++;
                     }
                     print_r($listaasist);
-                    echo count($listaasist);
+                    $cont = count($listaasist);
                     //die();
                     return $this->render('AppBundle:Reportes:asistencia.html.twig', 
-                    array("listaasist"=>$listaasist));
+                    array("listaasist"=>$listaasist, 'cont'=>$cont));
                 }
                 $msj = "No existe registro de asistencia.";              
                 return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj)); 

@@ -20,6 +20,16 @@
         
       </tr>
       {{listaasist[1][1]}}
+      
+{% for i in 1..cont %}
+    {% for j in 1..5 %}
+        {{listaasist[i][j]}}
+    {% endfor %}
+{% endfor %}
+      
+      
+      
+      
       {% for asis in listaasist %}
       <tr>
         <td></td>
