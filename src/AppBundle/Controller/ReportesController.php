@@ -125,16 +125,20 @@ class ReportesController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $asistencia = $em->getRepository('AppBundle:Asistencia')->findAll();
                 if($asistencia){
+                    $i = 1;
                     foreach($asistencia as $linea){
                         $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array('dni'=>$linea->getDniasist()));
                         $docente = $em->getRepository('AppBundle:Docente')->findOneBy(Array('dni'=>$linea->getDniasist()));
                         if($encargado){
-                            $listaasist = [ 'id' => $linea->getId(), 'dni' => $encargado->getDni(), 'apellido' => $encargado->getApellido(),
-                                            'nombre' => $encargado->getNombre(), 'fecha' => $linea->getFechaasist()];
+                            $listaasist[$i] = array($linea->getId(), $encargado->getDni(), $encargado->getApellido(), $encargado->getNombre(), $linea->getFechaasist());
+                            //$listaasist = [ 'id' => $linea->getId(), 'dni' => $encargado->getDni(), 'apellido' => $encargado->getApellido(),
+                            //                'nombre' => $encargado->getNombre(), 'fecha' => $linea->getFechaasist()];
                         }elseif($docente){
-                            $listaasist = [ 'id' => $linea->getId(), 'dni' => $docente->getDni(), 'apellido' => $docente->getApellido(),
-                                            'nombre' => $docente->getNombre(), 'fecha' => $linea->getFechaasist()];                            
+                            $listaasist[$i] = array($linea->getId(), $docente->getDni(), $docente->getApellido(), $docente->getNombre(), $linea->getFechaasist());
+                            //$listaasist = [ 'id' => $linea->getId(), 'dni' => $docente->getDni(), 'apellido' => $docente->getApellido(),
+                            //                'nombre' => $docente->getNombre(), 'fecha' => $linea->getFechaasist()];                            
                         }
+                        $i++;
                     }
                     print_r($listaasist);
                     die();
