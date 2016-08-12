@@ -86,17 +86,21 @@ class AsistenciaController extends Controller
             if($request->get('dni')!= ""){
                 $asist = $em->getRepository('AppBundle:Asistencia')->findOneBy(Array("dniasist"=>$request->get('dni')));
                 if($asist){
-                    $this->get('session')->getFlashBag()->add('mensaje','puede votar.');
-                    return $this->render('AppBundle:Presentacion:verpresentacionexped.html.twig', array('expe'=>$presentacion));
+                    $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array("dni"=>$request->get('dni')));
+                    $docente = $em->getRepository('AppBundle:Docente')->findOneBy(Array("dni"=>$request->get('dni')));
+                    if($encargado){
+                        echo "encargado";
+                    }elseif($docente){
+                        echo "docente";
+                    }
+                    $msjvotoexpe = "Gracias por votar.";
+                    return $this->render('AppBundle:Presentacion:verpresentacionexped.html.twig', array('msjvotoexpe'=>$msjvotoexpe));
                 }else{
-                    $this->get('session')->getFlashBag()->add('mensaje','No puede votar.');
+                    $this->get('session')->getFlashBag()->add('mensaje','Usted no no puede votar.');
                     return $this->render('AppBundle:Presentacion:verpresentacionexped.html.twig', array('expe'=>$presentacion));
                 }
-                //$encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array("dni"=>$request->get('dni')));
-                //$docente = $em->getRepository('AppBundle:Docente')->findOneBy(Array("dni"=>$request->get('dni')));
-
-                                                
             }
+            $this->get('session')->getFlashBag()->add('mensaje','Debe ingresar el D.N.I.');
             return $this->render('AppBundle:Presentacion:verpresentacionexped.html.twig', array('expe'=>$presentacion));
 
         }
