@@ -102,7 +102,7 @@ class ReportesController extends Controller
         $session=$request->getSession();
         if($session->has("id")){
                 $em = $this->getDoctrine()->getManager();
-                $historial = $em->getRepository('AppBundle:Historialvotoexp')->findAll();
+                $historial = $em->getRepository('AppBundle:Historicovotoexp')->findAll();
                 if($historial){
                     return $this->render('AppBundle:Reportes:historialvotosexp.html.twig', 
                     array("historial"=>$historial));
