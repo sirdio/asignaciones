@@ -76,16 +76,16 @@ class Historicovotoexp
         return $this->dni;
     }
 ///////////////////////////////////////
-    public function setNembre($nembre)
+    public function setNombre($nombre)
     {
-        $this->nembre = $nembre;
+        $this->nombre = $nombre;
     
         return $this;
     }
 
-    public function getNembre()
+    public function getNombre()
     {
-        return $this->nembre;
+        return $this->nombre;
     }
 //////////////////////////////////////////
     public function setApellido($apellido)
