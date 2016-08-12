@@ -141,6 +141,7 @@ class ReportesController extends Controller
                         $i++;
                     }
                     print_r($listaasist);
+                    echo count($listaasist);
                     //die();
                     return $this->render('AppBundle:Reportes:asistencia.html.twig', 
                     array("listaasist"=>$listaasist));
