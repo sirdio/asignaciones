@@ -89,7 +89,19 @@ class AsistenciaController extends Controller
                     $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array("dni"=>$request->get('dni')));
                     $docente = $em->getRepository('AppBundle:Docente')->findOneBy(Array("dni"=>$request->get('dni')));
                     if($encargado){
-                        echo "encargado";
+                        if($encargado->getCantvoto() == 0){
+                            $this->get('session')->getFlashBag()->add('mensaje','Usted ya superó la cantidad de voto disponible.');
+                            return $this->render('AppBundle:Presentacion:verpresentacionexped.html.twig', array('expe'=>$presentacion));                            
+                        }else{
+                            $restarvoto = $encargado->getCantexpped() - 1;
+                            $sumarvoto = $presentacion->getCantvoto() + 1;
+                            $encargado->setCantexpped($restarvoto);
+                            $em->persist($encargado);
+                            $em->flush();
+                            $presentacion->setCantexpped($sumarvoto);
+                            $em->persist($presentacion);
+                            $em->flush();
+                        }
                     }elseif($docente){
                         echo "docente";
                     }
