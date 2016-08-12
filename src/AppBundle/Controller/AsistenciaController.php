@@ -17,6 +17,7 @@ use AppBundle\Entity\Presentacion;
 use AppBundle\Entity\Users;
 use AppBundle\Entity\Historialvoto;
 use AppBundle\Entity\Asistencia;
+use AppBundle\Entity\Historicovotoexp;
 
 class AsistenciaController extends Controller
 {
@@ -94,14 +95,34 @@ class AsistenciaController extends Controller
                             $this->get('session')->getFlashBag()->add('mensaje','Usted ya superó la cantidad de voto disponible.');
                             return $this->render('AppBundle:Presentacion:verpresentacionexped.html.twig', array('expe'=>$presentacion));                            
                         }else{
-                            $restarvoto = $encargado->getCantexpped() - 1;
-                            $sumarvoto = $presentacion->getCantvoto() + 1;
-                            $encargado->setCantexpped($restarvoto);
-                            $em->persist($encargado);
-                            $em->flush();
-                            $presentacion->setCantvoto($sumarvoto);
-                            $em->persist($presentacion);
-                            $em->flush();
+                            $historicoexp = $em->getRepository('AppBundle:Historicovotoexp')->findOneBy(
+                                Array("dni"=>$encargado->getDni(), "presentacion"=>$presentacion));
+                            if($historicoexp){
+                                $this->get('session')->getFlashBag()->add('mensaje','Usted ya superó la cantidad de voto disponible.');
+                                return $this->render('AppBundle:Presentacion:verpresentacionexped.html.twig', array('expe'=>$presentacion));
+                            }else{
+                                $restarvoto = $encargado->getCantexpped() - 1;
+                                $sumarvoto = $presentacion->getCantvoto() + 1;
+                                $encargado->setCantexpped($restarvoto);
+                                $em->persist($encargado);
+                                $em->flush();
+                                $presentacion->setCantvoto($sumarvoto);
+                                $em->persist($presentacion);
+                                $em->flush();
+                                $historicovotoexp = new Historicovotoexp();
+                                $historicovotoexp->setDni($encargado->getDni());
+                                $historicovotoexp->setNombre($encargado->getNombre());
+                                $historicovotoexp->setApellido($encargado->getApellido());
+                                date_default_timezone_set("America/Argentina/Buenos_Aires");
+                                $horaactual = date("H:i:s");
+                                $fechaactual = date("d-m-Y");                                
+                                $historicovotoexp->setFecha($fechaactual);
+                                $historicovotoexp->setHora($horaactual);
+                                $historicovotoexp->setPresentacion($presentacion);
+                                $em->persist($historicovotoexp);
+                                $em->flush();                                
+                            }    
+
                         }
 
                     }elseif($docente){
@@ -110,14 +131,35 @@ class AsistenciaController extends Controller
                             $this->get('session')->getFlashBag()->add('mensaje','Usted ya superó la cantidad de voto disponible.');
                             return $this->render('AppBundle:Presentacion:verpresentacionexped.html.twig', array('expe'=>$presentacion));                            
                         }else{
-                            $restarvoto = $docente->getCantexpped() - 1;
-                            $sumarvoto = $presentacion->getCantvoto() + 1;
-                            $docente->setCantexpped($restarvoto);
-                            $em->persist($docente);
-                            $em->flush();
-                            $presentacion->setCantvoto($sumarvoto);
-                            $em->persist($presentacion);
-                            $em->flush();
+                            
+                            $historicoexp = $em->getRepository('AppBundle:Historicovotoexp')->findOneBy(
+                                Array("dni"=>$docente->getDni(), "presentacion"=>$presentacion));
+                            if($historicoexp){
+                                $this->get('session')->getFlashBag()->add('mensaje','Usted ya superó la cantidad de voto disponible.');
+                                return $this->render('AppBundle:Presentacion:verpresentacionexped.html.twig', array('expe'=>$presentacion));
+                            }else{
+                                $restarvoto = $docente->getCantexpped() - 1;
+                                $sumarvoto = $presentacion->getCantvoto() + 1;
+                                $docente->setCantexpped($restarvoto);
+                                $em->persist($docente);
+                                $em->flush();
+                                $presentacion->setCantvoto($sumarvoto);
+                                $em->persist($presentacion);
+                                $em->flush();   
+                                $historicovotoexp = new Historicovotoexp();
+                                $historicovotoexp->setDni($docente->getDni());
+                                $historicovotoexp->setNombre($docente->getNombre());
+                                $historicovotoexp->setApellido($docente->getApellido());
+                                date_default_timezone_set("America/Argentina/Buenos_Aires");
+                                $horaactual = date("H:i:s");
+                                $fechaactual = date("d-m-Y");                                
+                                $historicovotoexp->setFecha($fechaactual);
+                                $historicovotoexp->setHora($horaactual);
+                                $historicovotoexp->setPresentacion($presentacion);
+                                $em->persist($historicovotoexp);
+                                $em->flush();                                  
+                            }                            
+
                         }
 
                     }
