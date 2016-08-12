@@ -19,11 +19,11 @@
         <th>Acción</th>
         
       </tr>
-      {% for press in presentacion %}
+      {% for asis in listaasist %}
       <tr>
-        <td>{{press.id}}</td>
-        <td>{{press.catpresentacion}}</td>
-        <td><a href="{{path('MostrarPresentacion',{ 'id': press.id})}}" class="btn btn-primary btn-lg enabled" role="button">Modificar</a></td>
+        <td>{{asis[1][1]}}</td>
+        <td>{{asis[1][2]}}</td>
+        <td>{{asis[1][3]}}</td>
       </tr>
       {% endfor %}
       </table>

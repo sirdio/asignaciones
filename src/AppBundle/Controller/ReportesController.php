@@ -130,19 +130,19 @@ class ReportesController extends Controller
                         $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array('dni'=>$linea->getDniasist()));
                         $docente = $em->getRepository('AppBundle:Docente')->findOneBy(Array('dni'=>$linea->getDniasist()));
                         if($encargado){
-                            $listaasist[$i] = array($linea->getId(), $encargado->getDni(), $encargado->getApellido(), $encargado->getNombre(), $linea->getFechaasist());
+                            $listaasist[$i] = array( 1 =>$linea->getId(), 2 => $encargado->getDni(), 3 => $encargado->getApellido(), 4 => $encargado->getNombre(), 5 => $linea->getFechaasist());
                             //$listaasist = [ 'id' => $linea->getId(), 'dni' => $encargado->getDni(), 'apellido' => $encargado->getApellido(),
                             //                'nombre' => $encargado->getNombre(), 'fecha' => $linea->getFechaasist()];
                         }elseif($docente){
-                            $listaasist[$i] = array($linea->getId(), $docente->getDni(), $docente->getApellido(), $docente->getNombre(), $linea->getFechaasist());
+                            $listaasist[$i] = array( 1 => $linea->getId(), 2 => $docente->getDni(), 3 =>$docente->getApellido(), 4 => $docente->getNombre(), 5 => $linea->getFechaasist());
                             //$listaasist = [ 'id' => $linea->getId(), 'dni' => $docente->getDni(), 'apellido' => $docente->getApellido(),
                             //                'nombre' => $docente->getNombre(), 'fecha' => $linea->getFechaasist()];                            
                         }
                         $i++;
                     }
                     print_r($listaasist);
-                    die();
-                    return $this->render('AppBundle:Reportes:historialvotosexp.html.twig', 
+                    //die();
+                    return $this->render('AppBundle:Reportes:asistencia.html.twig', 
                     array("listaasist"=>$listaasist));
                 }
                 $msj = "No existe registro de asistencia.";              
