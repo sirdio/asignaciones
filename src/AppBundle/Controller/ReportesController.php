@@ -130,10 +130,10 @@ class ReportesController extends Controller
                         $docente = $em->getRepository('AppBundle:Docente')->findOneBy(Array('dni'=>$linea->getDniasist()));
                         if($encargado){
                             $listaasist = [ 'id' => $linea->getId(), 'dni' => $encargado->getDni(), 'apellido' => $encargado->getApellido(),
-                                            'nombre' => $encargado->getNombre(), 'fecha' => $linea->getFechaasist()]
+                                            'nombre' => $encargado->getNombre(), 'fecha' => $linea->getFechaasist()];
                         }elseif($docente){
                             $listaasist = [ 'id' => $linea->getId(), 'dni' => $docente->getDni(), 'apellido' => $docente->getApellido(),
-                                            'nombre' => $docente->getNombre(), 'fecha' => $linea->getFechaasist()]                            
+                                            'nombre' => $docente->getNombre(), 'fecha' => $linea->getFechaasist()];                            
                         }
                     }
                     print_r($listaasist);
