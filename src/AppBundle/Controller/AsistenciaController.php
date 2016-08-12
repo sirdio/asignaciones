@@ -84,6 +84,12 @@ class AsistenciaController extends Controller
         $presentacion = $em->getRepository('AppBundle:Presentacion')->find($id);
         if($request->isMethod('POST')){
             if($request->get('dni')!= ""){
+                $asist = $em->getRepository('AppBundle:Asistencia')->findOneBy(Array("dniasist"=>$request->get('dni')));
+                if($asist){
+                    $this->get('session')->getFlashBag()->add('mensaje','puede votar.');
+                }else{
+                    $this->get('session')->getFlashBag()->add('mensaje','No puede votar.');
+                }
                 //$encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array("dni"=>$request->get('dni')));
                 //$docente = $em->getRepository('AppBundle:Docente')->findOneBy(Array("dni"=>$request->get('dni')));
 
