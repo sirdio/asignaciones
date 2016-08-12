@@ -126,8 +126,17 @@ class ReportesController extends Controller
                 $asistencia = $em->getRepository('AppBundle:Asistencia')->findAll();
                 if($asistencia){
                     foreach($asistencia as $linea){
-                        echo $linea->getDniasist();
+                        $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array('dni'=>$linea->getDniasist()));
+                        $docente = $em->getRepository('AppBundle:Docente')->findOneBy('dni'=>$linea->getDniasist());
+                        if($encargado){
+                            $listaasist = [ 'id' => $linea->getId(), 'dni' => $encargado->getDni(), 'apellido' => $encargado->getApellido(),
+                                            'nombre' => $encargado->getNombre(), 'fecha' => $linea->getFechaasist()]
+                        }elseif($docente){
+                            $listaasist = [ 'id' => $linea->getId(), 'dni' => $docente->getDni(), 'apellido' => $docente->getApellido(),
+                                            'nombre' => $docente->getNombre(), 'fecha' => $linea->getFechaasist()]                            
+                        }
                     }
+                    print_r($listaasist);
                     die();
                     return $this->render('AppBundle:Reportes:historialvotosexp.html.twig', 
                     array("listaasist"=>$listaasist));
