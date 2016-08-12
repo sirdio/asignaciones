@@ -13,16 +13,17 @@
 
     <div class="table-responsive">
       <table class="table table-striped">
-      <tr>
+      <tr class="danger">
         <th>Id</th>
-        <th>Categor&iacutea</th>
-        <th>Acción</th>
-        
+        <th>D.N.I.</th>
+        <th>Apellido</th>
+        <th>Npmbre</th>
+        <th>Fecha</th>
       </tr>
-      {{listaasist[1][1]}}
+ 
       
 {% for i in 1..cont %}
-    <tr>
+    <tr class="danger">
     {% for j in 1..5 %}
         <td>{{listaasist[i][j]}}</td>
     {% endfor %}
