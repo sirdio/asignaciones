@@ -127,7 +127,7 @@ class ReportesController extends Controller
                 if($asistencia){
                     foreach($asistencia as $linea){
                         $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array('dni'=>$linea->getDniasist()));
-                        $docente = $em->getRepository('AppBundle:Docente')->findOneBy('dni'=>$linea->getDniasist());
+                        $docente = $em->getRepository('AppBundle:Docente')->findOneBy(Array('dni'=>$linea->getDniasist()));
                         if($encargado){
                             $listaasist = [ 'id' => $linea->getId(), 'dni' => $encargado->getDni(), 'apellido' => $encargado->getApellido(),
                                             'nombre' => $encargado->getNombre(), 'fecha' => $linea->getFechaasist()]
