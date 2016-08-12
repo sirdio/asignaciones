@@ -131,16 +131,13 @@ class ReportesController extends Controller
                         $docente = $em->getRepository('AppBundle:Docente')->findOneBy(Array('dni'=>$linea->getDniasist()));
                         if($encargado){
                             $listaasist[$i] = array( 1 =>$linea->getId(), 2 => $encargado->getDni(), 3 => $encargado->getApellido(), 4 => $encargado->getNombre(), 5 => $linea->getFechaasist());
-                            //$listaasist = [ 'id' => $linea->getId(), 'dni' => $encargado->getDni(), 'apellido' => $encargado->getApellido(),
-                            //                'nombre' => $encargado->getNombre(), 'fecha' => $linea->getFechaasist()];
+
                         }elseif($docente){
                             $listaasist[$i] = array( 1 => $linea->getId(), 2 => $docente->getDni(), 3 =>$docente->getApellido(), 4 => $docente->getNombre(), 5 => $linea->getFechaasist());
-                            //$listaasist = [ 'id' => $linea->getId(), 'dni' => $docente->getDni(), 'apellido' => $docente->getApellido(),
-                            //                'nombre' => $docente->getNombre(), 'fecha' => $linea->getFechaasist()];                            
+                         
                         }
                         $i++;
                     }
-                    print_r($listaasist);
                     $cont = count($listaasist);
                     //die();
                     return $this->render('AppBundle:Reportes:asistencia.html.twig', 
