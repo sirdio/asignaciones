@@ -75,6 +75,24 @@ class AsistenciaController extends Controller
         return $this->render('AppBundle:Presentacion:asistenciapresentacion.html.twig');
     }   
  
- 
+     /**
+     * @Route("/verpresentacion/{id}", name="VerPresentacionEXPed")
+     */
+    public function VerPresentacionEXPedAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $presentacion = $em->getRepository('AppBundle:Presentacion')->find($id);
+        if($request->isMethod('POST')){
+            if($request->get('dni')!= ""){
+                //$encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array("dni"=>$request->get('dni')));
+                //$docente = $em->getRepository('AppBundle:Docente')->findOneBy(Array("dni"=>$request->get('dni')));
+
+                                                
+            }
+            return $this->render('AppBundle:Presentacion:verpresentacionexped.html.twig', array('expe'=>$presentacion));
+
+        }
+        return $this->render('AppBundle:Presentacion:verpresentacionexped.html.twig', array('expe'=>$presentacion));
+    } 
     
 }
