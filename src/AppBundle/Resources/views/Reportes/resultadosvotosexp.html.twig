@@ -28,8 +28,15 @@
                                 <th>Especificación</th>
                                 <th>Cantidad de Votos</th>
                             </tr>
+                            {% set i = 0 %}
                         {% for presr in presresultado %}
-                            <tr class="danger">
+                            {% if i == 1 %}                        
+                                <tr class="danger">
+                                {% set i = 0 %}    
+                            {% else %}
+                                <tr class="info">
+                                {% set i = 1 %}    
+                            {% endif %}
                                 <td>{{presr.escuela.nombesc}}</td>
                                 <td>{{presr.adpresentacion}}</td>
                                 <td>{{presr.catpresentacion}}</td>
