@@ -751,7 +751,7 @@ class DefaultController extends Controller
         if($session->has("id")){
             /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
-        $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('isActive' => 0));
+        $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 0));
         echo count($trabajo);
         die();
         if (!$trabajo){
