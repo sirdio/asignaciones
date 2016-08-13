@@ -28,6 +28,27 @@ class VotoController extends Controller
         $session->clear();
         return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
     }
+
+    /**
+     * @Route("/vertrabajos", name="VerOtrosTrabajos")
+     */
+    public function VerOtrosTrabajosAction(Request $request, $id)
+    {
+        $session=$request->getSession();
+        if($session->has("dni") and $session->has("cue"))
+        {
+        /////////////////////////////////////////////////////////////////////
+            $em = $this->getDoctrine()->getManager();
+            $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 1));
+            return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
+ 
+ 
+        //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
+        }        
+        
+    }
     
     /**
      * @Route("/vototrabajo/{id}", name="VotoTrabajo")
