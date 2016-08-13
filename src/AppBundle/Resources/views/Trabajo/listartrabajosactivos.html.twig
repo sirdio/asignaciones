@@ -1,0 +1,39 @@
+{% extends '::base.html.twig' %}
+{% block title %}Lista de Trabajos Activos{% endblock %}
+{% block body %}
+
+<nav class="navbar navbar-default">
+  <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
+   		{% for flashMessage in app.session.flashbag.get('mensaje') %}
+    	<span class="alert-danger">
+        	{{ flashMessage }}
+        	<hr />
+    	</span>
+    	{% endfor %}  
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div>
+</nav>
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+      <tr>
+        <th>Id</th>
+        <th>Nombre Proyecto</th>
+        <th>Acción</th>
+        
+      </tr>
+      {% for trab in trabajo %}
+      <tr>
+        <td>{{trab.id}}</td>
+        <td>{{trab.nombproyecto}}</td>
+        <td><a href="{{path('TrabajoActivarDesactivar',{ 'id': trab.id})}}" class="btn btn-primary btn-lg enabled" role="button">Desactivar</a></td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div>
+
+{% endblock %}

@@ -70,7 +70,11 @@ class Trabajo
     /**
     * @ORM\Column(name="niveltrab", type="string", length=30)
     */    
-    private $niveltrab;        
+    private $niveltrab;  
+    /**
+    * @ORM\Column(name="is_active", type="boolean")
+    */
+    private $isActive;    
 
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
@@ -209,5 +213,16 @@ class Trabajo
     {
         return $this->niveltrab;
     } 
-      
+//////////////////////////////////////
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+    
+        return $this;
+    }
+
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
 }

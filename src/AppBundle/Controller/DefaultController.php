@@ -637,6 +637,7 @@ class DefaultController extends Controller
             $trabajo->setEncargado($encargado);
             $trabajo->setEscuela($escuela);
             $trabajo->setNiveltrab($_POST['nivel']);
+            $trabajo->setIsActive(1);
             $em->persist($trabajo);
             $em->flush();            
             $msj = "Trabajo cargado con exito.";              
@@ -740,6 +741,85 @@ class DefaultController extends Controller
         }
         
     }       
+    
+    /**
+     * @Route("/cargadatos/activartrabajo", name="ActivarTrabajo")
+     */
+    public function ActivarTrabajoAction(Request $request)
+    {
+        $session=$request->getSession();
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
+        $em = $this->getDoctrine()->getManager();
+        $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('isActive' => 0));
+        if (!$trabajo){
+            $msj = "No existen trabajos desactivados.";              
+            return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+        }        
+        return $this->render('AppBundle:Trabajo:listartrabajodesactivados.html.twig',array('trabajo'=>$trabajo));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }        
+
+    }     
+    
+    /**
+     * @Route("/cargadatos/desactivartrabajo", name="DesactivarTrabajo")
+     */
+    public function DesactivarTrabajoAction(Request $request)
+    {
+        $session=$request->getSession();
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
+        $em = $this->getDoctrine()->getManager();
+        $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('isActive' => 1));
+        if (!$trabajo){
+            $msj = "No existen trabajos desactivados.";              
+            return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+        }        
+        return $this->render('AppBundle:Trabajo:listartrabajosactivos.html.twig',array('trabajo'=>$trabajo));
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }        
+
+    }     
+    
+    /**
+     * @Route("/cargadatos/TrabajoActivarDesactivar/{id}", name="TrabajoActivarDesactivar")
+     */
+    public function TrabajoActivarDesactivarAction(Request $request, $id)
+    {
+        $session=$request->getSession();
+        if($session->has("id")){
+            /////////////////////////////////////////////////////////////////////
+            $em = $this->getDoctrine()->getManager();
+            $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);
+            if ($trabajo->getIsActive() == 1){
+                $trabajo->setIsActive(0);
+                $em->persist($trabajo);
+                $em->flush();
+                $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('isActive' => 1));
+                $this->get('session')->getFlashBag()->add('mensaje','El trabajo se Desactivo con exito.');
+                return $this->render('AppBundle:Trabajo:listartrabajosactivos.html.twig',array('trabajo'=>$trabajo));
+                
+            }elseif($trabajo->getIsActive() == 0){
+                $trabajo->setIsActive(1);
+                $em->persist($trabajo);
+                $em->flush();
+                $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('isActive' => 0));
+                $this->get('session')->getFlashBag()->add('mensaje','El trabajo se Desactivo con exito.');
+                return $this->render('AppBundle:Trabajo:listartrabajodesactivados.html.twig',array('trabajo'=>$trabajo));
+                
+            }        
+
+            //////////////////////////////////////////////////////////////////////
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }        
+
+    }     
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////    
     /**
