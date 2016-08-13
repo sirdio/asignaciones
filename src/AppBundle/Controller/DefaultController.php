@@ -801,6 +801,10 @@ class DefaultController extends Controller
                 $em->persist($trabajo);
                 $em->flush();
                 $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('isActive' => 1));
+                if (!$trabajo){
+                    $msj = "No existen trabajos desactivados.";              
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+                }                 
                 $this->get('session')->getFlashBag()->add('mensaje','El trabajo se Desactivo con exito.');
                 return $this->render('AppBundle:Trabajo:listartrabajosactivos.html.twig',array('trabajo'=>$trabajo));
                 
@@ -809,6 +813,10 @@ class DefaultController extends Controller
                 $em->persist($trabajo);
                 $em->flush();
                 $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('isActive' => 0));
+                if (!$trabajo){
+                    $msj = "No existen trabajos desactivados.";              
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
+                }                
                 $this->get('session')->getFlashBag()->add('mensaje','El trabajo se Desactivo con exito.');
                 return $this->render('AppBundle:Trabajo:listartrabajodesactivados.html.twig',array('trabajo'=>$trabajo));
                 
