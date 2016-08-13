@@ -524,13 +524,10 @@ class VotoController extends Controller
                     }
             }
         //////////////////////////////////////////////////////////////////////
-        }else
-        {
+        }else{
             return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
         }        
-        //$em = $this->getDoctrine()->getManager(Request $request);
-        //$trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
-        //return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
+
     }
     
     /**
@@ -603,7 +600,7 @@ class VotoController extends Controller
                         $session->set("tipovot",$copetyp->getTipovot());
                         $session->set("cue",$copetyp->getNombre());
                         $em = $this->getDoctrine()->getManager();
-                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 1));
                         return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
 
 
