@@ -752,8 +752,6 @@ class DefaultController extends Controller
             /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
         $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 0));
-        echo count($trabajo);
-        die();
         if (!$trabajo){
             $msj = "No existen trabajos desactivados.";              
             return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
@@ -775,7 +773,7 @@ class DefaultController extends Controller
         if($session->has("id")){
             /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
-        $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('isActive' => 1));
+        $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 1));
         if (!$trabajo){
             $msj = "No existen trabajos desactivados.";              
             return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
@@ -802,7 +800,7 @@ class DefaultController extends Controller
                 $trabajo->setIsActive(0);
                 $em->persist($trabajo);
                 $em->flush();
-                $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('isActive' => 1));
+                $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 1));
                 if (!$trabajo){
                     $msj = "No existen trabajos desactivados.";              
                     return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
@@ -814,12 +812,12 @@ class DefaultController extends Controller
                 $trabajo->setIsActive(1);
                 $em->persist($trabajo);
                 $em->flush();
-                $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('isActive' => 0));
+                $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 0));
                 if (!$trabajo){
                     $msj = "No existen trabajos desactivados.";              
                     return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
                 }                
-                $this->get('session')->getFlashBag()->add('mensaje','El trabajo se Desactivo con exito.');
+                $this->get('session')->getFlashBag()->add('mensaje','El trabajo se Activo con exito.');
                 return $this->render('AppBundle:Trabajo:listartrabajodesactivados.html.twig',array('trabajo'=>$trabajo));
                 
             }        
