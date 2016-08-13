@@ -1181,7 +1181,7 @@ class VotoController extends Controller
                     
             return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));
         }
-        $this->get('session')->getFlashBag()->add('mensaje','Ocurrió un problema intente de nuevo.');
+        //$this->get('session')->getFlashBag()->add('mensaje','Ocurrió un problema intente de nuevo.');
         return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));        
     }
     
