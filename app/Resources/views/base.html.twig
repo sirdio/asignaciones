@@ -26,18 +26,10 @@
     </head>
     <body>
         {% block body %}
-        <div class="jumbotron">
-            <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
-        </div>
-
 
         {{include('menu.html.twig')}}
         {% endblock %}
-        
-        
-        
-        
-        
+
         <footer>
            <p>T&eacutecnicamente 2016 - Sistema de Voto Electrónico - Desarrollado por <a href="#">Navarro Sergio Antonio</a>
             &copy; {{ 'now' | date('Y') }}</p>
