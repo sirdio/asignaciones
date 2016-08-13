@@ -32,7 +32,7 @@ class VotoController extends Controller
     /**
      * @Route("/vertrabajos", name="VerOtrosTrabajos")
      */
-    public function VerOtrosTrabajosAction(Request $request, $id)
+    public function VerOtrosTrabajosAction(Request $request)
     {
         $session=$request->getSession();
         if($session->has("dni") and $session->has("cue"))
