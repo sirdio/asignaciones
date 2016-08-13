@@ -150,4 +150,19 @@ class ReportesController extends Controller
         }
     } 
     
+    /**
+     * @Route("/mostrarresultados", name="MostrarResultados")
+     */
+    public function MostrarResultadosAction(Request $request)
+    {
+        $session=$request->getSession();
+        if($session->has("id")){
+                $em = $this->getDoctrine()->getManager();
+                $presresultado = $em->getRepository('AppBundle:Presentacion')->findBy(Array("nivelpres"=>'expped'), Array("cantvoto"=>'DESC'));
+                return $this->render('AppBundle:Reportes:resultadosvotosexp.html.twig', array("presresultado"=>$presresultado));
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+    }    
+    
 }

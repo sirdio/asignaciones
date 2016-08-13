@@ -1,5 +1,5 @@
 {% extends '::base.html.twig' %}
-{% block title %}TECNICAMENTE 2016!!!{% endblock %}
+{% block title %}Bienvenido a TECNICAMENTE 2016!!!{% endblock %}
 {% block body %}
 
 <nav class="navbar navbar-default">
@@ -26,11 +26,13 @@
                                 <th>Establecimineto</th>
                                 <th>Cantidad de Votos</th>
                             </tr>
-                        {% for trab in trabajo %}
+                        {% for presr in presresultado %}
                             <tr class="danger">
-                                <td>{{trab.nombproyecto}}</td>
-                                <td>{{trab.escuela.nombesc}}</td>
-                                <td>{{trab.cantvoto}}</td>
+                                <td>{{presr.escuela.nombesc}}</td>
+                                <td>{{presr.adpresentacion}}</td>
+                                <td>{{presr.catpresentacion}}</td>
+                                <td>{{presr.esppresentacion}}</td>
+                                <td>{{presr.cantvoto}}</td>
                             </tr>
                         {% endfor %}
                     </table>				
