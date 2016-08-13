@@ -752,6 +752,8 @@ class DefaultController extends Controller
             /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
         $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('isActive' => 0));
+        echo count($trabajo);
+        die();
         if (!$trabajo){
             $msj = "No existen trabajos desactivados.";              
             return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
