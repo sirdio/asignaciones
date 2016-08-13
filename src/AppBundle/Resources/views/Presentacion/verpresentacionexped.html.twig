@@ -1,13 +1,15 @@
 {% extends '::base.html.twig' %}
 {% block title %}Experiencia Pedagógica{% endblock %}
 {% block body %}  
+
+   <div class="container-fluid">
+   	<img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
    {% for flashMessage in app.session.flashbag.get('mensaje') %}
     <span class="alert-danger">
         {{ flashMessage }}
         <hr />
     </span>
-    {% endfor %}
-   <div class="container-fluid">
+    {% endfor %}   	
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
