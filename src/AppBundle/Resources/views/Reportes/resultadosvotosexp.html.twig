@@ -21,7 +21,7 @@
 				<div class="panel-body">
 				    <h3>Resultados</h3>
                     <table class="table table-hover">
-                            <tr class="danger">
+                            <tr class="warning">
                                 <th>Establecimiento</th>
                                 <th>Año de Desarrollo del Trabajo</th>
                                 <th>Categoría</th>
@@ -31,7 +31,7 @@
                             {% set i = 0 %}
                         {% for presr in presresultado %}
                             {% if i == 1 %}                        
-                                <tr class="danger">
+                                <tr class="success">
                                 {% set i = 0 %}    
                             {% else %}
                                 <tr class="info">
