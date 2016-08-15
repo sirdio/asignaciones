@@ -193,9 +193,13 @@ class ReportesController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
                 foreach($escuela as $esc){
-                    echo $esc->getCue()." - ".$esc->getNombesc()."<br>";
                     $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy(Array('idesc'=>$esc->getId()));
-                    echo " - ".$directivo->getApellido()." - ".$directivo->getNombre()."<br>";
+                    $esc->getCue()." - ".$esc->getNombesc()."<br>";
+                    $directivo->getDni()." - ".$directivo->getApellido()." - ".$directivo->getNombre()."<br>";
+                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('escuela'=>$esc));
+                    foreach($trabajo as $trab){
+                        
+                    }
                 }
                 die();
         }else{
