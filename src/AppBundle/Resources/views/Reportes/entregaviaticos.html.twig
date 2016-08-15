@@ -1,14 +1,47 @@
 
+{% extends '::base.html.twig' %}
+{% block title %}TECNICAMENTE 2016!!!{% endblock %}
+{% block body %}
 
+<nav class="navbar navbar-default">
+  <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">s
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div><!-- /.container-fluid -->
+</nav>
+
+<section class="Container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>TécnicaMente 2016</h3>
+				</div>
+				<div class="panel-body">
+				    <h3>Lista de Presentaciones "Experiencia Pedagógica"</h3>
+                    <table class="table table-hover">
+                            <tr class="danger">
+                                <th>D.N.I.</th>
+                                <th>Apellido</th>
+                                <th>Nombre</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                            </tr>
 
 
 
     {% for esc in escuela %}
         {{esc.nombesc}}<br>
-        --------------------------------------------------------------- <br>
+      
         {% for direc in directivo %}
             {%if esc.id == direc.idesc%}
-                {{direc.dni}} - {{direc.apellido}} - {{direc.nombre}} <br>
+            <tr class="danger">    
+                <td>{{direc.dni}}</td>
+                <td>{{direc.apellido}}</td>
+                <td>{{direc.nombre}}</td>
+            </tr>    
             {%endif%}
         {% endfor %}
         {% for trab in trabajo %}
@@ -29,4 +62,5 @@
             {% endfor %}    
         {% endfor %}        
         --------------------------------------------------------------- <br>
+        
     {% endfor %}
