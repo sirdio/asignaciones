@@ -191,7 +191,7 @@ class ReportesController extends Controller
         $session=$request->getSession();
         if($session->has("id")){
                 $em = $this->getDoctrine()->getManager();
-                $escuela = $em->getRepository('AppBundle:Presentacion')->findAll();
+                $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
                 foreach($escuela as $esc){
                     echo $esc->getCue()."-".$esc->getNombesc()."<br>";
                 }
