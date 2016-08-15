@@ -203,6 +203,7 @@ class ReportesController extends Controller
                     //foreach($trabajo as $trab){
                         
                     //}
+                    $i++;
                 }
                 //return $this->render('AppBundle:Reportes:entregaviaticos.html.twig');
                 print_r($listaviaticos);
