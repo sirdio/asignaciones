@@ -199,6 +199,7 @@ class ReportesController extends Controller
                     $estudiante = $em->getRepository('AppBundle:Estudiante')->findAll();
                     $docente = $em->getRepository('AppBundle:Docente')->findAll();
                     $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                    $presentacion = $em->getRepository('AppBundle:Presentacion')->findAll();
                     //$listaviaticos[$i] = array( 1 =>$esc->getNombesc(), 2 => $directivo->getDni() );
                     //$esc->getCue()." - ".$esc->getNombesc()."<br>";
                     //$directivo->getDni()." - ".$directivo->getApellido()." - ".$directivo->getNombre()."<br>";
@@ -210,7 +211,8 @@ class ReportesController extends Controller
                 //}
                 return $this->render('AppBundle:Reportes:entregaviaticos.html.twig', array(
                     'escuela' =>$escuela, 'directivo'=>$directivo, 'encargado'=>$encargado,
-                    'estudiante'=>$estudiante, 'trabajo'=>$trabajo));
+                    'estudiante'=>$estudiante, 'trabajo'=>$trabajo,
+                    'presentacion'=>$presentacion, 'docente'=>$docente));
                 //print_r($listaviaticos);
                 //die();
         }else{

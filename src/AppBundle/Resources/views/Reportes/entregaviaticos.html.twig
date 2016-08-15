@@ -21,6 +21,12 @@
                 {%endif%}
             {% endfor %}    
         {% endfor %}
-        
+        {% for pres in presentacion %}
+            {% for doc in docente %}
+                {%if pres.id == doc.presentacion.id and esc.id == pres.escuela.id %}
+                    {{doc.dni}} - {{doc.apellido}} - {{doc.nombre}} <br>
+                {%endif%}
+            {% endfor %}    
+        {% endfor %}        
         --------------------------------------------------------------- <br>
     {% endfor %}
