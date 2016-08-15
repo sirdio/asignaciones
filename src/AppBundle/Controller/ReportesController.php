@@ -192,21 +192,22 @@ class ReportesController extends Controller
         if($session->has("id")){
                 $em = $this->getDoctrine()->getManager();
                 $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
-                $i = 1;
-                foreach($escuela as $esc){
-                    $directivo = $em->getRepository('AppBundle:Directivo')->findByIdesc($esc->getId());
-                    $listaviaticos[$i] = array( 1 =>$esc->getNombesc(), 2 => $directivo->getDni() );
+                //$i = 1;
+                //foreach($escuela as $esc){
+                    $directivo = $em->getRepository('AppBundle:Directivo')->findByIdesc($escuela->getId());
+                    //$listaviaticos[$i] = array( 1 =>$esc->getNombesc(), 2 => $directivo->getDni() );
                     //$esc->getCue()." - ".$esc->getNombesc()."<br>";
                     //$directivo->getDni()." - ".$directivo->getApellido()." - ".$directivo->getNombre()."<br>";
-                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('escuela'=>$esc));
+                    //$trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('escuela'=>$esc));
                     //foreach($trabajo as $trab){
                         
                     //}
-                    $i++;
-                }
-                return $this->render('AppBundle:Reportes:entregaviaticos.html.twig', array('viaticos' =>$listaviaticos));
-                print_r($listaviaticos);
-                die();
+                    //$i++;
+                //}
+                return $this->render('AppBundle:Reportes:entregaviaticos.html.twig', array(
+                    'escuela' =>$escuela, 'directivo'=>$directivo));
+                //print_r($listaviaticos);
+                //die();
         }else{
             return $this->render('AppBundle:Default:principal.html.twig');
         }
