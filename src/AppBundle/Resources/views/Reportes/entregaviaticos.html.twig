@@ -33,8 +33,9 @@
 
 
     {% for esc in escuela %}
-        {{esc.nombesc}}<br>
-      
+    <tr class="info">
+        <td>{{esc.nombesc}}</td>
+    </tr>  
         {% for direc in directivo %}
             {%if esc.id == direc.idesc%}
             <tr class="danger">    
