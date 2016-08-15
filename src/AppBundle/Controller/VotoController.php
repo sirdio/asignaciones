@@ -653,7 +653,8 @@ class VotoController extends Controller
     public function VerTrabajoAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);        
+        $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id); 
+    if($trabajo->getIsActive() == 1){
         if($request->isMethod('POST')){
             if($request->get('dni')!= "" && $request->get('password')!=""){
 ///////////////////////////////////////////////////////////////////////////////
@@ -1206,7 +1207,10 @@ class VotoController extends Controller
             return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));
         }
         //$this->get('session')->getFlashBag()->add('mensaje','Ocurrió un problema intente de nuevo.');
-        return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));        
+        return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));   
+        }////cierra el if que verifica si el trabajo esta habilitado o no
+        $this->get('session')->getFlashBag()->add('mensaje','El trabajo esta Desactivado para votar.');
+        return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));
     }
     
     
