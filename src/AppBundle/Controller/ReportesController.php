@@ -165,4 +165,22 @@ class ReportesController extends Controller
         }
     }    
     
+    /**
+     * @Route("/mostrarpresentacionesinscriptas", name="VerPresentacionesInscriptas")
+     */
+    public function VerPresentacionesInscriptasAction(Request $request)
+    {
+        $session=$request->getSession();
+        if($session->has("id")){
+                $em = $this->getDoctrine()->getManager();
+                $presentacion = $em->getRepository('AppBundle:Presentacion')->findAll();
+                if($presentacion){
+                    return $this->render('AppBundle:Reportes:presentacionesinscriptas.html.twig', array("presresultado"=>$presresultado));    
+                }
+                return $this->render('AppBundle:Default:inicio.html.twig');    
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+    }  
+    
 }
