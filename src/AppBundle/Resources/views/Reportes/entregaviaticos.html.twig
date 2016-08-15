@@ -46,18 +46,30 @@
         {% endfor %}
         {% for trab in trabajo %}
             {%if esc.id == trab.escuela.id%}
-                {{trab.encargado.dni}} - {{trab.encargado.apellido}} - {{trab.encargado.nombre}} <br>
+            <tr class="danger">
+                <td>{{trab.encargado.dni}}</td>
+                <td>{{trab.encargado.apellido}}</td>
+                <td>{{trab.encargado.nombre}}</td>
+            </tr>
             {%endif%}
             {% for est in estudiante %}
                 {%if trab.id == est.trabajo.id and esc.id == trab.escuela.id %}
-                    {{est.dni}} - {{est.apellido}} - {{est.nombre}} <br>
+                <tr class="danger">
+                    <td>{{est.dni}}</td> 
+                    <td>{{est.apellido}}</td> 
+                    <td>{{est.nombre}}</td>
+                </tr>
                 {%endif%}
             {% endfor %}    
         {% endfor %}
         {% for pres in presentacion %}
             {% for doc in docente %}
                 {%if pres.id == doc.presentacion.id and esc.id == pres.escuela.id %}
-                    {{doc.dni}} - {{doc.apellido}} - {{doc.nombre}} <br>
+                <tr class="danger">
+                    <td>{{doc.dni}}</td>
+                    <td>{{doc.apellido}}</td>
+                    <td>{{doc.nombre}}</td>
+                </tr>
                 {%endif%}
             {% endfor %}    
         {% endfor %}        
