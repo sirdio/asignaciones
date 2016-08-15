@@ -9,5 +9,10 @@
             {%if esc.id == direc.idesc%}
                 {{direc.dni}} - {{direc.apellido}} - {{direc.nombre}} <br>
             {%endif%}
+        {% endfor %}
+        {% for trab in trabajo %}
+            {%if esc.id == trab.escuela.id%}
+                {{trab.encargado.dni}} - {{trab.encargado.apellido}} - {{trab.encargado.nombre}}
+            {%endif%}
         {% endfor %}        
     {% endfor %}
