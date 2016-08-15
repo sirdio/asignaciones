@@ -204,7 +204,8 @@ class ReportesController extends Controller
                         
                     //}
                 }
-                return $this->render('AppBundle:Reportes:entregaviaticos.html.twig');
+                //return $this->render('AppBundle:Reportes:entregaviaticos.html.twig');
+                print_r($listaviaticos);
                 die();
         }else{
             return $this->render('AppBundle:Default:principal.html.twig');
