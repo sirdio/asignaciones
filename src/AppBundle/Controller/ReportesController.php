@@ -182,5 +182,23 @@ class ReportesController extends Controller
             return $this->render('AppBundle:Default:principal.html.twig');
         }
     }  
+
+    /**
+     * @Route("/reporteentregasviatico", name="VerEntregas")
+     */
+    public function VerEntregasAction(Request $request)
+    {
+        $session=$request->getSession();
+        if($session->has("id")){
+                $em = $this->getDoctrine()->getManager();
+                $escuela = $em->getRepository('AppBundle:Presentacion')->findAll();
+                foreach($escuela as $esc){
+                    echo $esc->getCue()."-".$esc->getNombesc()."<br>";
+                }
+                die();
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+    }  
     
 }
