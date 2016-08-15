@@ -196,7 +196,7 @@ class ReportesController extends Controller
                 foreach($escuela as $esc){
                     $em1 = $this->getDoctrine()->getManager();
                     $directivo = $em1->getRepository('AppBundle:Directivo')->findByIdesc($esc->getId());
-                    $listaviaticos[$i] = array( 1 =>$esc->getNombesc(), 2 => $directivo->getDni(), 3 => $directivo->getApellido(), 4 => $directivo->getNombre());
+                    $listaviaticos[$i] = array( 1 =>$esc->getNombesc(), 2 => $directivo );
                     //$esc->getCue()." - ".$esc->getNombesc()."<br>";
                     //$directivo->getDni()." - ".$directivo->getApellido()." - ".$directivo->getNombre()."<br>";
                     $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('escuela'=>$esc));
