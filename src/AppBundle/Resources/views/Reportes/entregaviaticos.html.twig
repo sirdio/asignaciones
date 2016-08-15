@@ -23,6 +23,7 @@
 				    <h3>Lista de Presentaciones "Experiencia Pedagógica"</h3>
                     <table class="table table-hover">
                             <tr class="danger">
+                                <th>Establecimiento</th>
                                 <th>D.N.I.</th>
                                 <th>Apellido</th>
                                 <th>Nombre</th>
@@ -38,7 +39,8 @@
     </tr>  
         {% for direc in directivo %}
             {%if esc.id == direc.idesc%}
-            <tr class="danger">    
+            <tr class="danger"> 
+                <td>-</td>
                 <td>{{direc.dni}}</td>
                 <td>{{direc.apellido}}</td>
                 <td>{{direc.nombre}}</td>
@@ -48,6 +50,7 @@
         {% for trab in trabajo %}
             {%if esc.id == trab.escuela.id%}
             <tr class="danger">
+                <td>-</td>
                 <td>{{trab.encargado.dni}}</td>
                 <td>{{trab.encargado.apellido}}</td>
                 <td>{{trab.encargado.nombre}}</td>
@@ -56,6 +59,7 @@
             {% for est in estudiante %}
                 {%if trab.id == est.trabajo.id and esc.id == trab.escuela.id %}
                 <tr class="danger">
+                    <td> </td>
                     <td>{{est.dni}}</td> 
                     <td>{{est.apellido}}</td> 
                     <td>{{est.nombre}}</td>
@@ -67,6 +71,7 @@
             {% for doc in docente %}
                 {%if pres.id == doc.presentacion.id and esc.id == pres.escuela.id %}
                 <tr class="danger">
+                    <td>-</td>
                     <td>{{doc.dni}}</td>
                     <td>{{doc.apellido}}</td>
                     <td>{{doc.nombre}}</td>
@@ -74,8 +79,6 @@
                 {%endif%}
             {% endfor %}    
         {% endfor %}        
-        --------------------------------------------------------------- <br>
-        
     {% endfor %}
                    </table>				
 				</div>
