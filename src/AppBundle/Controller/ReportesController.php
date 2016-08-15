@@ -175,7 +175,7 @@ class ReportesController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $presentacion = $em->getRepository('AppBundle:Presentacion')->findAll();
                 if($presentacion){
-                    return $this->render('AppBundle:Reportes:presentacionesinscriptas.html.twig', array("presresultado"=>$presresultado));    
+                    return $this->render('AppBundle:Reportes:presentacionesinscriptas.html.twig', array("presentacion"=>$presentacion));    
                 }
                 return $this->render('AppBundle:Default:inicio.html.twig');    
         }else{
