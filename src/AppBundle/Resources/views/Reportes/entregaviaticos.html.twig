@@ -15,6 +15,12 @@
             {%if esc.id == trab.escuela.id%}
                 {{trab.encargado.dni}} - {{trab.encargado.apellido}} - {{trab.encargado.nombre}} <br>
             {%endif%}
-        {% endfor %}        
+            {% for est in estudiante %}
+                {%if trab.id == est.trabajo.id%}
+                    {{est.dni}} - {{est.apellido}} - {{est.nombre}} <br>
+                {%endif%}
+            {% endfor %}    
+        {% endfor %}
+        
         --------------------------------------------------------------- <br>
     {% endfor %}
