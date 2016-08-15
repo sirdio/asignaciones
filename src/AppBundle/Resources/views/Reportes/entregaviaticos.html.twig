@@ -5,7 +5,7 @@
 
     {% for esc in escuela %}
         {{esc.nombesc}}<br>
-        ---------------------------------------------------------------
+        --------------------------------------------------------------- <br>
         {% for direc in directivo %}
             {%if esc.id == direc.idesc%}
                 {{direc.dni}} - {{direc.apellido}} - {{direc.nombre}} <br>
@@ -16,4 +16,5 @@
                 {{trab.encargado.dni}} - {{trab.encargado.apellido}} - {{trab.encargado.nombre}} <br>
             {%endif%}
         {% endfor %}        
+        --------------------------------------------------------------- <br>
     {% endfor %}
