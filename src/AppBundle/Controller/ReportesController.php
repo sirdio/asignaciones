@@ -194,7 +194,10 @@ class ReportesController extends Controller
                 $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
                 //$i = 1;
                 //foreach($escuela as $esc){
-                    $directivo = $em->getRepository('AppBundle:Directivo')->findByIdesc($escuela->getId());
+                    $directivo = $em->getRepository('AppBundle:Directivo')->findAll();
+                    $encargado = $em->getRepository('AppBundle:Encargado')->findAll();
+                    $estudiante = $em->getRepository('AppBundle:Estudiante')->findAll();
+                    $docente = $em->getRepository('AppBundle:Docente')->findAll();
                     //$listaviaticos[$i] = array( 1 =>$esc->getNombesc(), 2 => $directivo->getDni() );
                     //$esc->getCue()." - ".$esc->getNombesc()."<br>";
                     //$directivo->getDni()." - ".$directivo->getApellido()." - ".$directivo->getNombre()."<br>";
