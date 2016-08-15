@@ -200,9 +200,9 @@ class ReportesController extends Controller
                     //$esc->getCue()." - ".$esc->getNombesc()."<br>";
                     //$directivo->getDni()." - ".$directivo->getApellido()." - ".$directivo->getNombre()."<br>";
                     $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('escuela'=>$esc));
-                    foreach($trabajo as $trab){
+                    //foreach($trabajo as $trab){
                         
-                    }
+                    //}
                 }
                 return $this->render('AppBundle:Reportes:entregaviaticos.html.twig');
                 die();
