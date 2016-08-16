@@ -87,7 +87,7 @@ class ViaticoController extends Controller
                 $viatico1->setDni($dni);
                 $decripcion = $tipoviatico->getDesc();
                 $viatico1->setDesc($decripcion);
-                $viatico1->setFecha($fechaactual);
+                $viatico1->setFecha('16-08-2016');
                 $em->persist($viatico1);
                 $em->flush();
                 $msj = "Se registro con exito el viático.";
