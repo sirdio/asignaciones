@@ -10,12 +10,12 @@ use Symfony\Component\Validator\Constraint\NotNull;
 /**
 *
 * @ORM\Entity
-* @ORM\Table(name="Tipoviatico")
-* @ORM\Entity(repositoryClass="AppBundle\Entity\TipoviaticoRepository") 
+* @ORM\Table(name="Viatico")
+* @ORM\Entity(repositoryClass="AppBundle\Entity\ViaticoRepository") 
 * 
 */
 
-class Tipoviatico
+class Viatico
 {
     /**
      * @var integer
