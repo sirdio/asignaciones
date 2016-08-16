@@ -60,6 +60,12 @@
                 <td>{{trab.encargado.dni}}</td>
                 <td>{{trab.encargado.apellido}}</td>
                 <td>{{trab.encargado.nombre}}</td>
+                {% for viat in viatico %}
+                    {%if viat.dniv == trab.encargado.dni %}
+                        <td>ENTREGADO</td>
+                        <td>{{viat.fechav}}</td>
+                    {%endif%}
+                {% endfor %}                 
             </tr>
             {%endif%}
             {% for est in estudiante %}
@@ -69,6 +75,12 @@
                     <td>{{est.dni}}</td> 
                     <td>{{est.apellido}}</td> 
                     <td>{{est.nombre}}</td>
+                {% for viat in viatico %}
+                    {%if viat.dniv == est.dni %}
+                        <td>ENTREGADO</td>
+                        <td>{{viat.fechav}}</td>
+                    {%endif%}
+                {% endfor %}                    
                 </tr>
                 {%endif%}
             {% endfor %}    
@@ -81,6 +93,12 @@
                     <td>{{doc.dni}}</td>
                     <td>{{doc.apellido}}</td>
                     <td>{{doc.nombre}}</td>
+                {% for viat in viatico %}
+                    {%if viat.dniv == doc.dni %}
+                        <td>ENTREGADO</td>
+                        <td>{{viat.fechav}}</td>
+                    {%endif%}
+                {% endfor %}                    
                 </tr>
                 {%endif%}
             {% endfor %}    
