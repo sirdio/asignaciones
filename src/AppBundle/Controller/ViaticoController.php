@@ -59,6 +59,7 @@ class ViaticoController extends Controller
                     $em->persist($tipoviatico);
                     $em->flush();                
                 }else{
+                    $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->find($id);
                     $tipoviatico->setIsActive(1);
                     $em->persist($tipoviatico);
                     $em->flush();                
