@@ -21,7 +21,7 @@
 				</div>
 				<div class="panel-body">
 				    <h3>Lista de Presentaciones "Experiencia Pedagógica"</h3>
-                    <table class="table table-hover">
+                    <table class="table table-responsive">
                             <tr class="danger">
                                 <th>Establecimiento</th>
                                 <th>D.N.I.</th>
@@ -40,7 +40,7 @@
         {% for direc in directivo %}
             {%if esc.id == direc.idesc%}
             <tr class="danger"> 
-                <td>-</td>
+                <td> </td>
                 <td>{{direc.dni}}</td>
                 <td>{{direc.apellido}}</td>
                 <td>{{direc.nombre}}</td>
@@ -50,7 +50,7 @@
         {% for trab in trabajo %}
             {%if esc.id == trab.escuela.id%}
             <tr class="danger">
-                <td>-</td>
+                <td> </td>
                 <td>{{trab.encargado.dni}}</td>
                 <td>{{trab.encargado.apellido}}</td>
                 <td>{{trab.encargado.nombre}}</td>
@@ -71,7 +71,7 @@
             {% for doc in docente %}
                 {%if pres.id == doc.presentacion.id and esc.id == pres.escuela.id %}
                 <tr class="danger">
-                    <td>-</td>
+                    <td> </td>
                     <td>{{doc.dni}}</td>
                     <td>{{doc.apellido}}</td>
                     <td>{{doc.nombre}}</td>
