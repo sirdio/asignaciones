@@ -16,6 +16,8 @@ use AppBundle\Entity\Trabajo;
 use AppBundle\Entity\Presentacion;
 use AppBundle\Entity\Users;
 use AppBundle\Entity\Historialvoto;
+use AppBundle\Entity\Tipoviatico;
+use AppBundle\Entity\Viatico;
 
 class ReportesController extends Controller
 {
@@ -192,27 +194,20 @@ class ReportesController extends Controller
         if($session->has("id")){
                 $em = $this->getDoctrine()->getManager();
                 $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
-                //$i = 1;
-                //foreach($escuela as $esc){
-                    $directivo = $em->getRepository('AppBundle:Directivo')->findAll();
-                    $encargado = $em->getRepository('AppBundle:Encargado')->findAll();
-                    $estudiante = $em->getRepository('AppBundle:Estudiante')->findAll();
-                    $docente = $em->getRepository('AppBundle:Docente')->findAll();
-                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
-                    $presentacion = $em->getRepository('AppBundle:Presentacion')->findAll();
-                    //$listaviaticos[$i] = array( 1 =>$esc->getNombesc(), 2 => $directivo->getDni() );
-                    //$esc->getCue()." - ".$esc->getNombesc()."<br>";
-                    //$directivo->getDni()." - ".$directivo->getApellido()." - ".$directivo->getNombre()."<br>";
-                    //$trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('escuela'=>$esc));
-                    //foreach($trabajo as $trab){
-                        
-                    //}
-                    //$i++;
-                //}
+                $directivo = $em->getRepository('AppBundle:Directivo')->findAll();
+                $encargado = $em->getRepository('AppBundle:Encargado')->findAll();
+                $estudiante = $em->getRepository('AppBundle:Estudiante')->findAll();
+                $docente = $em->getRepository('AppBundle:Docente')->findAll();
+                $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                $presentacion = $em->getRepository('AppBundle:Presentacion')->findAll();
+                date_default_timezone_set("America/Argentina/Buenos_Aires");
+                $fechaactual = date("d-m-Y");        
+                $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->findOneBy(Array('isActive' => 1));
+                $viatico = $em->getRepository('AppBundle:Viatico')->findBy(Array('fechav' => $fechaactual, 'descv' => $tipoviatico->desc()));
                 return $this->render('AppBundle:Reportes:entregaviaticos.html.twig', array(
                     'escuela' =>$escuela, 'directivo'=>$directivo, 'encargado'=>$encargado,
                     'estudiante'=>$estudiante, 'trabajo'=>$trabajo,
-                    'presentacion'=>$presentacion, 'docente'=>$docente));
+                    'presentacion'=>$presentacion, 'docente'=>$docente, 'viatico'=>$viatico));
                 //print_r($listaviaticos);
                 //die();
         }else{
