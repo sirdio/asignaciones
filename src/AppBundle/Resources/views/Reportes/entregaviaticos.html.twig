@@ -45,7 +45,7 @@
                 <td>{{direc.apellido}}</td>
                 <td>{{direc.nombre}}</td>
                 {% for viat in viatico %}
-                    {%if direc.dni == viat.dniv%}
+                    {%if viat.dniv == direc.dni %}
                         <td>ENTREGADO</td>
                         <td>{{viat.fechav}}</td>
                     {%endif%}
