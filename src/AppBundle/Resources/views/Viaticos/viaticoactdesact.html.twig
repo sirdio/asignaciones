@@ -32,6 +32,8 @@
         <td>{{tvdes.desc}}</td>
         {% if tvdes.isactive == 0 %}
             <td><a href="{{path('ViaticoActivarDesactivar',{ 'id': tvdes.id})}}" class="btn btn-primary btn-lg enabled" role="button">Activar</a></td>
+        {% else %}
+            <td>Elemento Activo</td>
         {% endif %}
       </tr>
       {% endfor %}
