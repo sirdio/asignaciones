@@ -203,7 +203,7 @@ class ReportesController extends Controller
                 date_default_timezone_set("America/Argentina/Buenos_Aires");
                 $fechaactual = date("d-m-Y");        
                 $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->findOneBy(Array('isActive' => 1));
-                $viatico = $em->getRepository('AppBundle:Viatico')->findBy(Array('fechav' => $fechaactual, 'descv' => $tipoviatico->desc()));
+                $viatico = $em->getRepository('AppBundle:Viatico')->findBy(Array('fechav' => $fechaactual, 'descv' => $tipoviatico->getDesc()));
                 return $this->render('AppBundle:Reportes:entregaviaticos.html.twig', array(
                     'escuela' =>$escuela, 'directivo'=>$directivo, 'encargado'=>$encargado,
                     'estudiante'=>$estudiante, 'trabajo'=>$trabajo,
