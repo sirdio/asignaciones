@@ -48,9 +48,9 @@
                     {%if direc.dni == viat.dniv%}
                         <td>ENTREGADO</td>
                         <td>{{viat.fechav}}</td>
-                    {%else%}
-                        <td> </td>
-                        <td> </td>
+                    {% else %}
+                        <td> {{viat.dniv}}</td>
+                        <td> {{viat.fechav}}</td>
                     {%endif%}
                 {% endfor %}        
             </tr>    
