@@ -204,7 +204,7 @@ class ReportesController extends Controller
                 $fechaactual = date("d-m-Y");        
                 $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->findOneBy(Array('isActive' => 1));
                 $viatico = $em->getRepository('AppBundle:Viatico')->findBy(Array( 'descv' => $tipoviatico->getDesc()));
-                count($viatico);
+                echo count($viatico);
                 die();
                 return $this->render('AppBundle:Reportes:entregaviaticos.html.twig', array(
                     'escuela' =>$escuela, 'directivo'=>$directivo, 'encargado'=>$encargado,
