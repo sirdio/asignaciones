@@ -49,7 +49,7 @@ class ViaticoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->find($id);
             if($tipoviatico->getIsActive() == 0){
-                $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->findOneBy(Array('isactive' => 1));
+                $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->findOneBy(Array('isActive' => 1));
                 $tipoviatico->setIsActive(0);
                 $em->persist($tipoviatico);
                 $em->flush();
