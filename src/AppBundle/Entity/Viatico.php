@@ -26,17 +26,17 @@ class Viatico
      */
     private $id;
      /**
-    * @ORM\Column(name="dni", type="string", length=10)
+    * @ORM\Column(name="dniv", type="string", length=10)
     */    
-    private $dni;    
+    private $dniv;    
     /**
-    * @ORM\Column(name="desc", type="string", length=20)
+    * @ORM\Column(name="descv", type="string", length=20)
     */    
-    private $desc;
+    private $descv;
     /**
-    * @ORM\Column(name="fecha", type="string", length=10)
+    * @ORM\Column(name="fechav", type="string", length=10)
     */    
-    private $fecha;
+    private $fechav;
 
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
@@ -46,40 +46,40 @@ class Viatico
         return $this->id;
     }
 
-    public function setDni($dni)
+    public function setDniv($dniv)
     {
-        $this->dni = $dni;
+        $this->dniv = $dniv;
     
         return $this;
     }
 
-    public function getDni()
+    public function getDniv()
     {
-        return $this->dni;
+        return $this->dniv;
     }
     
-    public function setDesc($desc)
+    public function setDescv($descv)
     {
-        $this->desc = $desc;
-    
-        return $this;
-    }
-
-    public function getDesc()
-    {
-        return $this->desc;
-    }
-    
-    public function setFecha($fecha)
-    {
-        $this->fecha = $fecha;
+        $this->descv = $descv;
     
         return $this;
     }
 
-    public function getFecha()
+    public function getDescv()
     {
-        return $this->fecha;
+        return $this->descv;
+    }
+    
+    public function setFechav($fechav)
+    {
+        $this->fechav = $fechav;
+    
+        return $this;
+    }
+
+    public function getFechav()
+    {
+        return $this->fechav;
     }
     
 
