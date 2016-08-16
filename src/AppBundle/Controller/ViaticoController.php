@@ -67,5 +67,37 @@ class ViaticoController extends Controller
             return $this->render('AppBundle:Default:principal.html.twig');
         }
     }
+    
+    /**
+     * @Route("/registrarentrega/{dni}", name="RegistrarEntrega")
+     */
+    public function RegistrarEntregaAction(Request $request, $dni)
+    {
+        $em = $this->getDoctrine()->getManager();
+        date_default_timezone_set("America/Argentina/Buenos_Aires");
+        $fechaactual = date("d-m-Y");        
+        $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->findOneBy(Array('isActive' => 1));
+        if($tipoviatico){
+            $viatico = $em->getRepository('AppBundle:viatico')->findOneBy(Array('fecha'=> $fechaactual, 'dni' => $dni, 'desc' => $tipoviatico->getDesc() ));
+            if($viatico){
+                $msj = "Ya fue entregado el/la ".$tipoviatico->getDesc().".";
+                return $this->render('AppBundle:Viaticos:viaticomensaje.html.twig', array('msj' =>$msj ));
+            }else{
+                $viatico = new Viatico();
+                $viatico->setDni($dni);
+                $viatico->setDesc($tipoviatico->getDesc());
+                $viatico->setFecha($fechaactual);
+                $em->persist($viatico);
+                $em->flush();
+                $msj = "Se registro con exito el viático.";
+                return $this->render('AppBundle:Viaticos:viaticomensaje.html.twig', array('msj' =>$msj ));            
+            }
+        }else{
+            $msj = "Debe Informar al administrador que Active el tipo de viático.";
+            return $this->render('AppBundle:Viaticos:viaticomensaje.html.twig', array('msj' =>$msj ));                            
+        }
+        
+
+    }    
 
 }
