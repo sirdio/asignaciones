@@ -48,16 +48,24 @@ class ViaticoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->find($id);
             if($tipoviatico->getIsActive() == 0){
+
                 $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->findOneBy(Array('isActive' => 1));
-                $tipoviatico->setIsActive(0);
-                $em->persist($tipoviatico);
-                $em->flush();
-                $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->find($id);
-                $tipoviatico->setIsActive(1);
-                $em->persist($tipoviatico);
-                $em->flush();                
+                if($tipoviatico){
+                    $tipoviatico->setIsActive(0);
+                    $em->persist($tipoviatico);
+                    $em->flush();
+                    $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->find($id);
+                    $tipoviatico->setIsActive(1);
+                    $em->persist($tipoviatico);
+                    $em->flush();                
+                }else{
+                    $tipoviatico->setIsActive(1);
+                    $em->persist($tipoviatico);
+                    $em->flush();                
+                }
                 $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->findAll();
-                return $this->render('AppBundle:Viaticos:viaticoactdesact.html.twig', array("tipoviatico"=>$tipoviatico));
+                return $this->render('AppBundle:Viaticos:viaticoactdesact.html.twig', array("tipoviatico"=>$tipoviatico));                
+                
             }elseif($tipoviatico->getIsActive() == 1){
                 $tipoviatico->setIsActive(0);
                 $em->persist($tipoviatico);
