@@ -22,7 +22,6 @@ use AppBundle\Entity\Viatico;
 class ViaticoController extends Controller
 {
 
-    
     /**
      * @Route("/mostrarTipodeviatico", name="ActDesactViatico")
      */
@@ -59,9 +58,13 @@ class ViaticoController extends Controller
                 $em->flush();                
                 $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->findAll();
                 return $this->render('AppBundle:Viaticos:viaticoactdesact.html.twig', array("tipoviatico"=>$tipoviatico));
-            }
-            $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->findAll();
+            }elseif($tipoviatico->getIsActive() == 1){
+                $tipoviatico->setIsActive(0);
+                $em->persist($tipoviatico);
+                $em->flush();
+                $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->findAll();
                 return $this->render('AppBundle:Viaticos:viaticoactdesact.html.twig', array("tipoviatico"=>$tipoviatico));
+            }
         }else
         {
             return $this->render('AppBundle:Default:principal.html.twig');
