@@ -78,7 +78,7 @@ class ViaticoController extends Controller
         $fechaactual = date("d-m-Y");        
         $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->findOneBy(Array('isActive' => 1));
         if($tipoviatico){
-            $viatico = $em->getRepository('AppBundle:viatico')->findOneBy(Array('fecha'=> $fechaactual, 'dni' => $dni, 'desc' => $tipoviatico->getDesc() ));
+            $viatico = $em->getRepository('AppBundle:Viatico')->findOneBy(Array('fecha'=> $fechaactual, 'dni' => $dni, 'desc' => $tipoviatico->getDesc() ));
             if($viatico){
                 $msj = "Ya fue entregado el/la ".$tipoviatico->getDesc().".";
                 return $this->render('AppBundle:Viaticos:viaticomensaje.html.twig', array('msj' =>$msj ));
