@@ -19,7 +19,7 @@ use AppBundle\Entity\Historialvoto;
 use AppBundle\Entity\Tipoviatico;
 use AppBundle\Entity\Viatico;
 
-class ReportesController extends Controller
+class ViaticoController extends Controller
 {
 
     
