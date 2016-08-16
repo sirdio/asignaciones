@@ -20,14 +20,18 @@
 
     <div class="table-responsive">
       <table class="table table-striped">
-      <tr>
+      <tr class="info">
         <th>Id</th>
         <th>Descripción</th>
         <th>Acción</th>
         
       </tr>
       {% for tvdes in tipoviatico %}
-      <tr>
+    {% if tvdes.isactive == 0 %}
+      <tr class="info">
+    {% else %}  
+      <tr class="success">  
+    {% endif %}
         <td>{{tvdes.id}}</td>
         <td>{{tvdes.desc}}</td>
         {% if tvdes.isactive == 0 %}
