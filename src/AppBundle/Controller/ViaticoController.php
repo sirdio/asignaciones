@@ -83,11 +83,12 @@ class ViaticoController extends Controller
                 $msj = "Ya fue entregado el/la ".$tipoviatico->getDesc().".";
                 return $this->render('AppBundle:Viaticos:viaticomensaje.html.twig', array('msj' =>$msj ));
             }else{
-                $viatico = new Viatico();
-                $viatico->setDni($dni);
-                $viatico->setDesc($tipoviatico->getDesc());
-                $viatico->setFecha($fechaactual);
-                $em->persist($viatico);
+                $viatico1 = new Viatico();
+                $viatico1->setDni($dni);
+                $decripcion = $tipoviatico->getDesc();
+                $viatico1->setDesc($decripcion);
+                $viatico1->setFecha($fechaactual);
+                $em->persist($viatico1);
                 $em->flush();
                 $msj = "Se registro con exito el viático.";
                 return $this->render('AppBundle:Viaticos:viaticomensaje.html.twig', array('msj' =>$msj ));            
