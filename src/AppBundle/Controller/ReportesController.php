@@ -203,13 +203,17 @@ class ReportesController extends Controller
                 date_default_timezone_set("America/Argentina/Buenos_Aires");
                 $fechaactual = date("d-m-Y");        
                 $tipoviatico = $em->getRepository('AppBundle:Tipoviatico')->findOneBy(Array('isActive' => 1));
+                if($tipoviatico){
                 $viatico = $em->getRepository('AppBundle:Viatico')->findBy(Array( 'descv' => $tipoviatico->getDesc(), 'fechav' => $fechaactual ));
                 return $this->render('AppBundle:Reportes:entregaviaticos.html.twig', array(
                     'escuela' =>$escuela, 'directivo'=>$directivo, 'encargado'=>$encargado,
                     'estudiante'=>$estudiante, 'trabajo'=>$trabajo,
                     'presentacion'=>$presentacion, 'docente'=>$docente, 'viatico' => $viatico));
-                //print_r($listaviaticos);
-                //die();
+                }else{
+                    $msj = "Debe solicitar al adminstrador que Active la entrega.";              
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                     
+                }
+                
         }else{
             return $this->render('AppBundle:Default:principal.html.twig');
         }
