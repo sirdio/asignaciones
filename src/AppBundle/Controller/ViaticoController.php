@@ -102,7 +102,7 @@ class ViaticoController extends Controller
                 $viatico1->setFechav($fechaactual);
                 $em->persist($viatico1);
                 $em->flush();
-                $msj = "Se registro con exito el viático.";
+                $msj = "Se registro con exito la entrega.";
                 return $this->render('AppBundle:Viaticos:viaticomensaje.html.twig', array('msj' =>$msj ));            
             }
         }else{

@@ -1,0 +1,107 @@
+{% extends '::base.html.twig' %}
+{% block title %}TECNICAMENTE 2016!!!{% endblock %}
+{% block body %}
+
+<nav class="navbar navbar-default">
+  <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
+</nav>
+
+<section class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>TécnicaMente 2016</h3>
+				</div>
+				<div class="panel-body">
+				    <h3>Lista de Presentaciones "Experiencia Pedagógica"</h3>
+                    <table class="table table-hover">
+                            <tr class="danger">
+                                <th>Establecimiento</th>
+                                <th>D.N.I.</th>
+                                <th>Apellido</th>
+                                <th>Nombre</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                            </tr>
+
+
+
+    {% for esc in escuela %}
+    <tr class="info">
+        <td>{{esc.nombesc}}</td>
+    </tr>  
+        {% for direc in directivo %}
+            {%if esc.id == direc.idesc%}
+            <tr class="danger"> 
+                <td> </td>
+                <td>{{direc.dni}}</td>
+                <td>{{direc.apellido}}</td>
+                <td>{{direc.nombre}}</td>
+                {% for viat in viatico %}
+                    {%if viat.dniv == direc.dni %}
+                        <td>ENTREGADO</td>
+                        <td>{{viat.fechav}}</td>
+                    {%endif%}
+                {% endfor %}        
+            </tr>    
+            {%endif%}
+        {% endfor %}
+        {% for trab in trabajo %}
+            {%if esc.id == trab.escuela.id%}
+            <tr class="danger">
+                <td> </td>
+                <td>{{trab.encargado.dni}}</td>
+                <td>{{trab.encargado.apellido}}</td>
+                <td>{{trab.encargado.nombre}}</td>
+                {% for viat in viatico %}
+                    {%if viat.dniv == trab.encargado.dni %}
+                        <td>ENTREGADO</td>
+                        <td>{{viat.fechav}}</td>
+                    {%endif%}
+                {% endfor %}                 
+            </tr>
+            {%endif%}
+            {% for est in estudiante %}
+                {%if trab.id == est.trabajo.id and esc.id == trab.escuela.id %}
+                <tr class="danger">
+                    <td> </td>
+                    <td>{{est.dni}}</td> 
+                    <td>{{est.apellido}}</td> 
+                    <td>{{est.nombre}}</td>
+                {% for viat in viatico %}
+                    {%if viat.dniv == est.dni %}
+                        <td>ENTREGADO</td>
+                        <td>{{viat.fechav}}</td>
+                    {%endif%}
+                {% endfor %}                    
+                </tr>
+                {%endif%}
+            {% endfor %}    
+        {% endfor %}
+        {% for pres in presentacion %}
+            {% for doc in docente %}
+                {%if pres.id == doc.presentacion.id and esc.id == pres.escuela.id %}
+                <tr class="danger">
+                    <td> </td>
+                    <td>{{doc.dni}}</td>
+                    <td>{{doc.apellido}}</td>
+                    <td>{{doc.nombre}}</td>
+                {% for viat in viatico %}
+                    {%if viat.dniv == doc.dni %}
+                        <td>ENTREGADO</td>
+                        <td>{{viat.fechav}}</td>
+                    {%endif%}
+                {% endfor %}                    
+                </tr>
+                {%endif%}
+            {% endfor %}    
+        {% endfor %}        
+    {% endfor %}
+                   </table>				
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}
