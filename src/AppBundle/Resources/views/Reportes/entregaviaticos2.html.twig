@@ -33,7 +33,7 @@
     </tr>  
         {% for direc in directivo %}
             {%if esc.id == direc.idesc%}
-            <tr class="danger"> 
+            <tr class="success"> 
                 <td> </td>
                 <td>{{direc.dni}}</td>
                 <td>{{direc.apellido}}</td>
@@ -49,7 +49,7 @@
         {% endfor %}
         {% for trab in trabajo %}
             {%if esc.id == trab.escuela.id%}
-            <tr class="danger">
+            <tr class="success">
                 <td> </td>
                 <td>{{trab.encargado.dni}}</td>
                 <td>{{trab.encargado.apellido}}</td>
@@ -64,7 +64,7 @@
             {%endif%}
             {% for est in estudiante %}
                 {%if trab.id == est.trabajo.id and esc.id == trab.escuela.id %}
-                <tr class="danger">
+                <tr class="success">
                     <td> </td>
                     <td>{{est.dni}}</td> 
                     <td>{{est.apellido}}</td> 
@@ -82,7 +82,7 @@
         {% for pres in presentacion %}
             {% for doc in docente %}
                 {%if pres.id == doc.presentacion.id and esc.id == pres.escuela.id %}
-                <tr class="danger">
+                <tr class="success">
                     <td> </td>
                     <td>{{doc.dni}}</td>
                     <td>{{doc.apellido}}</td>
