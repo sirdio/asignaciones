@@ -53,11 +53,13 @@ class ReportesController extends Controller
             if ($request->isMethod('POST')) {
                 $em = $this->getDoctrine()->getManager();
                 $escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);
-                $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array("escuela"=>$escuela));
-                $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy(Array("idesc"=>$escuela->getId()));
-                $estudiante = $em->getRepository('AppBundle:Estudiante')->findAll();
-                return $this->render('AppBundle:Reportes:resultadosinscripcion.html.twig', 
-                array("escuela"=>$escuela, "trabajo"=>$trabajo, "directivo"=>$directivo, "estudiante"=>$estudiante));
+                if($escuela){
+                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array("escuela"=>$escuela));
+                    $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy(Array("idesc"=>$escuela->getId()));
+                    $estudiante = $em->getRepository('AppBundle:Estudiante')->findAll();
+                    return $this->render('AppBundle:Reportes:resultadosinscripcion.html.twig', 
+                    array("escuela"=>$escuela, "trabajo"=>$trabajo, "directivo"=>$directivo, "estudiante"=>$estudiante));
+                }
             }
             $em=$this->getDoctrine()
                         ->getManager()
