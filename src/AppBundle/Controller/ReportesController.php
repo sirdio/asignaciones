@@ -33,7 +33,7 @@ class ReportesController extends Controller
             
             if ($request->isMethod('POST')) {
                 $em = $this->getDoctrine()->getManager();
-                $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array("niveltrab"=>$_POST['nivel']),Array("cantvoto"=>'DESC'));
+                $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array("niveltrab"=>$_POST['nivel'], "isActive"=> 1),Array("cantvoto"=>'DESC'));
                 return $this->render('AppBundle:Reportes:resultadosvotos.html.twig', array("trabajo"=>$trabajo));
             }
             return $this->render('AppBundle:Reportes:seleccionarnivel.html.twig');
