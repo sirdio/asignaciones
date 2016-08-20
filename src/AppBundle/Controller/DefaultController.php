@@ -848,8 +848,9 @@ class DefaultController extends Controller
         $alumnos = $em->getRepository('PedidoBundle:Estudiante')->findOneByDni($dnialu);
         $alumnos->setIsActive(1);
         $em->persist($alumnos);
-        $em->flush();        
-        return ;
+        $em->flush();
+        $dn = $alumnos->getDni();
+        return $dn;
     }
     
     public function getDesactivarAlumno($dnialu)
@@ -859,7 +860,8 @@ class DefaultController extends Controller
         $alumnos->setIsActive(0);
         $em->persist($alumnos);
         $em->flush();        
-        return ;
+        $dn = $alumnos->getDni();
+        return $dn;
     }
     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////    
