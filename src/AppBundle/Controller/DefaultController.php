@@ -845,7 +845,7 @@ class DefaultController extends Controller
     public function getActivarAlumno($dnialu)
     {
         $em = $this->getDoctrine()->getManager();
-        $alumnos = $em->getRepository('PedidoBundle:Estudiante')->findOneByDni($dnialu);
+        $alumnos = $em->getRepository('AppBundle:Estudiante')->findOneByDni($dnialu);
         $alumnos->setIsActive(1);
         $em->persist($alumnos);
         $em->flush();
@@ -856,7 +856,7 @@ class DefaultController extends Controller
     public function getDesactivarAlumno($dnialu)
     {
         $em = $this->getDoctrine()->getManager();
-        $alumnos = $em->getRepository('PedidoBundle:Estudiante')->findOneByDni($dnialu);
+        $alumnos = $em->getRepository('AppBundle:Estudiante')->findOneByDni($dnialu);
         $alumnos->setIsActive(0);
         $em->persist($alumnos);
         $em->flush();        
