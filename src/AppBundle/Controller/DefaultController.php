@@ -796,13 +796,16 @@ class DefaultController extends Controller
             /////////////////////////////////////////////////////////////////////
             $em = $this->getDoctrine()->getManager();
             $trabajo = $em->getRepository('AppBundle:Trabajo')->find($id);
+            $estudiante = $em->getRepository('AppBundle:Estudiante')->findBy(Array('trabajo' => $trabajo));
+            echo count($estudiante);
+            die();
             if ($trabajo->getIsActive() == 1){
                 $trabajo->setIsActive(0);
                 $em->persist($trabajo);
                 $em->flush();
                 $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 1));
                 if (!$trabajo){
-                    $msj = "No existen trabajos desactivados.";              
+                    $msj = "No existen trabajos desactivos.";              
                     return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
                 }                 
                 $this->get('session')->getFlashBag()->add('mensaje','El trabajo se Desactivo con exito.');
