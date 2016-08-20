@@ -198,9 +198,9 @@ class ReportesController extends Controller
                 $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
                 $directivo = $em->getRepository('AppBundle:Directivo')->findAll();
                 $encargado = $em->getRepository('AppBundle:Encargado')->findAll();
-                $estudiante = $em->getRepository('AppBundle:Estudiante')->findAll();
+                $estudiante = $em->getRepository('AppBundle:Estudiante')->findBy(Array('isActive' => 1));
                 $docente = $em->getRepository('AppBundle:Docente')->findAll();
-                $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 1));
                 $presentacion = $em->getRepository('AppBundle:Presentacion')->findAll();
                 date_default_timezone_set("America/Argentina/Buenos_Aires");
                 $fechaactual = date("d-m-Y");        
