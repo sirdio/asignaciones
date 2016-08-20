@@ -803,8 +803,10 @@ class DefaultController extends Controller
                 $em->flush();
                 
                 foreach($estudiante as $alumno){
-                    echo $alumno->getDni()."<br>";
+                    $docu =$alumno->getDni();
+                    $estadopago = $this->getDesactivarAlumno($docu);
                 }
+                
                 $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 1));
                 if (!$trabajo){
                     $msj = "No existen trabajos desactivos.";              
@@ -817,6 +819,11 @@ class DefaultController extends Controller
                 $trabajo->setIsActive(1);
                 $em->persist($trabajo);
                 $em->flush();
+                
+                foreach($estudiante as $alumno){
+                    $docu =$alumno->getDni();
+                    $estadopago = $this->getActivarAlumno($docu);
+                }                
                 $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 0));
                 if (!$trabajo){
                     $msj = "No existen trabajos desactivados.";              
@@ -834,6 +841,27 @@ class DefaultController extends Controller
 
     }     
 
+
+    public function getActivarAlumno($dnialu)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $alumnos = $em->getRepository('PedidoBundle:Estudiante')->findOneByDni($dnialu);
+        $alumnos->setIsActive(1);
+        $em->persist($alumnos);
+        $em->flush();        
+        return ;
+    }
+    
+    public function getDesactivarAlumno($dnialu)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $alumnos = $em->getRepository('PedidoBundle:Estudiante')->findOneByDni($dnialu);
+        $alumnos->setIsActive(0);
+        $em->persist($alumnos);
+        $em->flush();        
+        return ;
+    }
+    
 ////////////////////////////////////////////////////////////////////////////////////////////////////////    
     /**
      * @Route("/cargadatos/nuevapresentacion", name="NuevaPresentacion")
