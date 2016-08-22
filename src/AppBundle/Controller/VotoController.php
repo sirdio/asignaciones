@@ -663,7 +663,7 @@ class VotoController extends Controller
                 $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneBy(Array("dni"=>$request->get('dni'))); 
                 $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneBy(Array("dni"=>$request->get('dni'))); 
                 
-                if($directivo and $directivo->getIsActive == 1){
+                if($directivo and $directivo->getIsActive() == 1){
                     
                     $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
                     if($escuela->getCue() == $request->get('password')){
@@ -797,7 +797,7 @@ class VotoController extends Controller
                     return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));
                     }
                     
-                }elseif($encargado and $encargado->getIsActive == 1){
+                }elseif($encargado and $encargado->getIsActive() == 1){
                     
                     $directivo = $em->getRepository('AppBundle:Directivo')->find($encargado->getIdconf());
                     $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
@@ -935,7 +935,7 @@ class VotoController extends Controller
                     return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));
                     }
                     
-                }elseif($estudiante and $estudiante->getIsActive == 1){
+                }elseif($estudiante and $estudiante->getIsActive() == 1){
                     
                    if($estudiante->getTrabajo()->getEscuela()->getCue() == $request->get('password')){
 
@@ -1069,7 +1069,7 @@ class VotoController extends Controller
                    }
                     
 
-                }elseif($copetyp and $copetyp->getIsActive == 1){
+                }elseif($copetyp and $copetyp->getIsActive() == 1){
                    if($copetyp->getNombre() == $request->get('password')){
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
