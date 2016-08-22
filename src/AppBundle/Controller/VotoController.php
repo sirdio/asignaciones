@@ -662,7 +662,8 @@ class VotoController extends Controller
                 $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array("dni"=>$request->get('dni'))); 
                 $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneBy(Array("dni"=>$request->get('dni'))); 
                 $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneBy(Array("dni"=>$request->get('dni'))); 
-                if($directivo){
+                
+                if($directivo and $directivo->getIsActive == 1){
                     
                     $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
                     if($escuela->getCue() == $request->get('password')){
@@ -796,7 +797,7 @@ class VotoController extends Controller
                     return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));
                     }
                     
-                }elseif($encargado){
+                }elseif($encargado and $encargado->getIsActive == 1){
                     
                     $directivo = $em->getRepository('AppBundle:Directivo')->find($encargado->getIdconf());
                     $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
@@ -934,7 +935,7 @@ class VotoController extends Controller
                     return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));
                     }
                     
-                }elseif($estudiante){
+                }elseif($estudiante and $estudiante->getIsActive == 1){
                     
                    if($estudiante->getTrabajo()->getEscuela()->getCue() == $request->get('password')){
 
@@ -1068,7 +1069,7 @@ class VotoController extends Controller
                    }
                     
 
-                }elseif($copetyp){
+                }elseif($copetyp and $copetyp->getIsActive == 1){
                    if($copetyp->getNombre() == $request->get('password')){
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
