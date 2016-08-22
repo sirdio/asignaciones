@@ -548,9 +548,11 @@ class VotoController extends Controller
                     }
             }
         }
-        
-        $msj = "El Trabajo se encuentra desactivado para votar.";
-        return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));        
+        ////////////////GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+        //$msj = "El Trabajo se encuentra desactivado para votar.";
+        //return $this->render('AppBundle:PesVotos:mensajevoto1.html.twig', array('msj'=>$msj));        
+        $msj = "El trabajo no fue acreditado.";
+        return $this->render('AppBundle:PesVotos:mensajeacreditacion1.html.twig', array('msj'=>$msj));         
         //////////////////////////////////////////////////////////////////////
         }else{
             return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
@@ -637,7 +639,8 @@ class VotoController extends Controller
                         return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj));                       
                    }
                 }else{
-                    $msj = "El D.N.I. del usuario que intenta acceder, no se encuentra autorizado para votar.";
+                    $msj = "El D.N.I. del usuario que intenta acceder,
+                    no se encuentra autorizado para votar o no fue acreditado.";
                     return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj)); 
                 }
                 //die();
@@ -1199,7 +1202,8 @@ class VotoController extends Controller
                     return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));        
                    }
                 }else{
-                    $this->get('session')->getFlashBag()->add('mensaje','El D.N.I. del usuario que intenta acceder, no se encuentra autorizado para votar.');
+                    $this->get('session')->getFlashBag()->add('mensaje','El D.N.I. del usuario que intenta acceder, 
+                    no se encuentra autorizado para votar o no fue acreditado.');
                     return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));        
                 }
 ///////////////////////////////////////////////////////////////////////////////
