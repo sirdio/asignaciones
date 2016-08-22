@@ -17,7 +17,13 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="{{path('Logout')}}">Salir <span class="sr-only">(current)</span></a></li>
         {#<li><a href="#">Link</a></li>#}
-
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Acreditación <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Iniciar Proceso</a></li>
+         </ul>
+        </li> 
+        
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Establecimiento <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -39,16 +45,13 @@
         </li>
         
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Trabajos TécnicaMente y Experiencia Pedagógica<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Trabajo <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{{path('NuevoTrabajo')}}">Agregar Trabajo</a></li>
             <li><a href="{{path('ListarTrabajo')}}">Modificar Trabajo</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{path('ActivarTrabajo')}}">Activar</a></li>
             <li><a href="{{path('DesactivarTrabajo')}}">Desactivar</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="{{path('NuevaPresentacion')}}">Agregar Presentación</a></li>
-            <li><a href="{{path('ListarPresentacion')}}">Modificar Presentación</a></li>            
          </ul>
         </li>        
         
@@ -83,13 +86,6 @@
             <li role="separator" class="divider"></li>
          </ul>
         </li> 
-        
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Acreditación <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Iniciar Proceso</a></li>
-         </ul>
-        </li>         
         
       </ul>
     </div><!-- /.navbar-collapse -->
