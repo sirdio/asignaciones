@@ -1211,8 +1211,8 @@ class VotoController extends Controller
         //$this->get('session')->getFlashBag()->add('mensaje','Ocurrió un problema intente de nuevo.');
         return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));   
         }////cierra el if que verifica si el trabajo esta habilitado o no
-        $this->get('session')->getFlashBag()->add('mensaje','El trabajo esta Desactivado para votar.');
-        return $this->render('AppBundle:PesVotos:Vertrabajo.html.twig', array('trab'=>$trabajo));
+        $msj = "El trabajo no fue acreditado.";
+        return $this->render('AppBundle:PesVotos:mensajeacreditacion.html.twig', array('msj'=>$msj));  
     }
     
     
