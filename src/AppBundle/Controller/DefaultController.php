@@ -1045,8 +1045,8 @@ class DefaultController extends Controller
         $session=$request->getSession();
         if($session->has("id")){
             if ($request->isMethod('POST')) {
-                foreach($_POST as $nombre){
-                    echo $nombre."<br>";
+                foreach($_POST['acreditacion'] as $nombre => $valor){
+                    echo $nombre." ".$valor."<br>";
                 }
 
             }
