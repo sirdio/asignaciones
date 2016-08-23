@@ -45,6 +45,21 @@
             <label for="checkboxes-{{trab.id}}"><input name="trabajo" id="checkboxes-{{trab.id}}" value="{{trab.id}}" type="checkbox">
               {{trab.id}} - {{trab.nombproyecto}} {{trab.niveltrab}}
             </label>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="checkboxes">Encargado</label>
+  <div class="col-md-8">
+  <div class="checkbox">
+    <label for="checkboxes-0">
+      <input name="directivo" id="checkboxes-0" value="{{trab.encargado.dni}}" type="checkbox">
+      {{trab.encargado.dni}} - {{trab.encargado.apellido}}, {{trab.encargado.nombre}}
+    </label>
+	</div>
+  </div>
+</div>            
+            
+            
+            
 	   </div>
 	{% endfor%}   
   </div>
