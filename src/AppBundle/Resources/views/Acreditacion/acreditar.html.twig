@@ -31,10 +31,9 @@
   <div class="checkbox">
     <label for="check-{{i}}">
       <input name="acreditacion" id="check-{{i}}" value="{{directivo.dni}}" type="checkbox">
-          {{directivo.dni}} - {{directivo.apellido}}, {{directivo.nombre}}
+          {{directivo.dni}} - {{directivo.apellido}}, {{directivo.nombre}}---{{i}}
     </label>
 	</div>
-	
 	
     	{% set j = 1%}
 	    {% for trab in trabajo %}
@@ -44,10 +43,25 @@
         <div class="checkbox">
             <label for="check-{{i}}">
                 <input name="acreditacion" id="check-{{i}}" value="{{trab.id}}" type="checkbox">
-                  {{trab.id}} - {{trab.nombproyecto}} {{trab.niveltrab}}
+                  {{trab.id}} - {{trab.nombproyecto}} {{trab.niveltrab}}---{{i}}
             </label>
 	     </div>
 	  </div>
+
+    {% set i = i + 1 %}
+     <div class="col-md-8">
+        <label class="col-md-4 control-label" for="checkboxes">Trabajo N° {{j}}</label>
+        <div class="checkbox">
+            <label for="check-{{i}}">
+                <input name="acreditacion" id="check-{{i}}" value="{{trab.encargado.dni}}" type="checkbox">
+                  {{trab.encargado.dni}} - {{trab.encargado.apellido}} {{trab.encargado.nombre}}---{{i}}
+            </label>
+	     </div>
+	  </div>	  
+	  
+	  
+	  
+	  
 	   {% set j = j + 1 %}
 	{% endfor%}
 	
