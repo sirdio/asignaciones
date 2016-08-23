@@ -45,39 +45,6 @@
             <label for="checkboxes-{{trab.id}}"><input name="trabajo" id="checkboxes-{{trab.id}}" value="{{trab.id}}" type="checkbox">
               {{trab.id}} - {{trab.nombproyecto}} {{trab.niveltrab}}
             </label>
-
-<div class="form-group">
-  <label class="col-md-4 control-label" for="checkboxes">Docente Responsable</label>
-  <div class="col-md-8">
-  <div class="checkbox">
-    <label for="checkboxes-{{trab.encargado.dni}}">
-      <input name="encargado" id="checkboxes-{{trab.encargado.dni}}" value="{{trab.encargado.dni}}" type="checkbox">
-      {{trab.encargado.dni}} - {{trab.encargado.apellido}}, {{trab.encargado.nombre}}
-    </label>
-	</div>
-  </div>
-</div>            
- <hr>     
-  {#  <div class="form-group">
-  <label class="col-md-4 control-label" for="checkboxes">Alumnos</label>
-  <div class="col-md-8">
-{% for est in estudiante %}
-  {% if est.trabajo.id == Trab.id%}    
-  <div class="checkbox">
-    <label for="checkboxes-{{est.dni}}">
-      <input name="estudiante" id="checkboxes-{{est.dni}}" value="{{est.dni}}" type="checkbox">
-      {{est.dni}} - {{est.apellido}}, {{est.nombre}}
-    </label>
-	</div>
-	{%endif%}
-  {% endfor %}
-  </div>
-</div>#}  
-      
-      
-            
-            
-            
 	   </div>
 	{% endfor%}   
   </div>
