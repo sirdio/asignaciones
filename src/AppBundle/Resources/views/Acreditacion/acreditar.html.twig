@@ -16,6 +16,7 @@
           <div class="col-md-4">
           </div>
           <div class="col-md-4">#}
+         {% set i = 1%}  {#% set i = i + 1 %#}
 <form action="#{#{ path('GuardarModificacion',{'dni': encargado.dni, 'tv': encargado.tipovot }) }#}" method="post" class="form-horizontal">
 <fieldset>
 
@@ -27,28 +28,34 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="checkboxes">Directivo</label>
   <div class="col-md-8">
+      
+      
   <div class="checkbox">
-    <label for="checkboxes-0">
-      <input name="directivo" id="checkboxes-0" value="{{directivo.dni}}" type="checkbox">
-      {{directivo.dni}} - {{directivo.apellido}}, {{directivo.nombre}}
+    <label for="check-{{i}}">
+      <input name="acreditacion" id="check-{{i}}" value="{{directivo.dni}}" type="checkbox">
+          {{directivo.dni}} - {{directivo.apellido}}, {{directivo.nombre}}
     </label>
 	</div>
+    	{% set j = 1%}
+	    {% for trab in trabajo %}
+     {% set i = i + 1 %}
+        <div class="checkbox">
+            <label class="col-md-4 control-label" for="checkboxes">Trabajo N° {{j}}</label>
+            <label for="check-{{i}}">
+                <input name="acreditacion" id="check-{{i}}" value="{{trab.id}}" type="checkbox">
+                  {{trab.id}} - {{trab.nombproyecto}} {{trab.niveltrab}}
+            </label>
+	   </div>
+	   {% set j = j + 1 %}
+	{% endfor%}
+	
+	
   </div>
 </div>
 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="checkboxes">Trabajo</label>
-  <div class="col-md-8">
-      
-    {% for trab in trabajo %}   
-        <div class="checkbox">
-            <label for="checkboxes-{{trab.id}}"><input name="trabajo" id="checkboxes-{{trab.id}}" value="{{trab.id}}" type="checkbox">
-              {{trab.id}} - {{trab.nombproyecto}} {{trab.niveltrab}}
-            </label>
-	   </div>
-	{% endfor%}   
-  </div>
-</div>
+
+  
+
 
 <!-- Button -->
 <div class="form-group">
