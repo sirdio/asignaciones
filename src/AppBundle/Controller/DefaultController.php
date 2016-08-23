@@ -1015,7 +1015,7 @@ class DefaultController extends Controller
                     $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array("escuela"=>$escuela));
                     $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy(Array("idesc"=>$escuela->getId()));
                     $estudiante = $em->getRepository('AppBundle:Estudiante')->findAll();
-                    return $this->render('AppBundle:Reportes:acreditacion.html.twig', 
+                    return $this->render('AppBundle:Acreditacion:acreditacion.html.twig', 
                     array("escuela"=>$escuela, "trabajo"=>$trabajo, "directivo"=>$directivo, "estudiante"=>$estudiante));
                 }
             }
@@ -1027,7 +1027,7 @@ class DefaultController extends Controller
                         ->orderBy("e.cue","asc")
                         ->getQuery();
             $escuela=$em->getArrayResult();
-            return $this->render('AppBundle:Reportes:seleccionarescuela1.html.twig', array("escuela"=>$escuela));
+            return $this->render('AppBundle:Acreditacion:seleccionarescuela1.html.twig', array("escuela"=>$escuela));
         }else
         {
             return $this->render('AppBundle:Default:principal.html.twig');
