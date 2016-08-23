@@ -1011,6 +1011,8 @@ class DefaultController extends Controller
             if ($request->isMethod('POST')) {
                 $em = $this->getDoctrine()->getManager();
                 $escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);
+                echo count($escuela);
+                die();
                 if($escuela){
                     $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array("escuela"=>$escuela));
                     $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy(Array("idesc"=>$escuela->getId()));
