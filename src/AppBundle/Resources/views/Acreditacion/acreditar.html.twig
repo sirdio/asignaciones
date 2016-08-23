@@ -59,8 +59,9 @@
 	     </div>
 	  </div>	  
 	  {% for est in estudiante %}
-     {% set i = i + 1 %}
+     
      {% if est.trabajo.id == trab.id%}
+     {% set i = i + 1 %}
      <div class="col-md-8">
         <label class="col-md-4 control-label" for="checkboxes">Alumnos</label>
         <div class="checkbox">
