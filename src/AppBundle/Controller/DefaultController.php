@@ -1015,7 +1015,7 @@ class DefaultController extends Controller
                 if($escuela){
                     $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array("escuela"=>$escuela));
                     $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy(Array("idesc"=>$escuela->getId()));
-                    echo count($directivo);
+                    echo count($directivo->getDni());
                     die();
                     $estudiante = $em->getRepository('AppBundle:Estudiante')->findAll();
                     return $this->render('AppBundle:Acreditacion:acreditacion.html.twig', 
