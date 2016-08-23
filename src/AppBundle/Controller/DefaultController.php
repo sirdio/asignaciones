@@ -1045,8 +1045,10 @@ class DefaultController extends Controller
         $session=$request->getSession();
         if($session->has("id")){
             if ($request->isMethod('POST')) {
-                echo $_POST['acreditacion'];
-                die();
+                foreach($_POST['acreditacion'] as $nombre ){
+                    echo $nombre;
+                }
+            die();
             }
         }else{
             return $this->render('AppBundle:Default:principal.html.twig');

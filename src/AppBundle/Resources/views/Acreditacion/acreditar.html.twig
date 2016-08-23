@@ -24,7 +24,7 @@
   <div class="col-md-8">
   <div class="checkbox">
     <label for="check-{{i}}">
-      <input name="acreditacion" id="check-{{i}}" value="{{directivo.dni}}" type="checkbox">
+      <input name="acreditacion[]" id="check-{{i}}" value="{{directivo.dni}}" type="checkbox">
           {{directivo.dni}} - {{directivo.apellido}}, {{directivo.nombre}}---{{i}}
     </label>
 	</div>
@@ -38,7 +38,7 @@
         
         <div class="checkbox">
             <label for="check-{{i}}">
-                <input name="acreditacion" id="check-{{i}}" value="{{trab.id}}" type="checkbox">
+                <input name="acreditacion[]" id="check-{{i}}" value="{{trab.id}}" type="checkbox">
                   {{trab.id}} - {{trab.nombproyecto}} {{trab.niveltrab}}---{{i}}
             </label>
 	     </div>
@@ -50,7 +50,7 @@
         
         <div class="checkbox">
             <label for="check-{{i}}">
-                <input name="acreditacion" id="check-{{i}}" value="{{trab.encargado.dni}}" type="checkbox">
+                <input name="acreditacion[]" id="check-{{i}}" value="{{trab.encargado.dni}}" type="checkbox">
                   {{trab.encargado.dni}} - {{trab.encargado.apellido}} {{trab.encargado.nombre}}---{{i}}
             </label>
 	     </div>
@@ -64,7 +64,7 @@
         
         <div class="checkbox">
             <label for="check-{{i}}">
-                <input name="acreditacion" id="check-{{i}}" value="{{est.dni}}" type="checkbox">
+                <input name="acreditacion[]" id="check-{{i}}" value="{{est.dni}}" type="checkbox">
                   {{est.dni}} - {{est.apellido}} {{est.nombre}}---{{i}}
             </label>
 	     </div>
