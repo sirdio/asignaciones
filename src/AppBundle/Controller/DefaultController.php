@@ -1021,14 +1021,14 @@ class DefaultController extends Controller
                 }
             }
             $em=$this->getDoctrine()
-                        ->getManager()
+                     ->getManager()
                         ->createQueryBuilder('AppBundle:Escuela')
                         ->select('e')
                         ->from('AppBundle:Escuela','e')
                         ->orderBy("e.cue","asc")
                         ->getQuery();
-            $escuela=$em->getArrayResult();
-            return $this->render('AppBundle:Acreditacion:seleccionarescuela1.html.twig', array("escuela"=>$escuela));
+         $escuela=$em->getArrayResult();
+         return $this->render('AppBundle:Acreditacion:seleccionarescuela1.html.twig', array("escuela"=>$escuela));
         }else
         {
             return $this->render('AppBundle:Default:principal.html.twig');
@@ -1036,5 +1036,24 @@ class DefaultController extends Controller
         
             
     }
+    
+    /**
+     * @Route("/cargadatos/guardarcambios", name="ConfirmarAcreditacion")
+     */
+    public function ConfirmarAcreditacionAction(Request $request)
+    {
+        $session=$request->getSession();
+        if($session->has("id")){
+            if ($request->isMethod('POST')) {
+                print_r($request);
+                die();
+            }
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+        
+            
+    }
+    
     
 }
