@@ -1000,4 +1000,40 @@ class DefaultController extends Controller
         }
         
     }
+    
+    /**
+     * @Route("/cargadatos/iniciandoprocesodeacreditacion", name="IniciarProcesoAcreditacion")
+     */
+    public function IniciarProcesoAcreditacionAction(Request $request)
+    {
+        $session=$request->getSession();
+        if($session->has("id")){
+            if ($request->isMethod('POST')) {
+                $em = $this->getDoctrine()->getManager();
+                $escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);
+                if($escuela){
+                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array("escuela"=>$escuela));
+                    $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy(Array("idesc"=>$escuela->getId()));
+                    $estudiante = $em->getRepository('AppBundle:Estudiante')->findAll();
+                    return $this->render('AppBundle:Reportes:acreditacion.html.twig', 
+                    array("escuela"=>$escuela, "trabajo"=>$trabajo, "directivo"=>$directivo, "estudiante"=>$estudiante));
+                }
+            }
+            $em=$this->getDoctrine()
+                        ->getManager()
+                        ->createQueryBuilder('AppBundle:Escuela')
+                        ->select('e')
+                        ->from('AppBundle:Escuela','e')
+                        ->orderBy("e.cue","asc")
+                        ->getQuery();
+            $escuela=$em->getArrayResult();
+            return $this->render('AppBundle:Reportes:seleccionarescuela1.html.twig', array("escuela"=>$escuela));
+        }else
+        {
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+        
+            
+    }
+    
 }

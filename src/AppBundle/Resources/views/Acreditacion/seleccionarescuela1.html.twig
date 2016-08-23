@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+{% block title %}TECNICAMENTE 2016!!!{% endblock %}
+{% block body %}
+
+<nav class="navbar navbar-default">
+  <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <form action="{{ path('SeleccionarEst') }}" method="post" class="form-inline" role="form">
+	    <div class="control-group">
+            <label for="establecimiento">Establecimiento:</label>
+            <select id="establecimiento" name="establecimiento">
+                <option value="0">Seleccionar Opción</option>
+                {% for esc in escuela %}
+                  <option value="{{esc.id}}">{{esc.cue}} - {{esc.nombesc}}</option>
+                {% endfor %}                
+            </select>
+	    </div>
+
+	        <button class="btn btn-primary">Mostrar Formulario</button>
+       </form>
+     </div> 
+  </div>
+</div> 
+
+
+
+{% endblock %}

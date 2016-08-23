@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+{% block title %}Bienvenido a TECNICAMENTE 2016!!!{% endblock %}
+{% block body %}
+
+<nav class="navbar navbar-default">
+    <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('IniciarProcesoAcreditacion')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+     <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+<form action="#{#{ path('GuardarModificacion',{'dni': encargado.dni, 'tv': encargado.tipovot }) }#}" method="post" class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Formulario de Acreditación</legend>
+
+
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="checkboxes">Directivo</label>
+  <div class="col-md-4">
+  <div class="checkbox">
+    <label for="checkboxes-0">
+      <input name="directivo" id="checkboxes-0" value="{{directivo.dni}}" type="checkbox">
+      {{directivo.dni}} - {{directivo.apellido}}, {{directivo.nombre}}
+    </label>
+	</div>
+  </div>
+</div>
+
+
+<!-- Button -->
+<div class="form-group">
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Acreditar</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+          </div> 
+          <div class="col-md-4">
+          </div>
+    </div>
+</div> 
+
+
+
+{% endblock %}
