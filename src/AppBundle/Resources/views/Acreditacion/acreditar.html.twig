@@ -28,27 +28,29 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="checkboxes">Directivo</label>
   <div class="col-md-8">
-      
   <div class="checkbox">
     <label for="check-{{i}}">
       <input name="acreditacion" id="check-{{i}}" value="{{directivo.dni}}" type="checkbox">
           {{directivo.dni}} - {{directivo.apellido}}, {{directivo.nombre}}
     </label>
 	</div>
-	<div class="col-md-8">
+	
+	
     	{% set j = 1%}
 	    {% for trab in trabajo %}
      {% set i = i + 1 %}
+     <div class="col-md-8">
+        <label class="col-md-4 control-label" for="checkboxes">Trabajo N° {{j}}</label>
         <div class="checkbox">
-            <label class="col-md-4 control-label" for="checkboxes">Trabajo N° {{j}}</label>
             <label for="check-{{i}}">
                 <input name="acreditacion" id="check-{{i}}" value="{{trab.id}}" type="checkbox">
                   {{trab.id}} - {{trab.nombproyecto}} {{trab.niveltrab}}
             </label>
-	   </div>
+	     </div>
+	  </div>
 	   {% set j = j + 1 %}
 	{% endfor%}
-	</div>
+	
 	
   </div>
 </div>
