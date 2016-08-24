@@ -196,8 +196,8 @@ class ReportesController extends Controller
         if($session->has("id")){
                 $em = $this->getDoctrine()->getManager();
                 $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
-                $directivo = $em->getRepository('AppBundle:Directivo')->findAll();
-                $encargado = $em->getRepository('AppBundle:Encargado')->findAll();
+                $directivo = $em->getRepository('AppBundle:Directivo')->findBy(Array('isActive' => 1));
+                $encargado = $em->getRepository('AppBundle:Encargado')->findBy(Array('isActive' => 1));
                 $estudiante = $em->getRepository('AppBundle:Estudiante')->findBy(Array('isActive' => 1));
                 $docente = $em->getRepository('AppBundle:Docente')->findAll();
                 $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 1));
