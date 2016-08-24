@@ -1045,11 +1045,11 @@ class DefaultController extends Controller
         $session=$request->getSession();
         if($session->has("id")){
             if ($request->isMethod('POST')) {
-                foreach($_POST['acreditacion'] as $nombre ){
-                    echo $nombre."<br>";
+                //foreach($_POST['acreditacion'] as $nombre ){
+                //    echo $nombre."<br>";
                     //$em = $this->getDoctrine()->getManager();
                     //$escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);                    
-                }
+                //}
                 echo "y esto <br>";
                 foreach($_POST['acreditartrab'] as $nombre ){
                     echo $nombre."<br>";
