@@ -1048,6 +1048,7 @@ class DefaultController extends Controller
                 foreach($_POST['acreditacion'] as $nombre ){
                     echo $nombre."<br>";
                 }
+                echo "y esto <br>";
                 foreach($_POST['acreditartrab'] as $nombre ){
                     echo $nombre."<br>";
                 }                
