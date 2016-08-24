@@ -1045,24 +1045,36 @@ class DefaultController extends Controller
         $session=$request->getSession();
         if($session->has("id")){
             if ($request->isMethod('POST')) {
+                $em = $this->getDoctrine()->getManager();
                 foreach($_POST['acreditacion'] as $nombre ){
-                    echo $nombre;
                     $arreglo = explode('-', $nombre);
                     $tipousuario = $arreglo[0];
                     $dni = $arreglo[1];
                     if ($tipousuario == 'd'){
-                        echo "directivo".$dni."<br>";                        
+                        $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy(Array('dni' => $dni));
+                        $directivo->setIsActive(1);
+                        $em->persist($directivo);
+                        $em->flush();                    
                     }elseif ($tipousuario == 'en'){
-                        echo "encargado".$dni."<br>";                    
+                        $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array('dni' => $dni));
+                        $encargado->setIsActive(1);
+                        $em->persist($encargado);
+                        $em->flush();                                            
                     }elseif ($tipousuario == 'es'){
-                        echo "estudiante".$dni."<br>";    
+                        $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneBy(Array('dni' => $dni));
+                        $estudiante->setIsActive(1);
+                        $em->persist($estudiante);
+                        $em->flush();                              
                     }    
-                    //$em = $this->getDoctrine()->getManager();
-                    //$escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);                    
+                    
+                    
                 }
                 echo "y esto <br>";
                 foreach($_POST['acreditartrab'] as $nombre ){
-                    echo $nombre."<br>";
+                    $trabajo = $em->getRepository('AppBundle:Trabajo')->find($nombre);
+                    $trabjo->setIsActive(1);
+                    $em->persist($trabajo);
+                    $em->flush();                   
                 }
             die();
             }
