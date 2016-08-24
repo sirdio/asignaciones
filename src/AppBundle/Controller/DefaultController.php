@@ -1048,8 +1048,8 @@ class DefaultController extends Controller
                 foreach($_POST['acreditacion'] as $nombre ){
                     echo $nombre;
                     $arreglo = explode('-', $nombre);
-                    $tipousuario = $nombre[1];
-                    $dni = $nombre[0];
+                    $tipousuario = $arreglo[0];
+                    $dni = $arreglo[1];
                     if ($tipousuario == 'd'){
                         echo "directivo".$dni."<br>";                        
                     }elseif ($tipousuario == 'en'){
