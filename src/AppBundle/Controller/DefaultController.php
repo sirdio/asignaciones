@@ -1066,9 +1066,8 @@ class DefaultController extends Controller
                         $em->persist($estudiante);
                         $em->flush();                              
                     }elseif ($tipousuario == 't'){
-                        
                         $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('id' => $dni));
-                        $trabjo->setIsActive(1);
+                        $trabajo->setIsActive(1);
                         $em->persist($trabajo);
                         $em->flush();                          
                     }
