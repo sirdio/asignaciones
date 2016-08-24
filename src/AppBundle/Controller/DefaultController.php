@@ -1045,17 +1045,24 @@ class DefaultController extends Controller
         $session=$request->getSession();
         if($session->has("id")){
             if ($request->isMethod('POST')) {
-                //foreach($_POST['acreditacion'] as $nombre ){
-                //    echo $nombre."<br>";
+                foreach($_POST['acreditacion'] as $nombre ){
+                    $arreglo = explode('-', $nombre);
+                    $tipousuario = $nombre[0];
+                    $dni = $nombre[1];
+                    if ($tipousuario == 'd'){
+                        echo "directivo".$dni."<br>";                        
+                    }elseif ($tipousuario == 'en'){
+                        echo "encargado".$dni."<br>";                    
+                    }elseif ($tipousuario == 'es'){
+                        echo "estudiante".$dni."<br>";    
+                    }    
                     //$em = $this->getDoctrine()->getManager();
                     //$escuela = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);                    
-                //}
+                }
                 echo "y esto <br>";
                 foreach($_POST['acreditartrab'] as $nombre ){
                     echo $nombre."<br>";
                 }
-                echo "el directivo <br>";
-                echo $_POST['directivo'];
             die();
             }
         }else{
