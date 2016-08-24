@@ -1069,9 +1069,8 @@ class DefaultController extends Controller
                     
                     
                 }
-                echo "y esto <br>";
                 foreach($_POST['acreditartrab'] as $nombre ){
-                    $trabajo = $em->getRepository('AppBundle:Trabajo')->find($nombre);
+                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('id' => $nombre));
                     $trabjo->setIsActive(1);
                     $em->persist($trabajo);
                     $em->flush();                   
