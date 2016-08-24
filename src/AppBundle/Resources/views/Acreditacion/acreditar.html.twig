@@ -19,7 +19,7 @@
 					<h3>TécnicaMente 2016</h3>
 				</div>
 				<div class="panel-body">
-				    <h3>Escuela</h3>
+				    <h3>Establecimineto</h3>
                     <table class="table table-hover">
                             <tr class="danger">
                                 <th>Cue</th>
@@ -32,7 +32,7 @@
                                 <th>Correo Electrónico</th>
                                 <th>Ámbito de Gestión</th>
                             </tr>
-                            <tr class="danger">
+                            <tr class="info">
                                 <th>{{escuela.cue}}</th>
                                 <th>{{escuela.nombesc}}</th>
                                 <th>{{escuela.jurisdiccion}}</th>
@@ -64,7 +64,7 @@
   <div class="checkbox">
     <label for="check-{{i}}">
       <input name="acreditacion[]" id="check-{{i}}" value="d-{{directivo.dni}}" type="checkbox"
-      {% if directivo.isActive == 1 %} checked="checked" {%endif%}>
+      {% if directivo.isActive == 1 %} checked="checked" readonly="readonly"{%endif%}>
           {{directivo.dni}} - {{directivo.apellido}}, {{directivo.nombre}}---{{i}}
     </label>
 	</div>
@@ -79,7 +79,7 @@
         <div class="checkbox">
             <label for="check-{{i}}">
                 <input name="acreditacion[]" id="check-{{i}}" value="t-{{trab.id}}" type="checkbox" 
-                {% if trab.isActive == 1 %} checked="checked" {%endif%}>
+                {% if trab.isActive == 1 %} checked="checked" readonly="readonly"{%endif%}>
                   {{trab.id}} - {{trab.nombproyecto}} {{trab.niveltrab}}---{{i}}
             </label>
 	     </div>
@@ -92,7 +92,7 @@
         <div class="checkbox">
             <label for="check-{{i}}">
                 <input name="acreditacion[]" id="check-{{i}}" value="en-{{trab.encargado.dni}}" type="checkbox"
-                {% if trab.encargado.isActive == 1 %} checked="checked" {%endif%}>
+                {% if trab.encargado.isActive == 1 %} checked="checked" readonly="readonly"{%endif%}>
                   {{trab.encargado.dni}} - {{trab.encargado.apellido}} {{trab.encargado.nombre}}---{{i}}
             </label>
 	     </div>
@@ -107,7 +107,7 @@
         <div class="checkbox">
             <label for="check-{{i}}">
                 <input name="acreditacion[]" id="check-{{i}}" value="es-{{est.dni}}" type="checkbox"
-                {% if est.isActive == 1 %} checked="checked" {%endif%}>
+                {% if est.isActive == 1 %} checked="checked" readonly="readonly"{%endif%}>
                   {{est.dni}} - {{est.apellido}} {{est.nombre}}---{{i}}
             </label>
 	     </div>
