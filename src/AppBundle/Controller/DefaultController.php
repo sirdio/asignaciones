@@ -1046,6 +1046,7 @@ class DefaultController extends Controller
         if($session->has("id")){
             if ($request->isMethod('POST')) {
                 foreach($_POST['acreditacion'] as $nombre ){
+                    echo $nombre;
                     $arreglo = explode('-', $nombre);
                     $tipousuario = $nombre[0];
                     $dni = $nombre[1];
