@@ -1076,7 +1076,13 @@ class DefaultController extends Controller
                     $em->persist($trabajo);
                     $em->flush();                   
                 }
-            die();
+                $msj = "El proceso de acreditación finalizó con exito.";              
+                return $this->render('AppBundle:Acreditacion:msjacreditarok.html.twig', array('msj'=>$msj));
+                
+            //die();
+            }else{
+                $msj = "Ocurrio un problema y el proceso de acreditación no finalizó con exito.";              
+                return $this->render('AppBundle:Acreditacion:msjacreditarerro.html.twig', array('msj'=>$msj));                
             }
         }else{
             return $this->render('AppBundle:Default:principal.html.twig');
