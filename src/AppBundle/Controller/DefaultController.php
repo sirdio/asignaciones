@@ -1065,15 +1065,14 @@ class DefaultController extends Controller
                         $estudiante->setIsActive(1);
                         $em->persist($estudiante);
                         $em->flush();                              
-                    }    
+                    }elseif ($tipousuario == 't'){
+                        
+                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('id' => $dni));
+                        $trabjo->setIsActive(1);
+                        $em->persist($trabajo);
+                        $em->flush();                          
+                    }
                     
-                    
-                }
-                foreach($_POST['acreditartrab'] as $nombre ){
-                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(Array('id' => $nombre));
-                    $trabjo->setIsActive(1);
-                    $em->persist($trabajo);
-                    $em->flush();                   
                 }
                 $msj = "El proceso de acreditación finalizó con exito.";              
                 return $this->render('AppBundle:Acreditacion:msjacreditarok.html.twig', array('msj'=>$msj));
