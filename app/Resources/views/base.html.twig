@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        {% block head %}
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Bienvenidos!!!{% endblock %}</title>
+        <script type="text/javascript" src="{{ asset('public/js/jquery-3.1.0.min.js') }}"></script>
         {% block stylesheets %}
         <!-- Latest compiled and minified CSS -->
              <link href="{{ asset('public/css/bootstrap.css') }}" type="text/css" rel="stylesheet" />
@@ -22,7 +24,8 @@
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('public/ico/144x144.png') }}">
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{asset('public/ico/114x114.png') }}">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{asset('public/ico/72x72.png') }}">
-        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{asset('public/ico/57x57.png') }}">      
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{asset('public/ico/57x57.png') }}">    
+     {% endblock %}     
     </head>
     <body>
         {% block body %}

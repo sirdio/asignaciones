@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Datos</title>
+
+        {% block stylesheets %}
+        <!-- Latest compiled and minified CSS -->
+             <link href="{{ asset('public/css/bootstrap.css') }}" type="text/css" rel="stylesheet" />
+             <link href="{{ asset('public/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet" />
+
+ 
+
+        {% endblock %}
+
+
+
+
+		<script type="text/javascript" src="{{ asset('public/js/jquery.min.js') }}"></script>
+
+		<script type="text/javascript">
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Usuarios Inscriptos TÉCNICAMENTE2016'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Resultados',
+            data: [
+                ['Directivos: {{totd}} / {{porcentdirectivo}}%', {{porcentdirectivo}}],
+                ['Docentes: {{tote}} / {{porcentdocente}}%', {{porcentdocente}}],
+                ['Alumnos: {{tota}} / {{porcentalumno}}%', {{porcentalumno}}],
+                ['Jurado COPETyP: {{totcop}} / {{porcentjurado}}%', {{porcentjurado}}]
+            ]
+        }]
+    });
+
+   $('#container1').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Votaciones TÉCNICAMENTE2016, resultados generales'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Resultados',
+            data: [
+                ['Votaron: {{totalvr}} / {{porcentvr}}%', {{porcentvr}}],
+                ['Faltan Votar: {{totalfv}} / {{porcentfv}}%', {{porcentfv}}]
+            ]
+        }]
+    });
+
+$('#container2').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Resultados Votación TÉCNICAMENTE2016 por Categoría '
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Resultados',
+            data: [
+                ['Cicli Básico: {{contcbs}} / {{porcentcbs}}%', {{porcentcbs}}],
+                ['Ciclo Superior: {{contcss}} / {{porcentcss}}%', {{porcentcss}}]
+            ]
+        }]
+    });
+
+$('#container3').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Resultados Votación TÉCNICAMENTE2016 por Jurisdicción'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Resultados',
+            data: [
+                ['Chaco: {{chcbscss}} / {{porcentchcbscss}}%', {{porcentchcbscss}}],
+                ['Corrientes: {{corrcbscss}} / {{porcentcorrcbscss}}%', {{porcentcorrcbscss}}],
+                ['Entre Ríos: {{entriocbscss}} / {{porcententriocbscss}}%', {{porcententriocbscss}}],
+                ['Formosa: {{formcbscss}} / {{porcentformcbscss}}%', {{porcentformcbscss}}],
+                ['Misiones: {{miscbscss}} / {{porcentmiscbscss}}%', {{porcentmiscbscss}}]
+            ]
+        }]
+    });
+
+});
+		</script>
+	</head>
+	<body>
+
+<script src="{{ asset('public/js/highcharts.js') }}"></script>
+<script src="{{ asset('public/js/highcharts-3d.js') }}"></script>
+<script src="{{ asset('public/js/exporting.js') }}"></script>
+
+<nav class="navbar navbar-default">
+  <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div>
+</nav>
+{#<div id="container" style="height:400px; "></div>
+<div id="container1" style="height: 400px; "></div>#}
+
+<div class="container-fluid">
+
+
+    <div class="row">
+        <div id="container" class="col-md-6">
+        </div>
+        <div id="container1" class="col-md-6">
+        </div>
+    </div>
+    <div class="row">
+        <div id="container2" class="col-md-6">
+        </div>
+        <div id="container3" class="col-md-6">
+        </div>
+    </div>    
+</div>
+
+
+        <footer>
+           <p>T&eacutecnicamente 2016 - Sistema de Voto Electrónico - Desarrollado por <a href="https://web.facebook.com/Por%C3%A1-Sistemas-645176765627967/?fref=ts">Navarro Sergio Antonio</a>
+            &copy; {{ 'now' | date('Y') }}</p>
+        </footer>
+	</body>
+</html>

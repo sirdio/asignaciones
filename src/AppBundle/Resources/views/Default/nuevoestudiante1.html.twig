@@ -1,0 +1,140 @@
+{% extends '::base.html.twig' %}
+{% block title %}Agregar Usuario{% endblock %}
+{% block body %}
+
+<nav class="navbar navbar-default">
+  <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div>
+</nav>
+<div class="container">
+     <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+<form action="{{ path('GuardarUsuario') }}" method="post" class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Ingresar datos del Estudiante</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="dni">D.N.I.:</label>  
+  <div class="col-md-8">
+  <input id="dni" name="dni" placeholder="ingrese DNI" class="form-control input-md" required="" type="text" value="{{datosusuario.dni}}">
+  <span class="help-block label-info">{{msj}} ej.: 26587458</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="nombre">Nombre:</label>  
+  <div class="col-md-8">
+  <input id="nombre" name="nombre" placeholder="ingrese nombre" class="form-control input-md" required="" type="text" value="{{datosusuario.nombre}}">
+  <span class="help-block">ej.: Pedro A.</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="apellido">Apellido:</label>  
+  <div class="col-md-8">
+  <input id="apellido" name="apellido" placeholder="ingrese apellido" class="form-control input-md" required="" type="text" value="{{datosusuario.apellido}}">
+  <span class="help-block">ej.: López</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="tipovotante">Tipo de Votante:</label>  
+  <div class="col-md-8">
+  <input id="tipovotante" name="tipovotante" class="form-control input-md" required="" type="text" value="{{datosusuario.tv}}" readonly="readonly">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="aniocursa">Año que cursa:</label>  
+  <div class="col-md-8">
+  <input id="aniocursa" name="aniocursa" class="form-control input-md" required="" type="text" value="{{datosusuario.aniocursado}}">
+  <span class="help-block">ej.: 4to 1ra</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="especialidada">Especialidad:</label>  
+  <div class="col-md-8">
+  <input id="especialidada" name="especialidada" class="form-control input-md" required="" type="text" value="{{datosusuario.especialidad}}">
+  <span class="help-block">ej.: Inform&aacutetica</span>  
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="nivel">Nivel:</label>
+  <div class="col-md-8">
+    <select id="nivel" name="nivel" class="form-control">
+      {% if datosusuario.nivel == "cbs"%}
+        <option value="cbs">Ciclo B&aacutesico Secundaria</option>
+        <option value="css">Ciclo Superior Secundaria</option>
+        <option value="fp">Formaci&oacuten Profesional</option>
+        <option value="ts">Tecnicaturas Superiores</option>
+      {% endif %}
+      {% if datosusuario.nivel == "css"%}
+        <option value="css">Ciclo Superior Secundaria</option>
+        <option value="fp">Formaci&oacuten Profesional</option>
+        <option value="ts">Tecnicaturas Superiores</option>
+        <option value="cbs">Ciclo B&aacutesico Secundaria</option>
+      {% endif %}
+      {% if datosusuario.nivel == "fp"%}
+        <option value="fp">Formaci&oacuten Profesional</option>
+        <option value="ts">Tecnicaturas Superiores</option>
+        <option value="cbs">Ciclo B&aacutesico Secundaria</option>
+        <option value="css">Ciclo Superior Secundaria</option>
+      {% endif %}
+      {% if datosusuario.nivel == "ts"%}
+        <option value="ts">Tecnicaturas Superiores</option>
+        <option value="cbs">Ciclo B&aacutesico Secundaria</option>
+        <option value="css">Ciclo Superior Secundaria</option>
+        <option value="fp">Formaci&oacuten Profesional</option>
+      {% endif %}                  
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="trabajo">Trabajos:</label>
+  <div class="col-md-8">
+    <select id="trabajo" name="trabajo" class="form-control">
+      <option value="{{datotrab.id}}">{{datotrab.nombproyecto}}</option>
+      {% for trab in trabajo %}
+        {% if trab.id != datotrab.id %}
+          <option value="{{trab.id}}">{{trab.nombproyecto}}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Aceptar</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+          </div> 
+          <div class="col-md-4">
+          </div>
+    </div>
+</div> 
+
+{% endblock %}

@@ -75,9 +75,17 @@ class Trabajo
     * @ORM\Column(name="is_active", type="boolean")
     */
     private $isActive;    
+    /**
+    * @ORM\Column(name="estado", type="boolean")
+    */
+    private $estado;
 
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
+    public function __construct()
+    {
+        $this->estado = false;
+    } 
 
     public function getId()
     {
@@ -225,4 +233,16 @@ class Trabajo
     {
         return $this->isActive;
     }
+//////////////////////////////////////
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+    
+        return $this;
+    }
+
+    public function getEstado()
+    {
+        return $this->estado;
+    }    
 }

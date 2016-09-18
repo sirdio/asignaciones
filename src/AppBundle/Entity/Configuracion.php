@@ -49,10 +49,18 @@ class Configuracion
     */
     private $cantexpped;
 
+    /**
+    * @ORM\Column(name="is_active", type="boolean")
+    */
+    private $isActive; 
 
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
-
+    public function __construct()
+    {
+        $this->estado = false;
+    } 
+    
     public function getId()
     {
         return $this->id;
@@ -116,6 +124,18 @@ class Configuracion
     public function getCantexpped()
     {
         return $this->cantexpped;
-    }    
+    } 
+
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+    
+        return $this;
+    }
+
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
 
 }

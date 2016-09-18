@@ -21,12 +21,13 @@
 <!-- Form Name -->
 <legend>Ingresar datos del Directivo</legend>
 
+
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="dni">D.N.I.:</label>  
   <div class="col-md-8">
-  <input id="dni" name="dni" placeholder="ingrese DNI" class="form-control input-md" required="" type="text">
-  <span class="help-block">ej.: 26587458</span>  
+  <input id="dni" name="dni" placeholder="ingrese DNI" class="form-control input-md" required="" type="text" value="{{datosusuario.dni}}">
+  <span class="help-block label-info">{{msj}} ej.: 26587458</span>  
   </div>
 </div>
 
@@ -34,7 +35,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="nombre">Nombre:</label>  
   <div class="col-md-8">
-  <input id="nombre" name="nombre" placeholder="ingrese nombre" class="form-control input-md" required="" type="text">
+  <input id="nombre" name="nombre" placeholder="ingrese nombre" class="form-control input-md" required="" type="text" value="{{datosusuario.nombre}}">
   <span class="help-block">ej.: Pedro A.</span>  
   </div>
 </div>
@@ -43,7 +44,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="apellido">Apellido:</label>  
   <div class="col-md-8">
-  <input id="apellido" name="apellido" placeholder="ingrese apellido" class="form-control input-md" required="" type="text">
+  <input id="apellido" name="apellido" placeholder="ingrese apellido" class="form-control input-md" required="" type="text" value="{{datosusuario.apellido}}">
   <span class="help-block">ej.: López</span>  
   </div>
 </div>
@@ -52,7 +53,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="tipovotante">Tipo de Votante:</label>  
   <div class="col-md-8">
-  <input id="tipovotante" name="tipovotante" class="form-control input-md" required="" type="text" value="{{tipovotante}}" readonly="readonly">
+  <input id="tipovotante" name="tipovotante" class="form-control input-md" required="" type="text" value="{{datosusuario.tv}}" readonly="readonly">
   </div>
 </div>
 
@@ -60,7 +61,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="cargo">Cargo:</label>  
   <div class="col-md-8">
-  <input id="cargo" name="cargo" placeholder="ingresar cargo" class="form-control input-md" required="" type="text" >
+  <input id="cargo" name="cargo" placeholder="ingresar cargo" class="form-control input-md" required="" type="text" value="{{datosusuario.cargo}}">
   <span class="help-block">ej.: Jefa de Sección</span>  
   </div>
 </div>
@@ -69,7 +70,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="tel">Teléfono:</label>  
   <div class="col-md-8">
-  <input id="tel" name="tel" placeholder="ingrese telefono" class="form-control input-md" required="" type="text">
+  <input id="tel" name="tel" placeholder="ingrese telefono" class="form-control input-md" required="" type="text" value="{{datosusuario.tel}}">
   <span class="help-block">ej.: 379-4457189</span>  
   </div>
 </div>
@@ -78,7 +79,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="email">Email:</label>  
   <div class="col-md-8">
-  <input id="email" name="email" placeholder="ingrese Email" class="form-control input-md" required="" type="text">
+  <input id="email" name="email" placeholder="ingrese Email" class="form-control input-md" required="" type="text" value="{{datosusuario.email}}">
   <span class="help-block">ej.: pablo2314@hotmail.com</span>  
   </div>
 </div>
@@ -87,10 +88,12 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="establecimiento">Establecimiento:</label>
   <div class="col-md-8">
-    <select id="establecimiento" name="establecimiento" class="form-control">
-      <option value="0">Seleccionar Opción</option>
+    <select id="establecimiento" name="establecimiento" class="form-control">   
+      <option value="{{datoesc.id}}">{{datoesc.nombesc}}</option>   
       {% for esc in escuela %}
-      <option value="{{esc.id}}">{{esc.nombesc}}</option>
+        {%if esc.id != datoesc.id %}
+          <option value="{{esc.id}}">{{esc.nombesc}}</option>  
+        {% endif %}        
       {% endfor %}
     </select>
   </div>

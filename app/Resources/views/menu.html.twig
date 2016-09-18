@@ -20,7 +20,10 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Acreditación <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{path('IniciarProcesoAcreditacion')}}">Iniciar Proceso</a></li>
+            <li><a href="{{path('IniciarProcesoAcreditacion')}}">Iniciar Proceso</a></li>            
+            <li><a href="{{path('IniciarVotacion')}}">Iniciar Votación</a></li>
+            <li><a href="{{path('FinalizarVotacion')}}">Finalizar Votación</a></li>
+            <li><a href="{{path('ContarVotos')}}">Contar Votos</a></li>
          </ul>
         </li> 
         
@@ -76,13 +79,14 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informes <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{{path('SeleccionarEst')}}">Reportes de Inscripciones</a></li>
-            <li><a href="{{path('VerPresentacionesInscriptas')}}">Reporte de Inscripción Experiencia Pedagógica</a></li>
-            <li><a href="{{path('SeleccionarNivel')}}">Resultados de Votos TécnicaMente</a></li>
-            <li><a href="{{path('MostrarResultados')}}">Resultados de Votos Experiencia Pedagógica</a></li>
+            {#<li><a href="{{path('VerPresentacionesInscriptas')}}">Reporte de Inscripción Experiencia Pedagógica</a></li>#}
+            <li><a href="{{path('SeleccionarNivel')}}">Resultados por Nivel</a></li>
+            <li><a href="{{path('DatosEstadisticos')}}">Resultados por Jurisdicción y Nivel</a></li>
+            {#<li><a href="{{path('MostrarResultados')}}">Resultados de Votos Experiencia Pedagógica</a></li>#}
             <li><a href="{{path('MostrarHistorialTrab')}}">Historial de Votos Trabajos</a></li>
-            <li><a href="{{path('MostrarHistorialPress')}}">Historial de Votos Presentaci&oacuten</a></li>
-            <li><a href="{{path('VerEntregas')}}">Lista de entrega de Viáticos</a></li>
-            <li><a href="{{path('VerAsistencia')}}">Listado de Asistencia a Presentaci&oacuten</a></li>
+            {#<li><a href="{{path('MostrarHistorialPress')}}">Historial de Votos Presentaci&oacuten</a></li>#}
+            <li><a href="{{path('VerEntregas')}}">Lista de entrega de Viáticos</a></li>            
+            <li><a href="{{path('VerGrafica')}}">ver gráfica</a></li>
             <li role="separator" class="divider"></li>
          </ul>
         </li> 

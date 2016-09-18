@@ -89,9 +89,7 @@ class DefaultController extends Controller
         }else
         {
             return $this->render('AppBundle:Default:principal.html.twig');
-        }
-        
-            
+        } 
     }
 
     /**
@@ -151,10 +149,7 @@ class DefaultController extends Controller
             return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));
         }else{
             return $this->render('AppBundle:Default:principal.html.twig');
-        }
-        
-         
-        
+        }  
     }
 
     /**
@@ -163,144 +158,218 @@ class DefaultController extends Controller
     public function GuardarUAction(Request $request)
     {
         $session=$request->getSession();
-        if($session->has("id"))
-        {
+        if($session->has("id")){
         /////////////////////////////////////////////////////////////////////////    
-            if ($request->isMethod('POST')) {
+            if($request->isMethod('POST')){
                 $em = $this->getDoctrine()->getManager();
-                if ($_POST['tipovotante'] == "Directivo"){
-                    $configuracion = new Configuracion();
-                    $configuracion->setCantcbsec(3);
-                    $configuracion->setCantcssec(3);
-                    $configuracion->setCantfp(2);
-                    $configuracion->setCantts(2);
-                    $configuracion->setCantexpped(0);
-                    $em->persist($configuracion);
-                    $em->flush();
-                    $id = $configuracion->getId();
-                    $directivo = new Directivo();
-                    $directivo->setDni($_POST['dni']);
-                    $directivo->setNombre($_POST['nombre']);
-                    $directivo->setApellido($_POST['apellido']);
-                    $directivo->setTipovot($_POST['tipovotante']);
-                    $directivo->setCargo($_POST['cargo']);
-                    $directivo->setTeld($_POST['tel']);
-                    $directivo->setEmaild($_POST['email']);
-                    $directivo->setIdesc($_POST['establecimiento']);
-                    $directivo->setIdconf($id);
-                    $em->persist($directivo);
-                    $em->flush();
-                    $msj = "Usuario cargado con exito.";              
-                    return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));
-                }elseif ($_POST['tipovotante'] == "Encargado"){
-               
-                    $directivo = $em->getRepository('AppBundle:Directivo')->findOneByIdesc($_POST['establecimiento']);
-                    $idconf = $directivo->getIdconf();
-                    $encargado = new Encargado();
-                    $encargado->setDni($_POST['dni']);
-                    $encargado->setNombre($_POST['nombre']);
-                    $encargado->setApellido($_POST['apellido']);
-                    $encargado->setTipovot($_POST['tipovotante']);
-                    $encargado->setMateriadic($_POST['materiadic']);
-                    $encargado->setTele($_POST['tele']);
-                    $encargado->setEmaile($_POST['emaile']);
-                    $encargado->setIdconf($idconf);
-                    $encargado->SetCantexpped(2);
-                    $em->persist($encargado);
-                    $em->flush();
-                    $msj = "Usuario cargado con exito.";              
-                    return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));                
-                
-                }elseif ($_POST['tipovotante'] == "Docente"){
-                    $configuracion = new Configuracion();
-                    $configuracion->setCantcbsec(0);
-                    $configuracion->setCantcssec(0);
-                    $configuracion->setCantfp(0);
-                    $configuracion->setCantts(0);
-                    $configuracion->setCantexpped(2);
-                    $em->persist($configuracion);
-                    $em->flush();                                       
-                    $presentacion = $em->getRepository('AppBundle:Presentacion')->find($_POST['presentacion']);
-                    $docente = new Docente();
-                    $docente->setDni($_POST['dni']);
-                    $docente->setNombre($_POST['nombre']);
-                    $docente->setApellido($_POST['apellido']);
-                    $docente->setTipovot($_POST['tipovotante']);
-                    $docente->setEspacioc($_POST['espacioc']);
-                    $docente->setEspecialidadd($_POST['especialidadd']);
-                    $docente->setEmaildoc($_POST['emaildoc']);
-                    $docente->setTeldoc($_POST['teldoc']);
-                    $docente->setPresentacion($presentacion);
-                    $docente->setConfiguracion($configuracion);
-                    $docente->setNiveldoc('expped');
-                    $docente->SetCantexpped(2);
-                    $em->persist($docente);
-                    $em->flush();
-                    $msj = "Usuario cargado con exito.";              
-                    return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));            
-           
-                }elseif ($_POST['tipovotante'] == "Estudiante"){
-                    $configuracion = new Configuracion();
-                    $configuracion->setCantcbsec(3);
-                    $configuracion->setCantcssec(3);
-                    $configuracion->setCantfp(2);
-                    $configuracion->setCantts(2);
-                    $configuracion->setCantexpped(0);
-                    $em->persist($configuracion);
-                    $em->flush();
-                    $trabajo = $em->getRepository('AppBundle:Trabajo')->find($_POST['trabajo']);
-                    $estudiante = new Estudiante();
-                    $estudiante->setDni($_POST['dni']);
-                    $estudiante->setNombre($_POST['nombre']);
-                    $estudiante->setApellido($_POST['apellido']);
-                    $estudiante->setTipovot($_POST['tipovotante']);
-                    $estudiante->setAniocursa($_POST['aniocursa']);
-                    $estudiante->setEspecialidada($_POST['especialidada']);
-                    $estudiante->setNivel($_POST['nivel']);
-                    $estudiante->setTrabajo($trabajo);
-                    $estudiante->setConfiguracion($configuracion);
-                    $em->persist($estudiante);
-                    $em->flush();
-                    $msj = "Usuario cargado con exito.";              
-                    return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));     
-                
-                }elseif ($_POST['tipovotante'] == "COPETyP"){
-                    $configuracion = new Configuracion();
-                    $configuracion->setCantcbsec(1);
-                    $configuracion->setCantcssec(1);
-                    $configuracion->setCantfp(1);
-                    $configuracion->setCantts(1);
-                    $configuracion->setCantexpped(0);
-                    $em->persist($configuracion);
-                    $em->flush();
-                    $copetyp = new Copetyp();
-                    $copetyp->setDni($_POST['dni']);
-                    $copetyp->setNombre($_POST['nombre']);
-                    $copetyp->setApellido($_POST['apellido']);
-                    $copetyp->setTipovot($_POST['tipovotante']);                
-                    $copetyp->setCargocop($_POST['cargocop']);
-                    $copetyp->setEmailcop($_POST['emailcop']);
-                    $copetyp->setTelcop($_POST['telcop']);
-                    $copetyp->setConfiguracion($configuracion);
-                    $em->persist($copetyp);
-                    $em->flush();        
-                    $msj = "Usuario cargado con exito.";              
-                    return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));     
-                
+
+                if(strlen($_POST['dni']) < 8){
+                    //print_r($request);
+                    //die();
+                    $msj = "ingrese un D.N.I valido.";        
+                    if($request->get('tipovotante') == "Directivo"){
+                        $datosusuario = array('dni' => $request->get('dni'),
+                                        'nombre' => $request->get('nombre'),
+                                        'apellido' => $request->get('apellido'),
+                                        'tv' => $request->get('tipovotante'),
+                                        'escuelaid' => $request->get('establecimiento'),
+                                        'cargo' => $request->get('cargo'),
+                                        'tel' => $request->get('tel'),
+                                        'email' => $request->get('email'));
+                        $datoesc = $em->getRepository('AppBundle:Escuela')->find($request->get('establecimiento'));
+                        $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
+                        return $this->render('AppBundle:Default:nuevodirectivo1.html.twig',
+                        Array('msj'=>$msj, 'datosusuario'=>$datosusuario, 'escuela'=>$escuela , 'datoesc'=>$datoesc));
+                    }elseif($request->get('tipovotante') == "Encargado"){
+                        $datosusuario = array('dni' => $request->get('dni'),
+                                        'nombre' => $request->get('nombre'),
+                                        'apellido' => $request->get('apellido'),
+                                        'tv' => $request->get('tipovotante'),
+                                        'escuelaid' => $request->get('establecimiento'),
+                                        'materiadicta' => $request->get('materiadic'),
+                                        'tel' => $request->get('tele'),
+                                        'email' => $request->get('emaile'));
+                        $datoesc = $em->getRepository('AppBundle:Escuela')->find($request->get('establecimiento'));
+                        $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
+                        return $this->render('AppBundle:Default:nuevoencargado1.html.twig',
+                        Array('msj'=>$msj, 'datosusuario'=>$datosusuario, 'escuela'=>$escuela, 'datoesc'=>$datoesc));
+                    }elseif($request->get('tipovotante') == "Docente"){
+                        $datosusuario = array('dni' => $request->get('dni'),
+                                        'nombre' => $request->get('nombre'),
+                                        'apellido' => $request->get('apellido'), 
+                                        'tv' => $request->get('tipovotante'),
+                                        'espacioc' => $request->get('espacioc'),
+                                        'especialidad' => $request->get('especialidadd'),
+                                        'tel' => $request->get('teldoc'), 
+                                        'email' => $request->get('emaildoc'));
+                        $datopres = $em->getRepository('AppBundle:Presentacion')->find($request->get('presentacion'));
+                        $presentacion = $em->getRepository('AppBundle:Presentacion')->findAll();
+                        return $this->render('AppBundle:Default:nuevodocente1.html.twig',
+                        Array('msj'=>$msj, 'datosusuario'=>$datosusuario, 'presentacion'=>$presentacion, 'datopres'=>$datopres));
+                    }elseif($request->get('tipovotante') == "Estudiante"){
+                        $datosusuario = array('dni' => $request->get('dni'),
+                                        'nombre' => $request->get('nombre'),
+                                        'apellido' => $request->get('apellido'), 
+                                        'tv' => $request->get('tipovotante'),
+                                        'aniocursado' => $request->get('aniocursa'),
+                                        'especialidad' => $request->get('especialidada'),
+                                        'nivel' => $request->get('nivel'));
+                        $datotrab = $em->getRepository('AppBundle:Trabajo')->find($request->get('trabajo'));
+                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                        return $this->render('AppBundle:Default:nuevoestudiante1.html.twig',
+                        Array('msj'=>$msj, 'datosusuario'=>$datosusuario, 'trabajo'=>$trabajo, 'datotrab'=>$datotrab));
+                    }else{
+                        $datosusuario = array('dni' => $request->get('dni'),
+                                        'nombre' => $request->get('nombre'),
+                                        'apellido' => $request->get('apellido'), 
+                                        'tv' => $request->get('tipovotante'),
+                                        'cargo' => $request->get('cargocop'),
+                                        'tel' => $request->get('telcop'), 
+                                        'email' => $request->get('emailcop'));                        
+                        return $this->render('AppBundle:Default:nuevocopetyp1.html.twig',
+                        Array('msj'=>$msj, 'datosusuario'=>$datosusuario));
+                    }
+
                 }else{
-                    $msj = "Ocurrio un problema debe seleccinar un tipo de usuario valido.";        
-                    return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));                
-                }
-            
+                    $usuariodir = $em->getRepository('AppBundle:Directivo')->findOneByDni($_POST['dni']);
+                    $usuarioenc = $em->getRepository('AppBundle:Encargado')->findOneByDni($_POST['dni']);
+                    $usuarioest = $em->getRepository('AppBundle:Estudiante')->findOneByDni($_POST['dni']);
+                    $usuariodoc = $em->getRepository('AppBundle:Docente')->findOneByDni($_POST['dni']);
+                    $usuariocop = $em->getRepository('AppBundle:Copetyp')->findOneByDni($_POST['dni']);
+                    if(count($usuariodir) != 0 or count($usuarioenc) != 0 or count($usuarioest) != 0 or count($usuariodoc) != 0 or count($usuariocop) != 0 ){
+                        $msj = "El dni que ingreso ya fue registrado, verifique antes de continuar con la carga.";
+                        return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+                    }else{
+                        if ($_POST['tipovotante'] == "Directivo"){
+                            $configuracion = new Configuracion();
+                            $configuracion->setCantcbsec(3);
+                            $configuracion->setCantcssec(3);
+                            $configuracion->setCantfp(0);
+                            $configuracion->setCantts(0);
+                            $configuracion->setCantexpped(0);
+                            $em->persist($configuracion);
+                            $em->flush();
+                            $id = $configuracion->getId();
+                            $directivo = new Directivo();
+                            $directivo->setDni($_POST['dni']);
+                            $directivo->setNombre($_POST['nombre']);
+                            $directivo->setApellido($_POST['apellido']);
+                            $directivo->setTipovot($_POST['tipovotante']);
+                            $directivo->setCargo($_POST['cargo']);
+                            $directivo->setTeld($_POST['tel']);
+                            $directivo->setEmaild($_POST['email']);
+                            $directivo->setIdesc($_POST['establecimiento']);
+                            $directivo->setIdconf($id);
+                            $em->persist($directivo);
+                            $em->flush();
+                            $msj = "Usuario cargado con exito.";              
+                            return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));
+                        }elseif ($_POST['tipovotante'] == "Encargado"){
+                            $directivo = $em->getRepository('AppBundle:Directivo')->findOneByIdesc($_POST['establecimiento']);
+                            $idconf = $directivo->getIdconf();
+                            $encargado = new Encargado();
+                            $encargado->setDni($_POST['dni']);
+                            $encargado->setNombre($_POST['nombre']);
+                            $encargado->setApellido($_POST['apellido']);
+                            $encargado->setTipovot($_POST['tipovotante']);
+                            $encargado->setMateriadic($_POST['materiadic']);
+                            $encargado->setTele($_POST['tele']);
+                            $encargado->setEmaile($_POST['emaile']);
+                            $encargado->setIdconf($idconf);
+                            $encargado->SetCantexpped(2);
+                            $em->persist($encargado);
+                            $em->flush();
+                            $msj = "Usuario cargado con exito.";              
+                            return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));                                
+                        }elseif ($_POST['tipovotante'] == "Docente"){
+                            $configuracion = new Configuracion();
+                            $configuracion->setCantcbsec(0);
+                            $configuracion->setCantcssec(0);
+                            $configuracion->setCantfp(0);
+                            $configuracion->setCantts(0);
+                            $configuracion->setCantexpped(2);
+                            $em->persist($configuracion);
+                            $em->flush();                                       
+                            $presentacion = $em->getRepository('AppBundle:Presentacion')->find($_POST['presentacion']);
+                            $docente = new Docente();
+                            $docente->setDni($_POST['dni']);
+                            $docente->setNombre($_POST['nombre']);
+                            $docente->setApellido($_POST['apellido']);
+                            $docente->setTipovot($_POST['tipovotante']);
+                            $docente->setEspacioc($_POST['espacioc']);
+                            $docente->setEspecialidadd($_POST['especialidadd']);
+                            $docente->setEmaildoc($_POST['emaildoc']);
+                            $docente->setTeldoc($_POST['teldoc']);
+                            $docente->setPresentacion($presentacion);
+                            $docente->setConfiguracion($configuracion);
+                            $docente->setNiveldoc('expped');
+                            $docente->SetCantexpped(2);
+                            $em->persist($docente);
+                            $em->flush();
+                            $msj = "Usuario cargado con exito.";              
+                            return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));           
+                        }elseif ($_POST['tipovotante'] == "Estudiante"){
+                            $configuracion = new Configuracion();
+                            $configuracion->setCantcbsec(3);
+                            $configuracion->setCantcssec(3);
+                            $configuracion->setCantfp(0);
+                            $configuracion->setCantts(0);
+                            $configuracion->setCantexpped(0);
+                            $em->persist($configuracion);
+                            $em->flush();
+                            $trabajo = $em->getRepository('AppBundle:Trabajo')->find($_POST['trabajo']);
+                            $estudiante = new Estudiante();
+                            $estudiante->setDni($_POST['dni']);
+                            $estudiante->setNombre($_POST['nombre']);
+                            $estudiante->setApellido($_POST['apellido']);
+                            $estudiante->setTipovot($_POST['tipovotante']);
+                            $estudiante->setAniocursa($_POST['aniocursa']);
+                            $estudiante->setEspecialidada($_POST['especialidada']);
+                            $estudiante->setNivel($_POST['nivel']);
+                            $estudiante->setTrabajo($trabajo);
+                            $estudiante->setConfiguracion($configuracion);
+                            $em->persist($estudiante);
+                            $em->flush();
+                            $msj = "Usuario cargado con exito.";              
+                            return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));                  
+                        }elseif ($_POST['tipovotante'] == "COPETyP"){
+                            $configuracion = new Configuracion();
+                            $configuracion->setCantcbsec(1);
+                            $configuracion->setCantcssec(1);
+                            $configuracion->setCantfp(0);
+                            $configuracion->setCantts(0);
+                            $configuracion->setCantexpped(0);
+                            $configuracion->setIsActive(1);
+                            $em->persist($configuracion);
+                            $em->flush();
+                            $copetyp = new Copetyp();
+                            $copetyp->setDni($_POST['dni']);
+                            $copetyp->setNombre($_POST['nombre']);
+                            $copetyp->setApellido($_POST['apellido']);
+                            $copetyp->setIsActive(1);
+                            $copetyp->setTipovot($_POST['tipovotante']);                
+                            $copetyp->setCargocop($_POST['cargocop']);
+                            $copetyp->setEmailcop($_POST['emailcop']);
+                            $copetyp->setTelcop($_POST['telcop']);
+                            $copetyp->setConfiguracion($configuracion);
+                            $em->persist($copetyp);
+                            $em->flush();        
+                            $msj = "Usuario cargado con exito.";              
+                            return $this->render('AppBundle:Default:mensaje.html.twig', array('msj'=>$msj));     
+                        }else{
+                            $msj = "Ocurrio un problema debe seleccinar un tipo de usuario valido.";        
+                            return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));                
+                        }
+                    }
+                }    
+
             }
             $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
             return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
         ///////////////////////////////////////////////////////////////////////////    
-        }else
-        {
+        }else{
             return $this->render('AppBundle:Default:principal.html.twig');
-        }        
-
+        }
     }
     
     /**
@@ -324,7 +393,6 @@ class DefaultController extends Controller
         {
             return $this->render('AppBundle:Default:principal.html.twig');
         }        
-
     }   
 
     /**
@@ -377,8 +445,7 @@ class DefaultController extends Controller
             //////////////////////////////////////////////////////////////////////
         }else{
             return $this->render('AppBundle:Default:principal.html.twig');
-        } 
-        
+        }      
     }
     
     /**
@@ -392,66 +459,107 @@ class DefaultController extends Controller
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
             if ($tv == "Directivo"){
-                $establecimiento = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);
-                $directivo = $em->getRepository('AppBundle:Directivo')->findOneByDni($dni);
-                $directivo->setDni($_POST['dni']);
-                $directivo->setNombre($_POST['nombre']);
-                $directivo->setApellido($_POST['apellido']);
-                $directivo->setCargo($_POST['cargo']);
-                $directivo->setTeld($_POST['teld']);
-                $directivo->setEmaild($_POST['emaild']);
-                $directivo->setIdesc($establecimiento->getId());
-                $em->persist($directivo);
-                $em->flush();
+                $verificar = $em->getRepository('AppBundle:Directivo')->findOneByDni($_POST['dni']);
+                if(count($verificar)!= 0){
+                    $msj = "El nuevo DNI que ingreso ya esta registrado, verifique los datos por favor.";
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+                }elseif(strlen($_POST['dni']) < 8){
+                    $msj = "Debe ingresar un número de DNI valido.";        
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+                }else{
+                    $establecimiento = $em->getRepository('AppBundle:Escuela')->find($_POST['establecimiento']);
+                    $directivo = $em->getRepository('AppBundle:Directivo')->findOneByDni($dni);
+                    $directivo->setDni($_POST['dni']);
+                    $directivo->setNombre($_POST['nombre']);
+                    $directivo->setApellido($_POST['apellido']);
+                    $directivo->setCargo($_POST['cargo']);
+                    $directivo->setTeld($_POST['teld']);
+                    $directivo->setEmaild($_POST['emaild']);
+                    $directivo->setIdesc($establecimiento->getId());
+                    $em->persist($directivo);
+                    $em->flush();
+                }
             }elseif ($tv == "Encargado"){
-                $encargado = $em->getRepository('AppBundle:Encargado')->findOneByDni($dni);
-                $encargado->setDni($_POST['dni']);
-                $encargado->setNombre($_POST['nombre']);
-                $encargado->setApellido($_POST['apellido']);
-                $encargado->setMateriadic($_POST['materiadic']);
-                $encargado->setTele($_POST['tele']);
-                $encargado->setEmaile($_POST['emaile']);
-                $em->persist($encargado);
-                $em->flush();                
-
+                $verificar = $em->getRepository('AppBundle:Encargado')->findOneByDni($_POST['dni']);
+                if(count($verificar)!= 0){
+                    $msj = "El nuevo DNI que ingreso ya esta registrado, verifique los datos por favor.";
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+                }elseif(strlen($_POST['dni']) < 8){
+                    $msj = "Debe ingresar un número de DNI valido.";
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+                }else{      
+                    $encargado = $em->getRepository('AppBundle:Encargado')->findOneByDni($dni);
+                    $encargado->setDni($_POST['dni']);
+                    $encargado->setNombre($_POST['nombre']);
+                    $encargado->setApellido($_POST['apellido']);
+                    $encargado->setMateriadic($_POST['materiadic']);
+                    $encargado->setTele($_POST['tele']);
+                    $encargado->setEmaile($_POST['emaile']);
+                    $em->persist($encargado);
+                    $em->flush();                
+                }
             }elseif ($tv == "Docente"){
-                $presentacion = $em->getRepository('AppBundle:Presentacion')->find($_POST['presentacion']);
-                $docente = $em->getRepository('AppBundle:Docente')->findOneByDni($dni);
-                $docente->setDni($_POST['dni']);
-                $docente->setNombre($_POST['nombre']);
-                $docente->setApellido($_POST['apellido']);
-                $docente->setEspacioc($_POST['espacioc']);
-                $docente->setEspecialidadd($_POST['especialidadd']);
-                $docente->setTeldoc($_POST['teldoc']);
-                $docente->setEmaildoc($_POST['emaildoc']);
-                $docente->setPresentacion($presentacion);
-                $em->persist($docente);
-                $em->flush();                 
-                
+                $verificar = $em->getRepository('AppBundle:Docente')->findOneByDni($_POST['dni']);
+                if(count($verificar)!= 0){
+                    $msj = "El nuevo DNI que ingreso ya esta registrado, verifique los datos por favor.";
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+                }elseif(strlen($_POST['dni']) < 8){
+                    $msj = "Debe ingresar un número de DNI valido.";
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+                }else{                
+                    $presentacion = $em->getRepository('AppBundle:Presentacion')->find($_POST['presentacion']);
+                    $docente = $em->getRepository('AppBundle:Docente')->findOneByDni($dni);
+                    $docente->setDni($_POST['dni']);
+                    $docente->setNombre($_POST['nombre']);
+                    $docente->setApellido($_POST['apellido']);
+                    $docente->setEspacioc($_POST['espacioc']);
+                    $docente->setEspecialidadd($_POST['especialidadd']);
+                    $docente->setTeldoc($_POST['teldoc']);
+                    $docente->setEmaildoc($_POST['emaildoc']);
+                    $docente->setPresentacion($presentacion);
+                    $em->persist($docente);
+                    $em->flush();
+                }                
             }elseif ($tv == "Estudiante"){
-                $trabajo = $em->getRepository('AppBundle:Trabajo')->find($_POST['trabajo']);
-                $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneByDni($dni);
-                $estudiante->setDni($_POST['dni']);
-                $estudiante->setNombre($_POST['nombre']);
-                $estudiante->setApellido($_POST['apellido']);
-                $estudiante->setAniocursa($_POST['aniocursa']);
-                $estudiante->setEspecialidada($_POST['especialidada']);
-                $estudiante->setNivel($_POST['nivel']);
-                $estudiante->setTrabajo($trabajo);
-                $em->persist($estudiante);
-                $em->flush();                
-                
+                $verificar = $em->getRepository('AppBundle:Estudiante')->findOneByDni($_POST['dni']);
+                if(count($verificar)!= 0){
+                    $msj = "El nuevo DNI que ingreso ya esta registrado, verifique los datos por favor.";
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+                }elseif(strlen($_POST['dni']) < 8){
+                    $msj = "Debe ingresar un número de DNI valido.";
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+                }else{                
+                    $trabajo = $em->getRepository('AppBundle:Trabajo')->find($_POST['trabajo']);
+                    $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneByDni($dni);
+                    $estudiante->setDni($_POST['dni']);
+                    $estudiante->setNombre($_POST['nombre']);
+                    $estudiante->setApellido($_POST['apellido']);
+                    $estudiante->setAniocursa($_POST['aniocursa']);
+                    $estudiante->setEspecialidada($_POST['especialidada']);
+                    $estudiante->setNivel($_POST['nivel']);
+                    $estudiante->setTrabajo($trabajo);
+                    $em->persist($estudiante);
+                    $em->flush();                
+                }
             }elseif ($tv == "COPETyP"){
-                $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneByDni($dni);
-                $copetyp->setDni($_POST['dni']);
-                $copetyp->setNombre($_POST['nombre']);
-                $copetyp->setApellido($_POST['apellido']);
-                $copetyp->setCargocop($_POST['cargocop']);
-                $copetyp->setTelcop($_POST['telcop']);
-                $copetyp->setEmailcop($_POST['emailcop']);
-                $em->persist($copetyp);
-                $em->flush();                  
-                
+                $verificar = $em->getRepository('AppBundle:Copetyp')->findOneByDni($_POST['dni']);
+                if(count($verificar)!= 0){
+                    $msj = "El nuevo DNI que ingreso ya esta registrado, verifique los datos por favor.";
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+                }elseif(strlen($_POST['dni']) < 8){
+                    $msj = "Debe ingresar un número de DNI valido.";
+                    return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+                }else{                
+                    $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneByDni($dni);
+                    $copetyp->setDni($_POST['dni']);
+                    $copetyp->setNombre($_POST['nombre']);
+                    $copetyp->setApellido($_POST['apellido']);
+                    $copetyp->setCargocop($_POST['cargocop']);
+                    $copetyp->setTelcop($_POST['telcop']);
+                    $copetyp->setEmailcop($_POST['emailcop']);
+                    $em->persist($copetyp);
+                    $em->flush();                  
+                }
             }
             $msj = "Los datos se modificaron con exito.";              
             return $this->render('AppBundle:Default:mensajemodificacion.html.twig', array('msj'=>$msj));            
@@ -462,7 +570,6 @@ class DefaultController extends Controller
         }else{
             return $this->render('AppBundle:Default:principal.html.twig');
         }
-
     }   
     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////    
@@ -490,21 +597,27 @@ class DefaultController extends Controller
         if($session->has("id")){
             /////////////////////////////////////////////////////////////////////
         if ($request->isMethod('POST')) {
-            $escuela = new Escuela();
-            $escuela->setCue($_POST['cue']);
-            $escuela->setNombesc($_POST['nombesc']);
-            $escuela->setAmbitogestion($_POST['ambitogestion']);
-            $escuela->setJurisdiccion($_POST['jurisdiccion']);
-            $escuela->setDepartamento($_POST['departamento']);
-            $escuela->setLocalidad($_POST['localidad']);
-            $escuela->setDomicilio($_POST['domicilio']);
-            $escuela->setTelefono($_POST['telefono']);
-            $escuela->setEmailesc($_POST['emailesc']);
             $em = $this->getDoctrine()->getManager();
-            $em->persist($escuela);
-            $em->flush();
-            $msj = "Establecimiento cargado con exito.";              
-            return $this->render('AppBundle:Default:mensajealtaest.html.twig', array('msj'=>$msj));            
+            $verifescuela = $em->getRepository('AppBundle:Escuela')->findOneByCue($request->get('cue'));
+            if(count($verifescuela) == 0){
+                $escuela = new Escuela();
+                $escuela->setCue($_POST['cue']);
+                $escuela->setNombesc($_POST['nombesc']);
+                $escuela->setAmbitogestion($_POST['ambitogestion']);
+                $escuela->setJurisdiccion($_POST['jurisdiccion']);
+                $escuela->setDepartamento($_POST['departamento']);
+                $escuela->setLocalidad($_POST['localidad']);
+                $escuela->setDomicilio($_POST['domicilio']);
+                $escuela->setTelefono($_POST['telefono']);
+                $escuela->setEmailesc($_POST['emailesc']);                
+                $em->persist($escuela);
+                $em->flush();
+                $msj = "Establecimiento cargado con exito.";              
+                return $this->render('AppBundle:Default:mensajealtaest.html.twig', array('msj'=>$msj));            
+            }else{
+                $msj = "El CUE ingresado ya existe, verifique los datos por favor.";        
+                return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
+            }
         }
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
@@ -569,21 +682,28 @@ class DefaultController extends Controller
             /////////////////////////////////////////////////////////////////////
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
-            $escuela = $em->getRepository('AppBundle:Escuela')->find($id);
-            $escuela->setCue($_POST['cue']);
-            $escuela->setNombesc($_POST['nombesc']);
-            $escuela->setAmbitogestion($_POST['ambitogestion']);
-            $escuela->setJurisdiccion($_POST['jurisdiccion']);
-            $escuela->setDepartamento($_POST['departamento']);
-            $escuela->setLocalidad($_POST['localidad']);
-            $escuela->setDomicilio($_POST['domicilio']);
-            $escuela->setTelefono($_POST['telefono']);
-            $escuela->setEmailesc($_POST['emailesc']);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($escuela);
-            $em->flush();
-            $msj = "Los datos del Establecimiento se modificaron con exito.";              
-            return $this->render('AppBundle:Default:mensajemodificacion.html.twig', array('msj'=>$msj));            
+            $verifescuela = $em->getRepository('AppBundle:Escuela')->findOneByCue($request->get('cue'));
+            if(count($verifescuela) == 0){
+                $em = $this->getDoctrine()->getManager();
+                $escuela = $em->getRepository('AppBundle:Escuela')->find($id);
+                $escuela->setCue($_POST['cue']);
+                $escuela->setNombesc($_POST['nombesc']);
+                $escuela->setAmbitogestion($_POST['ambitogestion']);
+                $escuela->setJurisdiccion($_POST['jurisdiccion']);
+                $escuela->setDepartamento($_POST['departamento']);
+                $escuela->setLocalidad($_POST['localidad']);
+                $escuela->setDomicilio($_POST['domicilio']);
+                $escuela->setTelefono($_POST['telefono']);
+                $escuela->setEmailesc($_POST['emailesc']);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($escuela);
+                $em->flush();
+                $msj = "Los datos del Establecimiento se modificaron con exito.";              
+                return $this->render('AppBundle:Default:mensajemodificacion.html.twig', array('msj'=>$msj));
+            }else{
+                $msj = "El nuevo CUE ingresado ya existe, verifique los datos por favor.";        
+                return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));                
+            }
         }
         $msj = "Ocurrio un problema durante la carga intente nuevamente.";        
         return $this->render('AppBundle:Default:mensajeerro.html.twig',Array('msj'=>$msj));
@@ -1052,9 +1172,13 @@ class DefaultController extends Controller
                     $dni = $arreglo[1];
                     if ($tipousuario == 'd'){
                         $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy(Array('dni' => $dni));
+                        $configuracion = $em->getRepository('AppBundle:Configuracion')->findOneBy(Array('id' => $directivo->getIdconf()));
                         $directivo->setIsActive(1);
                         $em->persist($directivo);
-                        $em->flush();                    
+                        $em->flush();    
+                        $configuracion->setIsActive(1);
+                        $em->persist($configuracion);
+                        $em->flush();                                        
                     }elseif ($tipousuario == 'en'){
                         $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array('dni' => $dni));
                         $encargado->setIsActive(1);
@@ -1063,6 +1187,7 @@ class DefaultController extends Controller
                     }elseif ($tipousuario == 'es'){
                         $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneBy(Array('dni' => $dni));
                         $estudiante->setIsActive(1);
+                        $estudiante->getConfiguracion()->setIsActive(1);
                         $em->persist($estudiante);
                         $em->flush();                              
                     }elseif ($tipousuario == 't'){
@@ -1087,6 +1212,113 @@ class DefaultController extends Controller
         
             
     }
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * @Route("/cargadatos/inicarvotacion", name="IniciarVotacion")
+     */
+    public function InicarVotacionAction(Request $request)
+    {
+        $session=$request->getSession();
+        if($session->has("id")){
+            $em = $this->getDoctrine()->getManager();
+            $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 1,'estado' => 0));
+            if($trabajo){
+                foreach ($trabajo as $key ) {
+                    $estadotrabajo = $this->getEstadoIniciar($key->getId());
+                }
+                $msj ="Votación Iniciada.";
+                return $this->render('AppBundle:Default:msjestadovotacion.html.twig', array('msj'=>$msj));
+            }else{
+                $msj ="Las Votaciones ya fueron iniciadas.";
+                return $this->render('AppBundle:Default:msjexcepcion.html.twig', array('msj'=>$msj));
+            }
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        } 
+    }
+
+    /**
+     * @Route("/cargadatos/finalizarvotacion", name="FinalizarVotacion")
+     */
+    public function FinalizarVotacionAction(Request $request)
+    {
+        $session=$request->getSession();
+        if($session->has("id")){
+            $em = $this->getDoctrine()->getManager();
+            $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 1,'estado' => 1));
+            if($trabajo){
+                foreach ($trabajo as $key) {
+                    $estadotrabajo = $this->getEstadoCerrar($key->getId());
+                }
+                $msj ="Votaciones cerradas.";
+                return $this->render('AppBundle:Default:msjestadovotacion.html.twig', array('msj'=>$msj));
+            }else{
+                $msj ="Las Votaciones ya fueron cerradas.";
+                return $this->render('AppBundle:Default:msjexcepcion.html.twig', array('msj'=>$msj));
+            }
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        } 
+    } 
+
+    public function getEstadoIniciar($idtrab)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $trabajo = $em->getRepository('AppBundle:Trabajo')->find($idtrab);
+        $trabajo->setEstado(1);
+        $em->persist($trabajo);
+        $em->flush();
+        $valor = $trabajo->getId();
+        return $valor;
+    } 
+
+    public function getEstadoCerrar($idtrab)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $trabajo = $em->getRepository('AppBundle:Trabajo')->find($idtrab);
+        $trabajo->setEstado(0);
+        $em->persist($trabajo);
+        $em->flush();
+        $valor = $trabajo->getId();
+        return $valor;
+    }  
+
+    /**
+     * @Route("/cargadatos/contarvotos", name="ContarVotos")
+     */
+    public function ContarVotosAction(Request $request)
+    {
+        $session=$request->getSession();
+        if($session->has("id")){
+            $em = $this->getDoctrine()->getManager();
+            $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 1,'estado' => 0));
+            if($trabajo){
+                foreach ($trabajo as $key ) {
+                    $estadotrabajo = $this->getContadorVotos($key->getId());
+                }
+                $msj ="Finalizó el Conteo de Votos.";
+                return $this->render('AppBundle:Default:msjestadovotacion.html.twig', array('msj'=>$msj));
+            }else{
+                $msj ="No Finalizó la Votación.";
+                return $this->render('AppBundle:Default:msjexcepcion.html.twig', array('msj'=>$msj));
+            }
+        }else{
+            return $this->render('AppBundle:Default:principal.html.twig');
+        } 
+    }
     
-    
+    public function getContadorVotos($idtrab)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $trabajo = $em->getRepository('AppBundle:Trabajo')->find($idtrab);
+        $historialvotos = $em->getRepository('AppBundle:Historialvoto')->findBy(Array('trabajo' => $trabajo));
+        $contadordevotos = count($historialvotos);
+        $trabajo->setCantvoto($contadordevotos);
+        $em->persist($trabajo);
+        $em->flush();
+        $valor = $trabajo->getId();
+        return $valor;
+    }     
 }
