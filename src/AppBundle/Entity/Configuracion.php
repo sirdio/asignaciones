@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 use Symfony\Component\Validator\Constraint as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraint\NotBlank;
 use Symfony\Component\Validator\Constraint\NotBlankValidator;
@@ -26,106 +27,40 @@ class Configuracion
      */
     private $id;
     /**
-    * @ORM\Column(name="cantcbsec", type="integer")
+    * @ORM\Column(name="totalvotos", type="integer")
     */    
-    private $cantcbsec;    
-    /**
-     *
-     * @ORM\Column(name="cantcssec", type="integer")
-     * 
-     */    
-    private $cantcssec;
-    /**
-    * @ORM\Column(name="cantfp", type="integer")
-    */    
-    private $cantfp;
-    /**
-    * @ORM\Column(name="cantts", type="integer")
-    */
-    private $cantts;  
-
-    /**
-    * @ORM\Column(name="cantexpped", type="integer")
-    */
-    private $cantexpped;
-
+    private $totalvotos;    
     /**
     * @ORM\Column(name="is_active", type="boolean")
     */
-    private $isActive; 
+    private $isActive;
 
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
     public function __construct()
     {
-        $this->estado = false;
+
+        $this->isActive = false;
     } 
     
     public function getId()
     {
         return $this->id;
     }
-
-    public function setCantcbsec($cantcbsec)
+/////////////////////////////////////////////////////
+    public function setTotalvotos($totalvotos)
     {
-        $this->cantcbsec = $cantcbsec;
+        $this->totalvotos = $totalvotos;
     
         return $this;
     }
 
-    public function getCantcbsec()
+    public function getTotalvotos()
     {
-        return $this->cantcbsec;
+        return $this->totalvotos;
     }
 
-    public function setCantcssec($cantcssec)
-    {
-        $this->cantcssec = $cantcssec;
-    
-        return $this;
-    }
-
-    public function getCantcssec()
-    {
-        return $this->cantcssec;
-    }
-
-    public function setCantfp($cantfp)
-    {
-        $this->cantfp = $cantfp;
-    
-        return $this;
-    }
-
-    public function getCantfp()
-    {
-        return $this->cantfp;
-    }   
-
-    public function setCantts($cantts)
-    {
-        $this->cantts = $cantts;
-    
-        return $this;
-    }
-
-    public function getCantts()
-    {
-        return $this->cantts;
-    }    
-
-    public function setCantexpped($cantexpped)
-    {
-        $this->cantexpped = $cantexpped;
-    
-        return $this;
-    }
-
-    public function getCantexpped()
-    {
-        return $this->cantexpped;
-    } 
-
+/////////////////////////////////////////
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;

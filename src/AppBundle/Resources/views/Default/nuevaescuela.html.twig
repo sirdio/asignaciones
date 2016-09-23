@@ -50,12 +50,17 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="jurisdiccion">Jurisdicción:</label>  
+  <label class="col-md-4 control-label" for="jurisdiccion">Jurisdicción:</label>
   <div class="col-md-8">
-  <input id="jurisdiccion" name="jurisdiccion" placeholder="ingrese jurisdiccion" class="form-control input-md" required="" type="text">
-  <span class="help-block">ej.: Corrientes</span>  
+    <select id="jurisdiccion" name="jurisdiccion" class="form-control">
+      <option value="0">Seleccionar Jurisdicción</option>
+      {% for juris in jurisdiccion %}
+      <option value="{{juris.nomjuris}}">{{juris.nomjuris}}</option>
+      {% endfor %}
+    </select>
   </div>
 </div>
+
 
 <!-- Text input-->
 <div class="form-group">

@@ -64,7 +64,12 @@ class Escuela
     /**
     * @ORM\Column(name="ambitogestion", type="string", length=150)
     */
-    private $ambitogestion;        
+    private $ambitogestion;    
+    /**
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Configuracion")
+    * @ORM\JoinColumn(name="idconfig", referencedColumnName="id")
+    */
+    private $configuracion;     
 
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
@@ -181,4 +186,27 @@ class Escuela
     {
         return $this->ambitogestion;
     }      
+
+    /**
+     * Set configuracion
+     *
+     * @param \appBundle\Entity\Configuracion $configuracion
+     * @return Estudiante
+     */
+    public function setConfiguracion(\AppBundle\Entity\Configuracion $configuracion = null)
+    {
+        $this->configuracion = $configuracion;
+    
+        return $this;
+    }
+
+    /**
+     * Get configuracion
+     *
+     * @return \appBundle\Entity\Configuracion
+     */
+    public function getConfiguracion()
+    {
+        return $this->configuracion;
+    }    
 }

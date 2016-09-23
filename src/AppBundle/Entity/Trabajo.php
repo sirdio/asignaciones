@@ -79,7 +79,15 @@ class Trabajo
     * @ORM\Column(name="estado", type="boolean")
     */
     private $estado;
-
+    /**
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Configuracion")
+    * @ORM\JoinColumn(name="idconfig", referencedColumnName="id")
+    */
+    private $configuracion; 
+    /**
+    * @ORM\Column(name="stand", type="integer")
+    */
+    private $stand;    
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
     public function __construct()
@@ -244,5 +252,39 @@ class Trabajo
     public function getEstado()
     {
         return $this->estado;
-    }    
+    }   
+    /**
+     * Set configuracion
+     *
+     * @param \appBundle\Entity\Configuracion $configuracion
+     * @return Estudiante
+     */
+    public function setConfiguracion(\AppBundle\Entity\Configuracion $configuracion = null)
+    {
+        $this->configuracion = $configuracion;
+    
+        return $this;
+    }
+
+    /**
+     * Get configuracion
+     *
+     * @return \appBundle\Entity\Configuracion
+     */
+    public function getConfiguracion()
+    {
+        return $this->configuracion;
+    }
+          //////////////////////////////////////
+    public function setStand($stand)
+    {
+        $this->stand = $stand;
+    
+        return $this;
+    }
+
+    public function getStand()
+    {
+        return $this->stand;
+    }
 }

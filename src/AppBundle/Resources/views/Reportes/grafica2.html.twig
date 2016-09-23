@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Datos</title>
+
+        {% block stylesheets %}
+        <!-- Latest compiled and minified CSS -->
+             <link href="{{ asset('public/css/bootstrap.css') }}" type="text/css" rel="stylesheet" />
+             <link href="{{ asset('public/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet" />
+
+ 
+
+        {% endblock %}
+
+
+
+
+		<script type="text/javascript" src="{{ asset('public/js/jquery.min.js') }}"></script>
+
+		<script type="text/javascript">
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Usuarios Inscriptos TÉCNICAMENTE2016'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Resultados',
+            data: [
+                ['Directivos: {{totd}} / {{porcentdirectivo}}%', {{porcentdirectivo}}],
+                ['Docentes: {{tote}} / {{porcentdocente}}%', {{porcentdocente}}],
+                ['Alumnos: {{tota}} / {{porcentalumno}}%', {{porcentalumno}}]
+            ]
+        }]
+    });
+
+});
+		</script>
+	</head>
+	<body>
+
+<script src="{{ asset('public/js/highcharts.js') }}"></script>
+<script src="{{ asset('public/js/highcharts-3d.js') }}"></script>
+<script src="{{ asset('public/js/exporting.js') }}"></script>
+
+<nav class="navbar navbar-default">
+  <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div>
+</nav>
+{#<div id="container" style="height:400px; "></div>
+<div id="container1" style="height: 400px; "></div>#}
+
+<div class="container-fluid">
+
+
+    <div class="row">
+    <div id="container" style="height:400px; "></div>
+    </div>   
+</div>
+
+
+        <footer>
+           <p>T&eacutecnicamente 2016 - Sistema de Voto Electrónico - Desarrollado por <a href="https://web.facebook.com/Por%C3%A1-Sistemas-645176765627967/?fref=ts">Navarro Sergio Antonio</a>
+            &copy; {{ 'now' | date('Y') }}</p>
+        </footer>
+	</body>
+</html>

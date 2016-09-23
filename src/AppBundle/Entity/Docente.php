@@ -64,12 +64,6 @@ class Docente  extends Usuariovotante
     private $presentacion;      
 
     /**
-    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Configuracion")
-    * @ORM\JoinColumn(name="idconfig", referencedColumnName="id")
-    */
-    private $configuracion; 
-
-    /**
     * @ORM\Column(name="cantexpped", type="integer")
     */    
     private $cantexpped; 
@@ -168,29 +162,7 @@ class Docente  extends Usuariovotante
     {
         return $this->presentacion;
     }    
-//////////////////////////////////////
-    /**
-     * Set configuracion
-     *
-     * @param \appBundle\Entity\Configuracion $configuracion
-     * @return Docente
-     */
-    public function setConfiguracion(\AppBundle\Entity\Configuracion $configuracion = null)
-    {
-        $this->configuracion = $configuracion;
-    
-        return $this;
-    }
 
-    /**
-     * Get configuracion
-     *
-     * @return \appBundle\Entity\Configuracion
-     */
-    public function getConfiguracion()
-    {
-        return $this->configuracion;
-    }
 ///////////////////////////////////////////////////
 
     public function setCantexpped($cantexpped)

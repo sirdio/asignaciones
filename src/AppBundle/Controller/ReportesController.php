@@ -349,127 +349,151 @@ class ReportesController extends Controller
         $session=$request->getSession();
         if($session->has("id")){
             $em = $this->getDoctrine()->getManager();
+            $historial = $em->getRepository('AppBundle:Historialvoto')->findAll();
             $directivo = $em->getRepository('AppBundle:Directivo')->findBy(array('isActive' => 1));
             $encargado = $em->getRepository('AppBundle:Encargado')->findBy(array('isActive' => 1));
             $estudiantes = $em->getRepository('AppBundle:Estudiante')->findBy(array('isActive' => 1));
-            $copetyp = $em->getRepository('AppBundle:Copetyp')->findBy(array('isActive' => 1));
+
             $totd = count($directivo);
             $tote = count($encargado);
             $tota = count($estudiantes);
-            $totcop = count($copetyp);
 
-            $totaluser = $totd + $tote + $tota + $totcop;
+            $totaluser = $totd + $tote + $tota;
 
-            
+                
             $porcentdirectivo = ($totd / $totaluser)*100;
             $porcentdocente = ($tote / $totaluser)*100;
             $porcentalumno = ($tota / $totaluser)*100; 
-            $porcentjurado = ($totcop / $totaluser)*100;
 
             $porcentdirectivo =round($porcentdirectivo,2);
             $porcentdocente =round( $porcentdocente,2);
-            $porcentalumno =round($porcentalumno,2);
-            $porcentjurado =round($porcentjurado,2);
-            $totalvotos = $em->getRepository('AppBundle:Configuracion')->findBy(array('isActive' => 1));
-            $copetyp = $em->getRepository('AppBundle:Copetyp')->findBy(array('isActive' => 1));
-            $votosrealizados = $em->getRepository('AppBundle:Historialvoto')->findAll();
-            $totcopetyp = count($copetyp);
-            $votosactivos = count($totalvotos) - $totcopetyp;
-            $votoshabilitados = ($votosactivos * 6) + ($totcopetyp * 2);
+            $porcentalumno =round($porcentalumno,2);            
+            if($historial){
 
-            $totalvr = count($votosrealizados);
-            
-            $totalfv = $votoshabilitados - $totalvr;
-            $porcentvr =($totalvr/$votoshabilitados)*100;
-            $porcentfv =($totalfv/$votoshabilitados)*100; 
-            $porcentvr =round($porcentvr,2);
-            $porcentfv =round($porcentfv,2);
-            $contcbs = 0;
-            $contcss = 0;
-            $contotros = 0;
+                
+                $totalvotos = $em->getRepository('AppBundle:Configuracion')->findBy(array('isActive' => 1));
 
-            $corrcbs = 0;
-            $miscbs = 0;
-            $formcbs = 0;
-            $chcbs = 0;
-            $entriocbs = 0;
+                $votosactivos = count($totalvotos);
+                
+                $votoshabilitados = $votosactivos * 30;
 
-            $corrcss = 0;
-            $miscss = 0;
-            $formcss = 0;
-            $chcss = 0;
-            $entriocss = 0;            
-            foreach ($votosrealizados as $key) {
-                if($key->getTrabajo()->getNiveltrab() == 'cbs'){
-                    $contcbs = $contcbs + 1;
-                }elseif($key->getTrabajo()->getNiveltrab() == 'css'){
-                    $contcss = $contcss + 1;
-                }else{
-                    $contotros = $contotros + 1;
+
+                $votosdisponible = 0 ;
+                foreach ($totalvotos as $totalvotos ) {
+                    $detalle = $em->getRepository('AppBundle:Detalleconfiguracion')->findBy(array('configuracion'=>$totalvotos));
+                    foreach ($detalle as $detalle) {
+                        $votosdisponible = $votosdisponible + $detalle->getCantcbs() + $detalle->getCantcbs(); 
+
+                    }
                 }
 
-                if($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Corrientes' and $key->getTrabajo()->getNiveltrab() == 'cbs'){
-                    $corrcbs = $corrcbs + 1;
-                }elseif($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Misiones' and $key->getTrabajo()->getNiveltrab() == 'cbs'){
-                    $miscbs = $miscbs + 1;
-                }elseif($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Formosa' and $key->getTrabajo()->getNiveltrab() == 'cbs'){
-                    $formcbs = $formcbs + 1;
-                }elseif($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Chaco' and $key->getTrabajo()->getNiveltrab() == 'cbs'){
-                    $chcbs = $chcbs + 1;
-                }elseif($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Entre Ríos' and $key->getTrabajo()->getNiveltrab() == 'cbs'){
-                    $entriocbs = $entriocbs + 1;
+                $votosrealizados = $em->getRepository('AppBundle:Historialvoto')->findAll();
+                $totalvr = count($votosrealizados);
+
+                $totalfv = $votoshabilitados - $totalvr;
+                $porcentvr =($totalvr/$votoshabilitados)*100;
+                $porcentfv =($totalfv/$votoshabilitados)*100; 
+                $porcentvr =round($porcentvr,2);
+                $porcentfv =round($porcentfv,2);
+                
+                $contcbs = 0;
+                $contcss = 0;
+
+                $corrcbs = 0;
+                $miscbs = 0;
+                $formcbs = 0;
+                $chcbs = 0;
+                $entriocbs = 0;
+
+                $corrcss = 0;
+                $miscss = 0;
+                $formcss = 0;
+                $chcss = 0;
+                $entriocss = 0;   
+
+                foreach ($votosrealizados as $key) {
+                    if($key->getTrabajo()->getNiveltrab() == 'cbs'){
+                        $contcbs = $contcbs + 1;
+                    }elseif($key->getTrabajo()->getNiveltrab() == 'css'){
+                        $contcss = $contcss + 1;
+                    }else{
+                        $contotros = $contotros + 1;
+                    }
+
+                    if($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Corrientes' and $key->getTrabajo()->getNiveltrab() == 'cbs'){
+                        $corrcbs = $corrcbs + 1;
+                    }elseif($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Misiones' and $key->getTrabajo()->getNiveltrab() == 'cbs'){
+                        $miscbs = $miscbs + 1;
+                    }elseif($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Formosa' and $key->getTrabajo()->getNiveltrab() == 'cbs'){
+                        $formcbs = $formcbs + 1;
+                    }elseif($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Chaco' and $key->getTrabajo()->getNiveltrab() == 'cbs'){
+                        $chcbs = $chcbs + 1;
+                    }elseif($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Entre Ríos' and $key->getTrabajo()->getNiveltrab() == 'cbs'){
+                        $entriocbs = $entriocbs + 1;
+                    }
+
+                    if($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Corrientes' and $key->getTrabajo()->getNiveltrab() == 'css'){
+                        $corrcss = $corrcss + 1;
+                    }elseif($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Misiones' and $key->getTrabajo()->getNiveltrab() == 'css'){
+                        $miscss = $miscss + 1;
+                    }elseif($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Formosa' and $key->getTrabajo()->getNiveltrab() == 'css'){
+                        $formcss = $formcss + 1;
+                    }elseif($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Chaco' and $key->getTrabajo()->getNiveltrab() == 'css'){
+                        $chcss = $chcss + 1;
+                    }elseif($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Entre Ríos' and $key->getTrabajo()->getNiveltrab() == 'css'){
+                        $entriocss = $entriocss + 1;
+                    }
                 }
+                
+                $totcbscss = $contcbs + $contcss;
+                $porcentcbs = ($contcbs/ $totcbscss)*100;
+                $porcentcss = ($contcss/ $totcbscss)*100;
+                $porcentcbs =round($porcentcbs,2);
+                $porcentcss =round($porcentcss,2);
 
-                if($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Corrientes' and $key->getTrabajo()->getNiveltrab() == 'css'){
-                    $corrcss = $corrcss + 1;
-                }elseif($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Misiones' and $key->getTrabajo()->getNiveltrab() == 'css'){
-                    $miscss = $miscss + 1;
-                }elseif($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Formosa' and $key->getTrabajo()->getNiveltrab() == 'css'){
-                    $formcss = $formcss + 1;
-                }elseif($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Chaco' and $key->getTrabajo()->getNiveltrab() == 'css'){
-                    $chcss = $chcss + 1;
-                }elseif($key->getTrabajo()->getEscuela()->getJurisdiccion() == 'Entre Ríos' and $key->getTrabajo()->getNiveltrab() == 'css'){
-                    $entriocss = $entriocss + 1;
-                }
-            }
-            $totcbscss = $contcbs + $contcss;
-            $porcentcbs = ($contcbs/ $totcbscss)*100;
-            $porcentcss = ($contcss/ $totcbscss)*100;
-            $porcentcbs =round($porcentcbs,2);
-            $porcentcss =round($porcentcss,2);
+                $chcbscss = $chcbs + $chcss;
+                $corrcbscss = $corrcbs +$corrcss;
+                $entriocbscss = $entriocbs +$entriocss;
+                $formcbscss = $formcbs +$formcss;
+                $miscbscss = $miscbs+ $miscss;
+                $totChCoERFoMi = $chcbscss + $corrcbscss + $entriocbscss + $formcbscss + $miscbscss;
+                $porcentchcbscss = ($chcbscss / $totChCoERFoMi)*100;
+                $porcentcorrcbscss = ($corrcbscss / $totChCoERFoMi)*100;
+                $porcententriocbscss = ($entriocbscss / $totChCoERFoMi)*100;
+                $porcentformcbscss = ($formcbscss / $totChCoERFoMi)*100;
+                $porcentmiscbscss = ($miscbscss / $totChCoERFoMi)*100;
 
-            $chcbscss = $chcbs + $chcss;
-            $corrcbscss = $corrcbs +$corrcss;
-            $entriocbscss = $entriocbs +$entriocss;
-            $formcbscss = $formcbs +$formcss;
-            $miscbscss = $miscbs+ $miscss;
-            $totChCoERFoMi = $chcbscss + $corrcbscss + $entriocbscss + $formcbscss + $miscbscss;
-            $porcentchcbscss = ($chcbscss / $totChCoERFoMi)*100;
-            $porcentcorrcbscss = ($corrcbscss / $totChCoERFoMi)*100;
-            $porcententriocbscss = ($entriocbscss / $totChCoERFoMi)*100;
-            $porcentformcbscss = ($formcbscss / $totChCoERFoMi)*100;
-            $porcentmiscbscss = ($miscbscss / $totChCoERFoMi)*100;
+                $porcentchcbscss = round($porcentchcbscss,2);
+                $porcentcorrcbscss  = round($porcentcorrcbscss,2);
+                $porcententriocbscss = round($porcententriocbscss,2);
+                $porcentformcbscss = round($porcentformcbscss,2);
+                $porcentmiscbscss = round($porcentmiscbscss,2);
 
-            $porcentchcbscss = round($porcentchcbscss,2);
-            $porcentcorrcbscss  = round($porcentcorrcbscss,2);
-            $porcententriocbscss = round($porcententriocbscss,2);
-            $porcentformcbscss = round($porcentformcbscss,2);
-            $porcentmiscbscss = round($porcentmiscbscss,2);
-            return $this->render('AppBundle:Reportes:grafica.html.twig',
-                array(
-                    'totalvr'=>$totalvr, 'totalfv'=>$totalfv,
-                    'porcentfv'=>$porcentfv,'porcentvr'=>$porcentvr,
-                    'totd'=>$totd, 'tote'=>$tote, 'tota'=>$tota, 'totcop'=>$totcop,
-                    'porcentdirectivo'=>$porcentdirectivo, 'porcentdocente'=>$porcentdocente,
-                    'porcentalumno'=>$porcentalumno, 'porcentjurado'=>$porcentjurado,
-                    'contcbs'=>$contcbs, 'contcss'=>$contcss,
-                    'porcentcbs'=>$porcentcbs, 'porcentcss'=>$porcentcss,
-                    'chcbscss'=>$chcbscss, 'corrcbscss'=>$corrcbscss, 'entriocbscss'=>$entriocbscss, 
-                    'formcbscss'=>$formcbscss, 'miscbscss'=>$miscbscss,
-                    'porcentchcbscss' => $porcentchcbscss, 'porcentcorrcbscss' => $porcentcorrcbscss,
-                    'porcententriocbscss' => $porcententriocbscss, 'porcentformcbscss' => $porcentformcbscss,
-                    'porcentmiscbscss' => $porcentmiscbscss
-                    ));
+                return $this->render('AppBundle:Reportes:grafica.html.twig',
+                    array(
+                        'totalvr'=>$totalvr, 'totalfv'=>$totalfv,
+                        'porcentfv'=>$porcentfv,'porcentvr'=>$porcentvr,
+                        'totd'=>$totd, 'tote'=>$tote, 'tota'=>$tota,
+                        'porcentdirectivo'=>$porcentdirectivo, 'porcentdocente'=>$porcentdocente,
+                        'porcentalumno'=>$porcentalumno, 
+                        'contcbs'=>$contcbs, 'contcss'=>$contcss,
+                        'porcentcbs'=>$porcentcbs, 'porcentcss'=>$porcentcss,
+                        'chcbscss'=>$chcbscss, 'corrcbscss'=>$corrcbscss, 'entriocbscss'=>$entriocbscss, 
+                        'formcbscss'=>$formcbscss, 'miscbscss'=>$miscbscss,
+                        'porcentchcbscss' => $porcentchcbscss, 'porcentcorrcbscss' => $porcentcorrcbscss,
+                        'porcententriocbscss' => $porcententriocbscss, 'porcentformcbscss' => $porcentformcbscss,
+                        'porcentmiscbscss' => $porcentmiscbscss
+                        ));
+            }else{
+                return $this->render('AppBundle:Reportes:grafica2.html.twig',
+                    array(
+                        /*'totalvr'=>$totalvr, 'totalfv'=>$totalfv,
+                        'porcentfv'=>$porcentfv,'porcentvr'=>$porcentvr,*/
+                        'totd'=>$totd, 'tote'=>$tote, 'tota'=>$tota,
+                        'porcentdirectivo'=>$porcentdirectivo, 'porcentdocente'=>$porcentdocente,
+                        'porcentalumno'=>$porcentalumno
+                        ));                
+            }    
         }else{
             return $this->render('AppBundle:Default:principal.html.twig');
         }

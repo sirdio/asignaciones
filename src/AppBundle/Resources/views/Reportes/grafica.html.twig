@@ -52,13 +52,12 @@ $(function () {
             data: [
                 ['Directivos: {{totd}} / {{porcentdirectivo}}%', {{porcentdirectivo}}],
                 ['Docentes: {{tote}} / {{porcentdocente}}%', {{porcentdocente}}],
-                ['Alumnos: {{tota}} / {{porcentalumno}}%', {{porcentalumno}}],
-                ['Jurado COPETyP: {{totcop}} / {{porcentjurado}}%', {{porcentjurado}}]
+                ['Alumnos: {{tota}} / {{porcentalumno}}%', {{porcentalumno}}]
             ]
         }]
     });
 
-   $('#container1').highcharts({
+  $('#container1').highcharts({
         chart: {
             type: 'pie',
             options3d: {
@@ -94,7 +93,7 @@ $(function () {
         }]
     });
 
-$('#container2').highcharts({
+ $('#container2').highcharts({
         chart: {
             type: 'pie',
             options3d: {
