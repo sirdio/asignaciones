@@ -22,19 +22,21 @@
 				    <h3>Resultados</h3>
                     <table class="table table-hover">
                             <tr class="danger">
+                                <th>Stand</th>
                                 <th>Nombre Proyecto</th>
                                 <th>Jurisdicción</th>
                                 <th>Establecimineto</th>
                                 <th>Cantidad de Votos</th>
-                                <th>Acción</th>
+                                
                             </tr>
                         {% for trab in trabajo %}
                             <tr class="danger">
+                                <td>{{trab.stand}}</td>
                                 <td>{{trab.nombproyecto}}</td>
                                 <td>{{trab.escuela.jurisdiccion}}</td>
                                 <td>{{trab.escuela.nombesc}}</td>
                                 <td>{{trab.cantvoto}}</td>
-                                <td><a class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" data-val="{{trab.id}}" href="{{path('VerIntegrantes',{'idt':trab.id})}}">Ver Integrantes - {{trab.id}}</a></td>    
+         
                             </tr>
                         {% endfor %}
                     </table>				

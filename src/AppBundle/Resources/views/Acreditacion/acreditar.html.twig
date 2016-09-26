@@ -59,8 +59,9 @@
 <legend>Formulario de Acreditación</legend>
 
 <div class="form-group">
+{% if estd == 1%}
   <label class="col-md-4 control-label" for="checkboxes">Directivo</label>
-  <div class="col-md-8">
+  <div class="col-md-8"> 
   <div class="checkbox">
     <label for="check-{{i}}">
       <input name="acreditacion[]" id="check-{{i}}" value="d-{{directivo.dni}}" type="checkbox"
@@ -69,6 +70,7 @@
     </label>
 	</div>
 	</div>
+{% endif %}
 	<HR NOSHADE WIDTH=400 SIZE=4>
     	{% set j = 1%}
 	    {% for trab in trabajo %}

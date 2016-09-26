@@ -130,7 +130,15 @@ class DefaultController extends Controller
                     array('tipovotante'=>$tipovotante, 'presentacion'=>$presentacion));                
                 
                 }elseif ($_POST['selectbasic'] == "Estudiante"){
-                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                    //$trabajo = $em->getRepository('AppBundle:Trabajo')->findAll();
+                        $em=$this->getDoctrine()
+                                 ->getManager()
+                                    ->createQueryBuilder('AppBundle:Trabajo')
+                                    ->select('t')
+                                    ->from('AppBundle:Trabajo','t')
+                                    ->orderBy("t.stand","asc")
+                                    ->getQuery();
+                     $trabajo=$em->getArrayResult();
                     if (!$trabajo){
                         $msj = "Para cargar un usuario Estudiante es necesario cargar antes los trabajos.";              
                         return $this->render('AppBundle:Default:mensajeerro.html.twig', array('msj'=>$msj));                    
@@ -749,8 +757,27 @@ class DefaultController extends Controller
         if($session->has("id")){
             /////////////////////////////////////////////////////////////////////
         $em = $this->getDoctrine()->getManager();
-        $encargado = $em->getRepository('AppBundle:Encargado')->findAll();
-        $escuela = $em->getRepository('AppBundle:Escuela')->findAll();
+        //$encargado = $em->getRepository('AppBundle:Encargado')->findAll(Array('dni'=>'asc'));
+            $em=$this->getDoctrine()
+                     ->getManager()
+                        ->createQueryBuilder('AppBundle:Encargado')
+                        ->select('e')
+                        ->from('AppBundle:Encargado','e')
+                        ->orderBy("e.dni","asc")
+                        ->getQuery();
+         $encargado=$em->getArrayResult();
+            $em=$this->getDoctrine()
+                     ->getManager()
+                        ->createQueryBuilder('AppBundle:Escuela')
+                        ->select('e')
+                        ->from('AppBundle:Escuela','e')
+                        ->orderBy("e.cue","asc")
+                        ->getQuery();
+         $escuela=$em->getArrayResult();
+
+
+        //$em = $this->getDoctrine()->getManager();
+        //$escuela = $em->getRepository('AppBundle:Escuela')->findAll();
         return $this->render('AppBundle:Trabajo:nuevotrabajo.html.twig',
         array('encargado'=>$encargado, 'escuela'=>$escuela));
             //////////////////////////////////////////////////////////////////////
@@ -1176,9 +1203,14 @@ class DefaultController extends Controller
                 if($escuela){
                     $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array("escuela"=>$escuela));
                     $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy(Array("idesc"=>$escuela->getId()));
+                    if($directivo){
+                        $estd = 1;    
+                    }else{
+                        $estd = 0;
+                    }
                     $estudiante = $em->getRepository('AppBundle:Estudiante')->findAll();
                     return $this->render('AppBundle:Acreditacion:acreditar.html.twig', 
-                    array("escuela"=>$escuela, "trabajo"=>$trabajo, "directivo"=>$directivo, "estudiante"=>$estudiante));
+                    array("estd"=>$estd, "escuela"=>$escuela, "trabajo"=>$trabajo, "directivo"=>$directivo, "estudiante"=>$estudiante));
                 }
             }
             $em=$this->getDoctrine()

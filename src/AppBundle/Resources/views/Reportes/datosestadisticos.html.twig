@@ -1,37 +1,67 @@
-Directivo: {{totdirectivo}}
-<br>
-Docente: {{totencargado}}
-<br>
-Alumnos:{{totestudiante}}
-<br>
-Jurado(COPETyP):{{totcopetyp}}
-<br>
-Tabla configuracion activos:{{totconofig}}
-<br>
-Cantidad de Votantes: {{totalvotantes}}
-<br>
-Votos Habilitados: {{totvotoshabilitados}}
-<br>
-Total de Votos: {{totvotosrealizados}}
-<br>
-Cantidad de Votos Faltantes:{{totfaltante}}
-<br>
----------------------------------------------------------
+{% extends '::base.html.twig' %}
+{% block title %}TECNICAMENTE 2016!!!{% endblock %}
+{% block body %}
 
+<nav class="navbar navbar-default">
+  <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div><!-- /.container-fluid -->
+</nav>
 
-
-<br>
-Cantidad de Votos Faltantes:
-<br>
-Cantidad de votos Trabajos del CBS:
-<br>
-puesto 1:{{puesto1cbs}}
-<br>
-puesto 2:{{puesto2cbs}}
-<br>
-Cantidad de votos Trabajos del CSS:
-<br>
-puesto 1:
-<br>
-puesto 2:
-<br>
+<section class="Container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>TécnicaMente 2016</h3>
+				</div>
+				<div class="panel-body">
+				    <h3>Total de Votos Jurisdicción: {{juris.nomjuris}} Ciclo Básico</h3>
+                    <table class="table table-hover">
+                            <tr class="info">
+                                <th>Stand</th>
+                                <th>Nombre Proyecto</th>
+                                <th>Establecimineto</th>
+                                <th>Cantidad de Votos</th>
+                            </tr>
+                            {% for trab in trabajo %}
+                             {% if juris.nomjuris == trab.escuela.jurisdiccion and trab.niveltrab == 'cbs' %}   
+                            <tr class="info">
+                                <th>{{trab.stand}}</th>
+                                <th>{{trab.nombproyecto}}</th>
+                                <td>{{trab.escuela.nombesc}}</td>
+                                <td>{{trab.cantvoto}}</td>
+                            </tr>
+                        {% endif %}
+                            {% endfor %}
+                    </table>				
+				</div>
+                <div class="panel-body">
+                    <h3>Total de Votos Jurisdicción: {{juris.nomjuris}} Ciclo Superior</h3>
+                    <table class="table table-hover">
+                            <tr class="danger">
+                                <th>Stand</th>
+                                <th>Nombre Proyecto</th>
+                                <th>Establecimineto</th>
+                                <th>Cantidad de Votos</th>
+                            </tr>
+                            {% for trab in trabajo %}
+                             {% if juris.nomjuris == trab.escuela.jurisdiccion and trab.niveltrab == 'css' %}   
+                            <tr class="danger">
+                                <th>{{trab.stand}}</th>
+                                <th>{{trab.nombproyecto}}</th>
+                                <td>{{trab.escuela.nombesc}}</td>
+                                <td>{{trab.cantvoto}}</td>
+                            </tr>
+                        {% endif %}
+                            {% endfor %}
+                    </table>                
+                </div>                
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

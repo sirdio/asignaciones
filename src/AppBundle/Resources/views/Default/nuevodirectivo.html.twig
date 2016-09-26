@@ -60,7 +60,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="cargo">Cargo:</label>  
   <div class="col-md-8">
-  <input id="cargo" name="cargo" placeholder="ingresar cargo" class="form-control input-md" required="" type="text" >
+  <input id="cargo" name="cargo" placeholder="ingresar cargo" class="form-control input-md" required="" type="text" value="Directivo" >
   <span class="help-block">ej.: Jefa de Sección</span>  
   </div>
 </div>
@@ -69,7 +69,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="tel">Teléfono:</label>  
   <div class="col-md-8">
-  <input id="tel" name="tel" placeholder="ingrese telefono" class="form-control input-md" required="" type="text">
+  <input id="tel" name="tel" placeholder="ingrese telefono" class="form-control input-md" required="" type="text" value="1111111">
   <span class="help-block">ej.: 379-4457189</span>  
   </div>
 </div>
@@ -78,7 +78,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="email">Email:</label>  
   <div class="col-md-8">
-  <input id="email" name="email" placeholder="ingrese Email" class="form-control input-md" required="" type="text">
+  <input id="email" name="email" placeholder="ingrese Email" class="form-control input-md" required="" type="text" value="notiene@hotmail.com">
   <span class="help-block">ej.: pablo2314@hotmail.com</span>  
   </div>
 </div>
@@ -90,7 +90,7 @@
     <select id="establecimiento" name="establecimiento" class="form-control">
       <option value="0">Seleccionar Opción</option>
       {% for esc in escuela %}
-      <option value="{{esc.id}}">{{esc.nombesc}}</option>
+      <option value="{{esc.id}}">{{esc.cue}} - {{esc.nombesc}}</option>
       {% endfor %}
     </select>
   </div>

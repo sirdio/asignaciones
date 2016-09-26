@@ -280,60 +280,32 @@ class ReportesController extends Controller
         $session=$request->getSession();
         if($session->has("id")){
             $em = $this->getDoctrine()->getManager();
-            $directivo = $em->getRepository('AppBundle:Directivo')->findBy(array('isActive' => 1));
-            $encargado = $em->getRepository('AppBundle:Encargado')->findBy(array('isActive' => 1));
-            $estudiantes = $em->getRepository('AppBundle:Estudiante')->findBy(array('isActive' => 1));
-            $Copetyp = $em->getRepository('AppBundle:Copetyp')->findBy(array('isActive' => 1));
-            $totdirectivo = count($directivo);
-            $totencargado = count($encargado);
-            $totestudiante = count($estudiantes);
-            $totcopetyp = count($Copetyp);
-            ////////////////////////////////////////////////////////////////////////////////////////////////////
-            $useracreditado = $em->getRepository('AppBundle:Usuariovotante')->findBy(array('isActive' => 1));
-            $totalvotos = $em->getRepository('AppBundle:Configuracion')->findBy(array('isActive' => 1));            
-            $totalvotantes = count($useracreditado);
-            $cont = count($totalvotos);
-            $totvotoshabilitados = ($cont) * 6;
-
-            $totconofig = count($totalvotos);
-            
-            if($totalvotos){
-                $votosrealizados = $em->getRepository('AppBundle:Historialvoto')->findAll();
-                $totvotosrealizados = count($votosrealizados);
-                $totfaltante = $totvotoshabilitados - $totvotosrealizados;
-                $totvotos = 0;
-                $totvotoscbs = 0;
-                $totvotoscss = 0;                
-                foreach ($totalvotos as $key) {
-                    $totvotos = $totvotos + $key->getCantcbsec() + $key->getCantcssec();
-                    $totvotoscbs = $totvotoscbs + $key->getCantcbsec();
-                    $totvotoscss = $totvotoscss + $key->getCantcssec();
-                }
-                $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(array('niveltrab' => 'cbs' ));
-                if($trabajo){
-                                       $puesto1cbs =0;
-                    $puesto2cbs =0; 
-                }else{
-                    $puesto1cbs =0;
-                    $puesto2cbs =0;
-                }
-                return $this->render('AppBundle:Reportes:datosestadisticos.html.twig', 
-                    array('totalvotantes'=>$totalvotantes,'totvotoshabilitados'=>$totvotoshabilitados,
-                        'totconofig'=>$totconofig,'totestudiante'=>$totestudiante, 'totdirectivo'=>$totdirectivo,
-                        'totcopetyp'=>$totcopetyp, 'totencargado'=>$totencargado, 'totvotosrealizados'=>$totvotosrealizados,
-                        'totfaltante'=>$totfaltante,
-
-                        'totvotos'=>$totvotos, 
-                        'totvotoscbs'=>$totvotoscbs,
-                        'totvotoscss'=>$totvotoscss, 
-                        'puesto1cbs'=>$puesto1cbs, 'puesto2cbs'=>$puesto2cbs
-                        
-
-                        ));
+            $juris= $em->getRepository('AppBundle:Jurisdiccion')->find($request->get('juri'));
+            $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(
+                Array('isActive' => 1,'estado' => 0), Array( 'cantvoto'=>'DESC'));
+            if($trabajo){
+                return $this->render('AppBundle:Reportes:datosestadisticos.html.twig',
+                    array('juris'=>$juris, 'trabajo'=>$trabajo ));
             }else{
-                $msj = "No se registraron votantes.";
+                $msj = "Sigue abierta la votación.";
                 return $this->render('AppBundle:Reportes:msjestadistica.html.twig',array('msj'=>$msj));
             }            
+        }else
+        {
+            return $this->render('AppBundle:Default:principal.html.twig');
+        }
+    }
+
+    /**
+     * @Route("/cargadatos/seleccionarjurisdiccion", name="SelecJuris")
+     */
+    public function SelecJurisAction(Request $request)
+    {
+        $session=$request->getSession();
+        if($session->has("id")){
+            $em = $this->getDoctrine()->getManager();
+            $juris = $em->getRepository('AppBundle:Jurisdiccion')->findAll();
+            return $this->render('AppBundle:Reportes:seleccionarJuris.html.twig',array('juris'=>$juris));
         }else
         {
             return $this->render('AppBundle:Default:principal.html.twig');
@@ -353,7 +325,10 @@ class ReportesController extends Controller
             $directivo = $em->getRepository('AppBundle:Directivo')->findBy(array('isActive' => 1));
             $encargado = $em->getRepository('AppBundle:Encargado')->findBy(array('isActive' => 1));
             $estudiantes = $em->getRepository('AppBundle:Estudiante')->findBy(array('isActive' => 1));
-
+        if(!$directivo and !$encargado and !$estudiantes){
+            $msj = "No se puede Mostrar la información.";
+            return $this->render('AppBundle:Default:mensajeerro.html.twig',array('msj'=>$msj));
+        }else{
             $totd = count($directivo);
             $tote = count($encargado);
             $tota = count($estudiantes);
@@ -493,10 +468,12 @@ class ReportesController extends Controller
                         'porcentdirectivo'=>$porcentdirectivo, 'porcentdocente'=>$porcentdocente,
                         'porcentalumno'=>$porcentalumno
                         ));                
-            }    
+            }
+        }
         }else{
             return $this->render('AppBundle:Default:principal.html.twig');
         }
+
     }
 
 }

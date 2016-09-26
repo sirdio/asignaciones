@@ -1,0 +1,31 @@
+{% extends '::base.html.twig' %}
+{% block title %}TECNICAMENTE 2016!!!{% endblock %}
+{% block body %}
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+      </ul>
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <form action="{{ path('DatosEstadisticos') }}" method="post" class="form-inline" role="form">
+	    <div class="control-group">
+            <label for="juri">Nivel:</label>
+            <select id="juri" name="juri">
+                <option value="0">Seleccionar Opción</option>
+                {% for ju in juris %}
+                  <option value="{{ju.id}}">{{ju.nomjuris}}</option>
+                {% endfor %}
+            </select>
+	    </div>
+
+	        <button class="btn btn-primary">Mostrar Resultados</button>
+       </form>
+     </div> 
+  </div>
+</div> 
+{% endblock %}
