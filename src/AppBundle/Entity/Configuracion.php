@@ -27,9 +27,21 @@ class Configuracion
      */
     private $id;
     /**
-    * @ORM\Column(name="totalvotos", type="integer")
+    * @ORM\Column(name="ctvcbs", type="integer")
     */    
-    private $totalvotos;    
+    private $ctvcbs;    
+    /**
+    * @ORM\Column(name="ctvcss", type="integer")
+    */    
+    private $ctvcss; 
+    /**
+    * @ORM\Column(name="ctvfp", type="integer")
+    */    
+    private $ctvfp;    
+    /**
+    * @ORM\Column(name="ctvts", type="integer")
+    */    
+    private $ctvts; 
     /**
     * @ORM\Column(name="is_active", type="boolean")
     */
@@ -48,19 +60,58 @@ class Configuracion
         return $this->id;
     }
 /////////////////////////////////////////////////////
-    public function setTotalvotos($totalvotos)
+    public function setCtvcbs($ctvcbs)
     {
-        $this->totalvotos = $totalvotos;
+        $this->ctvcbs = $ctvcbs;
     
         return $this;
     }
 
-    public function getTotalvotos()
+    public function getCtvcbs()
     {
-        return $this->totalvotos;
+        return $this->ctvcbs;
     }
 
 /////////////////////////////////////////
+    public function setCtvcss($ctvcss)
+    {
+        $this->ctvcss = $ctvcss;
+    
+        return $this;
+    }
+
+    public function getCtvcss()
+    {
+        return $this->ctvcss;
+    }
+
+/////////////////////////////////////////
+    public function setCtvfp($ctvfp)
+    {
+        $this->ctvfp = $ctvfp;
+    
+        return $this;
+    }
+
+    public function getCtvfp()
+    {
+        return $this->ctvfp;
+    }
+
+/////////////////////////////////////////
+    public function setCtvts($ctvts)
+    {
+        $this->ctvts = $ctvts;
+    
+        return $this;
+    }
+
+    public function getCtvts()
+    {
+        return $this->ctvts;
+    }
+
+/////////////////////////////////////////    
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;

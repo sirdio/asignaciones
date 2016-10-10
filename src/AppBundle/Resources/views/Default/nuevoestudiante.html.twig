@@ -15,7 +15,7 @@
           <div class="col-md-4">
           </div>
           <div class="col-md-4">
-<form action="{{ path('GuardarUsuario') }}" method="post" class="form-horizontal">
+<form action="{{ path('GuardarUsuarioAlumno') }}" method="post" class="form-horizontal">
 <fieldset>
 
 <!-- Form Name -->
@@ -50,7 +50,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="tipovotante">Tipo de Votante::</label>  
+  <label class="col-md-4 control-label" for="tipovotante">Tipo de Votante:</label>  
   <div class="col-md-8">
   <input id="tipovotante" name="tipovotante" class="form-control input-md" required="" type="text" value="{{tipovotante}}" readonly="readonly">
   </div>
@@ -82,6 +82,8 @@
       <option value="0">Seleccionar Opción</option>
       <option value="cbs">Ciclo B&aacutesico Secundaria</option>
       <option value="css">Ciclo Superior Secundaria</option>
+      <option value="fp">Formaci&oacuten Profesional</option>
+      <option value="ts">Tecnicaturas Superiores</option>
     </select>
   </div>
 </div>

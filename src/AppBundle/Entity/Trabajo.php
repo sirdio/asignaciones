@@ -34,29 +34,15 @@ class Trabajo
      */    
     private $nombproyecto;    
     /**
-     * @var string
-     *
-     * @ORM\Column(name="descproyecto", type="string", length=300)
-     * 
-     */    
-    private $descproyecto;
-    /**
-    * @ORM\Column(name="pavproyecto", type="string", length=2500)
-    */    
-    private $pavproyecto;
-    /**
-    * @ORM\Column(name="dpwproyecto", type="string", length=150)
+    * @ORM\Column(name="cvmencion", type="integer")
     */
-    private $dpwproyecto;  
+    private $cvmencion;
 
     /**
-    * @ORM\Column(name="aemproyecto", type="string", length=150)
+    * @ORM\Column(name="cvdestacado", type="integer")
     */
-    private $aemproyecto;
-    /**
-    * @ORM\Column(name="cantvoto", type="integer")
-    */
-    private $cantvoto;
+    private $cvdestacado;
+
     /**
     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Encargado")
     * @ORM\JoinColumn(name="idenc", referencedColumnName="id")
@@ -111,65 +97,31 @@ class Trabajo
     {
         return $this->nombproyecto;
     }
+    
 //////////////////////////////////////
-    public function setDescproyecto($descproyecto)
+
+    public function setCvmencion($cvmencion)
     {
-        $this->descproyecto = $descproyecto;
+        $this->cvmencion = $cvmencion;
     
         return $this;
     }
 
-    public function getDescproyecto()
+    public function getCvmencion()
     {
-        return $this->descproyecto;
-    }
-//////////////////////////////////////
-    public function setPavproyecto($pavproyecto)
-    {
-        $this->pavproyecto = $pavproyecto;
-    
-        return $this;
-    }
-
-    public function getPavproyecto()
-    {
-        return $this->pavproyecto;
-    }   
-//////////////////////////////////////
-    public function setDpwproyecto($dpwproyecto)
-    {
-        $this->dpwproyecto = $dpwproyecto;
-    
-        return $this;
-    }
-
-    public function getDpwproyecto()
-    {
-        return $this->dpwproyecto;
+        return $this->cvmencion;
     }    
 //////////////////////////////////////
-    public function setAemproyecto($aemproyecto)
+    public function setCvdestacado($cvdestacado)
     {
-        $this->aemproyecto = $aemproyecto;
+        $this->cvdestacado = $cvdestacado;
     
         return $this;
     }
 
-    public function getAemproyecto()
+    public function getCvdestacado()
     {
-        return $this->aemproyecto;
-    }    
-//////////////////////////////////////
-    public function setCantvoto($cantvoto)
-    {
-        $this->cantvoto = $cantvoto;
-    
-        return $this;
-    }
-
-    public function getCantvoto()
-    {
-        return $this->cantvoto;
+        return $this->cvdestacado;
     }    
 //////////////////////////////////////
     /**
@@ -257,7 +209,7 @@ class Trabajo
      * Set configuracion
      *
      * @param \appBundle\Entity\Configuracion $configuracion
-     * @return Estudiante
+     * @return Trabajo
      */
     public function setConfiguracion(\AppBundle\Entity\Configuracion $configuracion = null)
     {

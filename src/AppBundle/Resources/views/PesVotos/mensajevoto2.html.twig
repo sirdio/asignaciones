@@ -6,14 +6,39 @@
     <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
   <div class="container-fluid">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{{path('VerOtrosTrabajos')}}">Volver <span class="sr-only">(current)</span></a></li>
          <li class="active"><a href="{{path('LogoutSalir')}}">Salir <span class="sr-only">(current)</span></a></li>
       </ul>
   </div>
 </nav>
 
 <div class="container">
-            <div class="alert alert-info">{{msj}}</div>      
+     <div class="alert alert-info">{{msj}}</div>
+     <table class="table table-striped">
+      <tr>
+        <th>Nro. de Stand</th>
+        <th>Nombre del Proyecto</th>       
+      </tr>
+      {% for esc in escuela %}
+      <tr>
+    {% if datosvoto.standcbs != 0 %}
+        <td>{{datosvoto.standcbs}}</td>
+        <td>{{datosvoto.nomcbs}}</td>
+    {% endif %}
+    {% if datosvoto.standcss != 0 %}
+        <td>{{datosvoto.standcss}}</td>
+        <td>{{datosvoto.nomcss}}</td>
+    {% endif %}
+    {% if datosvoto.standcbs != 0 %}
+        <td>{{datosvoto.standcbs}}</td>
+        <td>{{datosvoto.nomcbs}}</td>
+    {% endif %}
+    {% if datosvoto.standts != 0 %}
+        <td>{{datosvoto.standts}}</td>
+        <td>{{datosvoto.nomts}}</td>
+    {% endif %}            
+      </tr>
+      {% endfor %}
+      </table>
 </div> 
 
 

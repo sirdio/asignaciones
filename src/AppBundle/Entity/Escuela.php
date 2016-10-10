@@ -41,35 +41,9 @@ class Escuela
     */    
     private $jurisdiccion;
     /**
-    * @ORM\Column(name="departamento", type="string", length=150)
-    */
-    private $departamento;  
-
-    /**
     * @ORM\Column(name="localidad", type="string", length=150)
     */
-    private $localidad;
-    /**
-    * @ORM\Column(name="domicilio", type="string", length=200)
-    */
-    private $domicilio;
-    /**
-    * @ORM\Column(name="telefono", type="string", length=15)
-    */
-    private $telefono;
-    /**
-    * @ORM\Column(name="emailesc", type="string", length=200)
-    */
-    private $emailesc;    
-    /**
-    * @ORM\Column(name="ambitogestion", type="string", length=150)
-    */
-    private $ambitogestion;    
-    /**
-    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Configuracion")
-    * @ORM\JoinColumn(name="idconfig", referencedColumnName="id")
-    */
-    private $configuracion;     
+    private $localidad;  
 
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
@@ -115,18 +89,6 @@ class Escuela
         return $this->jurisdiccion;
     }   
 
-    public function setDepartamento($departamento)
-    {
-        $this->departamento = $departamento;
-    
-        return $this;
-    }
-
-    public function getDepartamento()
-    {
-        return $this->departamento;
-    }    
-
     public function setLocalidad($localidad)
     {
         $this->localidad = $localidad;
@@ -138,75 +100,5 @@ class Escuela
     {
         return $this->localidad;
     }    
-
-    public function setDomicilio($domicilio)
-    {
-        $this->domicilio = $domicilio;
     
-        return $this;
-    }
-
-    public function getDomicilio()
-    {
-        return $this->domicilio;
-    }    
-
-    public function setTelefono($telefono)
-    {
-        $this->telefono = $telefono;
-    
-        return $this;
-    }
-
-    public function getTelefono()
-    {
-        return $this->telefono;
-    }    
-
-    public function setEmailesc($emailesc)
-    {
-        $this->emailesc = $emailesc;
-    
-        return $this;
-    }
-
-    public function getEmailesc()
-    {
-        return $this->emailesc;
-    }    
-    
-    public function setAmbitogestion($ambitogestion)
-    {
-        $this->ambitogestion = $ambitogestion;
-    
-        return $this;
-    }
-
-    public function getAmbitogestion()
-    {
-        return $this->ambitogestion;
-    }      
-
-    /**
-     * Set configuracion
-     *
-     * @param \appBundle\Entity\Configuracion $configuracion
-     * @return Estudiante
-     */
-    public function setConfiguracion(\AppBundle\Entity\Configuracion $configuracion = null)
-    {
-        $this->configuracion = $configuracion;
-    
-        return $this;
-    }
-
-    /**
-     * Get configuracion
-     *
-     * @return \appBundle\Entity\Configuracion
-     */
-    public function getConfiguracion()
-    {
-        return $this->configuracion;
-    }    
 }

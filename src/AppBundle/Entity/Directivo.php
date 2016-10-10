@@ -30,25 +30,17 @@ class Directivo  extends Usuariovotante
      * 
      */    
     private $cargo;    
-	
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="emaild", type="string", length=150)
-     * 
-     */    
-    private $emaild;
-	
-    /**
-    * @ORM\Column(name="teld", type="string", length=30)
-    */    
-    private $teld;	
 
     /**
     * @ORM\Column(name="idesc", type="integer")
     */    
     private $idesc;
     
+   // /**
+   // * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Configuracion")
+   // * @ORM\JoinColumn(name="idconfig", referencedColumnName="id")
+   // */
+   // private $configuracion;
    /**
      * Get id
      *
@@ -71,30 +63,6 @@ class Directivo  extends Usuariovotante
         return $this->cargo;
     }
 
-	    public function setEmaild($emaild)
-    {
-        $this->emaild = $emaild;
-    
-        return $this;
-    }
-
-    public function getEmaild()
-    {
-        return $this->emaild;
-    }
-
-    public function setTeld($teld)
-    {
-        $this->teld = $teld;
-    
-        return $this;
-    }
-
-    public function getTeld()
-    {
-        return $this->teld;
-    }
-
     public function setIdesc($idesc)
     {
         $this->idesc = $idesc;
@@ -106,5 +74,27 @@ class Directivo  extends Usuariovotante
     {
         return $this->idesc;
     }  
+//////////////////////////////////////
+    ///**
+    // * Set configuracion
+    // *
+    // * @param \appBundle\Entity\Configuracion $configuracion
+    // * @return Copetyp
+    // */
+    //public function setConfiguracion(\AppBundle\Entity\Configuracion $configuracion = null)
+    //{
+    //    $this->configuracion = $configuracion;
+    //    return $this;
+    //}
+
+    ///**
+    // * Get configuracion
+    // *
+    // * @return \appBundle\Entity\Configuracion
+    // */
+    //public function getConfiguracion()
+    //{
+    //    return $this->configuracion;
+    //}    
         
 }

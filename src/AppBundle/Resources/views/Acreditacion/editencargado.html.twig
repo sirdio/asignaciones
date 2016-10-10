@@ -1,12 +1,12 @@
 {% extends '::base.html.twig' %}
-{% block title %}Agregar Usuario{% endblock %}
+{% block title %}Modificar Usuario{% endblock %}
 {% block body %}
 
 <nav class="navbar navbar-default">
   <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
   <div class="container-fluid">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="{{path('VolverAcreditacion',{'id': ide})}}">Volver <span class="sr-only">(current)</span></a></li>
       </ul>
   </div>
 </nav>
@@ -15,7 +15,7 @@
           <div class="col-md-4">
           </div>
           <div class="col-md-4">
-<form action="{{ path('GuardarUsuarioEncargado') }}" method="post" class="form-horizontal">
+<form action="{{ path('GuardarModEncargado',{'dni': encargado.dni, 'ide': ide})}}" method="post" class="form-horizontal">
 <fieldset>
 
 <!-- Form Name -->
@@ -25,7 +25,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="dni">D.N.I.:</label>  
   <div class="col-md-8">
-  <input id="dni" name="dni" placeholder="ingrese DNI" class="form-control input-md" required="" type="text">
+  <input id="dni" name="dni" class="form-control input-md" required="" type="text" value="{{encargado.dni}}">
   <span class="help-block">ej.: 26587458</span>  
   </div>
 </div>
@@ -34,7 +34,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="nombre">Nombre:</label>  
   <div class="col-md-8">
-  <input id="nombre" name="nombre" placeholder="ingrese nombre" class="form-control input-md" required="" type="text">
+  <input id="nombre" name="nombre" class="form-control input-md" required="" type="text" value="{{encargado.nombre}}">
   <span class="help-block">ej.: Pedro A.</span>  
   </div>
 </div>
@@ -43,16 +43,8 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="apellido">Apellido:</label>  
   <div class="col-md-8">
-  <input id="apellido" name="apellido" placeholder="ingrese apellido" class="form-control input-md" required="" type="text">
+  <input id="apellido" name="apellido" class="form-control input-md" required="" type="text" value="{{encargado.apellido}}">
   <span class="help-block">ej.: López</span>  
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="tipovotante">Tipo de Votante:</label>  
-  <div class="col-md-8">
-  <input id="tipovotante" name="tipovotante" class="form-control input-md" required="" type="text" value="{{tipovotante}}" readonly="readonly">
   </div>
 </div>
 
@@ -60,7 +52,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="materiadic">Materia que Dicta:</label>  
   <div class="col-md-8">
-  <input id="materiadic" name="materiadic" placeholder="ingresar la materia que dicta" class="form-control input-md" required="" type="text" value="No Agregó">
+  <input id="materiadic" name="materiadic" class="form-control input-md" required="" type="text" value="{{encargado.materiadic}}">
   <span class="help-block">ej.: Laboratorio de Programación I</span>  
   </div>
 </div>

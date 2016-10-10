@@ -6,7 +6,7 @@
   <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
   <div class="container-fluid">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="{{path('VolverAcreditacion',{'id':ide})}}">Volver <span class="sr-only">(current)</span></a></li>
       </ul>
   </div>
 </nav>
@@ -15,7 +15,7 @@
           <div class="col-md-4">
           </div>
           <div class="col-md-4">
-<form action="{{ path('GuardarCambiosTrabajo',{'id': trabajo.id }) }}" method="post" class="form-horizontal">
+<form action="{{ path('GuardarDTM',{'idt': trabajo.id, 'ide': idescuela}) }}" method="post" class="form-horizontal">
 <fieldset>
 
 <!-- Form Name -->
@@ -28,6 +28,7 @@
   <input id="nombproyecto" name="nombproyecto" class="form-control input-md" required="" type="text" value="{{trabajo.nombproyecto}}">
   </div>
 </div>
+
 
 <!-- Text input-->
 <div class="form-group">

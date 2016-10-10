@@ -30,19 +30,6 @@ class Copetyp  extends Usuariovotante
      * 
      */    
     private $cargocop;    
-	
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="emailcop", type="string", length=150)
-     * 
-     */    
-    private $emailcop;
-	
-    /**
-    * @ORM\Column(name="telcop", type="string", length=30)
-    */    
-    private $telcop;	
 
     /**
     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Configuracion")
@@ -73,32 +60,6 @@ class Copetyp  extends Usuariovotante
     public function getCargocop()
     {
         return $this->cargocop;
-    }
-
-//////////////////////////////////////
-	    public function setEmailcop($emailcop)
-    {
-        $this->emailcop = $emailcop;
-    
-        return $this;
-    }
-
-    public function getEmailcop()
-    {
-        return $this->emailcop;
-    }
-
-//////////////////////////////////////
-    public function setTelcop($telcop)
-    {
-        $this->telcop = $telcop;
-    
-        return $this;
-    }
-
-    public function getTelcop()
-    {
-        return $this->telcop;
     }
 
 //////////////////////////////////////

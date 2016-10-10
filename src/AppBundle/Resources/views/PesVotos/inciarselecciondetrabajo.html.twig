@@ -6,7 +6,10 @@
 
         <!-- Top content -->
         <div class="top-content">
-        	<img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">        	
+        	<img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">  
+                {% for flashMessage in app.session.flashbag.get('mensaje') %}
+                    <span class="alert-danger"> {{ flashMessage }} <hr /> </span>
+                {% endfor %}                  	
             <div class="inner-bg">
                 <div class="container">
                     <div class="row">
@@ -19,7 +22,7 @@
                         	<div class="form-top">
                         		<div class="form-top-left">
                         			<h3> Iniciar Sesión </h3>
-                            		<p>ingrese D.N.I. y contrase&ntildea para ver y votar un trabajo:</p>
+                            		<p>ingrese D.N.I. y contrase&ntildea para votar los trabajos:</p>
                         		</div>
                             </div>
                             <div class="form-bottom">

@@ -29,26 +29,14 @@ class Encargado  extends Usuariovotante
      * @ORM\Column(name="materiadic", type="string", length=150)
      * 
      */    
-    private $materiadic;    
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="emaile", type="string", length=150)
-     * 
-     */    
-    private $emaile;
-	
-    /**
-    * @ORM\Column(name="tele", type="string", length=30)
-    */    
-    private $tele;
-
-    /**
-    * @ORM\Column(name="cantexpped", type="integer")
-    */    
-    private $cantexpped;    
+    private $materiadic;   
     
+        /**
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Configuracion")
+    * @ORM\JoinColumn(name="idconfig", referencedColumnName="id")
+    */
+    private $configuracion;
+
    /**
      * Get id
      *
@@ -71,39 +59,26 @@ class Encargado  extends Usuariovotante
         return $this->materiadic;
     }
 
-    public function setEmaile($emaile)
+    /**
+     * Set configuracion
+     *
+     * @param \appBundle\Entity\Configuracion $configuracion
+     * @return Encargado
+     */
+    public function setConfiguracion(\AppBundle\Entity\Configuracion $configuracion = null)
     {
-        $this->emaile = $emaile;
+        $this->configuracion = $configuracion;
     
         return $this;
     }
 
-    public function getEmaile()
+    /**
+     * Get configuracion
+     *
+     * @return \appBundle\Entity\Configuracion
+     */
+    public function getConfiguracion()
     {
-        return $this->emaile;
+        return $this->configuracion;
     }
-
-    public function setTele($tele)
-    {
-        $this->tele = $tele;
-    
-        return $this;
-    }
-
-    public function getTele()
-    {
-        return $this->tele;
-    }
-    
-    public function setCantexpped($cantexpped)
-    {
-        $this->cantexpped = $cantexpped;
-    
-        return $this;
-    }
-
-    public function getCantexpped()
-    {
-        return $this->cantexpped;
-    }    
 }

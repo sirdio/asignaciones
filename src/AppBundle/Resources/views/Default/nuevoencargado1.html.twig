@@ -15,7 +15,7 @@
           <div class="col-md-4">
           </div>
           <div class="col-md-4">
-<form action="{{ path('GuardarUsuario') }}" method="post" class="form-horizontal">
+<form action="{{ path('GuardarUsuarioEncargado') }}" method="post" class="form-horizontal">
 <fieldset>
 
 <!-- Form Name -->
@@ -50,7 +50,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="tipovotante">Tipo de Votante::</label>  
+  <label class="col-md-4 control-label" for="tipovotante">Tipo de Votante:</label>  
   <div class="col-md-8">
   <input id="tipovotante" name="tipovotante" class="form-control input-md" required="" type="text" value="{{datosusuario.tv}}" readonly="readonly" >
   </div>
@@ -60,43 +60,10 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="materiadic">Materia que Dicta:</label>  
   <div class="col-md-8">
-  <input id="materiadic" name="materiadic" placeholder="ingresar la materia que dicta" class="form-control input-md" required="" type="text" value="{{datosusuario.materiadicta}}">
+  <input id="materiadic" name="materiadic" placeholder="ingresar la materia que dicta" class="form-control input-md" required="" type="text" value="{{datosusuario.materiadic}}">
   <span class="help-block">ej.: Laboratorio de Programación I</span>  
   </div>
 </div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="tele">Teléfono:</label>  
-  <div class="col-md-8">
-  <input id="tele" name="tele" placeholder="ingrese telefono" class="form-control input-md" required="" type="text" value="{{datosusuario.tel}}">
-  <span class="help-block">ej.: 379-4457189</span>  
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="emaile">Email:</label>  
-  <div class="col-md-8">
-  <input id="emaile" name="emaile" placeholder="ingrese Email" class="form-control input-md" required="" type="text" value="{{datosusuario.email}}">
-  <span class="help-block">ej.: pablo2314@hotmail.com</span>  
-  </div>
-</div>
-
-<!-- Select Basic -->
-{#<div class="form-group">
-  <label class="col-md-4 control-label" for="establecimiento">Establecimiento:</label>
-  <div class="col-md-8">
-    <select id="establecimiento" name="establecimiento" class="form-control">      
-      <option value="{{datoesc.id}}">{{datoesc.nombesc}}</option>   
-      {% for esc in escuela %}
-        {%if esc.id != datoesc.id %}
-          <option value="{{esc.id}}">{{esc.nombesc}}</option>  
-        {% endif %}        
-      {% endfor %}
-    </select>
-  </div>
-</div>#}
 
 <!-- Button -->
 <div class="form-group">

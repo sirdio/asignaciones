@@ -6,7 +6,7 @@
   <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
   <div class="container-fluid">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="{{path('VolverAcreditacion',{'id':escuela.id})}}">Volver <span class="sr-only">(current)</span></a></li>
       </ul>
   </div>
 </nav>
@@ -15,7 +15,7 @@
           <div class="col-md-4">
           </div>
           <div class="col-md-4">
-<form action="{{ path('GuardarCambiosEst',{'id':escuela.id}) }}" method="post" class="form-horizontal">
+<form action="{{ path('GuardarEscuela',{'id':escuela.id}) }}" method="post" class="form-horizontal">
 <fieldset>
 
 <!-- Form Name -->
