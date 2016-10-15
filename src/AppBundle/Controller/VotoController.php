@@ -29,28 +29,6 @@ class VotoController extends Controller
         $session->clear();
         return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
     }
-
-    
-    public function getRegistrarVoto($dni, $nombre, $apellido, $trabajoid)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $trabajovoto = $em->getRepository('AppBundle:Trabajo')->find($trabajoid);       
-        $hvoto = new Historialvoto();
-        $hvoto->setDni($dni);
-        $hvoto->setNembre($nombre);
-        $hvoto->setApellido($apellido);
-        date_default_timezone_set("America/Argentina/Buenos_Aires");
-        $horaactual = date("H:i:s");
-        $fechaactual = date("d-m-Y");
-        $hvoto->setFecha($fechaactual);
-        $hvoto->setHora($horaactual);
-        $hvoto->setTrabajo($trabajovoto);
-        $em->persist($hvoto);
-        $em->flush();
-        $valor = true;
-        return $valor;
-    }
-
     
     /**
      * @Route("/iniciarselecciondetrabajo", name="IniciarSelecdeTrabajo")
@@ -67,28 +45,65 @@ class VotoController extends Controller
                     $this->get('session')->getFlashBag()->add('mensaje','El directivo debe decidir junto con el docente responsable de uno de los trabajos que representa a su establecimiento y seleccionar en forma conjunta los trabajos que van a votar y luego el docente se encarga de realizar el voto.');
                     return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
                 }elseif($encargado and $encargado->getIsActive() == 1){
-                    $trabajo = $em->getRepository('AppBundle:trabajo')->findBy(array('encargado' => $encargado ));
-                    if (isset($trabajo) && count($trabajo) == 1) {   
-                        $trabajo = $em->getRepository('AppBundle:trabajo')->findOneBy(array('encargado' => $encargado ));
-                        if ($trabajo->getEscuela()->getCue() == $request->get('password')){
-                            $session=$request->getSession();
-                            $session->set("dni",$encargado->getDni());
-                            $session->set("tipovot",$encargado->getTipovot());
-                            $session->set("cue",$trabajo->getEscuela()->getCue());
-                            return $this->render('AppBundle:PesVotos:votartrabajos.html.twig',array('enc'=>$encargado));
+                    $trabajo = $em->getRepository('AppBundle:trabajo')->findOneBy(array('encargado' => $encargado ));
+                    if ($trabajo->getEscuela()->getCue() == $request->get('password')){
+                        if ($encargado->getConfiguracion()->getCtvcbs()==1 or $encargado->getConfiguracion()->getCtvcss()==1 or $encargado->getConfiguracion()->getCtvfp()==1 or $encargado->getConfiguracion()->getCtvts()==1){
+                            if (isset($trabajo) && count($trabajo) == 1) {   
+                                $trabajo = $em->getRepository('AppBundle:trabajo')->findOneBy(array('encargado' => $encargado ));
+                                    $session=$request->getSession();
+                                    $session->set("dni",$encargado->getDni());
+                                    $session->set("tipovot",$encargado->getTipovot());
+                                    $session->set("cue",$trabajo->getEscuela()->getCue());
+                                    $ciclo = "cbs";
+                                    $trabcbs = $this->getRecuperartrabajos($ciclo);
+                                    $ciclo = "css";
+                                    $trabcss = $this->getRecuperartrabajos($ciclo);
+                                    $ciclo = "fp";
+                                    $trabfp = $this->getRecuperartrabajos($ciclo);
+                                    $ciclo = "ts";
+                                    $trabts = $this->getRecuperartrabajos($ciclo);
+                                    $dnienc = $encargado->getDni();
+                                    return $this->render('AppBundle:PesVotos:votartrabajos.html.twig',
+                                        array('enc'=>$encargado,'trabcbs'=>$trabcbs,'trabcss'=>$trabcss,'trabfp'=>$trabfp,'trabts'=>$trabts, 'dnienc'=>$dnienc));                       
+                            }else{
+                                $this->get('session')->getFlashBag()->add('mensaje','Error 111: Problema al definir el objeto, consulte con el administrador.');
+                                return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
+                            } 
                         }else{
-                            $this->get('session')->getFlashBag()->add('mensaje','La Contraseña que Ingreso No es Correcta, si no recuerda su contraseña consulte con el administrador.');
+                            $this->get('session')->getFlashBag()->add('mensaje','Supero la cantidad de votos disponibles.');
+                            return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
+                        }
+                    }else{
+                        $this->get('session')->getFlashBag()->add('mensaje','La Contraseña que Ingreso No es Correcta, si no recuerda su contraseña consulte con el administrador.');
+                        return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
+                    }                         
+                }elseif($estudiante and $estudiante->getIsActive() == 1){
+                    
+                    if ($estudiante->getTrabajo()->getEscuela()->getCue() == $request->get('password')){
+                        if ($estudiante->getTrabajo()->getConfiguracion()->getCtvcbs()==1 or $estudiante->getTrabajo()->getConfiguracion()->getCtvcss()==1 or $estudiante->getTrabajo()->getConfiguracion()->getCtvfp()==1 or $estudiante->getTrabajo()->getConfiguracion()->getCtvts()==1) {
+                                $session=$request->getSession();
+                                $session->set("dni",$estudiante->getDni());
+                                $session->set("tipovot",$estudiante->getTipovot());
+                                $session->set("cue",$estudiante->getTrabajo()->getEscuela()->getCue());
+                                $ciclo = "cbs";
+                                $trabcbs = $this->getRecuperartrabajos($ciclo);
+                                $ciclo = "css";
+                                $trabcss = $this->getRecuperartrabajos($ciclo);
+                                $ciclo = "fp";
+                                $trabfp = $this->getRecuperartrabajos($ciclo);
+                                $ciclo = "ts";
+                                $trabts = $this->getRecuperartrabajos($ciclo);
+                                $idtrabajo = $estudiante->getTrabajo()->getId();
+                                return $this->render('AppBundle:PesVotos:votartrabajoalumno.html.twig',
+                                    array('alu'=>$estudiante,'trabcbs'=>$trabcbs,'trabcss'=>$trabcss,'trabfp'=>$trabfp,'trabts'=>$trabts, 'idtrabajo'=>$idtrabajo));
+                        }else{
+                            $this->get('session')->getFlashBag()->add('mensaje','Supero la cantidad de votos disponibles.');
                             return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
                         }                        
-                    }elseif (isset($trabajo) && count($trabajo) > 1) {
-                        echo "Mayor a 1";
-                        echo isset($trabajo);
-                        echo count($trabajo);
-                        die();                        
                     }else{
-                        $this->get('session')->getFlashBag()->add('mensaje','Error 111: Problema al definir el objeto, consulte con el administrador.');
+                        $this->get('session')->getFlashBag()->add('mensaje','La Contraseña que Ingreso No es Correcta, si no recuerda su contraseña consulte con el administrador.');
                         return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
-                    } 
+                    }                    
                 }else{
                 $this->get('session')->getFlashBag()->add('mensaje','El usario que intenta ingresar no fue acreditado o no esta cargado en el sistema, consulte con el administrador.');
                 return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');                     
@@ -101,7 +116,33 @@ class VotoController extends Controller
         return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
     }
 
+    public function getRecuperartrabajos($ciclo)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $trabajos = $em->getRepository('AppBundle:Trabajo')->findBy(array('niveltrab'=>$ciclo,'isActive'=>1, 'estado'=>1));
+         return $trabajos;
+    }
 
+    public function getRegVoto($dni, $nombre, $apellido, $trabajoid, $tipovotante)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $trabajovoto = $em->getRepository('AppBundle:Trabajo')->find($trabajoid);       
+        $hvoto = new Historialvoto();
+        $hvoto->setDni($dni);
+        $hvoto->setNembre($nombre);
+        $hvoto->setApellido($apellido);
+        date_default_timezone_set("America/Argentina/Buenos_Aires");
+        $horaactual = date("H:i:s");
+        $fechaactual = date("d-m-Y");
+        $hvoto->setFecha($fechaactual);
+        $hvoto->setHora($horaactual);
+        $hvoto->setTrabajo($trabajovoto);
+        $hvoto->setTipovoto($tipovotante);
+        $em->persist($hvoto);
+        $em->flush();
+        $valor = true;
+        return;
+    }
 
     /**
      * @Route("/guardarvotos", name="VotarTrabajos")
@@ -114,25 +155,112 @@ class VotoController extends Controller
             $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(array('dni' => $session->get('dni')));
             if($request->isMethod('POST')){                
                 if ($request->get('cbs')){
-                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(array('stand'=>$request->get('cbs')));
-                    $standcbs = $trabajo->getStand();
-                    $nombcbs = $trabajo->getnombproyecto();
+                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(
+                        array('stand'=>$request->get('cbs'),'isActive' => 1, 'estado' => 1));
+                    if($trabajo){
+                        if($encargado->getConfiguracion()->getCtvcbs() == 1){                            
+                            $standcbs = $trabajo->getStand();
+                            $nombcbs = $trabajo->getnombproyecto();
+                            $encargado->getConfiguracion()->setCtvcbs(0);
+                            
+                            $dni = $encargado->getDni();
+                            $nombre = $encargado->getNombre();
+                            $apellido = $encargado->getApellido();
+                            $trabajoid = $trabajo->getId();
+                            $tipovotante =$encargado->getTipovot();
+                            $this->getRegVoto($dni, $nombre, $apellido, $trabajoid, $tipovotante);
+                        }else{
+                            $msj ="Supero la cantidad de votos disponibles para Ciclo Básico.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto.html.twig');
+                        }
+                    }else{
+                        $this->get('session')->getFlashBag()->add('mensaje','El número de Stand que desea votar para la categoría Ciclo Básico, no existe o no esta habilitado. En caso de tener dudas consulte con el administrador.');
+                            $ciclo = "cbs";
+                            $trabcbs = $this->getRecuperartrabajos($ciclo);
+                            $ciclo = "css";
+                            $trabcss = $this->getRecuperartrabajos($ciclo);
+                            $ciclo = "fp";
+                            $trabfp = $this->getRecuperartrabajos($ciclo);
+                            $ciclo = "ts";
+                            $trabts = $this->getRecuperartrabajos($ciclo);
+                            $dnienc = $encargado->getDni();
+                            return $this->render('AppBundle:PesVotos:votartrabajos.html.twig',
+                             array('enc'=>$encargado,'trabcbs'=>$trabcbs,'trabcss'=>$trabcss,'trabfp'=>$trabfp,'trabts'=>$trabts, 'dnienc'=>$dnienc)); 
+                    }
                 }else{
                     $standcbs = 0;
                     $nombcbs = 0;
                 }
                 if ($request->get('css')){
-                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(array('stand'=>$request->get('css')));
-                    $standcss = $trabajo->getStand();
-                    $nombcss = $trabajo->getnombproyecto();
+                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(
+                        array('stand'=>$request->get('css'),'isActive' => 1, 'estado' => 1));
+                    if($trabajo){
+                        if($encargado->getConfiguracion()->getCtvcss() == 1){                            
+                            $standcss = $trabajo->getStand();
+                            $nombcss = $trabajo->getnombproyecto();
+                            $encargado->getConfiguracion()->setCtvcss(0);
+                            
+                            $dni = $encargado->getDni();
+                            $nombre = $encargado->getNombre();
+                            $apellido = $encargado->getApellido();
+                            $trabajoid = $trabajo->getId();
+                            $tipovotante =$encargado->getTipovot();
+                            $this->getRegVoto($dni, $nombre, $apellido, $trabajoid, $tipovotante);
+                        }else{
+                            $msj ="Supero la cantidad de votos disponibles para Ciclo Superior.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto.html.twig');
+                        }
+                    }else{
+                        $this->get('session')->getFlashBag()->add('mensaje','El número de Stand que desea votar para la categoría Ciclo Superior, no existe o no esta habilitado. En caso de tener dudas consulte con el administrador.');
+                            $ciclo = "cbs";
+                            $trabcbs = $this->getRecuperartrabajos($ciclo);
+                            $ciclo = "css";
+                            $trabcss = $this->getRecuperartrabajos($ciclo);
+                            $ciclo = "fp";
+                            $trabfp = $this->getRecuperartrabajos($ciclo);
+                            $ciclo = "ts";
+                            $trabts = $this->getRecuperartrabajos($ciclo);
+                            $dnienc = $encargado->getDni();
+                            return $this->render('AppBundle:PesVotos:votartrabajos.html.twig',
+                             array('enc'=>$encargado,'trabcbs'=>$trabcbs,'trabcss'=>$trabcss,'trabfp'=>$trabfp,'trabts'=>$trabts, 'dnienc'=>$dnienc)); 
+                    }                    
                 }else{
                     $standcss = 0;
                     $nombcss = 0;
                 }
                 if ($request->get('fp')){
-                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(array('stand'=>$request->get('fp')));
-                    $standfp = $trabajo->getStand();
-                    $nombfp = $trabajo->getnombproyecto();
+                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(
+                        array('stand'=>$request->get('fp'),'isActive' => 1, 'estado' => 1));
+                    if($trabajo){
+                        if($encargado->getConfiguracion()->getCtvfp() == 1){                            
+                            $standfp = $trabajo->getStand();
+                            $nombfp = $trabajo->getnombproyecto();
+                            $encargado->getConfiguracion()->setCtvfp(0);
+                            
+                            $dni = $encargado->getDni();
+                            $nombre = $encargado->getNombre();
+                            $apellido = $encargado->getApellido();
+                            $trabajoid = $trabajo->getId();
+                            $tipovotante =$encargado->getTipovot();
+                            $this->getRegVoto($dni, $nombre, $apellido, $trabajoid, $tipovotante);
+                        }else{
+                            $msj ="Supero la cantidad de votos disponibles para Formación Profesional.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto.html.twig');
+                        }
+                    }else{
+                        $this->get('session')->getFlashBag()->add('mensaje','El número de Stand que desea votar para la categoría Formación Profesional, no existe o no esta habilitado. En caso de tener dudas consulte con el administrador.');
+                            $ciclo = "cbs";
+                            $trabcbs = $this->getRecuperartrabajos($ciclo);
+                            $ciclo = "css";
+                            $trabcss = $this->getRecuperartrabajos($ciclo);
+                            $ciclo = "fp";
+                            $trabfp = $this->getRecuperartrabajos($ciclo);
+                            $ciclo = "ts";
+                            $trabts = $this->getRecuperartrabajos($ciclo);
+                            $dnienc = $encargado->getDni();
+                            return $this->render('AppBundle:PesVotos:votartrabajos.html.twig',
+                             array('enc'=>$encargado,'trabcbs'=>$trabcbs,'trabcss'=>$trabcss,'trabfp'=>$trabfp,'trabts'=>$trabts, 'dnienc'=>$dnienc)); 
+                    }  
                 }else{
                     $standfp = 0;
                     $nombfp = 0;
@@ -141,141 +269,193 @@ class VotoController extends Controller
                     $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(
                         array('stand' => $request->get('ts'),'isActive' => 1, 'estado' => 1));
                     if($trabajo){
-                        $standts = $trabajo->getStand();
-                        $nombts = $trabajo->getnombproyecto();
+                        if($encargado->getConfiguracion()->getCtvts() == 1){                            
+                            $standts = $trabajo->getStand();
+                            $nombts = $trabajo->getnombproyecto();
+                            $encargado->getConfiguracion()->setCtvts(0);
+                            
+                            $dni = $encargado->getDni();
+                            $nombre = $encargado->getNombre();
+                            $apellido = $encargado->getApellido();
+                            $trabajoid = $trabajo->getId();
+                            $tipovotante =$encargado->getTipovot();
+                            $this->getRegVoto($dni, $nombre, $apellido, $trabajoid, $tipovotante);
+                        }else{
+                            $msj ="Supero la cantidad de votos disponibles para el Nivel Superior.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto.html.twig');
+                        }
                     }else{
                         $this->get('session')->getFlashBag()->add('mensaje','El número de Stand que desea votar para la categoría Nivel Superiro, no existe o no esta habilitado. En caso de tener dudas consulte con el administrador.');
-                        return $this->render('AppBundle:PesVotos:votartrabajos.html.twig',array('enc'=>$encargado));
+                            $ciclo = "cbs";
+                            $trabcbs = $this->getRecuperartrabajos($ciclo);
+                            $ciclo = "css";
+                            $trabcss = $this->getRecuperartrabajos($ciclo);
+                            $ciclo = "fp";
+                            $trabfp = $this->getRecuperartrabajos($ciclo);
+                            $ciclo = "ts";
+                            $trabts = $this->getRecuperartrabajos($ciclo);
+                            $dnienc = $encargado->getDni();
+                            return $this->render('AppBundle:PesVotos:votartrabajos.html.twig',
+                             array('enc'=>$encargado,'trabcbs'=>$trabcbs,'trabcss'=>$trabcss,'trabfp'=>$trabfp,'trabts'=>$trabts, 'dnienc'=>$dnienc)); 
                     }
                 }else{
                     $standts = 0;
                     $nombts = 0;
                 }
+                $em->persist($encargado);
+                $em->flush();
                 $msj = "Gracias por votar.";
-                $datosvoto = array ( 'standcbs' => $standcbs, 'nombcbs' => $nomcbs, 'standcss' => $standcss, 'nombcss' => $nomcss, 'standfp' => $standfp, 'nombfp' => $nomfp, 'standts' => $standts, 'nombts' => $nomts);
+                $datosvoto = array ( 'standcbs' => $standcbs, 'nombcbs' => $nombcbs, 'standcss' => $standcss, 'nombcss' => $nombcss, 'standfp' => $standfp, 'nombfp' => $nombfp, 'standts' => $standts, 'nombts' => $nombts);
                 return $this->render('AppBundle:PesVotos:mensajevoto2.html.twig', Array('msj'=>$msj, 'datosvoto'=>$datosvoto));                
-            
             }
             $this->get('session')->getFlashBag()->add('mensaje','Ocuurio un problema intete enviar los datos de nuevo, si el error persiste consulte con el administrador.');
-            return $this->render('AppBundle:PesVotos:votartrabajos.html.twig',array('enc'=>$encargado));
+            $ciclo = "cbs";
+            $trabcbs = $this->getRecuperartrabajos($ciclo);
+            $ciclo = "css";
+            $trabcss = $this->getRecuperartrabajos($ciclo);
+            $ciclo = "fp";
+            $trabfp = $this->getRecuperartrabajos($ciclo);
+            $ciclo = "ts";
+            $trabts = $this->getRecuperartrabajos($ciclo);
+            $dnienc = $encargado->getDni();
+            return $this->render('AppBundle:PesVotos:votartrabajos.html.twig',
+                             array('enc'=>$encargado,'trabcbs'=>$trabcbs,'trabcss'=>$trabcss,'trabfp'=>$trabfp,'trabts'=>$trabts, 'dnienc'=>$dnienc)); 
         }else{
             return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
         }            
     }
 
-}
-/*
-                if ($request->get('cbs') == "" or $request->get('cbs') == "0") {
+    /**
+     * @Route("/guardarvotoalumno", name="VotarTrabajoAlumno")
+     */
+    public function VotarTrabajoAlumnoAction(Request $request)
+    {
+        $session=$request->getSession();
+        if($session->has("dni")){
+            $em = $this->getDoctrine()->getManager();
+            $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneBy(array('dni' => $session->get('dni')));
+            $ciclo = "cbs";
+            $trabcbs = $this->getRecuperartrabajos($ciclo);
+            $ciclo = "css";
+            $trabcss = $this->getRecuperartrabajos($ciclo);
+            $ciclo = "fp";
+            $trabfp = $this->getRecuperartrabajos($ciclo);
+            $ciclo = "ts";
+            $trabts = $this->getRecuperartrabajos($ciclo);
+            $idtrabajo = $estudiante->getTrabajo()->getId();            
+            if($request->isMethod('POST')){  
+                $dni = $estudiante->getDni();
+                $nombre = $estudiante->getNombre();
+                $apellido = $estudiante->getApellido();
+                $tipovotante =$estudiante->getTipovot();
+                if ($request->get('cbs')){
+                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(
+                        array('stand'=>$request->get('cbs'),'isActive' => 1, 'estado' => 1));                    
+                    if($trabajo){
+                        if($estudiante->getTrabajo()->getConfiguracion()->getCtvcbs() == 1){                            
+                            $standcbs = $trabajo->getStand();
+                            $nombcbs = $trabajo->getnombproyecto();
+                            $estudiante->getTrabajo()->getConfiguracion()->setCtvcbs(0);
+
+                            $trabajoid = $trabajo->getId();
+                            $this->getRegVoto($dni, $nombre, $apellido, $trabajoid, $tipovotante);
+                        }else{
+                            $msj ="Supero la cantidad de votos disponibles para Ciclo Básico.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto.html.twig');
+                        }
+                    }else{
+                        $this->get('session')->getFlashBag()->add('mensaje','El número de Stand que desea votar para la categoría Ciclo Básico, no existe o no esta habilitado. En caso de tener dudas consulte con el administrador.');
+                        return $this->render('AppBundle:PesVotos:VotarTrabajoAlumno.html.twig',
+                            array('alu'=>$estudiante,'trabcbs'=>$trabcbs,'trabcss'=>$trabcss,'trabfp'=>$trabfp,'trabts'=>$trabts, 'idtrabajo'=>$idtrabajo));
+                    }
+                }else{
                     $standcbs = 0;
                     $nombcbs = 0;
-                }else{
-                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(array('stand' => $request->get('cbs')));
-                    if(!$trabajo){
-                        $this->get('session')->getFlashBag()->add('mensaje','El número de stand ingresado para el Ciclo Básico no existe, verificar que sea el correcto.');
-
-                        return $this->render('AppBundle:PesVotos:votartrabajos.html.twig',
-                            array('enc'=>$encargado, 'stcbs' =>$stcbs ,'stcss' =>$stcss, 'stfp' =>$stfp, 'stts' =>$stts));
-
-                    }else{
-                        $this->get('session')->getFlashBag()->add('mensaje','por ahora es correcto.');
-                        return $this->render('AppBundle:PesVotos:votartrabajos.html.twig',array('enc'=>$encargado));                        
-                    }
                 }
-                $datosvoto = array ( 'standcbs' => $standcbs, 'nombcbs' => $nomcbs, 'standcss' => $standcss, 'nombcss' => $nomcss, 'standfp' => $standfp, 'nombfp' => $nomfp, 'standts' => $standts, 'nombts' => $nomts);
-                return $this->render('AppBundle:PesVotos:mensajevoto2.html.twig', 
-                    Array('msj'=>$msj, 'datosvoto'=>$datosvoto));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                $em = $this->getDoctrine()->getManager();
-                $directivo = $em->getRepository('AppBundle:Directivo')->findOneBy(Array("dni"=>$request->get('dni'))); 
-                $encargado = $em->getRepository('AppBundle:Encargado')->findOneBy(Array("dni"=>$request->get('dni'))); 
-                $estudiante = $em->getRepository('AppBundle:Estudiante')->findOneBy(Array("dni"=>$request->get('dni'))); 
-                $copetyp = $em->getRepository('AppBundle:Copetyp')->findOneBy(Array("dni"=>$request->get('dni'))); 
-                if($directivo and $directivo->getIsActive() == 1){
-                    $escuela = $em->getRepository('AppBundle:Escuela')->find($directivo->getIdesc()); 
-                    if($escuela->getCue() == $request->get('password')){
-
-                        $session=$request->getSession();
-                        $session->set("dni",$directivo->getDni());
-                        $session->set("tipovot",$directivo->getTipovot());
-                        $session->set("cue",$escuela->getCue());              
-                        $em = $this->getDoctrine()->getManager();
-                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 1, 'estado' => 1));
-                        if($trabajo){
-                            return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
+                if ($request->get('css')){
+                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(
+                        array('stand'=>$request->get('css'),'isActive' => 1, 'estado' => 1));
+                    if($trabajo){
+                        if($estudiante->getTrabajo()->getConfiguracion()->getCtvcss() == 1){                            
+                            $standcss = $trabajo->getStand();
+                            $nombcss = $trabajo->getnombproyecto();
+                            $estudiante->getTrabajo()->getConfiguracion()->setCtvcss(0);
+                            
+                            $trabajoid = $trabajo->getId();
+                            $this->getRegVoto($dni, $nombre, $apellido, $trabajoid, $tipovotante);
                         }else{
-                            $msj = "Los trabajos no fueron acreditados o la votación no Inicia.";
-                            return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj));
-                        }                        
-                    }else{
-                        $msj = "La Contraseña que ingreso es incorrecta.";
-                        return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj)); 
-                    }
-                    
-                }elseif($encargado and $encargado->getIsActive() == 1){
-                    $trabajo = $em->getRepository('AppBundle:trabajo')->findBy(array('encargado' => $encargado ));
-                    foreach ($trabajo as $trabajo ) {
-
-                        if($trabajo->getEscuela()->getCue() == $request->get('password')){
-                            $session=$request->getSession();
-                            $session->set("dni",$encargado->getDni());
-                            $session->set("tipovot",$encargado->getTipovot());
-                            $session->set("cue",$trabajo->getEscuela()->getCue());              
-                            $em = $this->getDoctrine()->getManager();
-                            $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 1, 'estado' => 1));
-                            if($trabajo){
-                                return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
-                            }else{
-                                $msj = "Los trabajos no fueron acreditados o la votación no Inicia.";
-                                return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj));
-                            }                        
+                            $msj ="Supero la cantidad de votos disponibles para Ciclo Superior.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto.html.twig');
                         }
-                    }
-                    $msj = "La Contraseña que ingreso es incorrecta.";
-                    return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj));
-                }elseif($estudiante and $estudiante->getIsActive() == 1){
-                    
-                   if($estudiante->getTrabajo()->getEscuela()->getCue() == $request->get('password')){
-                        $session=$request->getSession();
-                        $session->set("dni",$estudiante->getDni());
-                        $session->set("tipovot",$estudiante->getTipovot());
-                        $session->set("cue",$estudiante->getTrabajo()->getEscuela()->getCue());              
-                        $em = $this->getDoctrine()->getManager();
-                        $trabajo = $em->getRepository('AppBundle:Trabajo')->findBy(Array('isActive' => 1, 'estado' => 1));
-                        if($trabajo){
-                            return $this->render('AppBundle:PesVotos:presentartrabajos.html.twig', array('trabajo'=>$trabajo));
-                        }else{
-                            $msj = "Los trabajos no fueron acreditados o la votación no Inicia.";
-                            return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj));
-                        }                        
-                   }else{
-                        $msj = "La Contraseña que ingreso es incorrecta.";
-                        return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj));
-                   }
-                }elseif($copetyp and $copetyp->getIsActive() == 1){
-                    $msj = "Funcionalidad en construccio.";
-                    return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj));
+                    }else{
+                        $this->get('session')->getFlashBag()->add('mensaje','El número de Stand que desea votar para la categoría Ciclo Superior, no existe o no esta habilitado. En caso de tener dudas consulte con el administrador.');
+                        return $this->render('AppBundle:PesVotos:VotarTrabajoAlumno.html.twig',
+                            array('alu'=>$estudiante,'trabcbs'=>$trabcbs,'trabcss'=>$trabcss,'trabfp'=>$trabfp,'trabts'=>$trabts, 'idtrabajo'=>$idtrabajo));
+                    }                    
                 }else{
-                    $msj = "El D.N.I. del usuario que intenta acceder,
-                    no se encuentra autorizado para votar o no fue acreditado.";
-                    return $this->render('AppBundle:PesVotos:mensajevoto.html.twig', array('msj'=>$msj)); 
+                    $standcss = 0;
+                    $nombcss = 0;
                 }
+                if ($request->get('fp')){
+                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(
+                        array('stand'=>$request->get('fp'),'isActive' => 1, 'estado' => 1));
+                    if($trabajo){
+                        if($estudiante->getTrabajo()->getConfiguracion()->getCtvfp() == 1){                            
+                            $standfp = $trabajo->getStand();
+                            $nombfp = $trabajo->getnombproyecto();
+                            $estudiante->getTrabajo()->getConfiguracion()->setCtvfp(0);
+                            
+                            $trabajoid = $trabajo->getId();
+                            $this->getRegVoto($dni, $nombre, $apellido, $trabajoid, $tipovotante);
+                        }else{
+                            $msj ="Supero la cantidad de votos disponibles para Formación Profesional.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto.html.twig');
+                        }
+                    }else{
+                        $this->get('session')->getFlashBag()->add('mensaje','El número de Stand que desea votar para la categoría Formación Profesional, no existe o no esta habilitado. En caso de tener dudas consulte con el administrador.');
+                        return $this->render('AppBundle:PesVotos:VotarTrabajoAlumno.html.twig',
+                            array('alu'=>$estudiante,'trabcbs'=>$trabcbs,'trabcss'=>$trabcss,'trabfp'=>$trabfp,'trabts'=>$trabts, 'idtrabajo'=>$idtrabajo));
+                    }  
+                }else{
+                    $standfp = 0;
+                    $nombfp = 0;
+                }
+                if ($request->get('ts')){
+                    $trabajo = $em->getRepository('AppBundle:Trabajo')->findOneBy(
+                        array('stand' => $request->get('ts'),'isActive' => 1, 'estado' => 1));
+                    if($trabajo){
+                        if($estudiante->getTrabajo()->getConfiguracion()->getCtvts() == 1){                            
+                            $standts = $trabajo->getStand();
+                            $nombts = $trabajo->getnombproyecto();
+                            $estudiante->getTrabajo()->getConfiguracion()->setCtvts(0);
+                            
+                            $trabajoid = $trabajo->getId();
+                            $this->getRegVoto($dni, $nombre, $apellido, $trabajoid, $tipovotante);
+                        }else{
+                            $msj ="Supero la cantidad de votos disponibles para el Nivel Superior.";
+                            return $this->render('AppBundle:PesVotos:mensajevoto.html.twig');
+                        }
+                    }else{
+                        $this->get('session')->getFlashBag()->add('mensaje','El número de Stand que desea votar para la categoría Nivel Superiro, no existe o no esta habilitado. En caso de tener dudas consulte con el administrador.');
+                        return $this->render('AppBundle:PesVotos:VotarTrabajoAlumno.html.twig',
+                            array('alu'=>$estudiante,'trabcbs'=>$trabcbs,'trabcss'=>$trabcss,'trabfp'=>$trabfp,'trabts'=>$trabts, 'idtrabajo'=>$idtrabajo));
+                    }
+                }else{
+                    $standts = 0;
+                    $nombts = 0;
+                }
+                $em->persist($estudiante);
+                $em->flush();
+                $msj = "Gracias por votar.";
+                $datosvoto = array ( 'standcbs' => $standcbs, 'nombcbs' => $nombcbs, 'standcss' => $standcss, 'nombcss' => $nombcss, 'standfp' => $standfp, 'nombfp' => $nombfp, 'standts' => $standts, 'nombts' => $nombts);
+                return $this->render('AppBundle:PesVotos:mensajevoto2.html.twig', Array('msj'=>$msj, 'datosvoto'=>$datosvoto));                
+            }
+            $this->get('session')->getFlashBag()->add('mensaje','Ocuurio un problema intete enviar los datos de nuevo, si el error persiste consulte con el administrador.');
 
-
-                */
+            return $this->render('AppBundle:PesVotos:VotarTrabajoAlumno.html.twig',
+                array('alu'=>$estudiante,'trabcbs'=>$trabcbs,'trabcss'=>$trabcss,'trabfp'=>$trabfp,'trabts'=>$trabts, 'idtrabajo'=>$idtrabajo));
+        }else{
+            return $this->render('AppBundle:PesVotos:inciarselecciondetrabajo.html.twig');
+        }            
+    }    
+}

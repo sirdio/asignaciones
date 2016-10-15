@@ -6,7 +6,8 @@
     <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
   <div class="container-fluid">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{{path('SeleccionarNivel')}}">Volver <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="{{path('SeleccionarNivel')}}">Atras <span class="sr-only">(current)</span></a></li>
       </ul>
   </div><!-- /.container-fluid -->
 </nav>
@@ -19,28 +20,51 @@
 					<h3>TécnicaMente 2016</h3>
 				</div>
 				<div class="panel-body">
-				    <h3>Resultados</h3>
+				    <h3>Resultados votos del {{nivel}} (Destacados)</h3>
                     <table class="table table-hover">
-                            <tr class="danger">
-                                <th>Stand</th>
+                            <tr class="info">
+                                <th>Stand Nro.</th>
                                 <th>Nombre Proyecto</th>
-                                <th>Jurisdicción</th>
                                 <th>Establecimineto</th>
+                                <th>Jurisdicción</th>
                                 <th>Cantidad de Votos</th>
                                 
                             </tr>
-                        {% for trab in trabajo %}
-                            <tr class="danger">
-                                <td>{{trab.stand}}</td>
-                                <td>{{trab.nombproyecto}}</td>
-                                <td>{{trab.escuela.jurisdiccion}}</td>
-                                <td>{{trab.escuela.nombesc}}</td>
-                                <td>{{trab.cantvoto}}</td>
-         
+                        {% for des in trabajodes %}
+                            <tr class="info">
+                                <td>{{des.stand}}</td>
+                                <td>{{des.nombproyecto}}</td>
+                                <td>{{des.escuela.nombesc}}</td>
+                                <td>{{des.escuela.jurisdiccion}}</td>
+                                <td>{{des.cvdestacado}}</td>         
                             </tr>
                         {% endfor %}
                     </table>				
 				</div>
+
+        <div class="panel-body">
+            <h3>Resultados votos del {{nivel}} (Menciones)</h3>
+                    <table class="table table-hover">
+                            <tr class="danger">
+                                <th>Stand Nro.</th>
+                                <th>Nombre Proyecto</th>
+                                <th>Establecimineto</th>
+                                <th>Jurisdicción</th>
+                                <th>Cantidad de Votos</th>
+                                
+                            </tr>
+                        {% for men in trabajomen %}
+                            <tr class="danger">
+                                <td>{{men.stand}}</td>
+                                <td>{{men.nombproyecto}}</td>
+                                <td>{{men.escuela.nombesc}}</td>
+                                <td>{{men.escuela.jurisdiccion}}</td>
+                                <td>{{men.cvmencion}}</td>         
+                            </tr>
+                        {% endfor %}
+                    </table>        
+        </div>
+
 			</div>
 		</div>
 	</div>

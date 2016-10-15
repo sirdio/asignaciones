@@ -16,28 +16,39 @@
      <table class="table table-striped">
       <tr>
         <th>Nro. de Stand</th>
-        <th>Nombre del Proyecto</th>       
+        <th>Nombre del Proyecto</th>
+		<th>Categoría</th>
       </tr>
-      {% for esc in escuela %}
       <tr>
     {% if datosvoto.standcbs != 0 %}
+    <tr>
         <td>{{datosvoto.standcbs}}</td>
-        <td>{{datosvoto.nomcbs}}</td>
+        <td>{{datosvoto.nombcbs}}</td>
+        <td>Ciclo Básico</td>
+    </tr>
     {% endif %}
     {% if datosvoto.standcss != 0 %}
+    <tr>
         <td>{{datosvoto.standcss}}</td>
-        <td>{{datosvoto.nomcss}}</td>
+        <td>{{datosvoto.nombcss}}</td>
+        <td>Ciclo Superior</td>
+    </tr>
     {% endif %}
-    {% if datosvoto.standcbs != 0 %}
-        <td>{{datosvoto.standcbs}}</td>
-        <td>{{datosvoto.nomcbs}}</td>
+    {% if datosvoto.standfp != 0 %}
+    <tr>
+        <td>{{datosvoto.standfp}}</td>
+        <td>{{datosvoto.nombfp}}</td>
+        <td>Formación Profesional</td>
+	</tr>        
     {% endif %}
     {% if datosvoto.standts != 0 %}
+    	<tr>
         <td>{{datosvoto.standts}}</td>
-        <td>{{datosvoto.nomts}}</td>
+        <td>{{datosvoto.nombts}}</td>
+        <td>Nivel Superior</td>
+        </tr>
     {% endif %}            
-      </tr>
-      {% endfor %}
+      
       </table>
 </div> 
 

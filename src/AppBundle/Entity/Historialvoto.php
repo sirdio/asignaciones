@@ -54,7 +54,10 @@ class Historialvoto
     * @ORM\JoinColumn(name="idtrab", referencedColumnName="id")
     */
     private $trabajo;
-       
+    /**
+    * @ORM\Column(name="tipovoto", type="string", length=10)
+    */    
+    private $tipovoto;       
 
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
@@ -148,5 +151,15 @@ class Historialvoto
         return $this->trabajo;
     }
 //////////////////////////////////////
+    public function setTipovoto($tipovoto)
+    {
+        $this->tipovoto = $tipovoto;
+    
+        return $this;
+    }
 
+    public function getTipovoto()
+    {
+        return $this->tipovoto;
+    }
 }

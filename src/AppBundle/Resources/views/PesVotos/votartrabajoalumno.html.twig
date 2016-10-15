@@ -24,26 +24,26 @@
         	<div class="form-top">
             	<div class="form-top-left">
                 	<h3> ¡LEER ATENTAMENTE! </h3>
-                	{% if enc.configuracion.ctvcbs == 1 or enc.configuracion.ctvcss == 1 or enc.configuracion.ctvfp == 1 or enc.configuracion.ctvts == 1 %}
+                	{% if alu.trabajo.configuracion.ctvcbs == 1 or alu.trabajo.configuracion.ctvcss == 1 or alu.trabajo.configuracion.ctvfp == 1 or alu.trabajo.configuracion.ctvts == 1 %}
                     <p>A continuación debe ingresar el Número de Stand del trabajo que desea votar.</p>
                     <p>Recuerde que solo podra votar 1 (uno) trabajo por categoría (las cuales son: Ciclo Básico, Ciclo Superior, Formación Profesional y Nivel Superior).</p>
                     <p>En el caso de no tener decidido aún que trabajo votar en alguna de las categoría, no seleccionar ningún valor en el campo correspondiente. </p>
                     <p>En caso de tener alguna duda consulte con aulgunos de los arganizadores o con el administrador del sistema, gracias.</p>
-                    {% elseif enc.configuracion.ctvcbs == 0 and enc.configuracion.ctvcss == 0 and enc.configuracion.ctvfp == 0 and enc.configuracion.ctvts == 0%}
+                    {% elseif alu.trabajo.configuracion.ctvcbs == 0 and alu.trabajo.configuracion.ctvcss == 0 and alu.trabajo.configuracion.ctvfp == 0 and alu.trabajo.configuracion.ctvts == 0%}
 						<p>Usted Ya realizo todos los votos Permitidos, gracias.</p>
                 	{% endif %}
                 </div>
             </div>
             <div class="form-bottom">
-				<form role="form" action="{{path('VotarTrabajos')}}" method="post" class="form-horizontal">
-					{% if enc.configuracion.ctvcbs == 1 %}
+				<form role="form" action="{{path('VotarTrabajoAlumno')}}" method="post" class="form-horizontal">
+					{% if alu.trabajo.configuracion.ctvcbs == 1 %}
 						<div class="form-group">
 						  <label class="col-md-4 control-label" for="cbs">Ciclo Básico ETP Stand N°:</label>
 						  <div class="col-md-8">
 						    <select id="cbs" name="cbs" class="form-control">
 						      <option value="0">Seleccionar Stand</option>
 						      {% for cbs in trabcbs %}
-						      	{% if dnienc != cbs.encargado.dni %}
+						      	{% if idtrabajo != cbs.id %}
 						      		<option value="{{cbs.stand}}">{{cbs.stand}} - {{cbs.nombproyecto}}</option>
 						      	{% endif %}
 						      {% endfor %}
@@ -52,14 +52,14 @@
 						</div>
 					{% endif %}
 
-					{% if enc.configuracion.ctvcss == 1 %}
+					{% if alu.trabajo.configuracion.ctvcss == 1 %}
 						<div class="form-group">
 						  <label class="col-md-4 control-label" for="css">Ciclo Superior ETP Stand N°:</label>
 						  <div class="col-md-8">
 						    <select id="css" name="css" class="form-control">
 						      <option value="0">Seleccionar Stand</option>
 						      {% for css in trabcss %}
-						      	{% if dnienc != css.encargado.dni %}
+						      	{% if idtrabajo != css.id %}
 						      		<option value="{{css.stand}}">{{css.stand}} - {{css.nombproyecto}}</option>
 						      	{% endif %}
 						      {% endfor %}
@@ -68,14 +68,14 @@
 						</div>
 
 					{% endif %}
-					{% if enc.configuracion.ctvfp == 1 %}
+					{% if alu.trabajo.configuracion.ctvfp == 1 %}
 						<div class="form-group">
 						  <label class="col-md-4 control-label" for="fp">Formación Profesional Stand N°:</label>
 						  <div class="col-md-8">
 						    <select id="fp" name="fp" class="form-control">
 						      <option value="0">Seleccionar Stand</option>
 						      {% for fp in trabfp %}
-						      	{% if dnienc != fp.encargado.dni %}	
+						      	{% if idtrabajo != fp.id %}	
 						      		<option value="{{fp.stand}}">{{fp.stand}} - {{fp.nombproyecto}}</option>
 						      	{% endif %}
 						      {% endfor %}
@@ -84,14 +84,14 @@
 						</div>
 
 					{% endif %}
-					{% if enc.configuracion.ctvts == 1 %}
+					{% if alu.trabajo.configuracion.ctvts == 1 %}
 						<div class="form-group">
 						  <label class="col-md-4 control-label" for="ts">Nivel Superior Stand N°:</label>
 						  <div class="col-md-8">
 						    <select id="ts" name="ts" class="form-control">
 						      <option value="0">Seleccionar Stand</option>
 						      {% for ts in trabts %}
-						      	{% if dnienc != ts.encargado.dni %}
+						      	{% if idtrabajo != ts.id %}
 						      		<option value="{{ts.stand}}">{{ts.stand}} - {{ts.nombproyecto}}</option>
 						  		{% endif %}
 						      {% endfor %}
@@ -99,7 +99,7 @@
 						  </div>
 						</div>
 					{% endif %}
-					{% if enc.configuracion.ctvcbs == 1 or enc.configuracion.ctvcss == 1 or enc.configuracion.ctvfp == 1 or enc.configuracion.ctvts == 1 %}
+					{% if alu.trabajo.configuracion.ctvcbs == 1 or alu.trabajo.configuracion.ctvcss == 1 or alu.trabajo.configuracion.ctvfp == 1 or alu.trabajo.configuracion.ctvts == 1 %}
 						<div class="form-group">
 							<div class="col-md-4">
 								<button id="singlebutton" name="confirmarvoto" value="Confirmar" class="btn btn-primary">Votar</button>

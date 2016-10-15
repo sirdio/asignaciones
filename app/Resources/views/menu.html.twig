@@ -1,6 +1,7 @@
 <nav class="navbar navbar-default">
   <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
   <div class="container-fluid">
+    
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -79,13 +80,9 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informes <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{{path('SeleccionarEst')}}">Reportes de Inscripciones</a></li>
-            {#<li><a href="{{path('VerPresentacionesInscriptas')}}">Reporte de Inscripción Experiencia Pedagógica</a></li>#}
-            <li><a href="{{path('SeleccionarNivel')}}">Resultados por Nivel</a></li>
-            <li><a href="{{path('SelecJuris')}}">Resultados por Jurisdicción y Nivel</a></li>
-            {#<li><a href="{{path('MostrarResultados')}}">Resultados de Votos Experiencia Pedagógica</a></li>#}
+            <li><a href="{{path('SeleccionarNivel')}}">Ver Resultados por Categoría</a></li>
+            <li><a href="{{path('SelecOpcion')}}">Ver Resultados por Tipo de Voto</a></li>
             <li><a href="{{path('MostrarHistorialTrab')}}">Historial de Votos Trabajos</a></li>
-            {#<li><a href="{{path('MostrarHistorialPress')}}">Historial de Votos Presentaci&oacuten</a></li>#}
-            {#<li><a href="{{path('VerEntregas')}}">Lista de entrega de Viáticos</a></li>#}            
             <li><a href="{{path('VerGrafica')}}">ver gráfica</a></li>
             <li role="separator" class="divider"></li>
          </ul>

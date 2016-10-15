@@ -7,6 +7,7 @@
   <div class="container-fluid">
       <ul class="nav navbar-nav">
         <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="{{path('SelecOpcion')}}">Atras <span class="sr-only">(current)</span></a></li>
       </ul>
   </div><!-- /.container-fluid -->
 </nav>
@@ -16,47 +17,109 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3>TécnicaMente 2016</h3>
+					<h3>TécnicaMente 2016 Proyectos {{tipov}}</h3>
 				</div>
 				<div class="panel-body">
-				    <h3>Total de Votos Jurisdicción: {{juris.nomjuris}} Ciclo Básico</h3>
+				    <h3>Votos : Ciclo Básico</h3>
                     <table class="table table-hover">
                             <tr class="info">
-                                <th>Stand</th>
+                                <th>Stand Nro.</th>
                                 <th>Nombre Proyecto</th>
                                 <th>Establecimineto</th>
+                                <th>Jurisdicción</th>
                                 <th>Cantidad de Votos</th>
                             </tr>
-                            {% for trab in trabajo %}
-                             {% if juris.nomjuris == trab.escuela.jurisdiccion and trab.niveltrab == 'cbs' %}   
+                            {% for cb in trabajocb %}                             
                             <tr class="info">
-                                <th>{{trab.stand}}</th>
-                                <th>{{trab.nombproyecto}}</th>
-                                <td>{{trab.escuela.nombesc}}</td>
-                                <td>{{trab.cantvoto}}</td>
+                                <th>{{cb.stand}}</th>
+                                <th>{{cb.nombproyecto}}</th>
+                                <td>{{cb.escuela.nombesc}}</td>
+                                <td>{{cb.escuela.jurisdiccion}}</td>
+                                {% if tipov == 'Destacados' %}
+                                <td>{{cb.cvdestacado}}</td>                                
+                                {% endif %}
+                                {% if tipov == 'Mencionados' %}
+                                <td>{{cb.cvmencion}}</td>                                
+                                {% endif %}                                
                             </tr>
-                        {% endif %}
                             {% endfor %}
                     </table>				
 				</div>
                 <div class="panel-body">
-                    <h3>Total de Votos Jurisdicción: {{juris.nomjuris}} Ciclo Superior</h3>
+                    <h3>Votos: Ciclo Superior</h3>
                     <table class="table table-hover">
                             <tr class="danger">
-                                <th>Stand</th>
+                                <th>Stand Nro.</th>
                                 <th>Nombre Proyecto</th>
                                 <th>Establecimineto</th>
+                                <th>Jurisdicción</th>
                                 <th>Cantidad de Votos</th>
                             </tr>
-                            {% for trab in trabajo %}
-                             {% if juris.nomjuris == trab.escuela.jurisdiccion and trab.niveltrab == 'css' %}   
+                            {% for cs in trabajocs %}
                             <tr class="danger">
-                                <th>{{trab.stand}}</th>
-                                <th>{{trab.nombproyecto}}</th>
-                                <td>{{trab.escuela.nombesc}}</td>
-                                <td>{{trab.cantvoto}}</td>
+                                <th>{{cs.stand}}</th>
+                                <th>{{cs.nombproyecto}}</th>
+                                <td>{{cs.escuela.nombesc}}</td>
+                                <td>{{cs.escuela.jurisdiccion}}</td>
+                                {% if tipov == "Destacados" %}
+                                <td>{{cs.cvdestacado}}</td>                                
+                                {% endif %}
+                                {% if tipov == "Mencionados" %}
+                                <td>{{cs.cvmencion}}</td>                                
+                                {% endif %}                                
                             </tr>
-                        {% endif %}
+                            {% endfor %}
+                    </table>                
+                </div>  
+                <div class="panel-body">
+                    <h3>Votos: Formación Profesional</h3>
+                    <table class="table table-hover">
+                            <tr class="warning">
+                                <th>Stand Nro.</th>
+                                <th>Nombre Proyecto</th>
+                                <th>Establecimineto</th>
+                                <th>Jurisdicción</th>
+                                <th>Cantidad de Votos</th>
+                            </tr>
+                            {% for fp in trabajofp %}
+                            <tr class="warning">
+                                <th>{{fp.stand}}</th>
+                                <th>{{fp.nombproyecto}}</th>
+                                <td>{{fp.escuela.nombesc}}</td>
+                                <td>{{fp.escuela.jurisdiccion}}</td>
+                                {% if tipov == "Destacados" %}
+                                <td>{{fp.cvdestacado}}</td>                                
+                                {% endif %}
+                                {% if tipov == "Mencionados" %}
+                                <td>{{fp.cvmencion}}</td>                                
+                                {% endif %}                                
+                            </tr>
+                            {% endfor %}
+                    </table>                
+                </div>
+                <div class="panel-body">
+                    <h3>Votos: Nivel Superior</h3>
+                    <table class="table table-hover">
+                            <tr class="info">
+                                <th>Stand Nro.</th>
+                                <th>Nombre Proyecto</th>
+                                <th>Establecimineto</th>
+                                <th>Jurisdicción</th>
+                                <th>Cantidad de Votos</th>
+                            </tr>
+                            {% for ts in trabajots %}
+                            <tr class="info">
+                                <th>{{ts.stand}}</th>
+                                <th>{{ts.nombproyecto}}</th>
+                                <td>{{ts.escuela.nombesc}}</td>
+                                <td>{{ts.escuela.jurisdiccion}}</td>
+                                {% if tipov == "Destacados" %}
+                                <td>{{ts.cvdestacado}}</td>                                
+                                {% endif %}
+                                {% if tipov == "Mencionados" %}
+                                <td>{{ts.cvmencion}}</td>                                
+                                {% endif %}                                
+                            </tr>
                             {% endfor %}
                     </table>                
                 </div>                

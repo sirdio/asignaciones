@@ -490,9 +490,16 @@ class ProcesoacreditacionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $trabajo = $em->getRepository('AppBundle:Trabajo')->find($idtrab);
-        $historialvotos = $em->getRepository('AppBundle:Historialvoto')->findBy(Array('trabajo' => $trabajo));
-        $contadordevotos = count($historialvotos);
-        $trabajo->setCantvoto($contadordevotos);
+        $historialvotosmen = $em->getRepository('AppBundle:Historialvoto')->findBy(
+            Array('trabajo' => $trabajo, 'tipovoto' => "Encargado"));
+        $contadordevotosmen = count($historialvotosmen);
+
+        $historialvotosdes = $em->getRepository('AppBundle:Historialvoto')->findBy(
+            Array('trabajo' => $trabajo, 'tipovoto' => "Estudiante"));
+        $contadordevotosdes = count($historialvotosdes);
+        
+        $trabajo->setCvmencion($contadordevotosmen);
+        $trabajo->setCvdestacado($contadordevotosdes);
         $em->persist($trabajo);
         $em->flush();
         $valor = $trabajo->getId();

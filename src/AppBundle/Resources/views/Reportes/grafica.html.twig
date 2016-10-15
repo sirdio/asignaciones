@@ -124,7 +124,9 @@ $(function () {
             name: 'Resultados',
             data: [
                 ['Cicli Básico: {{contcbs}} / {{porcentcbs}}%', {{porcentcbs}}],
-                ['Ciclo Superior: {{contcss}} / {{porcentcss}}%', {{porcentcss}}]
+                ['Ciclo Superior: {{contcss}} / {{porcentcss}}%', {{porcentcss}}],
+                ['Formación Profesional: {{contfp}} / {{porcentfp}}%', {{porcentfp}}],
+                ['Nivel Superior: {{contts}} / {{porcentts}}%', {{porcentts}}]
             ]
         }]
     });
@@ -139,7 +141,7 @@ $('#container3').highcharts({
             }
         },
         title: {
-            text: 'Resultados Votación TÉCNICAMENTE2016 por Jurisdicción'
+            text: 'Resultados Votación TÉCNICAMENTE2016 Proyectos Mencionados y Proyectos Destacados'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -159,11 +161,8 @@ $('#container3').highcharts({
             type: 'pie',
             name: 'Resultados',
             data: [
-                ['Chaco: {{chcbscss}} / {{porcentchcbscss}}%', {{porcentchcbscss}}],
-                ['Corrientes: {{corrcbscss}} / {{porcentcorrcbscss}}%', {{porcentcorrcbscss}}],
-                ['Entre Ríos: {{entriocbscss}} / {{porcententriocbscss}}%', {{porcententriocbscss}}],
-                ['Formosa: {{formcbscss}} / {{porcentformcbscss}}%', {{porcentformcbscss}}],
-                ['Misiones: {{miscbscss}} / {{porcentmiscbscss}}%', {{porcentmiscbscss}}]
+                ['Votos Destacados: {{contdes}} / {{porcentdes}}%', {{porcentdes}}],
+                ['Votos Mencionados: {{contm}} / {{porcentmen}}%', {{porcentmen}}]
             ]
         }]
     });

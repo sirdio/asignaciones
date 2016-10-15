@@ -11,7 +11,7 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<section class="Container">
+<section class="Container" id="contenido">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="panel panel-default">
@@ -25,23 +25,13 @@
                                 <th>Cue</th>
                                 <th>Nombre Establecimineto</th>
                                 <th>Jurisdicción</th>
-                                <th>Departamento</th>
                                 <th>Localidad</th>
-                                <th>Domicilio</th>
-                                <th>Teléfono</th>
-                                <th>Correo Electrónico</th>
-                                <th>Ámbito de Gestión</th>
                             </tr>
                             <tr class="danger">
                                 <th>{{escuela.cue}}</th>
                                 <th>{{escuela.nombesc}}</th>
                                 <th>{{escuela.jurisdiccion}}</th>
-                                <th>{{escuela.departamento}}</th>
                                 <th>{{escuela.localidad}}</th>
-                                <th>{{escuela.domicilio}}</th>
-                                <th>{{escuela.telefono}}</th>
-                                <th>{{escuela.emailesc}}</th>
-                                <th>{{escuela.ambitogestion}}</th>
                             </tr>                            
                     </table>				
 				</div>
@@ -54,24 +44,13 @@
                                 <th>apellido</th>
                                 <th>Nombre</th>
                                 <th>Cargo</th>
-                                <th>Correo Electrónico</th>
-                                <th>Nro. de contacto</th>
                             </tr>
                             <tr class="danger">
                                 <th>{{directivo.dni}}</th>
                                 <th>{{directivo.apellido}}</th>
                                 <th>{{directivo.nombre}}</th>
                                 <th>{{directivo.cargo}}</th>
-                                <th>{{directivo.emaild}}</th>
-                                <th>{{directivo.teld}}</th>
                             </tr>                            
-                        {#% for trab in trabajo %}
-                            <tr class="danger">
-                                <td>{{trab.nombproyecto}}</td>
-                                <td>{{trab.escuela.nombesc}}</td>
-                                <td>{{trab.cantvoto}}</td>
-                            </tr>
-                        {% endfor %#}
                     </table>				
 				</div>	
 				
@@ -97,16 +76,12 @@
                                 <th>apellido</th>
                                 <th>Nombre</th>
                                 <th>Materia que Dicta</th>
-                                <th>Correo Electrónico</th>
-                                <th>Teléfono</th>
                             </tr>
                             <tr class="info">
                                 <td>{{trab.encargado.dni}}</td>
                                 <td>{{trab.encargado.apellido}}</td>
                                 <td>{{trab.encargado.nombre}}</td>
                                 <td>{{trab.encargado.materiadic}}</td>
-                                <td>{{trab.encargado.emaile}}</td>
-                                <td>{{trab.encargado.tele}}</td>
                             </tr>
                             <tr class="success">    
                                 <td><h3>Alumnos</h3></td>
@@ -137,15 +112,15 @@
 				</div>				
 				
 				
-				
+			
 				
 				
 				
 			</div>
 		</div>
 	</div>
-</section>
 
+</section>
 
 
 {% endblock %}

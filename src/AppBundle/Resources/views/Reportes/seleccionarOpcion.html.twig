@@ -3,6 +3,13 @@
 {% block body %}
 
 <nav class="navbar navbar-default">
+  <img src="{{ asset('public/img/imgtm1.jpg') }}" alt="..." class="img-responsive">
+    {% for flashMessage in app.session.flashbag.get('mensaje') %}
+      <span class="alert-danger">
+          {{ flashMessage }}
+          <hr />
+      </span>
+    {% endfor %}  
   <div class="container-fluid">
       <ul class="nav navbar-nav">
         <li class="active"><a href="{{path('Inicio')}}">Volver <span class="sr-only">(current)</span></a></li>
@@ -14,16 +21,15 @@
     <div class="col-md-12">
       <form action="{{ path('DatosEstadisticos') }}" method="post" class="form-inline" role="form">
 	    <div class="control-group">
-            <label for="juri">Nivel:</label>
-            <select id="juri" name="juri">
+            <label for="tv">Tipo de Voto:</label>
+            <select id="tv" name="tv">
                 <option value="0">Seleccionar Opción</option>
-                {% for ju in juris %}
-                  <option value="{{ju.id}}">{{ju.nomjuris}}</option>
-                {% endfor %}
+                <option value="destacados">Proyectos Destacados</option>
+                <option value="mencionados">Proyectos Mencionados</option>
             </select>
-	    </div>
+	    <button class="btn-group btn-primary ">Mostrar Resultados</button>
+      </div>
 
-	        <button class="btn btn-primary">Mostrar Resultados</button>
        </form>
      </div> 
   </div>
